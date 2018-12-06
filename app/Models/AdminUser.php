@@ -7,6 +7,7 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
@@ -30,8 +31,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class AdminUser extends Eloquent
+class AdminUser extends Authenticatable
 {
+    protected $guard = 'admin';
+
 	protected $casts = [
 		'is_super_admin' => 'int',
 		'role_id' => 'int'
