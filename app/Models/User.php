@@ -2,13 +2,13 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 06 Dec 2018 06:52:29 +0000.
+ * Date: Fri, 07 Dec 2018 08:44:36 +0000.
  */
 
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Reliese\Database\Eloquent\Model as Eloquent;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class User
@@ -20,14 +20,16 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $password
  * @property string $image_path
  * @property string $company_name
+ * @property string $email_token
  * @property string $phone
- * @property string $status
+ * @property int $status_id
  * @property string $tax_no
  * @property \Carbon\Carbon $email_verified_at
  * @property string $remember_token
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
+ * @property \App\Models\Status $status
  * @property \Illuminate\Database\Eloquent\Collection $addresses
  * @property \Illuminate\Database\Eloquent\Collection $orders
  * @property \Illuminate\Database\Eloquent\Collection $product_reviews
@@ -38,12 +40,17 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class User extends Authenticatable
 {
+	protected $casts = [
+		'status_id' => 'int'
+	];
+
 	protected $dates = [
 		'email_verified_at'
 	];
 
 	protected $hidden = [
 		'password',
+		'email_token',
 		'remember_token'
 	];
 
@@ -54,12 +61,18 @@ class User extends Authenticatable
 		'password',
 		'image_path',
 		'company_name',
+		'email_token',
 		'phone',
-		'status',
+		'status_id',
 		'tax_no',
 		'email_verified_at',
 		'remember_token'
 	];
+
+	public function status()
+	{
+		return $this->belongsTo(\App\Models\Status::class);
+	}
 
 	public function addresses()
 	{

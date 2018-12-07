@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\EmailVerification;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -69,6 +74,48 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'email_token' => base64_encode($data['email']),
+            'status_id' => 4
         ]);
+    }
+
+    public function register(Request $request){
+        $rules = array(
+            'email'                 => 'required|email|max:100|unique:users',
+            'first_name'            => 'required|max:100',
+            'last_name'             => 'required|max:100',
+            'phone'                 => 'required|unique:users',
+            'password'              => 'required|min:6|max:20|same:password',
+            'password_confirmation' => 'required|same:password'
+        );
+
+        $messages = array(
+            'not_contains'  => 'Email cannot contain these characters +',
+            'phone.unique'  => 'Your phone number already registered!',
+        );
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $user = $this->create($request->all());
+
+        $emailVerify = new EmailVerification($user);
+        Mail::to($user->email)->send($emailVerify);
+
+        return View('auth.send-email', compact('user'));
+    }
+
+    public function verify($token)
+    {
+        $user = User::where('email_token',$token)->first();
+        $user->status_id = 1;
+        $user->save();
+
+        Session::put("user-data", $user);
+        Session::flash('success', 'Your Email Have been Verified, Please Login');
+        return Redirect::route('login');
     }
 }
