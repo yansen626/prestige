@@ -26,6 +26,8 @@ Route::prefix('admin')->group(function(){
 
     // Admin User
     Route::get('/admin-user', 'Admin\AdminUserController@index')->name('admin-users');
+    Route::get('/admin-user/create', 'Admin\AdminUserController@create')->name('admin-users.create');
+    Route::post('/admin-users/store', 'Admin\AdminUserController@store')->name('admin-users.store');
 });
 
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
@@ -42,3 +44,6 @@ Route::prefix('product')->group(function(){
     Route::post('/store', 'Admin\ProductController@store')->name('admin.product.store');
     Route::get('/edit/{item}', 'Admin\ProductController@edit')->name('admin.product.edit');
 });
+
+// Select2
+Route::get('/select-roles', 'Admin\RoleController@getRoles')->name('select.roles');
