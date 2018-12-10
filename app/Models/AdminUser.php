@@ -26,8 +26,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $email_verified_at
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property int $status_id
  * 
  * @property \App\Models\Role $role
+ * @property \App\Models\Status $status
  *
  * @package App\Models
  */
@@ -59,8 +61,14 @@ class AdminUser extends Authenticatable
 		'language',
 		'image_path',
 		'remember_token',
-		'email_verified_at'
+		'email_verified_at',
+        'status_id'
 	];
+
+    public function status()
+    {
+        return $this->belongsTo(\App\Models\Status::class);
+    }
 
 	public function role()
 	{
