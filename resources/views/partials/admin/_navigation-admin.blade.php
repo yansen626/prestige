@@ -67,7 +67,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="#">
+                            <a href="{{route('admin-users')}}">
                             <i class="icon icon-user-circle text-green"></i>User
                             </a>
                         </li>

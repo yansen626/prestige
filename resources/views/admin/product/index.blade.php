@@ -53,3 +53,45 @@
         </div>
     </div>
 @endsection
+
+
+@section('styles')
+    <link href="{{ asset('css/datatables.css') }}" rel="stylesheet">
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/datatables.js') }}"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script>
+        $('#demoGrid').DataTable({
+            processing: true,
+            serverSide: true,
+            pageLength: 25,
+            ajax: '{!! route('datatables.admin_products') !!}',
+            order: [ [0, 'asc'] ],
+            columns: [
+                { data: 'name', name: 'name', class: 'text-center'},
+                { data: 'sku', name: 'sku', class: 'text-center'},
+                { data: 'qty', name: 'qty', class: 'text-center'},
+                { data: 'price', name: 'price', class: 'text-center'},
+                { data: 'created_at', name: 'created_at', class: 'text-center', orderable: false, searchable: false,
+                    render: function ( data, type, row ){
+                        if ( type === 'display' || type === 'filter' ){
+                            return moment(data).format('DD MMM YYYY');
+                        }
+                        return data;
+                    }
+                },
+                { data: 'update_at', name: 'update_at', class: 'text-center', orderable: false, searchable: false,
+                    render: function ( data, type, row ){
+                        if ( type === 'display' || type === 'filter' ){
+                            return moment(data).format('DD MMM YYYY');
+                        }
+                        return data;
+                    }
+                },
+                { data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'}
+            ],
+        });
+    </script>
+@endsection

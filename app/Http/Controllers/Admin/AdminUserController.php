@@ -59,7 +59,7 @@ class AdminUserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+//        dd($request);
         //
         $validator = Validator::make($request->all(), [
             'first_name'        => 'required|max:100',

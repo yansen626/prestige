@@ -10,7 +10,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Transformer\ProductTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Intervention\Image\Facades\Image;
+use Yajra\DataTables\DataTables;
 
 class ProductController extends Controller
 {
@@ -22,6 +26,14 @@ class ProductController extends Controller
     public function __construct()
     {
         $this->middleware('auth:admin');
+    }
+
+    public function getIndex(Request $request){
+        $users = Product::all();
+        return DataTables::of($users)
+            ->setTransformer(new ProductTransformer())
+            ->addIndexColumn()
+            ->make(true);
     }
 
     public function index()
@@ -36,16 +48,26 @@ class ProductController extends Controller
 
     public function create()
     {
+
         return view('admin.product.create');
     }
 
     public function store(Request $request)
     {
+        dd($request);
+        $img = Image::make(Input::get('img_data'));
+        $extStr = $img->mime();
+        $ext = explode('/', $extStr, 2);
 
+        $filename = 'test_image.'. $ext[1];
+
+        $img->save(public_path('storage/user_custom/'. $filename), 75);
+        dd($img);
     }
 
     public function edit(Product $item)
     {
+
         return view('admin.product.edit');
     }
 }

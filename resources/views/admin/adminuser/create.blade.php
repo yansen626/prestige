@@ -15,7 +15,9 @@
     </div>
 </header>
 
-<form method="POST" action="{{ route('admin-users.store') }}">
+{{ Form::open(['route'=>['admin-users.store'],'method' => 'post','id' => 'general-form']) }}
+{{--<form method="POST" action="{{ route('admin-users.store') }}">--}}
+    {{--{{ csrf_field() }}--}}
     <div class="container-fluid relative animatedParent animateOnce">
         <div class="row">
             <div class="col-md-12">
@@ -113,7 +115,8 @@
             </div>
         </div>
     </div>
-</form>
+{{--</form>--}}
+{{ Form::close() }}
 @endsection
 
 @section('styles')
