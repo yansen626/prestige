@@ -12,61 +12,118 @@
         </div>
     </header>
 
-    <div class="container-fluid relative animatedParent animateOnce">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body b-b">
-                            <!-- Input -->
-                            <div class="body">
-                                <div class="form-row col-md-12">
-                                    <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label">BankID *</label>
-                                                <input id="BankId" type="text" class="form-control"
-                                                       name="BankId" value="">
+    {{ Form::open(['route'=>['admin.product.store'],'method' => 'post','id' => 'general-form']) }}
+
+    <div class="content-wrapper animatedParent animateOnce">
+        <div class="container">
+            <section class="paper-card">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body b-b">
+                                <!-- Input -->
+                                <div class="body">
+                                    <div class="form-row col-md-12">
+                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
+                                            <div class="form-group form-float form-group-lg">
+                                                <div class="form-line">
+                                                    <label class="form-label">Product Name *</label>
+                                                    <input id="name" type="text" class="form-control" name="name" value="">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group form-float form-group-lg">
-                                        <div class="form-line">
-                                            <label class="form-label">BankName *</label>
-                                            <input id="BankName" name="BankName" type="text" value=""
-                                                   style="text-transform: uppercase;" class="form-control">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label">SKU *</label>
+                                                <input id="sku" name="sku" type="text" value="" class="form-control">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group form-float form-group-lg">
-                                        <div class="form-line">
-                                            <label class="form-label">AccountNo *</label>
-                                            <input id="AccountNo" name="AccountNo" type="text" value=""
-                                                   style="text-transform: uppercase;" class="form-control">
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="Description">Description</label>
+                                            <textarea id="Description" rows="5" class="form-control" name="Description"></textarea>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label for="Notes">Notes</label>
-                                        <textarea id="Notes" rows="5" class="form-control"
-                                                  style="text-transform: uppercase;" name="Notes"></textarea>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label">Qty *</label>
+                                                <input id="qty" name="qty" type="number" value="" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label">Price *</label>
+                                                <input id="price" name="price" type="number" value="" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label">Weight *</label>
+                                                <input id="price" name="price" type="number" value="" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label">Width *</label>
+                                                <input id="price" name="price" type="number" value="" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label">Height *</label>
+                                                <input id="price" name="price" type="number" value="" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label">Length *</label>
+                                                <input id="price" name="price" type="number" value="" class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="meta_title">Meta Title</label>
+                                            <input id="meta_title" name="meta_title" type="text" value="" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <div class="form-group">
+                                            <label for="meta_description">Meta Title</label>
+                                            <textarea id="meta_description" rows="5" class="form-control"
+                                                      style="text-transform: uppercase;" name="meta_description"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
+                                        <a href="#" class="btn btn-danger">Exit</a>
+                                        <input type="submit" class="btn btn-success" value="Save">
                                     </div>
                                 </div>
 
-                                <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
-                                    <a href="#" class="btn btn-danger">Exit</a>
-                                    <input type="submit" class="btn btn-success" value="Save">
-                                </div>
+                                <!-- #END# Input -->
+
                             </div>
-
-                            <!-- #END# Input -->
-
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
+    {{ Form::close() }}
 @endsection

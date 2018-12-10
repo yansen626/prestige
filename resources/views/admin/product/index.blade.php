@@ -20,7 +20,7 @@
                         <tbody>
                         <tr class="no-b">
                             <td>
-                                <a href="#" class="btn btn-outline-primary btn-lg btn-block">
+                                <a href="{{route ('admin.product.create')}}" class="btn btn-outline-primary btn-lg btn-block">
                                 <i class="icon icon-plus"></i> Add
                                 </a>
                             </td>
