@@ -28,3 +28,12 @@ Route::prefix('admin')->group(function(){
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 
 Route::view('/send-email', 'auth.send-email');
+
+
+Route::prefix('product')->group(function(){
+    Route::get('/', 'Admin\ProductController@index')->name('admin.product.index');
+    Route::get('/show/{item}', 'Admin\ProductController@show')->name('admin.product.show');
+    Route::get('/create', 'Admin\ProductController@create')->name('admin.product.create');
+    Route::post('/store', 'Admin\ProductController@store')->name('admin.product.store');
+    Route::get('/edit/{item}', 'Admin\ProductController@edit')->name('admin.product.edit');
+});

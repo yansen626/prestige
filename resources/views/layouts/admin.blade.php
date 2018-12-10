@@ -80,8 +80,8 @@
         </div>
     </div>
 </div>
-@include('partials._header-admin')
-@include('partials._navigation-admin')
+@include('partials.admin._header-admin')
+@include('partials.admin._navigation-admin')
 <div id="app">
     <div class="page has-sidebar-left">
         @yield('content')

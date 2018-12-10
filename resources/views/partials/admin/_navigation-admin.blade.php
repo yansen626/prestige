@@ -44,6 +44,24 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
+                        <i class="icon icon-settings light-green-text s-18 "></i> <span>Product</span>
+                        <i class="icon icon-angle-left s-18 pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('admin.product.index') }}">
+                            <i class="icon icon-user-circle text-green"></i>List Product
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin.product.create') }}">
+                            <i class="icon icon-user-circle text-green"></i>Add New Product
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
                         <i class="icon icon-settings light-green-text s-18 "></i> <span>Setup</span>
                         <i class="icon icon-angle-left s-18 pull-right"></i>
                     </a>
