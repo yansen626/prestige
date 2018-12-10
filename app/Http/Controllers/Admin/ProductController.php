@@ -65,6 +65,25 @@ class ProductController extends Controller
         dd($img);
     }
 
+    public function createPosition()
+    {
+
+        return view('admin.product.create-position');
+    }
+
+    public function storePosition(Request $request)
+    {
+        dd($request);
+        $img = Image::make(Input::get('img_data'));
+        $extStr = $img->mime();
+        $ext = explode('/', $extStr, 2);
+
+        $filename = 'test_image.'. $ext[1];
+
+        $img->save(public_path('storage/user_custom/'. $filename), 75);
+        dd($img);
+    }
+
     public function edit(Product $item)
     {
 
