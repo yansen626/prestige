@@ -25,9 +25,11 @@ Route::prefix('admin')->group(function(){
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 
     // Admin User
-    Route::get('/admin-user', 'Admin\AdminUserController@index')->name('admin-users');
-    Route::get('/admin-user/create', 'Admin\AdminUserController@create')->name('admin-users.create');
+    Route::get('/admin-users', 'Admin\AdminUserController@index')->name('admin-users');
+    Route::get('/admin-users/create', 'Admin\AdminUserController@create')->name('admin-users.create');
     Route::post('/admin-users/store', 'Admin\AdminUserController@store')->name('admin-users.store');
+    Route::get('/admin-users/edit/{item}', 'Admin\AdminUserController@edit')->name('admin-users.edit');
+    Route::post('/admin-users/update', 'Admin\AdminUserController@update')->name('admin-users.update');
 
     // Product
     Route::get('/product/', 'Admin\ProductController@index')->name('admin.product.index');

@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\AdminUser;
 use App\Transformer\AdminUserTransformer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
@@ -59,8 +61,6 @@ class AdminUserController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request);
-        //
         $validator = Validator::make($request->all(), [
             'first_name'        => 'required|max:100',
             'last_name'         => 'required|max:100',
@@ -79,18 +79,27 @@ class AdminUserController extends Controller
         if ($validator->fails()) return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
         //Create Admin
+        $user = Auth::guard('admin')->user();
+        if($request->input('is_super_admin') == 'on'){
+            $superAdmin = 1;
+        }
+        else{
+            $superAdmin = 0;
+        }
         $adminUser = AdminUser::create([
             'first_name'    => $request->input('first_name'),
             'last_name'     => $request->input('last_name'),
             'email'         => $request->input('email'),
-            'role'          => $request->input('role'),
+            'role_id'       => $request->input('role'),
             'password'      => $request->input('password'),
             'status_id'     => $request->input('status'),
-            'is_super_admin'=> $request->input('is_super_admin')
+            'is_super_admin'=> $superAdmin,
+            'created_by'    => $user->id,
+            'created_at'    => Carbon::now('Asia/Jakarta')
         ]);
 
-        Session::flash('message', 'Success Creating new Admin User!');
-        return redirect()->route('admin.admin-users');
+        Session::flash('success', 'Success Creating new Admin User!');
+        return redirect()->route('admin-users');
     }
 
     /**
@@ -113,6 +122,8 @@ class AdminUserController extends Controller
     public function edit($id)
     {
         //
+        $adminUser = AdminUser::find($id);
+        return view('admin.adminuser.edit', compact('adminUser'));
     }
 
     /**
@@ -124,7 +135,43 @@ class AdminUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'first_name'        => 'required|max:100',
+            'last_name'         => 'required|max:100',
+            'email'             => 'required|regex:/^\S*$/u|unique:users|max:50',
+            'role'              => 'required',
+            'password'          => 'required'
+        ],[
+            'email.unique'      => 'ID Login Akses telah terdaftar!',
+            'email.regex'       => 'ID Login Akses harus tanpa spasi!'
+        ]);
+
+        $validator->sometimes('password', 'min:6|confirmed', function ($input) {
+            return $input->password;
+        });
+
+        if ($validator->fails()) return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+
+        //Create Admin
+        $user = Auth::guard('admin')->user();
+        if($request->input('is_super_admin') == 'on'){
+            $superAdmin = 1;
+        }
+        else{
+            $superAdmin = 0;
+        }
+
+        $adminUser = AdminUser::find($id);
+        $adminUser->email = $request->input('email');
+        $adminUser->first_name = $request->input('first_name');
+        $adminUser->last_name = $request->input('last_name');
+        $adminUser->is_super_admin = $superAdmin;
+        $adminUser->updated_at = Carbon::now('Asia/Jakarta');
+        $adminUser->status_id = $request->input('status');
+        $adminUser->save();
+
+        Session::flash('success', 'Success Updating Admin User!');
+        return redirect()->route('admin-users');
     }
 
     /**
