@@ -8,6 +8,7 @@ use App\Transformer\AdminUserTransformer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\DataTables;
@@ -177,11 +178,23 @@ class AdminUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
         //
+        try {
+            //Belum melakukan pengecekan hubungan pada Table Lain
+            $adminUserId = $request->input('id');
+            $adminUser = AdminUser::find($adminUserId);
+            $adminUser->delete();
+
+            Session::flash('message', 'Berhasil menghapus data barang ' . $item->code . ' - ' . $item->name);
+            return Response::json(array('success' => 'VALID'));
+        }
+        catch(\Exception $ex){
+            return Response::json(array('errors' => 'INVALID'));
+        }
     }
 }

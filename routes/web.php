@@ -30,6 +30,7 @@ Route::prefix('admin')->group(function(){
     Route::post('/admin-users/store', 'Admin\AdminUserController@store')->name('admin-users.store');
     Route::get('/admin-users/edit/{item}', 'Admin\AdminUserController@edit')->name('admin-users.edit');
     Route::post('/admin-users/update', 'Admin\AdminUserController@update')->name('admin-users.update');
+    Route::post('/admin-users/delete', 'Admin\AdminUserController@destroy')->name('admin-users.destroy');
 
     // Product
     Route::get('/product/', 'Admin\ProductController@index')->name('admin.product.index');

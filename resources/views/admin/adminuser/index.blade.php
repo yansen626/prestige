@@ -82,4 +82,5 @@
             ],
         });
     </script>
+    @include('partials._deleteJs', ['routeUrl' => 'admin-users.destroy', 'redirectUrl' => 'admin-users'])
 @endsection
