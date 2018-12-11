@@ -48,6 +48,9 @@ Route::prefix('admin')->group(function(){
     Route::post('/categories/update', 'Admin\CategoryController@update')->name('admin.categories.update');
     Route::post('/categories/delete', 'Admin\CategoryController@destroy')->name('admin.categories.destroy');
 
+    // Currency
+    Route::get('/currencies', 'Admin\CurrencyController@index')->name('admin.currencies.index');
+
     // Product
     Route::get('/product/', 'Admin\ProductController@index')->name('admin.product.index');
     Route::get('/product/show/{item}', 'Admin\ProductController@show')->name('admin.product.show');
@@ -68,6 +71,7 @@ Route::get('/datatables-admin-users', 'Admin\AdminUserController@getIndex')->nam
 Route::get('/datatables-admin-products', 'Admin\ProductController@getIndex')->name('datatables.admin_products');
 Route::get('/datatables-users', 'Admin\UserController@getIndex')->name('datatables.users');
 Route::get('/datatables-categories', 'Admin\CategoryController@getIndex')->name('datatables.categories');
+Route::get('/datatables-currencies', 'Admin\CurrencyController@getIndex')->name('datatables.currencies');
 
 // Select2
 Route::get('/select-roles', 'Admin\RoleController@getRoles')->name('select.roles');

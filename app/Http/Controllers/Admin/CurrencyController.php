@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Currency;
+use App\Transformer\CurrencyTransformer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class CurrencyController extends Controller
 {
@@ -35,6 +37,14 @@ class CurrencyController extends Controller
         return "Success!";
     }
 
+    public function getIndex(Request $request){
+        $users = Currency::query();
+        return DataTables::of($users)
+            ->setTransformer(new CurrencyTransformer)
+            ->addIndexColumn()
+            ->make(true);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +52,7 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.currency.index');
     }
 
     /**

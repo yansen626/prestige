@@ -17,10 +17,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property float $rate
  * @property \Carbon\Carbon $updated_at
  *
+ * @property string $rate_string
  * @package App\Models
  */
 class Currency extends Eloquent
 {
+    protected $appends = [
+        'rate_string'
+    ];
+
 	public $timestamps = false;
 
 	protected $casts = [
@@ -31,4 +36,8 @@ class Currency extends Eloquent
 		'name',
 		'rate'
 	];
+
+    public function getRateStringAttribute(){
+        return number_format($this->attributes['rate'], 0, ",", ".");
+    }
 }

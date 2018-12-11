@@ -54,6 +54,13 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('admin.currencies.index') }}">
+                                <i class="icon icon-money text-green"></i>Currencies
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
