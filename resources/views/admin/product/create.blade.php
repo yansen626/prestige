@@ -27,9 +27,31 @@
                                 <div class="container-fluid animatedParent animateOnce my-3">
                                     <div class="animated fadeInUpShort">
                                         <!-- Input -->
-                                        {{ Form::open(['route'=>['admin.product.store'],'method' => 'post','id' => 'general-form']) }}
+                                        {{ Form::open(['route'=>['admin.product.store'],'method' => 'post','id' => 'general-form', 'enctype' => 'multipart/form-data']) }}
+
+                                        @include('partials.admin._messages')
+                                        @foreach($errors->all() as $error)
+                                            <ul>
+                                                <li>
+                                            <span class="help-block">
+                                                <strong style="color: #ff3d00;"> {{ $error }} </strong>
+                                            </span>
+                                                </li>
+                                            </ul>
+                                        @endforeach
                                             <div class="row">
                                                 <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-12 mb-3">
+                                                            <label class="form-label">Upload Main Image *</label>
+                                                            {{--<input type="file" name="PhotoPosted" id="PhotoPosted" class="file-loading">--}}
+                                                            {!! Form::file('main_image', array('id' => 'main_image', 'class' => 'file-loading', 'accept' => 'image/*,application/pdf')) !!}
+                                                        </div>
+                                                        <div class="col-md-12 mb-3">
+                                                            <label class="form-label">Upload Detail Image *</label>
+                                                            {!! Form::file('detail_image[]', array('id' => 'detail_image', 'class' => 'file-loading', 'multiple' => 'multiple')) !!}
+                                                        </div>
+                                                    </div>
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label for="validationCustom01">Product Name</label>
@@ -114,4 +136,27 @@
             </section>
         </div>
     </div>
+@endsection
+
+
+@section('styles')
+    <link href="{{ URL::asset('css/fileinput.css') }}" rel="stylesheet">
+@endsection
+
+@section('scripts')
+    <script type="text/javascript" src="{{ URL::asset('js/fileinput.js') }}"></script>
+
+    <script>
+        // FILEINPUT
+        $("#main_image")
+            .fileinput({
+                allowedFileExtensions: ["jpg", "jpeg", "png"],
+                showUpload: false,
+            });
+        $("#detail_image")
+            .fileinput({
+                allowedFileExtensions: ["jpg", "jpeg", "png"],
+                showUpload: false,
+            });
+    </script>
 @endsection

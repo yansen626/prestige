@@ -13,6 +13,7 @@ use App\libs\Utilities;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Transformer\ProductTransformer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -71,16 +72,27 @@ class ProductController extends Controller
                 'price'             => 'required',
                 'qty'             => 'required',
                 'weight'             => 'required',
-                'product_detail'             => 'required',
+                'description'             => 'required',
                 'tags'             => 'required',
             ]);
 
-            if ($validator->fails()) return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+            if ($request->input('category') == "-1") {
+                return back()->withErrors("Category is required")->withInput($request->all());
+            }
+//            dd($request);
+            $detailImages = $request->file('detail_image');
+            $mainImages = $request->file('main_image');
+
+            if($detailImages == null){
+                return back()->withErrors("Detail Image required")->withInput($request->all());
+            }
+            if ($validator->fails())
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
             $dateTimeNow = Carbon::now('Asia/Jakarta');
             $slug = Utilities::CreateProductSlug($request->input('name'));
 
-//            dd($request);
+//            dd($slug);
             $newProduct = Product::create([
                 'name' => $request->input('name'),
                 'slug' => $slug,
@@ -103,24 +115,56 @@ class ProductController extends Controller
                 'created_at'        => $dateTimeNow->toDateTimeString(),
             ]);
 
-            return redirect()->route('admin.product.create.position',['item' => $newProduct->id]);
+
+            //product image
+            $img = Image::make($mainImages);
+            $extStr = $img->mime();
+            $ext = explode('/', $extStr, 2);
+
+            $filename = $newProduct->id.'_main_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
+
+            $img->save(public_path('storage/products/'. $filename), 75);
+            $newProductImage = ProductImage::create([
+                'product_id' => $newProduct->id,
+                'path' => $filename,
+                'is_main_image' => 1
+            ]);
+            for($i=0;$i<sizeof($detailImages);$i++){
+                $img = Image::make($detailImages[$i]);
+                $extStr = $img->mime();
+                $ext = explode('/', $extStr, 2);
+
+                $filename = $newProduct->id.'_'.$i.'_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
+
+                $img->save(public_path('storage/products/'. $filename), 75);
+
+                $newProductImage = ProductImage::create([
+                    'product_id' => $newProduct->id,
+                    'path' => $filename,
+                    'is_main_image' => 0
+                ]);
+            }
+
+            return redirect()->route('admin.product.create.customize',['item' => $newProduct->id]);
 
         }catch(\Exception $ex){
-//            dd($ex);
+            dd($ex);
             error_log($ex);
             return back()->withErrors("Something Went Wrong")->withInput();
         }
     }
 
-    public function createPosition(Product $item)
+    public function createCustomize(Product $item)
     {
+        $mainImage = ProductImage::where('product_id', $item->id)->where('is_main_image', 1)->first();
         $data = [
             'product'    => $item,
+            'mainImage'    => $mainImage,
         ];
-        return view('admin.product.create-position')->with($data);
+        return view('admin.product.create-customize')->with($data);
     }
 
-    public function storePosition(Request $request)
+    public function storeCustomize(Request $request)
     {
         dd($request);
         $img = Image::make(Input::get('img_data'));

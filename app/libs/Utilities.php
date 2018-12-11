@@ -32,7 +32,8 @@ class Utilities
 
             return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
         }catch(\Exception $ex){
-            dd($ex);
+//            dd($ex);
+            error_log($ex);
         }
     }
 }

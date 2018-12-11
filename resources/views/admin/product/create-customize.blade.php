@@ -21,7 +21,7 @@
                             <div class="card-body b-b">
 
                                 <h3 class="my-3">
-                                    Step 2 (image)
+                                    Step 2 (Customer Customize Option)
                                 </h3>
                                 <h3 class="my-3">
                                     Product = {{$product->name}}
@@ -32,41 +32,40 @@
                                         <!-- Input -->
                                         {{ Form::open(['route'=>['admin.product.store'],'method' => 'post','id' => 'general-form']) }}
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-8">
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <label class="form-label">Upload Main Image *</label>
-                                                        {{--<input type="file" name="PhotoPosted" id="PhotoPosted" class="file-loading">--}}
-                                                        {!! Form::file('main_image', array('id' => 'main_image', 'class' => 'file-loading', 'accept' => 'image/*,application/pdf')) !!}
-                                                    </div>
-                                                    <div class="col-md-12 mb-3">
-                                                        <img id='img-upload' style="width:500px; height:500px;"/>
-                                                        <canvas id="canvas" width=300 height=300></canvas>
+                                                        <canvas id="myCanvas" width="600" height="600"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
-                                                        <input id="theText" type="text">
-                                                        <a id="submit">Check Position</a><br>
+                                                        <label class="form-label">Position Name</label>
+                                                        <input id="position_x" name="position_name" type="text" value="Top Center" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">X</label>
-                                                        <input id="position_x" name="position_x" type="number" value="" class="form-control">
+                                                        <input id="position_x" name="position_x" type="number" value="250" onkeyup="ChangePosition()" class="form-control">
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Y</label>
-                                                        <input id="position_y" name="position_y" type="number" value="" class="form-control">
+                                                        <input id="position_y" name="position_y" type="number" value="300" onkeyup="ChangePosition()" class="form-control">
                                                     </div>
                                                 </div>
-
-                                            </div>
-                                            <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
-                                                <a href="#" class="btn btn-danger">Exit</a>
-                                                <input type="submit" class="btn btn-success" value="Save">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <a id="new_position">Add New Position</a>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
+                                                    <a href="#" class="btn btn-danger">Exit</a>
+                                                    <input type="submit" class="btn btn-success" value="Save">
+                                                </div>
                                             </div>
                                         </div>
                                     {{ Form::close() }}
@@ -98,30 +97,45 @@
                 showPreview: false
             });
 
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
+        window.onload = function(){
+            var canvas = document.getElementById("myCanvas");
+            var context = canvas.getContext("2d");
+            var imageObj = new Image();
+            imageObj.onload = function(){
+                context.drawImage(imageObj, 10, 10);
+                context.font = "20pt Calibri";
+                context.fillStyle = "#fff";
+                context.fillText("TEST!", 250, 300);
+            };
 
-                reader.onload = function (e) {
-                    $('#img-upload').attr('src', e.target.result);
-                }
+            imageObj.src = "{{ asset('storage/products/'.$mainImage->path) }}";
+        };
 
-                reader.readAsDataURL(input.files[0]);
-            }
+        function ChangePosition(){
+            var posX = $('#position_x').val();
+            var posY = $('#position_y').val();
+
+            var canvas = document.getElementById("myCanvas");
+            var context = canvas.getContext("2d");
+            var imageObj = new Image();
+            imageObj.onload = function(){
+                context.drawImage(imageObj, 10, 10);
+                context.font = "20pt Calibri";
+                context.fillStyle = "#fff";
+                context.fillText("TEST!", posX, posY);
+            };
+
+            imageObj.src = "{{ asset('storage/products/'.$mainImage->path) }}";
         }
-
-        $("#main_image").change(function(){
-            readURL(this);
-        });
 
         // CANVAS JAVASCRIPT
 
         // canvas related variables
-        var canvas = document.getElementById("canvas");
+        var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
 
         // variables used to get mouse position on the canvas
-        var $canvas = $("#canvas");
+        var $canvas = $("#myCanvas");
         var canvasOffset = $canvas.offset();
         var offsetX = canvasOffset.left;
         var offsetY = canvasOffset.top;
@@ -208,27 +222,27 @@
         }
 
         // listen for mouse events
-        $("#canvas").mousedown(function (e) {
+        $("#myCanvas").mousedown(function (e) {
             handleMouseDown(e);
         });
-        $("#canvas").mousemove(function (e) {
+        $("#myCanvas").mousemove(function (e) {
             handleMouseMove(e);
         });
-        $("#canvas").mouseup(function (e) {
+        $("#myCanvas").mouseup(function (e) {
             handleMouseUp(e);
         });
-        $("#canvas").mouseout(function (e) {
+        $("#myCanvas").mouseout(function (e) {
             handleMouseOut(e);
         });
 
-        $("#submit").click(function () {
+        $("#new_position").click(function () {
 
             // calc the y coordinate for this text on the canvas
             var y = texts.length * 20 + 20;
 
             // get the text from the input element
             var text = {
-                text: $("#theText").val(),
+                text: 'New Position',
                 x: 20,
                 y: y
             };
