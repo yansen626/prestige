@@ -40,6 +40,14 @@ Route::prefix('admin')->group(function(){
     Route::post('/users/update', 'Admin\UserController@update')->name('admin.users.update');
     Route::post('/users/delete', 'Admin\UserController@destroy')->name('admin.users.destroy');
 
+    // Category
+    Route::get('/categories', 'Admin\CategoryController@index')->name('admin.categories.index');
+    Route::get('/categories/create', 'Admin\CategoryController@create')->name('admin.categories.create');
+    Route::post('/categories/store', 'Admin\CategoryController@store')->name('admin.categories.store');
+    Route::get('/categories/edit/{item}', 'Admin\CategoryController@edit')->name('admin.categories.edit');
+    Route::post('/categories/update', 'Admin\CategoryController@update')->name('admin.categories.update');
+    Route::post('/categories/delete', 'Admin\CategoryController@destroy')->name('admin.categories.destroy');
+
     // Product
     Route::get('/product/', 'Admin\ProductController@index')->name('admin.product.index');
     Route::get('/product/show/{item}', 'Admin\ProductController@show')->name('admin.product.show');
@@ -59,9 +67,11 @@ Route::view('/send-email', 'auth.send-email');
 Route::get('/datatables-admin-users', 'Admin\AdminUserController@getIndex')->name('datatables.admin_users');
 Route::get('/datatables-admin-products', 'Admin\ProductController@getIndex')->name('datatables.admin_products');
 Route::get('/datatables-users', 'Admin\UserController@getIndex')->name('datatables.users');
+Route::get('/datatables-categories', 'Admin\CategoryController@getIndex')->name('datatables.categories');
 
 // Select2
 Route::get('/select-roles', 'Admin\RoleController@getRoles')->name('select.roles');
+Route::get('/select-categories', 'Admin\CategoryController@getCategories')->name('select.categories');
 
 // Third Party API
 Route::get('/update-currency', 'Admin\CurrencyController@getCurrenciesUpdate')->name('update-currencies');

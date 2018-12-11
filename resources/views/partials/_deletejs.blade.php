@@ -16,6 +16,9 @@
                 else{
                     window.location = '{{ route($redirectUrl) }}';
                 }
+            },
+            error: function (data) {
+                alert("Error");
             }
         });
     });

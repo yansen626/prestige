@@ -81,6 +81,15 @@
                 { data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'}
             ],
         });
+
+        $(document).on('click', '.delete-modal', function(){
+            $('#deleteModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+
+            $('#deleted-id').val($(this).data('id'));
+        });
     </script>
     @include('partials._deleteJs', ['routeUrl' => 'admin.admin-users.destroy', 'redirectUrl' => 'admin.admin-users.index'])
 @endsection

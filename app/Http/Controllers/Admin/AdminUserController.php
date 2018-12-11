@@ -100,7 +100,7 @@ class AdminUserController extends Controller
         ]);
 
         Session::flash('success', 'Success Creating new Admin User!');
-        return redirect()->route('admin.admin-users');
+        return redirect()->route('admin.admin-users.index');
     }
 
     /**
@@ -172,7 +172,7 @@ class AdminUserController extends Controller
         $adminUser->save();
 
         Session::flash('success', 'Success Updating Admin User!');
-        return redirect()->route('admin.admin-users');
+        return redirect()->route('admin.admin-users.index');
     }
 
     /**
@@ -190,7 +190,7 @@ class AdminUserController extends Controller
             $adminUser = AdminUser::find($adminUserId);
             $adminUser->delete();
 
-            Session::flash('message', 'Success Deleting Admin User ' . $item->code . ' - ' . $item->name);
+            Session::flash('success', 'Success Deleting Admin User ' . $adminUser->email . ' - ' . $adminUser->first_name . ' ' . $adminUser->last_name);
             return Response::json(array('success' => 'VALID'));
         }
         catch(\Exception $ex){

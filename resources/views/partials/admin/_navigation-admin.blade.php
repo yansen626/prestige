@@ -44,6 +44,19 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
+                        <i class="icon icon-settings light-green-text s-18 "></i> <span>Data</span>
+                        <i class="icon icon-angle-left s-18 pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('admin.categories.index') }}">
+                                <i class="icon icon-sticky-note text-green"></i>Category
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
                         <i class="icon icon-settings light-green-text s-18 "></i> <span>Product</span>
                         <i class="icon icon-angle-left s-18 pull-right"></i>
                     </a>

@@ -128,10 +128,9 @@ class UserController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Request $request
-     * @param  int $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Request $request, $id)
+    public function destroy(Request $request)
     {
         //
         try {
@@ -140,7 +139,7 @@ class UserController extends Controller
             $user = User::find($userId);
             $user->delete();
 
-            Session::flash('message', 'Success Deleting User ' . $user->email . ' - ' . $user->name);
+            Session::flash('success', 'Success Deleting User ' . $user->email . ' - ' . $user->name);
             return Response::json(array('success' => 'VALID'));
         }
         catch(\Exception $ex){
