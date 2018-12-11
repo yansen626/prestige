@@ -6,7 +6,7 @@
         <div class="container-fluid text-white">
             <div class="row p-t-b-10 ">
                 <div class="col">
-                    <h4> <i class="icon-table"></i> Admin Users</h4>
+                    <h4> <i class="icon-table"></i> Users</h4>
                 </div>
             </div>
         </div>
@@ -16,26 +16,14 @@
         <div class="container">
             <section class="paper-card">
                 <div class="row">
-                    <table class="table cell-vertical-align-middle  table-responsive mb-4">
-                        <tbody>
-                        <tr class="no-b">
-                            <td>
-                                <a href="{{ route('admin.admin-users.create') }}" class="btn btn-outline-primary btn-lg btn-block">
-                                <i class="icon icon-plus"></i> Add
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
                     <div class="col-lg-12">
                         @include('partials.admin._messages')
-                        <table id="user-admin" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
+                        <table id="user" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th>Email</th>
                                 <th>Name</th>
-                                <th>Is Superadmin</th>
-                                <th>Role</th>
+                                <th>Phone</th>
                                 <th>Status</th>
                                 <th>Created At</th>
                                 <th></th>
@@ -58,18 +46,17 @@
     <script src="{{ asset('js/datatables.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
-        $('#user-admin').DataTable({
+        $('#user').DataTable({
             processing: true,
             serverSide: true,
             pageLength: 25,
-            ajax: '{!! route('datatables.admin_users') !!}',
+            ajax: '{!! route('datatables.users') !!}',
             order: [ [0, 'asc'] ],
             columns: [
                 { data: 'email', name: 'email', class: 'text-center'},
                 { data: 'name', name: 'name', class: 'text-center'},
-                { data: 'superadmin', name: 'superadmin', class: 'text-center'},
-                { data: 'role', name: 'role', class: 'text-center'},
-                { data: 'status', name: 'status'},
+                { data: 'phone', name: 'phone', class: 'text-center'},
+                { data: 'status', name: 'status', class: 'text-center'},
                 { data: 'created_at', name: 'created_at', class: 'text-center', orderable: false, searchable: false,
                     render: function ( data, type, row ){
                         if ( type === 'display' || type === 'filter' ){
@@ -82,5 +69,5 @@
             ],
         });
     </script>
-    @include('partials._deleteJs', ['routeUrl' => 'admin.admin-users.destroy', 'redirectUrl' => 'admin.admin-users.index'])
+    @include('partials._deleteJs', ['routeUrl' => 'admin.users.destroy', 'redirectUrl' => 'admin.users.index'])
 @endsection

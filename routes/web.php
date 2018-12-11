@@ -25,12 +25,20 @@ Route::prefix('admin')->group(function(){
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 
     // Admin User
-    Route::get('/admin-users', 'Admin\AdminUserController@index')->name('admin-users');
-    Route::get('/admin-users/create', 'Admin\AdminUserController@create')->name('admin-users.create');
-    Route::post('/admin-users/store', 'Admin\AdminUserController@store')->name('admin-users.store');
-    Route::get('/admin-users/edit/{item}', 'Admin\AdminUserController@edit')->name('admin-users.edit');
-    Route::post('/admin-users/update', 'Admin\AdminUserController@update')->name('admin-users.update');
-    Route::post('/admin-users/delete', 'Admin\AdminUserController@destroy')->name('admin-users.destroy');
+    Route::get('/admin-users', 'Admin\AdminUserController@index')->name('admin.admin-users.index');
+    Route::get('/admin-users/create', 'Admin\AdminUserController@create')->name('admin.admin-users.create');
+    Route::post('/admin-users/store', 'Admin\AdminUserController@store')->name('admin.admin-users.store');
+    Route::get('/admin-users/edit/{item}', 'Admin\AdminUserController@edit')->name('admin.admin-users.edit');
+    Route::post('/admin-users/update', 'Admin\AdminUserController@update')->name('admin.admin-users.update');
+    Route::post('/admin-users/delete', 'Admin\AdminUserController@destroy')->name('admin.admin-users.destroy');
+
+    // User
+    Route::get('/users', 'Admin\UserController@index')->name('admin.users.index');
+    Route::get('/users/create', 'Admin\UserController@create')->name('admin.users.create');
+    Route::post('/users/store', 'Admin\UserController@store')->name('admin.users.store');
+    Route::get('/users/edit/{item}', 'Admin\UserController@edit')->name('admin.users.edit');
+    Route::post('/users/update', 'Admin\UserController@update')->name('admin.users.update');
+    Route::post('/users/delete', 'Admin\UserController@destroy')->name('admin.users.destroy');
 
     // Product
     Route::get('/product/', 'Admin\ProductController@index')->name('admin.product.index');
@@ -50,6 +58,7 @@ Route::view('/send-email', 'auth.send-email');
 // Datatables
 Route::get('/datatables-admin-users', 'Admin\AdminUserController@getIndex')->name('datatables.admin_users');
 Route::get('/datatables-admin-products', 'Admin\ProductController@getIndex')->name('datatables.admin_products');
+Route::get('/datatables-users', 'Admin\UserController@getIndex')->name('datatables.users');
 
 // Select2
 Route::get('/select-roles', 'Admin\RoleController@getRoles')->name('select.roles');

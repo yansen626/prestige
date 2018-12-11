@@ -8,14 +8,14 @@
             <div class="col">
                 <h4>
                     <i class="icon-package"></i>
-                    Create New Division
+                    Create New Admin User
                 </h4>
             </div>
         </div>
     </div>
 </header>
 
-{{ Form::open(['route'=>['admin-users.store'],'method' => 'post','id' => 'general-form']) }}
+{{ Form::open(['route'=>['admin.admin-users.store'],'method' => 'post','id' => 'general-form']) }}
 {{--<form method="POST" action="{{ route('admin-users.store') }}">--}}
     {{--{{ csrf_field() }}--}}
     <div class="container-fluid relative animatedParent animateOnce">
@@ -114,7 +114,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
-                                    <a href="{{ route('admin-users') }}" class="btn btn-danger">Exit</a>
+                                    <a href="{{ route('admin.admin-users.index') }}" class="btn btn-danger">Exit</a>
                                     <input type="submit" class="btn btn-success" value="Save">
                                 </div>
                                 <!-- #END# Input -->
