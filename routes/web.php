@@ -62,3 +62,6 @@ Route::get('/datatables-users', 'Admin\UserController@getIndex')->name('datatabl
 
 // Select2
 Route::get('/select-roles', 'Admin\RoleController@getRoles')->name('select.roles');
+
+// Third Party API
+Route::get('/update-currency', 'Admin\CurrencyController@getCurrenciesUpdate')->name('update-currencies');

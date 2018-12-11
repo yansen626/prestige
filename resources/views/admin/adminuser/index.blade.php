@@ -69,7 +69,7 @@
                 { data: 'name', name: 'name', class: 'text-center'},
                 { data: 'superadmin', name: 'superadmin', class: 'text-center'},
                 { data: 'role', name: 'role', class: 'text-center'},
-                { data: 'status', name: 'status'},
+                { data: 'status', name: 'status', class: 'text-center'},
                 { data: 'created_at', name: 'created_at', class: 'text-center', orderable: false, searchable: false,
                     render: function ( data, type, row ){
                         if ( type === 'display' || type === 'filter' ){
