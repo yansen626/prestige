@@ -12,7 +12,6 @@
         </div>
     </header>
 
-    {{ Form::open(['route'=>['admin.product.store'],'method' => 'post','id' => 'general-form']) }}
 
     <div class="content-wrapper animatedParent animateOnce">
         <div class="container">
@@ -21,103 +20,93 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body b-b">
-                                <!-- Input -->
-                                <div class="body">
-                                    <div class="form-row col-md-12">
-                                        <div class="form-group col-md-6 col-sm-6 col-xs-12">
-                                            <div class="form-group form-float form-group-lg">
-                                                <div class="form-line">
-                                                    <label class="form-label">Product Name *</label>
-                                                    <input id="name" type="text" class="form-control" name="name" value="">
+                                <h3 class="my-3">
+                                    Step 1 (Product Information)
+                                </h3>
+
+                                <div class="container-fluid animatedParent animateOnce my-3">
+                                    <div class="animated fadeInUpShort">
+                                        <!-- Input -->
+                                        {{ Form::open(['route'=>['admin.product.store'],'method' => 'post','id' => 'general-form']) }}
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="validationCustom01">Product Name</label>
+                                                            <input type="text" name="name" class="form-control" value="{{old('name')}}" required>
+                                                        </div>
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="sku">SKU</label>
+                                                            <input type="text" class="form-control" id="sku" name="sku" value="{{old('sku')}}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6 mb-3">
+                                                            <label for="category">Category</label>
+                                                            <select id="category" name="category" class="custom-select form-control">
+                                                                <option value="-1">Select Product Category</option>
+                                                                @foreach($categories as $category)
+                                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-3 mb-3">
+                                                            <label for="validationCustom04">Price</label>
+                                                            <input type="number" class="form-control" id="price"  name="price" value="{{old('price')}}" required>
+                                                        </div>
+                                                        <div class="col-md-3 mb-3">
+                                                            <label for="sku">Quantity</label>
+                                                            <input type="number" class="form-control" id="qty" name="qty" value="{{old('qty')}}" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-3 mb-3">
+                                                            <label>Weight</label>
+                                                            <input type="number" class="form-control" id="weight" name="weight" value="{{old('weight')}}" required>
+                                                        </div>
+                                                        <div class="col-md-3 mb-3">
+                                                            <label>Width</label>
+                                                            <input type="number" class="form-control" id="width" name="width" value="{{old('width')}}">
+                                                        </div>
+                                                        <div class="col-md-3 mb-3">
+                                                            <label>Height</label>
+                                                            <input type="number" class="form-control" id="height" name="height" value="{{old('height')}}">
+                                                        </div>
+                                                        <div class="col-md-3 mb-3">
+                                                            <label>Length</label>
+                                                            <input type="number" class="form-control" id="length" name="length" value="{{old('length')}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="productDetails">Product Details</label>
+                                                        <textarea class="form-control p-t-40" id="description" name="description"
+                                                                  placeholder="Write Something..." rows="7" required>{{old('description')}}</textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="tags">Product Tags</label><br>
+                                                        <input type="text" class="tags-input" id="tags" name="tags" placeholder="Add New"
+                                                               value="{{old('tags')}}">
+                                                    </div>
+                                                    {{--<div class="row">--}}
+                                                        {{--<div class="col-md-12 mb-3">--}}
+                                                            {{--<label>Meta Title</label>--}}
+                                                            {{--<input type="text" name="meta_title" class="form-control">--}}
+                                                        {{--</div>--}}
+                                                        {{--<div class="col-md-12 mb-3">--}}
+                                                            {{--<label>Meta Description</label>--}}
+                                                            {{--<textarea id="meta_description" rows="2" class="form-control" name="meta_description"></textarea>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
+                                                    <div class="row">
+                                                        <a href="{{ route('admin.product.index') }}" class="btn btn-danger">Exit</a>
+                                                        <button class="btn btn-primary" type="submit">Publish</button>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label">SKU *</label>
-                                                <input id="sku" name="sku" type="text" value="" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="Description">Description</label>
-                                            <textarea id="Description" rows="5" class="form-control" name="Description"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label">Qty *</label>
-                                                <input id="qty" name="qty" type="number" value="" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label">Price *</label>
-                                                <input id="price" name="price" type="number" value="" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label">Weight *</label>
-                                                <input id="price" name="price" type="number" value="" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label">Width *</label>
-                                                <input id="price" name="price" type="number" value="" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label">Height *</label>
-                                                <input id="price" name="price" type="number" value="" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-sm-3 col-xs-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label">Length *</label>
-                                                <input id="price" name="price" type="number" value="" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="meta_title">Meta Title</label>
-                                            <input id="meta_title" name="meta_title" type="text" value="" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="meta_description">Meta Title</label>
-                                            <textarea id="meta_description" rows="5" class="form-control"
-                                                      style="text-transform: uppercase;" name="meta_description"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
-                                        <a href="#" class="btn btn-danger">Exit</a>
-                                        <input type="submit" class="btn btn-success" value="Save">
+                                        {{ Form::close() }}
+                                    <!-- #END# Input -->
                                     </div>
                                 </div>
-
-                                <!-- #END# Input -->
-
                             </div>
                         </div>
                     </div>
@@ -125,5 +114,4 @@
             </section>
         </div>
     </div>
-    {{ Form::close() }}
 @endsection

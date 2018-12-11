@@ -57,7 +57,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/product/create', 'Admin\ProductController@create')->name('admin.product.create');
     Route::post('/product/store', 'Admin\ProductController@store')->name('admin.product.store');
 
-    Route::get('/product/create-position', 'Admin\ProductController@createPosition')->name('admin.product.create.position');
+    Route::get('/product/create-position/{item}', 'Admin\ProductController@createPosition')->name('admin.product.create.position');
     Route::post('/product/store-position', 'Admin\ProductController@storePosition')->name('admin.product.store.position');
     Route::get('/product/edit/{item}', 'Admin\ProductController@edit')->name('admin.product.edit');
 });

@@ -17,6 +17,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $name
  * @property string $slug
  * @property string $sku
+ * @property string $tag
  * @property string $description
  * @property int $status
  * @property int $in_stock
@@ -69,6 +70,7 @@ class Product extends Eloquent
 		'name',
 		'slug',
 		'sku',
+		'tag',
 		'description',
 		'status',
 		'in_stock',
