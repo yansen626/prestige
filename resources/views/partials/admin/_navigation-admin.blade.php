@@ -87,6 +87,11 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
+                            <a href="{{ route('admin.store-address.index') }}">
+                                <i class="icon icon-address-book text-green"></i>Store Addresses
+                            </a>
+                        </li>
+                        <li>
                             <a href="{{ route('admin.admin-users.index') }}">
                                 <i class="icon icon-user-circle text-green"></i>Admin Users
                             </a>
