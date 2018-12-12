@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\Voucher;
 use App\Transformer\VoucherTransformer;
 use Carbon\Carbon;
@@ -64,7 +66,7 @@ class VoucherController extends Controller
     {
         //Get Data from View
         $validator = Validator::make($request->all(), [
-            'code'          => 'required|max:100',
+            'code'          => 'required|max:100|unique:vouchers',
             'description'   => 'required|max:100',
             'start_date'    => 'required',
             'finish_date'   => 'required'
@@ -122,7 +124,22 @@ class VoucherController extends Controller
     {
         $voucher = Voucher::find($id);
 
-        return view('admin.voucher.edit', compact('voucher'));
+        //More Data to Show
+        if($voucher->category_id != null || $voucher->category_id != 0){
+            $category = Category::find($voucher->category_id);
+        }
+        else{
+            $category = null;
+        }
+
+        if($voucher->product_id != null || $voucher->product_id != 0){
+            $product = Product::find($voucher->product_id);
+        }
+        else{
+            $product = null;
+        }
+
+        return view('admin.voucher.edit', compact('voucher', 'category', 'product'));
     }
 
     /**
@@ -132,7 +149,7 @@ class VoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //Get Data from View
         $validator = Validator::make($request->all(), [
@@ -155,7 +172,7 @@ class VoucherController extends Controller
         }
 
         $user = Auth::guard('admin')->user();
-        $voucher = Voucher::find($id);
+        $voucher = Voucher::find($request->input('id'));
 
         $voucher->code = $request->input('code');
         $voucher->description = $request->input('description');

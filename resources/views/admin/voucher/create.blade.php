@@ -50,9 +50,9 @@
                                     <div class="col-md-12">
                                         <div class="form-group form-float form-group-lg">
                                             <div class="form-line">
-                                                <label class="form-label" for="email">Code *</label>
-                                                <input id="email" type="email" class="form-control"
-                                                       name="email" value="{{ old('email') }}">
+                                                <label class="form-label" for="code">Code *</label>
+                                                <input id="code" type="text" class="form-control"
+                                                       name="code" value="{{ old('code') }}">
                                             </div>
                                         </div>
                                     </div>
@@ -60,9 +60,9 @@
                                     <div class="col-md-12">
                                         <div class="form-group form-float form-group-lg">
                                             <div class="form-line">
-                                                <label class="form-label" for="email">Description *</label>
+                                                <label class="form-label" for="description">Description *</label>
                                                 <textarea id="description" type="description" class="form-control"
-                                                          name="description">{{ old('email') }}</textarea>
+                                                          name="description">{{ old('description') }}</textarea>
                                             </div>
                                         </div>
                                     </div>
