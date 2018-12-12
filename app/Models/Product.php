@@ -99,6 +99,11 @@ class Product extends Eloquent
 		return $this->hasMany(\App\Models\AvoredProductImage::class);
 	}
 
+	public function product_images()
+	{
+		return $this->hasMany(\App\Models\ProductImage::class);
+	}
+
 	public function categories()
 	{
 		return $this->belongsToMany(\App\Models\Category::class)

@@ -14,6 +14,7 @@ use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\ProductPosition;
 use App\Transformer\ProductTransformer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -49,7 +50,14 @@ class ProductController extends Controller
 
     public function show(Product $item)
     {
-        return view('admin.product.show');
+        $images = ProductImage::where('product_id', $item->id)->orderby('is_main_image','desc')->get();
+        $productCategory = CategoryProduct::where('product_id', $item->id)->first();
+        $data = [
+            'product'    => $item,
+            'productCategory'    => $productCategory,
+            'images'    => $images,
+        ];
+        return view('admin.product.show')->with($data);
     }
 
     public function create()
@@ -93,6 +101,7 @@ class ProductController extends Controller
             $slug = Utilities::CreateProductSlug($request->input('name'));
 
 //            dd($slug);
+            // save product
             $newProduct = Product::create([
                 'name' => $request->input('name'),
                 'slug' => $slug,
@@ -104,11 +113,13 @@ class ProductController extends Controller
                 'width' => $request->input('width'),
                 'height' => $request->input('height'),
                 'length' => $request->input('length'),
+                'tag' => $request->input('tags'),
                 'status_id' => 1,
                 'created_at'        => $dateTimeNow->toDateTimeString(),
                 'updated_at'        => $dateTimeNow->toDateTimeString()
             ]);
 
+            // save product category
             $newProductCategory = CategoryProduct::create([
                 'category_id' => $request->input('category'),
                 'product_id' => $newProduct->id,
@@ -116,7 +127,7 @@ class ProductController extends Controller
             ]);
 
 
-            //product image
+            // save product main image, and image detail
             $img = Image::make($mainImages);
             $extStr = $img->mime();
             $ext = explode('/', $extStr, 2);
@@ -148,7 +159,7 @@ class ProductController extends Controller
             return redirect()->route('admin.product.create.customize',['item' => $newProduct->id]);
 
         }catch(\Exception $ex){
-            dd($ex);
+//            dd($ex);
             error_log($ex);
             return back()->withErrors("Something Went Wrong")->withInput();
         }
@@ -164,22 +175,79 @@ class ProductController extends Controller
         return view('admin.product.create-customize')->with($data);
     }
 
-    public function storeCustomize(Request $request)
+    public function storeCustomize(Request $request, Product $item)
     {
         dd($request);
-        $img = Image::make(Input::get('img_data'));
-        $extStr = $img->mime();
-        $ext = explode('/', $extStr, 2);
+        try{
+            $validator = Validator::make($request->all(), [
+                'position_name'        => 'required',
+                'position_x'         => 'required',
+                'position_y'             => 'required',
+            ]);
+            if ($validator->fails())
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
-        $filename = 'test_image.'. $ext[1];
+            // save product position
+            $dateTimeNow = Carbon::now('Asia/Jakarta');
+            $newProductCustomize = ProductPosition::create([
+                'product_id' => $item->id,
+                'name' => $request->input('position_name'),
+                'pos_x' => $request->input('position_x'),
+                'pos_y' => $request->input('position_y'),
+                'created_at'        => $dateTimeNow->toDateTimeString(),
+                'updated_at'        => $dateTimeNow->toDateTimeString(),
+            ]);
 
-        $img->save(public_path('storage/user_custom/'. $filename), 75);
-        dd($img);
+            return redirect()->route('admin.product.show',['item' => $item->id]);
+
+        }catch(\Exception $ex){
+//            dd($ex);
+            error_log($ex);
+            return back()->withErrors("Something Went Wrong")->withInput();
+        }
+    }
+
+    public function editCustomize(Product $item)
+    {
+        $mainImage = ProductImage::where('product_id', $item->id)->where('is_main_image', 1)->first();
+        $data = [
+            'product'    => $item,
+            'mainImage'    => $mainImage,
+        ];
+        return view('admin.product.create-customize')->with($data);
+    }
+
+    public function updateCustomize(Product $item)
+    {
+        $mainImage = ProductImage::where('product_id', $item->id)->where('is_main_image', 1)->first();
+        $data = [
+            'product'    => $item,
+            'mainImage'    => $mainImage,
+        ];
+        return view('admin.product.create-customize')->with($data);
     }
 
     public function edit(Product $item)
     {
 
         return view('admin.product.edit');
+    }
+
+
+    public function getProducts(Request $request){
+        $term = trim($request->q);
+        $roles = Product::where('id', '!=', $request->id)
+            ->where(function ($q) use ($term) {
+                $q->where('name', 'LIKE', '%' . $term . '%');
+            })
+            ->get();
+
+        $formatted_tags = [];
+
+        foreach ($roles as $role) {
+            $formatted_tags[] = ['id' => $role->id, 'text' => $role->name];
+        }
+
+        return \Response::json($formatted_tags);
     }
 }

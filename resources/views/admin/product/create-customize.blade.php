@@ -30,12 +30,11 @@
                                 <div class="container-fluid animatedParent animateOnce my-3">
                                     <div class="animated fadeInUpShort">
                                         <!-- Input -->
-                                        {{ Form::open(['route'=>['admin.product.store'],'method' => 'post','id' => 'general-form']) }}
+                                        {{ Form::open(['route'=>['admin.product.store.customize', $item->id],'method' => 'post','id' => 'general-form']) }}
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
-                                                        <label class="form-label">Upload Main Image *</label>
                                                         <canvas id="myCanvas" width="600" height="600"></canvas>
                                                     </div>
                                                 </div>
@@ -44,7 +43,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <label class="form-label">Position Name</label>
-                                                        <input id="position_x" name="position_name" type="text" value="Top Center" class="form-control">
+                                                        <input id="position_name" name="position_name" type="text" value="Top Center" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -55,11 +54,6 @@
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Y</label>
                                                         <input id="position_y" name="position_y" type="number" value="300" onkeyup="ChangePosition()" class="form-control">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6 mb-3">
-                                                        <a id="new_position">Add New Position</a>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
