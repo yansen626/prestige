@@ -51,6 +51,9 @@ Route::prefix('admin')->group(function(){
     // Currency
     Route::get('/currencies', 'Admin\CurrencyController@index')->name('admin.currencies.index');
 
+    // Contact Message
+    Route::get('/contact-messages', 'Admin\ContactMessageController@index')->name('admin.contact-messages.index');
+
     // Store Address
     Route::get('/store-address', 'Admin\StoreAddressController@index')->name('admin.store-address.index');
     Route::get('/store-address/create', 'Admin\StoreAddressController@create')->name('admin.store-address.create');
@@ -78,6 +81,7 @@ Route::get('/datatables-users', 'Admin\UserController@getIndex')->name('datatabl
 Route::get('/datatables-categories', 'Admin\CategoryController@getIndex')->name('datatables.categories');
 Route::get('/datatables-currencies', 'Admin\CurrencyController@getIndex')->name('datatables.currencies');
 Route::get('/datatables-store-addresses', 'Admin\StoreAddressController@getIndex')->name('datatables.store-addresses');
+Route::get('/datatables-contact-message', 'Admin\ContactMessageController@getIndex')->name('datatables.contact-message');
 
 // Select2
 Route::get('/select-roles', 'Admin\RoleController@getRoles')->name('select.roles');

@@ -61,6 +61,13 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('admin.contact-messages.index') }}">
+                                <i class="icon icon-money text-green"></i>Contact Us
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
