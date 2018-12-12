@@ -71,6 +71,14 @@ Route::prefix('admin')->group(function(){
     Route::post('/vouchers/update', 'Admin\VoucherController@update')->name('admin.vouchers.update');
     Route::post('/vouchers/delete', 'Admin\VoucherController@destroy')->name('admin.vouchers.destroy');
 
+    // FAQ
+    Route::get('/faqs', 'Admin\FaqController@index')->name('admin.faqs.index');
+    Route::get('/faqs/create', 'Admin\FaqController@create')->name('admin.faqs.create');
+    Route::post('/faqs/store', 'Admin\FaqController@store')->name('admin.faqs.store');
+    Route::get('/faqs/edit/{item}', 'Admin\FaqController@edit')->name('admin.faqs.edit');
+    Route::post('/faqs/update', 'Admin\FaqController@update')->name('admin.faqs.update');
+    Route::post('/faqs/delete', 'Admin\FaqController@destroy')->name('admin.faqs.destroy');
+
     // Product
     Route::get('/product/', 'Admin\ProductController@index')->name('admin.product.index');
     Route::get('/product/show/{item}', 'Admin\ProductController@show')->name('admin.product.show');
@@ -98,6 +106,7 @@ Route::get('/datatables-store-addresses', 'Admin\StoreAddressController@getIndex
 Route::get('/datatables-contact-message', 'Admin\ContactMessageController@getIndex')->name('datatables.contact-message');
 Route::get('/datatables-subscribes', 'Admin\SubscribeController@getIndex')->name('datatables.subscribes');
 Route::get('/datatables-vouchers', 'Admin\VoucherController@getIndex')->name('datatables.vouchers');
+Route::get('/datatables-faqs', 'Admin\FaqController@getIndex')->name('datatables.faqs');
 
 // Select2
 Route::get('/select-roles', 'Admin\RoleController@getRoles')->name('select.roles');

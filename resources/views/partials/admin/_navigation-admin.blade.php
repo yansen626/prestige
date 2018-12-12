@@ -80,7 +80,15 @@
                     <ul class="treeview-menu">
                         <li>
                             <a href="{{ route('admin.vouchers.index') }}">
-                                <i class="icon icon-user-circle text-green"></i>Vouchers
+                                <i class="icon icon-vcard text-green"></i>Vouchers
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('admin.faqs.index') }}">
+                                <i class="icon icon-document text-green"></i>FAQ
                             </a>
                         </li>
                     </ul>
