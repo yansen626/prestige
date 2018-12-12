@@ -24,13 +24,13 @@
                                     Step 2 (Customer Customize Option)
                                 </h3>
                                 <h3 class="my-3">
-                                    Product = {{$product->name}}
+                                    Product = {{$productPosition->product->name}}
                                 </h3>
 
                                 <div class="container-fluid animatedParent animateOnce my-3">
                                     <div class="animated fadeInUpShort">
                                         <!-- Input -->
-                                        {{ Form::open(['route'=>['admin.product.store.customize', $product->id],'method' => 'post','id' => 'general-form']) }}
+                                        {{ Form::open(['route'=>['admin.product.update.customize', $productPosition->id],'method' => 'post','id' => 'general-form']) }}
                                         <div class="row">
                                             <div class="col-md-8">
                                                 <div class="row">
@@ -43,21 +43,21 @@
                                                 <div class="row">
                                                     <div class="col-md-12 mb-3">
                                                         <label class="form-label">Position Name</label>
-                                                        <input id="position_name" name="position_name" type="text" value="Top Center" class="form-control">
+                                                        <input id="position_name" name="position_name" type="text" value="{{$productPosition->name}}" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">X</label>
-                                                        <input id="position_x" name="position_x" type="number" value="250" onkeyup="ChangePosition()" class="form-control">
+                                                        <input id="position_x" name="position_x" type="number" value="{{$productPosition->pos_x}}" onkeyup="ChangePosition()" class="form-control">
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Y</label>
-                                                        <input id="position_y" name="position_y" type="number" value="300" onkeyup="ChangePosition()" class="form-control">
+                                                        <input id="position_y" name="position_y" type="number" value="{{$productPosition->pos_y}}" onkeyup="ChangePosition()" class="form-control">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
-                                                    <a href="#" class="btn btn-danger">Exit</a>
+                                                    <a href="{{route('admin.product.show', ['item' => $productPosition->product_id])}}" class="btn btn-danger">Back</a>
                                                     <input type="submit" class="btn btn-success" value="Save">
                                                 </div>
                                             </div>
@@ -92,6 +92,8 @@
             });
 
         window.onload = function(){
+            var posX = $('#position_x').val();
+            var posY = $('#position_y').val();
             var canvas = document.getElementById("myCanvas");
             var context = canvas.getContext("2d");
             var imageObj = new Image();
@@ -99,7 +101,7 @@
                 context.drawImage(imageObj, 10, 10);
                 context.font = "20pt Calibri";
                 context.fillStyle = "#fff";
-                context.fillText("TEST!", 250, 300);
+                context.fillText("TEST!", posX, posY);
             };
 
             imageObj.src = "{{ asset('storage/products/'.$mainImage->path) }}";

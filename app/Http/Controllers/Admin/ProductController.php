@@ -52,9 +52,12 @@ class ProductController extends Controller
     {
         $images = ProductImage::where('product_id', $item->id)->orderby('is_main_image','desc')->get();
         $productCategory = CategoryProduct::where('product_id', $item->id)->first();
+        $productPosition = ProductPosition::where('product_id', $item->id)->get();
+
         $data = [
             'product'    => $item,
             'productCategory'    => $productCategory,
+            'productPosition'    => $productPosition,
             'images'    => $images,
         ];
         return view('admin.product.show')->with($data);
@@ -177,13 +180,14 @@ class ProductController extends Controller
 
     public function storeCustomize(Request $request, Product $item)
     {
-        dd($request);
+//        dd($item);
         try{
             $validator = Validator::make($request->all(), [
                 'position_name'        => 'required',
                 'position_x'         => 'required',
                 'position_y'             => 'required',
             ]);
+
             if ($validator->fails())
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
@@ -201,38 +205,160 @@ class ProductController extends Controller
             return redirect()->route('admin.product.show',['item' => $item->id]);
 
         }catch(\Exception $ex){
-//            dd($ex);
+            dd($ex);
             error_log($ex);
             return back()->withErrors("Something Went Wrong")->withInput();
         }
     }
 
-    public function editCustomize(Product $item)
+    public function editCustomize(ProductPosition $item)
     {
-        $mainImage = ProductImage::where('product_id', $item->id)->where('is_main_image', 1)->first();
+        $mainImage = ProductImage::where('product_id', $item->product_id)->where('is_main_image', 1)->first();
         $data = [
-            'product'    => $item,
+            'productPosition'    => $item,
             'mainImage'    => $mainImage,
         ];
-        return view('admin.product.create-customize')->with($data);
+        return view('admin.product.edit-customize')->with($data);
     }
 
-    public function updateCustomize(Product $item)
+    public function updateCustomize(Request $request, ProductPosition $item)
     {
-        $mainImage = ProductImage::where('product_id', $item->id)->where('is_main_image', 1)->first();
-        $data = [
-            'product'    => $item,
-            'mainImage'    => $mainImage,
-        ];
-        return view('admin.product.create-customize')->with($data);
+        try{
+            $validator = Validator::make($request->all(), [
+                'position_name'        => 'required',
+                'position_x'         => 'required',
+                'position_y'             => 'required',
+            ]);
+
+            if ($validator->fails())
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+
+            // save product position
+            $dateTimeNow = Carbon::now('Asia/Jakarta');
+            $item->name = $request->input('position_name');
+            $item->pos_x = $request->input('position_x');
+            $item->pos_y = $request->input('position_y');
+            $item->updated_at = $dateTimeNow->toDateTimeString();
+            $item->save();
+
+            return redirect()->route('admin.product.show',['item' => $item->product_id]);
+
+        }catch(\Exception $ex){
+            dd($ex);
+            error_log($ex);
+            return back()->withErrors("Something Went Wrong")->withInput();
+        }
     }
 
     public function edit(Product $item)
     {
-
-        return view('admin.product.edit');
+        $categories = Category::all();
+        $mainImage = ProductImage::where('product_id', $item->id)->where('is_main_image', 1)->first();
+        $detailImage = ProductImage::where('product_id', $item->id)->where('is_main_image', 0)->get();
+        $selectedCategory = CategoryProduct::where('product_id', $item->id)->first();
+        $data = [
+            'product'    => $item,
+            'categories'    => $categories,
+            'selectedCategory'    => $selectedCategory,
+            'mainImage'    => $mainImage,
+            'detailImage'    => $detailImage,
+        ];
+        return view('admin.product.edit')->with($data);
     }
 
+    public function update(Request $request, Product $product){
+
+        try{
+            $validator = Validator::make($request->all(), [
+                'name'        => 'required',
+                'sku'         => 'required',
+                'category'             => 'required',
+                'price'             => 'required',
+                'qty'             => 'required',
+                'weight'             => 'required',
+                'description'             => 'required',
+                'tags'             => 'required',
+            ]);
+
+            if ($request->input('category') == "-1") {
+                return back()->withErrors("Category is required")->withInput($request->all());
+            }
+//            dd($request);
+            $detailImages = $request->file('detail_image');
+            $mainImages = $request->file('main_image');
+
+            if ($validator->fails())
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+
+            $dateTimeNow = Carbon::now('Asia/Jakarta');
+            $slug = Utilities::CreateProductSlug($request->input('name'));
+
+//            dd($slug);
+            // update product
+            $product->name = $request->input('name');
+            $product->slug = $slug;
+            $product->sku = $request->input('sku');
+            $product->description = $request->input('description');
+            $product->qty = $request->input('qty');
+            $product->price = (double) $request->input('price');
+            $product->weight = $request->input('weight');
+            $product->width = $request->input('width');
+            $product->height = $request->input('height');
+            $product->length = $request->input('length');
+            $product->tag = $request->input('tags');
+            $product->updated_at = $dateTimeNow->toDateTimeString();
+
+            $product->save();
+
+            // update product category
+            $selectedCategory = CategoryProduct::where('product_id', $product->id)->first();
+            $selectedCategory->category_id = $request->input('category');
+            $selectedCategory->updated_at = $dateTimeNow->toDateTimeString();
+            $selectedCategory->save();
+
+
+            // update product main image, and image detail
+
+            if(!empty($mainImages)){
+                $mainImage = ProductImage::where('product_id', $product->id)->where('is_main_image', 1)->first();
+
+                $img = Image::make($mainImages);
+                $img->save(public_path('storage/products/'. $mainImage->path), 75);
+
+            }
+            if(!empty($detailImages)){
+                $detailImage = ProductImage::where('product_id', $product->id)->where('is_main_image', 0)->get();
+
+                foreach($detailImage as $image){
+                    $image->delete();
+                }
+
+                for($i=0;$i<sizeof($detailImages);$i++){
+                    $img = Image::make($detailImages[$i]);
+                    $extStr = $img->mime();
+                    $ext = explode('/', $extStr, 2);
+
+                    $filename = $product->id.'_'.$i.'_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
+
+                    $img->save(public_path('storage/products/'. $filename), 75);
+
+                    $newProductImage = ProductImage::create([
+                        'product_id' => $product->id,
+                        'path' => $filename,
+                        'is_main_image' => 0
+                    ]);
+                }
+            }
+
+
+            return redirect()->route('admin.product.show',['item' => $product->id]);
+
+        }catch(\Exception $ex){
+//            dd($ex);
+            error_log($ex);
+            return back()->withErrors("Something Went Wrong")->withInput();
+        }
+    }
 
     public function getProducts(Request $request){
         $term = trim($request->q);

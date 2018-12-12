@@ -105,7 +105,7 @@
                                     <!-- #END# Input -->
                                     </div>
                                 </div>
-
+                                <hr>
                                 <h3 class="my-3">
                                     Customize Position Detail
                                 </h3>
@@ -114,41 +114,32 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="row">
-                                                    <div class="col-md-8">
-                                                        <div class="row">
-                                                            <div class="col-md-12 mb-3">
-                                                                <canvas id="myCanvas" width="600" height="600"></canvas>
+                                                    @foreach($productPosition as $position)
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-12 mb-3">
+                                                                    <label class="form-label">Position Name</label>
+                                                                    <input id="position_name" name="position_name" type="text" value="{{$position->name}}" class="form-control">
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <div class="row">
-                                                            <div class="col-md-12 mb-3">
-                                                                <label class="form-label">Position Name</label>
-                                                                <input id="position_name" name="position_name" type="text" value="Top Center" class="form-control">
+                                                        <div class="col-md-6">
+                                                            <div class="row">
+                                                                <div class="col-md-12 mb-3">
+                                                                    <a href="{{route('admin.product.edit.customize',['item' => $position->id])}}" class="btn btn-primary">Edit Customize</a>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-6 mb-3">
-                                                                <label class="form-label">X</label>
-                                                                <input id="position_x" name="position_x" type="number" value="250" onkeyup="ChangePosition()" class="form-control">
-                                                            </div>
-                                                            <div class="col-md-6 mb-3">
-                                                                <label class="form-label">Y</label>
-                                                                <input id="position_y" name="position_y" type="number" value="300" onkeyup="ChangePosition()" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
-                                                            <a href="#" class="btn btn-danger">Edit Customize</a>
-                                                        </div>
-                                                    </div>
+                                                    @endforeach
                                                 </div>
+                                                <a href="{{route('admin.product.create.customize',['item' => $product->id])}}" class="btn btn-success">Add New Customize</a>
                                             </div>
                                         </div>
                                     <!-- #END# Input -->
                                     </div>
                                 </div>
-                                <div class="row">
+                                <hr>
+                                <div class="row center">
                                     <a href="{{ route('admin.product.edit', ['item' => $product->id]) }}" class="btn btn-danger">Edit</a>
                                 </div>
                             </div>
