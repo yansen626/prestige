@@ -8,14 +8,14 @@
             <div class="col">
                 <h4>
                     <i class="icon-package"></i>
-                    Create New Admin User
+                    Create New Voucher
                 </h4>
             </div>
         </div>
     </div>
 </header>
 
-{{ Form::open(['route'=>['admin.admin-users.store'],'method' => 'post','id' => 'general-form']) }}
+{{ Form::open(['route'=>['admin.vouchers.store'],'method' => 'post','id' => 'general-form']) }}
 {{--<form method="POST" action="{{ route('admin-users.store') }}">--}}
     {{--{{ csrf_field() }}--}}
     <div class="container-fluid relative animatedParent animateOnce">
@@ -37,72 +37,6 @@
                                 @endforeach
                                 <!-- Input -->
                                 <div class="body">
-                                    <div class="col-sm-12">
-                                        <div class="form-check mb-2 mr-sm-2">
-                                            <input type="checkbox" id="is_super_admin" name="is_super_admin" class="form-check-input"/>
-                                            <label class="form-check-label" for="is_super_admin">
-                                                Superadmin
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label" for="email">Email *</label>
-                                                <input id="email" type="email" class="form-control"
-                                                       name="email" value="{{ old('email') }}">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label" for="password">Password *</label>
-                                                <input id="password" type="password" class="form-control"
-                                                       name="password" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label" for="password_confirmation">Password Confirmation *</label>
-                                                <input id="password_confirmation" type="password" class="form-control"
-                                                       name="password_confirmation" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label" for="first_name">First Name *</label>
-                                                <input id="first_name" name="first_name" type="text" value="{{ old('first_name') }}"
-                                                       class="form-control" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label" for="last_name">Last Name *</label>
-                                                <input id="last_name" name="last_name" type="text" value="{{ old('last_name') }}"
-                                                       class="form-control" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="role">Role *</label>
-                                            <select id="role" name="role" class="form-control"></select>
-                                        </div>
-                                    </div>
-
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="status">Status *</label>
@@ -112,9 +46,62 @@
                                             </select>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label" for="email">Code *</label>
+                                                <input id="email" type="email" class="form-control"
+                                                       name="email" value="{{ old('email') }}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label" for="email">Description *</label>
+                                                <textarea id="description" type="description" class="form-control"
+                                                          name="description">{{ old('email') }}</textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="category">Category *</label>
+                                            <select id="category" name="category" class="form-control"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="product">Product *</label>
+                                            <select id="product" name="product" class="form-control"></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label" for="start_date">Start Date *</label>
+                                                <input id="start_date" name="start_date" type="text" class="date-time-picker form-control" value="{{ old('start_date') }}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label" for="finish_date">Finish Date *</label>
+                                                <input id="finish_date" type="text" class="date-time-picker form-control"
+                                                       name="finish_date" value="{{ old('finish_date') }}">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
-                                    <a href="{{ route('admin.admin-users.index') }}" class="btn btn-danger">Exit</a>
+                                    <a href="{{ route('admin.vouchers.index') }}" class="btn btn-danger">Exit</a>
                                     <input type="submit" class="btn btn-success" value="Save">
                                 </div>
                                 <!-- #END# Input -->
@@ -141,16 +128,38 @@
 @section('scripts')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script type="text/javascript">
-
-        $('#role').select2({
+        $('#category').select2({
             placeholder: {
                 id: '-1',
-                text: 'Choose Role...'
+                text: 'Choose Category...'
             },
             width: '100%',
             minimumInputLength: 0,
             ajax: {
-                url: '{{ route('select.roles') }}',
+                url: '{{ route('select.categories') }}',
+                dataType: 'json',
+                data: function (params) {
+                    return {
+                        q: $.trim(params.term)
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: data
+                    };
+                }
+            }
+        });
+
+        $('#product').select2({
+            placeholder: {
+                id: '-1',
+                text: 'Choose Product...'
+            },
+            width: '100%',
+            minimumInputLength: 0,
+            ajax: {
+                url: '{{ route('select.products') }}',
                 dataType: 'json',
                 data: function (params) {
                     return {

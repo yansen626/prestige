@@ -62,6 +62,15 @@ Route::prefix('admin')->group(function(){
     Route::get('/store-address/create', 'Admin\StoreAddressController@create')->name('admin.store-address.create');
     Route::post('/store-address/delete', 'Admin\StoreAddressController@destroy')->name('admin.store-address.destroy');
 
+    // Voucher
+    Route::get('/vouchers/', 'Admin\VoucherController@index')->name('admin.vouchers.index');
+    Route::get('/vouchers/show/{item}', 'Admin\VoucherController@show')->name('admin.vouchers.show');
+    Route::get('/vouchers/create', 'Admin\VoucherController@create')->name('admin.vouchers.create');
+    Route::post('/vouchers/store', 'Admin\VoucherController@store')->name('admin.vouchers.store');
+    Route::get('/vouchers/edit/{item}', 'Admin\VoucherController@edit')->name('admin.vouchers.edit');
+    Route::post('/vouchers/update', 'Admin\VoucherController@update')->name('admin.vouchers.update');
+    Route::post('/vouchers/delete', 'Admin\VoucherController@destroy')->name('admin.vouchers.destroy');
+
     // Product
     Route::get('/product/', 'Admin\ProductController@index')->name('admin.product.index');
     Route::get('/product/show/{item}', 'Admin\ProductController@show')->name('admin.product.show');
@@ -86,10 +95,12 @@ Route::get('/datatables-currencies', 'Admin\CurrencyController@getIndex')->name(
 Route::get('/datatables-store-addresses', 'Admin\StoreAddressController@getIndex')->name('datatables.store-addresses');
 Route::get('/datatables-contact-message', 'Admin\ContactMessageController@getIndex')->name('datatables.contact-message');
 Route::get('/datatables-subscribes', 'Admin\SubscribeController@getIndex')->name('datatables.subscribes');
+Route::get('/datatables-vouchers', 'Admin\VoucherController@getIndex')->name('datatables.vouchers');
 
 // Select2
 Route::get('/select-roles', 'Admin\RoleController@getRoles')->name('select.roles');
 Route::get('/select-categories', 'Admin\CategoryController@getCategories')->name('select.categories');
+Route::get('/select-products', 'Admin\ProductController@getProducts')->name('select.products');
 
 // Third Party API
 Route::get('/update-currency', 'Admin\CurrencyController@getCurrenciesUpdate')->name('update-currencies');
