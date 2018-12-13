@@ -28,7 +28,8 @@ class HomeController extends Controller
     }
 
     public function getLocation(){
-        $asdf = geoip($ip = null);
+        dd(\Request::ip());
+        $asdf = geoip($ip = \Request::ip());
         dd($asdf);
     }
 }
