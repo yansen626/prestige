@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Mail\EmailVerification;
+use App\Models\Country;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -126,5 +127,12 @@ class RegisterController extends Controller
 
         $email = $userDB->email;
         return View('auth.send-email', compact('email'));
+    }
+
+    public function showRegistrationForm()
+    {
+        $countries = Country::all();
+
+        return view('auth.register', compact('countries'));
     }
 }
