@@ -11,13 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'Frontend\HomeController@index')->name('home');
+
+// ADMIN ROUTE
+// ====================================================================================================================
 
 Route::prefix('admin')->group(function(){
     Route::get('/', 'Admin\AdminController@index')->name('admin.dashboard');
