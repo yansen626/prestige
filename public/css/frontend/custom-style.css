@@ -1207,6 +1207,7 @@ blockquot {
 
 .bg-white {
 	background-color: #ffffff !important;
+	padding-top: 25px;
 }
 
 .bg-dark {
@@ -1984,13 +1985,19 @@ blockquot {
 /*------------------------------------*\
     #FORMS
 \*------------------------------------*/
+.form-message{
+	font-family: 'Work Sans', sans-serif;
+	font-size: 15px;
+	font-weight: 800;
+	color: #ff3d00;
+}
+
 .form-control {
 	color: #9b9b9b;
-	font-family: 'Abril Fatface', cursive;
+	font-family: 'Work Sans', sans-serif;
 	font-size: 13px;
-	font-weight: 800;
+	font-weight: 400;
 	line-height: 49px;
-	text-transform: uppercase;
 	border: none;
 	border-bottom: 2px solid #eee;
 	background: transparent;
@@ -3745,7 +3752,7 @@ table tbody tr td {
 
 .module--search-box .form-control {
 	color: #f9f9f9;
-	font-family: 'Abril Fatface', cursive;
+	font-family: 'Work Sans', sans-serif;
 	font-size: 35px;
 	font-weight: 300;
 	line-height: 70px;
@@ -3756,7 +3763,6 @@ table tbody tr td {
 	float: left;
 	padding: 0;
 	margin-bottom: 0;
-	text-transform: capitalize;
 }
 
 .module--search-box .btn {
@@ -9768,7 +9774,7 @@ a.link--styled {
 
 .contact-form .form-control {
 	color: #9b9b9b;
-	font-family: 'Abril Fatface', cursive;
+	font-family: 'Work Sans', sans-serif;
 	font-size: 13px;
 	font-weight: 800;
 	line-height: 49px;
