@@ -26,4 +26,9 @@ class HomeController extends Controller
     {
         return view('frontend.home');
     }
+
+    public function getLocation(){
+        $asdf = geoip($ip = null);
+        dd($asdf);
+    }
 }

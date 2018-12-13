@@ -18,6 +18,7 @@
 Auth::routes();
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
+Route::get('/test-location', 'Frontend\HomeController@getLocation')->name('getLocation');
 
 // ADMIN ROUTE
 // ====================================================================================================================
