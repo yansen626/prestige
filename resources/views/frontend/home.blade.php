@@ -313,11 +313,10 @@
                         </div>
                     </div>
                 </div><!-- .col-md-6 end-->
-                <div class="col-xs-12 col-sm-12 col-md-6 col-content  bg-pastel">
-                    <h6>Quick & smart</h6>
-                    <h3>Great Solutions</h3>
-                    <p>Rounding up a bunch of specific designs and talking about the merits of each is the perfect way to find common ground. Collecting a wide array of samples and inspiration is a great way to start your next awesome project. At its core, every brand has something special to reveal something that inspires people. We are a branding agency</p>
-                    <a class="btn btn--white" href="#">read more</a>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-content bg-pastel center">
+                    <h3>Customize For A Tailored & Timeless Accessory</h3>
+
+                    <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">LET'S GO SHOPPING</a>
                 </div>
             </div>
             <!-- .row end -->

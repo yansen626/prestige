@@ -5,99 +5,51 @@
     <div class="footer-widget">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-3 footer--widget footer--widget-about">
+                <div class="col-xs-12 col-sm-6 col-md-6 footer--widget footer--widget-about">
                     <div class="footer--widget-title">
-                        <h5>About Us</h5>
+                        <h2>nama.</h2>
                     </div>
                     <div class="footer--widget-content">
-                        <p>Our brand promise is simple: to provide powerful digital marketing solutions to small businesses that are looking to build success online.</p>
-                        <ul class="list-unstyled mb-0">
-                            <li><span>Call US:</span> 002 01065370701</li>
-                            <li><span>Email US:</span> ayman@zytheme.com</li>
-                        </ul>
+
+                        <div class="col-xs-12 col-sm-6 col-md-6 footer--widget footer--widget-about">
+                            <ul class="list-unstyled mb-0">
+                                <li>T&C'S</li>
+                                <li>FAQ'S</li>
+                                <li>SHIPPING</li>
+                                <li>PRIVACY</li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 footer--widget footer--widget-about">
+                            <ul class="list-unstyled mb-0">
+                                <li>ABOUT</li>
+                                <li>CONTACT</li>
+                                <li>
+                                    <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-20">
+                                    <img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-20">
+                                    <img src="{{ asset('images/icons/nama-brand-facebook.svg') }}" class="width-20">
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div><!-- .col-md-3 end -->
-                <div class="col-xs-12 col-sm-6 col-md-3 footer--widget footer--widget-recent">
-                    <div class="footer--widget-title">
-                        <h5>Recent Posts</h5>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div>
+                        <h5>Join Our Newsletter</h5>
                     </div>
-                    <div class="footer--widget-content">
-                        <div class="entry">
-                            <div class="entry--title">
-                                <a href="#">Four ways to cheer up on Blue Monday!</a>
-                            </div>
-                            <div class="entry--meta">Feb 27, 2017</div>
-                        </div><!-- .entry end -->
-                        <div class="entry">
-                            <div class="entry--title">
-                                <a href="#">Old cameras can capture images better</a>
-                            </div>
-                            <div class="entry--meta">Feb 27, 2017</div>
-                        </div><!-- .entry end -->
-                        <div class="entry">
-                            <div class="entry--title">
-                                <a href="#">New subway line has most advanced</a>
-                            </div>
-                            <div class="entry--meta">Feb 27, 2017</div>
-                        </div><!-- .entry end -->
-                    </div>
-                </div><!-- .col-md-3 end -->
-                <div class="col-xs-12 col-sm-6 col-md-3 footer--widget widget-instagram">
-                    <div class="footer--widget-title">
-                        <h5>Instagram</h5>
-                    </div>
-                    <div class="footer--widget-content">
-                        <div id="instafeed" class="instafeed" data-insta-number="6"></div>
-                    </div>
-                </div><!-- .col-md-3 end -->
-                <div class="col-xs-12 col-sm-6 col-md-3 footer--widget footer--widget-newsletter">
-                    <div class="footer--widget-title">
-                        <h5>Newsletter</h5>
-                    </div>
-                    <div class="footer--widget-content">
-                        <p>Don’t miss to follow us & subscribe to our new feeds, kindly fill the form below.</p>
-                        <form class="form-newsletter">
-                            <input type="email" name="email" class="form-control" placeholder="Subscribe Our Newsletter">
-                            <button type="submit"><i class="fa fa-long-arrow-right"></i></button>
+                    <div>
+                        <form>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Name" required/>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required/>
+                            <button type="submit" class="newsletter-button"><i class="fa fa-long-arrow-right"></i></button>
                         </form>
                         <div class="clearfix"></div>
+                        <p>
+                            COPYRIGHT 2018 NAMA LEATHER GOODS
+                        </p>
                     </div>
                 </div><!-- .col-md-3 end -->
             </div>
         </div><!-- .container end -->
     </div><!-- .footer-widget end -->
 
-    <!-- Copyrights
-    ============================================= -->
-    <div class="footer--bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <hr class="divider--footer">
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4">
-                    <div class="footer--links">
-                        <ul class="list-inline mb-0">
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-1 col-md-4">
-                    <div class="footer--logo text--center">
-                        <img src="assets/images/logo/logo-footer.png" alt="logo">
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-5 col-md-4">
-                    <div class="footer--copyright text-right">
-                        <span>&copy; 2017 League, With Love by</span> <a href="http://themeforest.net/user/7oroof/portfolio?ref=zytheme">7oroof.com</a>
-                    </div>
-                </div>
-
-            </div>
-        </div><!-- .container end -->
-    </div><!-- .footer-copyright end -->
 </footer>

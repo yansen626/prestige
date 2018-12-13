@@ -10484,7 +10484,7 @@ footer .widget-instagram .insta-hover i {
     #Footer
 \*------------------------------------*/
 .footer {
-	background-color: #282828;
+	background-color: #ffffff;
 	padding-top: 0;
 	padding-bottom: 0;
 }
@@ -10496,10 +10496,10 @@ footer .widget-instagram .insta-hover i {
 }
 
 .footer-widget .footer--widget-title h5 {
-	color: #ffffff;
+	color: #000000;
 	font-family: 'Abril Fatface', cursive;
 	font-size: 13px;
-	font-weight: 700;
+	font-weight: 400;
 	line-height: 1;
 	text-transform: uppercase;
 	margin-bottom: 20px;
@@ -10521,12 +10521,12 @@ footer .widget-instagram .insta-hover i {
 }
 
 .footer-widget .footer--widget-about ul li span {
-	color: #ffffff;
-	font-weight: 700;
+	color: #000000;
+	font-weight: 400;
 }
 
 .footer-widget .footer--widget-about .social a {
-	color: #ffffff;
+	color: #000000;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 28px;
@@ -10601,7 +10601,7 @@ footer .widget-instagram .insta-hover i {
 	background-color: transparent;
 	border: none;
 	line-height: 42px;
-	color: #ffffff;
+	color: #000000;
 	font-size: 11px;
 	font-weight: 400;
 	width: 15%;
@@ -11949,10 +11949,9 @@ footer .widget-instagram .insta-hover i {
 }
 
 .info-box h3 {
-	color: #ffffff;
+	color: #000000;
 	font-size: 40px;
-	font-weight: 700;
-	font-style: italic;
+	font-weight: 400;
 	line-height: 44px;
 }
 
