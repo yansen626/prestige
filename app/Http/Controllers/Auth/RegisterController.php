@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Mail\EmailVerification;
+use App\Models\City;
 use App\Models\Country;
+use App\Models\Province;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -132,7 +134,9 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $countries = Country::all();
+        $provinces = Province::all();
+        $cities = City::all();
 
-        return view('auth.register', compact('countries'));
+        return view('auth.register', compact('countries', 'provinces', 'cities'));
     }
 }

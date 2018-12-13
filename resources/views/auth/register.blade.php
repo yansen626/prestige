@@ -63,11 +63,24 @@
                                     <option value="{{ $country->id }}">{{ $country->name }}</option>
                                 @endforeach
                             </select>
-                            @if ($errors->has('country'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('country') }}</strong>
-                                </span>
-                            @endif
+                        </div>
+
+                        <div class="col-md-12">
+                            <select name="province" id="province" class="form-control">
+                                <option value="-1">PROVINCE</option>
+                                @foreach($provinces as $province)
+                                    <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-12">
+                            <select name="city" id="city" class="form-control">
+                                <option value="-1">CITY</option>
+                                @foreach($cities as $city)
+                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="col-md-12">
