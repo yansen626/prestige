@@ -16,14 +16,17 @@
 
     <!-- Fonts
         ============================================= -->
-    <link href="http://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CPlayfair+Display:400,400i,700,700i,900,900i%7CDroid+Serif" rel="stylesheet" type="text/css">
+    {{--<link href="http://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i,800,800i%7CPlayfair+Display:400,400i,700,700i,900,900i%7CDroid+Serif" rel="stylesheet" type="text/css">--}}
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Work+Sans:400,500" rel="stylesheet" type="text/css">
 
     <!-- Stylesheets
         ============================================= -->
     <link href="{{ asset('css/frontend/external.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend/external.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/frontend/style.css') }}" rel="stylesheet">
+    {{--<link href="{{ asset('css/frontend/style.css') }}" rel="stylesheet">--}}
+    <link href="{{ asset('css/frontend/custom-style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/frontend/custom.css') }}" rel="stylesheet">
 
     <!-- RS5.0 Main Stylesheet -->
     <link rel="stylesheet" type="text/css" href="{{ asset('revolution/css/settings.css') }}">
