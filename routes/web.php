@@ -115,3 +115,6 @@ Route::get('/select-products', 'Admin\ProductController@getProducts')->name('sel
 
 // Third Party API
 Route::get('/update-currency', 'Admin\CurrencyController@getCurrenciesUpdate')->name('update-currencies');
+
+// Email Aauth
+Route::get('/request-verification/{email}', 'Auth\RegisterController@RequestVerification')->name('request-verification');

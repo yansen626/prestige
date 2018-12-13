@@ -116,4 +116,15 @@ class RegisterController extends Controller
         Session::flash('success', 'Your Email Have been Verified, Please Login');
         return Redirect::route('login');
     }
+
+    public function RequestVerification($email){
+
+        $userDB = User::where('email', $email)->first();
+
+        $emailVerify = new EmailVerification($userDB);
+        Mail::to($userDB->email)->send($emailVerify);
+
+        $email = $userDB->email;
+        return View('auth.send-email', compact('email'));
+    }
 }
