@@ -46,6 +46,7 @@
                                 </span>
                             @endif
                         </div>
+
                         <div class="col-md-6">
                             <input type="text" class="form-control" name="phone" id="phone" placeholder="PHONE NUMBER" required/>
                             @if ($errors->has('phone'))
@@ -67,6 +68,10 @@
                                     <strong>{{ $errors->first('country') }}</strong>
                                 </span>
                             @endif
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn--primary btn--block">Register</button>
                         </div>
                     </div>
                 </form>
