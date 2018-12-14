@@ -23,5 +23,33 @@
 
 .module-active .module-fullscreen {
     width: 50%;
+    background-color: #EDF3F6;
+}
 
+.color-black a{
+    color: #000000;
+    font-size: 13px;
+}
+
+.module--search-box .form-control{
+    color: #000000;
+    border-bottom: 2px solid #000000;
+}
+
+.top-bar{
+    background-color: #FBE4E8;
+}
+
+.top-bar .top--contact{
+    color: #000000;
+}
+
+.header-menu {
+    padding-bottom:3px;
+}
+.header-menu:hover {
+    display:inline-block;
+    border-bottom:1px solid black;
+    padding-bottom:2px;
+    cursor: pointer;
 }

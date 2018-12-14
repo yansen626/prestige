@@ -22,8 +22,8 @@
     <!-- Stylesheets
         ============================================= -->
     <link href="{{ asset('css/frontend/external.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/frontend/external.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/frontend/library/font-awesome.min.css') }}" rel="stylesheet">
     {{--<link href="{{ asset('css/frontend/style.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/frontend/custom-style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/frontend/custom.css') }}" rel="stylesheet">
