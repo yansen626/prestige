@@ -21,110 +21,117 @@
     <nav id="primary-menu" class="navbar navbar-fixed-top">
         <div class="container">
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <!-- Module Shop -->
-            <div class="module module-search2 pull-left">
-                <div class="module-icon search-icon color-black">
-                    {{--<i class="fa fa-search"></i>--}}
-                    {{--<span class="title">search</span>--}}
-                    <a href="#">SHOP</a>
-                </div>
-                <div class="module-content module-fullscreen module--search2-box">
-                    <div class="pos-vertical-center">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 center">
-                                    <a><H4 class="header-menu">SHOP ALL</H4></a>
-                                    <a><H4 class="header-menu">BAGS & TOTES</H4></a>
-                                    <a><H4 class="header-menu">WALLETS</H4></a>
-                                    <a><H4 class="header-menu">CARD HOLDERS</H4></a>
-                                    <a><H4 class="header-menu">POUCHES</H4></a>
-                                    <a><H4 class="header-menu">PHONE CASES</H4></a>
-                                </div><!-- .col-md-8 end -->
-                            </div><!-- .row end -->
-                        </div><!-- .container end -->
-                    </div>
-                    <a class="module-cancel" href="#"><i class="fa fa-close"></i></a>
-                </div>
-            </div><!-- .module-Shop end -->
 
-            <!-- Module About -->
-            <div class="module module-search2 pull-left">
-                <div class="module-icon search-icon color-black">
-                    {{--<i class="fa fa-search"></i>--}}
-                    {{--<span class="title">search</span>--}}
-                    <a href="#">ABOUT</a>
-                </div>
-                {{--<div class="module-content module-fullscreen module--search2-box">--}}
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse-2">
+                <!-- Module Shop -->
+                <div class="module module-search2 pull-left">
+                    <div class="module-icon search-icon color-black">
+                        {{--<i class="fa fa-search"></i>--}}
+                        {{--<span class="title">search</span>--}}
+                        <a href="#">SHOP</a>
+                    </div>
+                    <div class="module-content module-fullscreen module--search2-box">
+                        <div class="pos-vertical-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 center">
+                                        <a><H4 class="header-menu">SHOP ALL</H4></a>
+                                        <a><H4 class="header-menu">BAGS & TOTES</H4></a>
+                                        <a><H4 class="header-menu">WALLETS</H4></a>
+                                        <a><H4 class="header-menu">CARD HOLDERS</H4></a>
+                                        <a><H4 class="header-menu">POUCHES</H4></a>
+                                        <a><H4 class="header-menu">PHONE CASES</H4></a>
+                                    </div><!-- .col-md-8 end -->
+                                </div><!-- .row end -->
+                            </div><!-- .container end -->
+                        </div>
+                        <a class="module-cancel" href="#"><i class="fa fa-close"></i></a>
+                    </div>
+                </div><!-- .module-Shop end -->
+
+                <!-- Module About -->
+                <div class="module module-search2 pull-left">
+                    <div class="module-icon search-icon color-black">
+                        {{--<i class="fa fa-search"></i>--}}
+                        {{--<span class="title">search</span>--}}
+                        <a href="#">ABOUT</a>
+                    </div>
+                    {{--<div class="module-content module-fullscreen module--search2-box">--}}
                     {{--<div class="pos-vertical-center">--}}
-                        {{--<div class="container">--}}
-                            {{--<div class="row">--}}
-                                {{--<div class="col-xs-6 col-sm-6 col-md-6">--}}
-                                    {{--<form class="form-search2">--}}
-                                        {{--<input type="text" class="form-control" placeholder="test">--}}
-                                        {{--<button class="btn" type="button"><i class="fa fa-search"></i></button>--}}
-                                    {{--</form><!-- .form-search end -->--}}
-                                {{--</div><!-- .col-md-8 end -->--}}
-                            {{--</div><!-- .row end -->--}}
-                        {{--</div><!-- .container end -->--}}
+                    {{--<div class="container">--}}
+                    {{--<div class="row">--}}
+                    {{--<div class="col-xs-6 col-sm-6 col-md-6">--}}
+                    {{--<form class="form-search2">--}}
+                    {{--<input type="text" class="form-control" placeholder="test">--}}
+                    {{--<button class="btn" type="button"><i class="fa fa-search"></i></button>--}}
+                    {{--</form><!-- .form-search end -->--}}
+                    {{--</div><!-- .col-md-8 end -->--}}
+                    {{--</div><!-- .row end -->--}}
+                    {{--</div><!-- .container end -->--}}
                     {{--</div>--}}
                     {{--<a class="module-cancel" href="#"><i class="fa fa-close"></i></a>--}}
-                {{--</div>--}}
-            </div><!-- .module-About end -->
+                    {{--</div>--}}
+                </div><!-- .module-About end -->
 
-            <!-- Module Contact -->
-            <div class="module module-search2 pull-left">
-                <div class="module-icon search-icon color-black">
-                    {{--<i class="fa fa-search"></i>--}}
-                    {{--<span class="title">search</span>--}}
-                    <a href="#">CONTACT</a>
-                </div>
-                <div class="module-content module-fullscreen module--search2-box">
-                    <div class="pos-vertical-center">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <h3>Contact</h3>
-
-                                    <form class="form-search2">
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="NAME" required/>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
-                                        <input type="text" class="form-control" name="order" id="order" placeholder="ORDER NUMBER (IF APPLICABLE)" required/>
-                                        <textarea class="form-control" name="message" id="message" placeholder="MESSAGE"></textarea>
-
-                                        <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">SEND</a>
-                                    </form><!-- .form-search end -->
-                                </div><!-- .col-md-8 end -->
-                            </div><!-- .row end -->
-                        </div><!-- .container end -->
+                <!-- Module Contact -->
+                <div class="module module-search2 pull-left">
+                    <div class="module-icon search-icon color-black">
+                        {{--<i class="fa fa-search"></i>--}}
+                        {{--<span class="title">search</span>--}}
+                        <a href="#">CONTACT</a>
                     </div>
-                    <a class="module-cancel" href="#"><i class="fa fa-close"></i></a>
-                </div>
-            </div><!-- .module-Contact end -->
+                    <div class="module-content module-fullscreen module--search2-box">
+                        <div class="pos-vertical-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6" style="padding: 0 1% 0 7%;">
+                                        <h2>Contact</h2>
+                                        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+                                        <br/>
+                                        <form class="form-search2">
+                                            <input type="text" class="form-control" name="name" id="name" placeholder="NAME" required/>
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
+                                            <input type="text" class="form-control" name="order" id="order" placeholder="ORDER NUMBER (IF APPLICABLE)" required/>
+                                            <textarea class="form-control" name="message" id="message" rows="2" placeholder="MESSAGE" required></textarea>
 
-            <!-- Module Search -->
-            <div class="module module-search pull-left">
-                <div class="module-icon search-icon color-black">
-                    {{--<i class="fa fa-search"></i>--}}
-                    {{--<span class="title">search</span>--}}
-                    <a href="#">SEARCH</a>
-                </div>
-                <div class="module-content module-fullscreen module--search-box">
-                    <div class="pos-vertical-center">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <form class="form-search">
-                                        <input type="text" class="form-control" placeholder="Search">
-                                        <button class="btn" type="button"><i class="fa fa-search"></i></button>
-                                    </form><!-- .form-search end -->
-                                </div><!-- .col-md-8 end -->
-                            </div><!-- .row end -->
-                        </div><!-- .container end -->
+                                            <div style="text-align: center;">
+                                                <button type="submit" class="btn btn--secondary btn--bordered">SEND</button>
+                                            </div>
+                                        </form><!-- .form-search end -->
+                                    </div><!-- .col-md-8 end -->
+                                </div><!-- .row end -->
+                            </div><!-- .container end -->
+                        </div>
+                        <a class="module-cancel" href="#"><i class="fa fa-close"></i></a>
                     </div>
-                    <a class="module-cancel" href="#"><i class="fa fa-close"></i></a>
-                </div>
-            </div><!-- .module-search end -->
+                </div><!-- .module-Contact end -->
 
+                <!-- Module Search -->
+                <div class="module module-search pull-left">
+                    <div class="module-icon search-icon color-black">
+                        {{--<i class="fa fa-search"></i>--}}
+                        {{--<span class="title">search</span>--}}
+                        <a href="#">SEARCH</a>
+                    </div>
+                    <div class="module-content module-fullscreen module--search-box">
+                        <div class="pos-vertical-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 center">
+                                        <h4>Search</h4>
+                                        <form class="form-search">
+                                            <input type="text" class="form-control">
+                                            <button class="btn search-button" type="button"><i class="fa fa-long-arrow-right"></i></button>
+                                        </form><!-- .form-search end -->
+                                    </div><!-- .col-md-8 end -->
+                                </div><!-- .row end -->
+                            </div><!-- .container end -->
+                        </div>
+                        <a class="module-cancel" href="#"><i class="fa fa-close"></i></a>
+                    </div>
+                </div><!-- .module-search end -->
+
+            </div>
             <!-- .navbar-collapse -->
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
