@@ -3121,9 +3121,9 @@ table tbody tr td {
 table tbody tr td,
 table tbody tr td {
 	font-size: 13px;
-	font-weight: 600;
+	font-weight: 400;
 	line-height: 26px;
-	color: #9b9b9b;
+	color: black;
 }
 
 /*------------------------------------*\
@@ -8836,6 +8836,8 @@ ul.comments-list ul.comment-children {
 	border: 1px solid #eee;
 	border-radius: 0;
 	margin-bottom: 0;
+	border-left: none;
+	border-right: none;
 }
 
 .cart-table thead {
@@ -8862,9 +8864,9 @@ ul.comments-list ul.comment-children {
 .cart-table tbody tr td.cart-product-price,
 .cart-table tbody tr td.cart-product-total {
 	font-size: 13px;
-	font-weight: 700;
+	font-weight: 400;
 	line-height: 26px;
-	color: #9b9b9b;
+	color: black;
 }
 
 .cart-table tbody tr td.cart-product-quantity .product-quantity {
