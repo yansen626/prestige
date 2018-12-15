@@ -50,7 +50,7 @@
                                     </a>
                                 </div>
                                 <div class="col">
-                                    <a href="@Url.Action("Logout", "Account")">
+                                    <a href="{{ route('admin.logout') }}">
                                     <i class="icon-exit_to_app grey darken-3 avatar  r-5"></i>
                                     <div class="pt-1">Logout</div>
                                     </a>

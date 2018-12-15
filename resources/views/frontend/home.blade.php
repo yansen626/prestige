@@ -1,305 +1,162 @@
 @extends('layouts.frontend')
 
 @section('content')
-    <!-- Hero Section
-====================================== -->
-    <section id="slider" class="slider slider-overlay-dark">
-        <!-- START REVOLUTION SLIDER 5.0 -->
-        <div class="rev_slider_wrapper">
-            <div id="slider1" class="rev_slider"  data-version="5.0">
-                <ul>
-                    <!-- slide 1 -->
-                    <li data-transition="zoomout"
-                        data-slotamount="default"
-                        data-easein="Power4.easeInOut"
-                        data-easeout="Power4.easeInOut"
-                        data-masterspeed="2000"
-                        data-thumb="assets/images/sliders/thumb/1.jpg" class="slide-overlay-dark">
-                        <!-- MAIN IMAGE -->
-                        <img src="assets/images/sliders/slide-bg/16.jpg" alt="Slide Background Image"  width="1920" height="1280">
-                        <!-- LAYER NR. 1 -->
-                        <div class="tp-caption"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="-130"
-                             data-whitespace="nowrap"
-                             data-width="none"
-                             data-height="none"
-                             data-transform_idle="o:1;"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="500"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-responsive_offset="on">
-                            <div class="slide--subheadline">Missing The Past!</div>
-                        </div>
 
-                        <!-- LAYER NR. 2 -->
-                        <div class="tp-caption"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="-65"
-                             data-whitespace="nowrap"
-                             data-width="none"
-                             data-height="none"
-                             data-transform_idle="o:1;"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="750"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-responsive_offset="on"
-                        >
-                            <div class="slide--headline extend">Back To Classic Style</div>
-                        </div>
+    <!-- Cover #3
+    ============================================= -->
+    <section id="cover3" class="section cover-3 pt-0 pb-0">
+        <div class="container-fluid">
+            <div class="row comm-height">
+                {{--<div class="col-xs-12 col-sm-12 col-md-6 pr-0 pl-0">--}}
+                    {{--<div class="bg-overlay">--}}
+                        {{--<div class="bg-section">--}}
+                            {{--<img src="assets/images/banners/8.jpg" alt="Background"/>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div><!-- .col-md-6 end-->--}}
+                <div class="col-xs-12 col-sm-12 col-md-12 col-content testimonial testimonial-wide testimonial-2 pl-100 pt-100 ">
+                    <div id="testimonial-wide" class="carousel carousel-dots mt-50" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="false" data-dots="true" data-space="0" data-loop="true" data-speed="800">
+                        <!-- Testimonial #1 -->
+                        <div class="testimonial-panel">
+                            <div class="col-md-6">
+                                <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
+                                <div class="testimonial--body">
+                                    <p>Bespoke & <br> Personalized <br> Leather Goods</p>
+                                </div><!-- .testimonial-body end -->
 
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="20"
-                             data-width="none"
-                             data-height="none"
-                             data-transform_idle="o:1;"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="1000"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-responsive_offset="on"
-                        >
-                            <div class="slide--bio text-center">League is a creative multi-concept WordPress theme perfectly<br> designed to make awesome website for any business. </div>
-                        </div>
-
-                        <!-- LAYER NR. 4 -->
-                        <div class="tp-caption"
-
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="100"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power3.easeOut;"
-                             data-style_hover="c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[175%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_out="x:inherit;y:inherit;"
-                             data-start="1250"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-actions='[{"event":"click","action":"jumptoslide","slide":"rs-164","delay":""}]'
-                             data-basealign="slide"
-                             data-responsive_offset="on"
-                             data-responsive="off">
-                            <div class="slide-action">
-                                <a class="btn btn--secondary btn--white mr-30" href="#">Read More </a>
-                                <a class="btn btn--white btn--bordered" href="#">Get Started</a>
+                                <div class="testimonial--meta">
+                                    <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">SHOP COLLECTION</a>
+                                </div><!-- .testimonial-meta end -->
                             </div>
-                        </div>
-                    </li>
-
-                    <!-- slide 2 -->
-                    <li data-transition="zoomout"
-                        data-slotamount="default"
-                        data-easein="Power4.easeInOut"
-                        data-easeout="Power4.easeInOut"
-                        data-masterspeed="2000"
-                        data-thumb="assets/images/sliders/thumb/2.jpg" class="slide-overlay-dark">
-                        <!-- MAIN IMAGE -->
-                        <img src="assets/images/sliders/slide-bg/20.jpg" alt="Slide Background Image"  width="1920" height="1280">
-                        <!-- LAYER NR. 1 -->
-                        <div class="tp-caption"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="-130"
-                             data-whitespace="nowrap"
-                             data-width="none"
-                             data-height="none"
-                             data-transform_idle="o:1;"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="500"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-responsive_offset="on">
-                            <div class="slide--subheadline">Clean, Powerful & Creative</div>
-                        </div>
-
-                        <!-- LAYER NR. 2 -->
-                        <div class="tp-caption"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="-65"
-                             data-whitespace="nowrap"
-                             data-width="none"
-                             data-height="none"
-                             data-transform_idle="o:1;"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="750"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-responsive_offset="on"
-                        >
-                            <div class="slide--headline">Start Your Business</div>
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="20"
-                             data-width="none"
-                             data-height="none"
-                             data-transform_idle="o:1;"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="1000"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-responsive_offset="on"
-                        >
-                            <div class="slide--bio text-center">League is a creative multi-concept WordPress theme perfectly<br> designed to make awesome website for any business. </div>
-                        </div>
-
-                        <!-- LAYER NR. 4 -->
-                        <div class="tp-caption"
-
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="100"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power3.easeOut;"
-                             data-style_hover="c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[175%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_out="x:inherit;y:inherit;"
-                             data-start="1250"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-actions='[{"event":"click","action":"jumptoslide","slide":"rs-164","delay":""}]'
-                             data-basealign="slide"
-                             data-responsive_offset="on"
-                             data-responsive="off">
-                            <div class="slide-action">
-                                <a class="btn btn--white btn--bordered" href="#">Purchase Now</a>
+                            <div class="col-md-6">
+                                <img src="{{ asset('images/banners/10.jpg') }}" alt="Background"/>
                             </div>
-                        </div>
-                    </li>
+                        </div><!-- .testimonial-panel end -->
 
-                    <!-- slide 3 -->
-                    <li data-transition="zoomout"
-                        data-slotamount="default"
-                        data-easein="Power4.easeInOut"
-                        data-easeout="Power4.easeInOut"
-                        data-masterspeed="2000"
-                        data-thumb="assets/images/sliders/thumb/3.jpg" class="slide-overlay-dark">
-                        <!-- MAIN IMAGE -->
-                        <img src="assets/images/sliders/slide-bg/19.jpg" alt="Slide Background Image"  width="1920" height="1280">
-                        <!-- LAYER NR. 1 -->
-                        <div class="tp-caption"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="-130"
-                             data-whitespace="nowrap"
-                             data-width="none"
-                             data-height="none"
-                             data-transform_idle="o:1;"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="500"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-responsive_offset="on">
-                            <div class="slide--subheadline">Create Your Life</div>
-                        </div>
+                        <!-- Testimonial #2 -->
+                        <div class="testimonial-panel">
+                            <div class="col-md-6">
+                                <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
+                                <div class="testimonial--body">
+                                    <p>Sustainable <br> Leather <br> Accessories</p>
+                                </div><!-- .testimonial-body end -->
 
-                        <!-- LAYER NR. 2 -->
-                        <div class="tp-caption"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="-65"
-                             data-whitespace="nowrap"
-                             data-width="none"
-                             data-height="none"
-                             data-transform_idle="o:1;"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="750"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-responsive_offset="on"
-                        >
-                            <div class="slide--headline">Poweful and Creative!</div>
-                        </div>
-
-                        <!-- LAYER NR. 3 -->
-                        <div class="tp-caption"
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="20"
-                             data-width="none"
-                             data-height="none"
-                             data-transform_idle="o:1;"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                             data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;"
-                             data-start="1000"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-responsive_offset="on"
-                        >
-                            <div class="slide--bio text-center">League is a creative multi-concept WordPress theme perfectly<br> designed to make awesome website for any business. </div>
-                        </div>
-
-                        <!-- LAYER NR. 4 -->
-                        <div class="tp-caption"
-
-                             data-x="center" data-hoffset="0"
-                             data-y="center" data-voffset="100"
-                             data-width="none"
-                             data-height="none"
-                             data-whitespace="nowrap"
-                             data-transform_idle="o:1;"
-                             data-transform_hover="o:1;rX:0;rY:0;rZ:0;z:0;s:300;e:Power3.easeOut;"
-                             data-style_hover="c:rgba(255, 255, 255, 1.00);bc:rgba(255, 255, 255, 1.00);"
-                             data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:2000;e:Power4.easeInOut;"
-                             data-transform_out="y:[175%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                             data-mask_out="x:inherit;y:inherit;"
-                             data-start="1250"
-                             data-splitin="none"
-                             data-splitout="none"
-                             data-actions='[{"event":"click","action":"jumptoslide","slide":"rs-164","delay":""}]'
-                             data-basealign="slide"
-                             data-responsive_offset="on"
-                             data-responsive="off">
-                            <div class="slide-action">
-                                <a class="btn btn--secondary btn--white mr-30" href="#">Read More </a>
-                                <a class="btn btn--white btn--bordered" href="#">Get Started</a>
+                                <div class="testimonial--meta">
+                                    <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">FIND OUT MORE</a>
+                                </div><!-- .testimonial-meta end -->
                             </div>
-                        </div>
-                    </li>
+                            <div class="col-md-6">
+                                <img src="{{ asset('images/banners/10.jpg') }}" alt="Background"/>
+                            </div>
+                        </div><!-- .testimonial-panel end -->
 
-                </ul>
+                        <!-- Testimonial #3 -->
+                        <div class="testimonial-panel">
+                            <div class="col-md-6">
+                                <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
+                                <div class="testimonial--body">
+                                    <p>The Perfect Gift <br> or Everyday <br> Companion</p>
+                                </div><!-- .testimonial-body end -->
+
+                                <div class="testimonial--meta">
+                                    <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">LET'S SHOP</a>
+                                </div><!-- .testimonial-meta end -->
+                            </div>
+                            <div class="col-md-6">
+                                <img src="{{ asset('images/banners/10.jpg') }}" alt="Background"/>
+                            </div>
+                        </div><!-- .testimonial-panel end -->
+                    </div>
+                </div><!-- .col-md-6 end-->
             </div>
-            <!-- END REVOLUTION SLIDER -->
+            <!-- .row end -->
         </div>
-        <!-- END OF SLIDER WRAPPER -->
+        <!-- .container end -->
     </section>
-    <!-- #hero end -->
+    <!-- #cover3 end -->
 
+    <!-- Testimonial #1
+    ============================================= -->
+    <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white pt-80 pb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div id="testimonial-carousel" class="carousel carousel-dots" data-slide="3" data-slide-rs="1" data-autoplay="false" data-nav="false" data-dots="true" data-space="0" data-loop="true" data-speed="800" data-center="true">
+                        <!-- Testimonial #1 -->
+                        <div class="testimonial-panel">
+                            <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
+                            <div class="testimonial--body">
+                                <p>League agency is the most impressive & great social media agencies I've ever seen. From the intuitive interface to the powerful tools!</p>
+                            </div><!-- .testimonial-body end -->
+                            <div class="testimonial--meta">
+                                <div class="testimonial--meta-img">
+                                    <img src="assets/images/testimonial/1.png" alt="Testimonial Author">
+                                </div>
+                                <div class="testimonial--meta-content">
+                                    <h4>Mahmoud Baghagho</h4>
+                                    <p>7oroof Agency</p>
+                                </div>
+                            </div><!-- .testimonial-meta end -->
+                        </div><!-- .testimonial-panel end -->
+
+                        <!-- Testimonial #2 -->
+                        <div class="testimonial-panel">
+                            <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
+                            <div class="testimonial--body">
+                                <p>My project was a simple task, but the persistence & determination of the team turned it into a great project which make me happy!</p>
+                            </div><!-- .testimonial-body end -->
+                            <div class="testimonial--meta">
+                                <div class="testimonial--meta-img">
+                                    <img src="assets/images/testimonial/2.png" alt="Testimonial Author">
+                                </div>
+                                <div class="testimonial--meta-content">
+                                    <h4>ayman fikry</h4>
+                                    <p>zytheme</p>
+                                </div>
+                            </div><!-- .testimonial-meta end -->
+                        </div><!-- .testimonial-panel end -->
+
+                        <!-- Testimonial #3 -->
+                        <div class="testimonial-panel">
+                            <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
+
+                            <div class="testimonial--body">
+                                <p>In my job as social media strategist, I've tried every analytics product on the market and when I came across league</p>
+                            </div><!-- .testimonial-body end -->
+                            <div class="testimonial--meta">
+                                <div class="testimonial--meta-img">
+                                    <img src="assets/images/testimonial/3.png" alt="Testimonial Author">
+                                </div>
+                                <div class="testimonial--meta-content">
+                                    <h4>Fouad badawy</h4>
+                                    <p>Tie Labs Inc</p>
+                                </div>
+                            </div><!-- .testimonial-meta end -->
+                        </div><!-- .testimonial-panel end -->
+
+
+                        <!-- Testimonial #4 -->
+                        <div class="testimonial-panel">
+                            <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
+                            <div class="testimonial--body">
+                                <p>In my job as social media strategist, I've tried every analytics product on the market and I was blown away!</p>
+                            </div><!-- .testimonial-body end -->
+                            <div class="testimonial--meta">
+                                <div class="testimonial--meta-img">
+                                    <img src="assets/images/testimonial/4.png" alt="Testimonial Author">
+                                </div>
+                                <div class="testimonial--meta-content">
+                                    <h4>Mostafa Mabrook</h4>
+                                    <p>Code 125</p>
+                                </div>
+                            </div><!-- .testimonial-meta end -->
+                        </div><!-- .testimonial-panel end -->
+                    </div>
+                </div><!-- .col-md-12 end -->
+            </div><!-- .row end -->
+        </div><!-- .container end -->
+    </section>
+    <!-- #testimonial1 end -->
 
     <!-- Info Box #9
     ============================================= -->
