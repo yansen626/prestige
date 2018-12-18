@@ -2,155 +2,209 @@
 
 @section('content')
 
-    <!-- Cover #3
-    ============================================= -->
-    <section id="cover3" class="section cover-3 pt-0 pb-0">
-        <div class="container-fluid">
-            <div class="row comm-height">
-                {{--<div class="col-xs-12 col-sm-12 col-md-6 pr-0 pl-0">--}}
-                    {{--<div class="bg-overlay">--}}
-                        {{--<div class="bg-section">--}}
-                            {{--<img src="assets/images/banners/8.jpg" alt="Background"/>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div><!-- .col-md-6 end-->--}}
-                <div class="col-xs-12 col-sm-12 col-md-12 col-content testimonial testimonial-wide testimonial-2 pl-100 pt-100 ">
-                    <div id="testimonial-wide" class="carousel carousel-dots mt-50" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="false" data-dots="true" data-space="0" data-loop="true" data-speed="800">
-                        <!-- Testimonial #1 -->
-                        <div class="testimonial-panel">
-                            <div class="col-md-6">
-                                <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
-                                <div class="testimonial--body">
-                                    <p>Bespoke & <br> Personalized <br> Leather Goods</p>
-                                </div><!-- .testimonial-body end -->
 
-                                <div class="testimonial--meta">
-                                    <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">SHOP COLLECTION</a>
-                                </div><!-- .testimonial-meta end -->
-                            </div>
-                            <div class="col-md-6">
-                                <img src="{{ asset('images/banners/10.jpg') }}" alt="Background"/>
-                            </div>
-                        </div><!-- .testimonial-panel end -->
+    <!-- Slider #1
+============================================= -->
+    <section id="slider" class="carousel slider slider-shop slider-dots slider-navs" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="false" data-dots="true" data-space="0" data-loop="true" data-speed="800">
 
-                        <!-- Testimonial #2 -->
-                        <div class="testimonial-panel">
-                            <div class="col-md-6">
-                                <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
-                                <div class="testimonial--body">
-                                    <p>Sustainable <br> Leather <br> Accessories</p>
-                                </div><!-- .testimonial-body end -->
-
-                                <div class="testimonial--meta">
-                                    <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">FIND OUT MORE</a>
-                                </div><!-- .testimonial-meta end -->
-                            </div>
-                            <div class="col-md-6">
-                                <img src="{{ asset('images/banners/10.jpg') }}" alt="Background"/>
-                            </div>
-                        </div><!-- .testimonial-panel end -->
-
-                        <!-- Testimonial #3 -->
-                        <div class="testimonial-panel">
-                            <div class="col-md-6">
-                                <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
-                                <div class="testimonial--body">
-                                    <p>The Perfect Gift <br> or Everyday <br> Companion</p>
-                                </div><!-- .testimonial-body end -->
-
-                                <div class="testimonial--meta">
-                                    <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">LET'S SHOP</a>
-                                </div><!-- .testimonial-meta end -->
-                            </div>
-                            <div class="col-md-6">
-                                <img src="{{ asset('images/banners/10.jpg') }}" alt="Background"/>
-                            </div>
-                        </div><!-- .testimonial-panel end -->
+        <!-- Slide #1 -->
+        <div class="slide--item">
+            {{--<div class="bg-section">--}}
+                {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
+            {{--</div>--}}
+            <div class="pos-vertical-center">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="slide--headline center">
+                        Bespoke & <br> Personalized <br> Leather Goods<br><br>
+                        <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">SHOP COLLECTION</a>
                     </div>
-                </div><!-- .col-md-6 end-->
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 slider-home" style="background-image: url('{{asset('images/Links/banner-1.jpg')}}')">
+                    {{--<div class="bg-section">--}}
+                    {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
+                    {{--</div>--}}
+                </div>
             </div>
-            <!-- .row end -->
-        </div>
-        <!-- .container end -->
+        </div><!-- .slide-item end -->
+
+        <!-- Slide #2 -->
+        <div class="slide--item">
+            {{--<div class="bg-section">--}}
+            {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
+            {{--</div>--}}
+            <div class="pos-vertical-center">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="slide--headline center">
+                        Sustainable <br> Leather <br> Accessories<br>
+                        <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">SHOP COLLECTION</a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 slider-home" style="background-image: url('{{asset('images/Links/banner-2.jpg')}}')">
+                    {{--<div class="bg-section">--}}
+                    {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
+                    {{--</div>--}}
+                </div>
+            </div>
+        </div><!-- .slide-item end -->
+
+        <!-- Slide #2 -->
+        <div class="slide--item">
+            {{--<div class="bg-section">--}}
+            {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
+            {{--</div>--}}
+            <div class="pos-vertical-center">
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="slide--headline center">
+                        The Perfect Gift <br> or Everyday <br> Companion<br>
+                        <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">LET'S SHOP</a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 slider-home" style="background-image: url('{{asset('images/Links/banner-3.jpg')}}')">
+                    {{--<div class="bg-section">--}}
+                    {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
+                    {{--</div>--}}
+                </div>
+            </div>
+        </div><!-- .slide-item end -->
+
     </section>
-    <!-- #cover3 end -->
+    <a href="#testimonial1" class="down-button"><i class="fa fa-long-arrow-down"></i></a>
 
     <!-- Testimonial #1
     ============================================= -->
     <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white pt-80 pb-80">
         <div class="container">
             <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 center">
+                    <h2>Spring Favorites</h2>
+                    <p>
+                        REDEFINE SIMPLE EVERYDAY LUXURY WITH NAMA/S PRACTICAL,<BR>
+                        TIMELESS AND HIGH DISTICTION PERSONALIZED LEATHER GOODS.<BR><BR>
+                        ENJOY CHIC AND BESPOKE ACCESORIES WITH THE KNOWLEDGE THAT THEY<BR>
+                        HAVE BEEN MADE WITH UTMOST CARE AND QUALITY.
+                    </p>
+                </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div id="testimonial-carousel" class="carousel carousel-dots" data-slide="3" data-slide-rs="1" data-autoplay="false" data-nav="false" data-dots="true" data-space="0" data-loop="true" data-speed="800" data-center="true">
+                    <div id="testimonial-carousel" class="carousel carousel-dots" data-slide="3" data-slide-rs="1" data-autoplay="false" data-nav="true" data-dots="false" data-space="0" data-loop="true" data-speed="800" data-center="true">
                         <!-- Testimonial #1 -->
-                        <div class="testimonial-panel">
-                            <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
-                            <div class="testimonial--body">
-                                <p>League agency is the most impressive & great social media agencies I've ever seen. From the intuitive interface to the powerful tools!</p>
-                            </div><!-- .testimonial-body end -->
-                            <div class="testimonial--meta">
-                                <div class="testimonial--meta-img">
-                                    <img src="assets/images/testimonial/1.png" alt="Testimonial Author">
-                                </div>
-                                <div class="testimonial--meta-content">
-                                    <h4>Mahmoud Baghagho</h4>
-                                    <p>7oroof Agency</p>
-                                </div>
-                            </div><!-- .testimonial-meta end -->
-                        </div><!-- .testimonial-panel end -->
+                        <div class="testimonial-panel product-item">
+                            <div class="product--img">
+                                <img  src="{{ asset('images/Links/product-1.jpg') }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <div class="product--hover">
+                                    <div class="product--action">
+                                        <a class="btn btn--secondary btn--bordered" href="#">Shop</a>
+                                    </div>
+                                </div><!-- .product-overlay end -->
+                            </div><!-- .product-img end -->
+                            <div class="product--content">
+                                <div class="product--title">
+                                    <h3><a href="#">Le Coq Sportif Triangle T-Shirt</a></h3>
+                                </div><!-- .product-title end -->
+                                <div class="product--price">
+                                    <span>$18.00</span>
+                                </div><!-- .product-price end -->
+                            </div><!-- .product-bio end -->
+                        </div><!-- .product end -->
 
                         <!-- Testimonial #2 -->
-                        <div class="testimonial-panel">
-                            <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
-                            <div class="testimonial--body">
-                                <p>My project was a simple task, but the persistence & determination of the team turned it into a great project which make me happy!</p>
-                            </div><!-- .testimonial-body end -->
-                            <div class="testimonial--meta">
-                                <div class="testimonial--meta-img">
-                                    <img src="assets/images/testimonial/2.png" alt="Testimonial Author">
-                                </div>
-                                <div class="testimonial--meta-content">
-                                    <h4>ayman fikry</h4>
-                                    <p>zytheme</p>
-                                </div>
-                            </div><!-- .testimonial-meta end -->
-                        </div><!-- .testimonial-panel end -->
+                        <div class="testimonial-panel product-item">
+                            <div class="product--img">
+                                <img  src="{{ asset('images/Links/product-2.jpg') }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <div class="product--hover">
+                                    <div class="product--action">
+                                        <a class="btn btn--secondary btn--bordered" href="#">Shop</a>
+                                    </div>
+                                </div><!-- .product-overlay end -->
+                            </div><!-- .product-img end -->
+                            <div class="product--content">
+                                <div class="product--title">
+                                    <h3><a href="#">Le Coq Sportif Triangle T-Shirt</a></h3>
+                                </div><!-- .product-title end -->
+                                <div class="product--price">
+                                    <span>$18.00</span>
+                                </div><!-- .product-price end -->
+                            </div><!-- .product-bio end -->
+                        </div><!-- .product end -->
 
                         <!-- Testimonial #3 -->
-                        <div class="testimonial-panel">
-                            <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
-
-                            <div class="testimonial--body">
-                                <p>In my job as social media strategist, I've tried every analytics product on the market and when I came across league</p>
-                            </div><!-- .testimonial-body end -->
-                            <div class="testimonial--meta">
-                                <div class="testimonial--meta-img">
-                                    <img src="assets/images/testimonial/3.png" alt="Testimonial Author">
-                                </div>
-                                <div class="testimonial--meta-content">
-                                    <h4>Fouad badawy</h4>
-                                    <p>Tie Labs Inc</p>
-                                </div>
-                            </div><!-- .testimonial-meta end -->
-                        </div><!-- .testimonial-panel end -->
-
+                        <div class="testimonial-panel product-item">
+                            <div class="product--img">
+                                <img  src="{{ asset('images/Links/product-3.jpg') }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <div class="product--hover">
+                                    <div class="product--action">
+                                        <a class="btn btn--secondary btn--bordered" href="#">Shop</a>
+                                    </div>
+                                </div><!-- .product-overlay end -->
+                            </div><!-- .product-img end -->
+                            <div class="product--content">
+                                <div class="product--title">
+                                    <h3><a href="#">Le Coq Sportif Triangle T-Shirt</a></h3>
+                                </div><!-- .product-title end -->
+                                <div class="product--price">
+                                    <span>$18.00</span>
+                                </div><!-- .product-price end -->
+                            </div><!-- .product-bio end -->
+                        </div><!-- .product end -->
 
                         <!-- Testimonial #4 -->
-                        <div class="testimonial-panel">
-                            <div class="testimonial--icon"></div><!-- .testimonial-icon end -->
-                            <div class="testimonial--body">
-                                <p>In my job as social media strategist, I've tried every analytics product on the market and I was blown away!</p>
-                            </div><!-- .testimonial-body end -->
-                            <div class="testimonial--meta">
-                                <div class="testimonial--meta-img">
-                                    <img src="assets/images/testimonial/4.png" alt="Testimonial Author">
-                                </div>
-                                <div class="testimonial--meta-content">
-                                    <h4>Mostafa Mabrook</h4>
-                                    <p>Code 125</p>
-                                </div>
-                            </div><!-- .testimonial-meta end -->
-                        </div><!-- .testimonial-panel end -->
+                        <div class="testimonial-panel product-item">
+                            <div class="product--img">
+                                <img  src="{{ asset('images/Links/product-4.jpg') }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <div class="product--hover">
+                                    <div class="product--action">
+                                        <a class="btn btn--secondary btn--bordered" href="#">Shop</a>
+                                    </div>
+                                </div><!-- .product-overlay end -->
+                            </div><!-- .product-img end -->
+                            <div class="product--content">
+                                <div class="product--title">
+                                    <h3><a href="#">Le Coq Sportif Triangle T-Shirt</a></h3>
+                                </div><!-- .product-title end -->
+                                <div class="product--price">
+                                    <span>$18.00</span>
+                                </div><!-- .product-price end -->
+                            </div><!-- .product-bio end -->
+                        </div><!-- .product end -->
+
+                        <!-- Testimonial #5 -->
+                        <div class="testimonial-panel product-item">
+                            <div class="product--img">
+                                <img  src="{{ asset('images/Links/product-5.png') }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <div class="product--hover">
+                                    <div class="product--action">
+                                        <a class="btn btn--secondary btn--bordered" href="#">Shop</a>
+                                    </div>
+                                </div><!-- .product-overlay end -->
+                            </div><!-- .product-img end -->
+                            <div class="product--content">
+                                <div class="product--title">
+                                    <h3><a href="#">Le Coq Sportif Triangle T-Shirt</a></h3>
+                                </div><!-- .product-title end -->
+                                <div class="product--price">
+                                    <span>$18.00</span>
+                                </div><!-- .product-price end -->
+                            </div><!-- .product-bio end -->
+                        </div><!-- .product end -->
+
+                        <!-- Testimonial #6 -->
+                        <div class="testimonial-panel product-item">
+                            <div class="product--img">
+                                <img  src="{{ asset('images/Links/product-6.jpg') }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <div class="product--hover">
+                                    <div class="product--action">
+                                        <a class="btn btn--secondary btn--bordered" href="#">Shop</a>
+                                    </div>
+                                </div><!-- .product-overlay end -->
+                            </div><!-- .product-img end -->
+                            <div class="product--content">
+                                <div class="product--title">
+                                    <h3><a href="#">Le Coq Sportif Triangle T-Shirt</a></h3>
+                                </div><!-- .product-title end -->
+                                <div class="product--price">
+                                    <span>$18.00</span>
+                                </div><!-- .product-price end -->
+                            </div><!-- .product-bio end -->
+                        </div><!-- .product end -->
                     </div>
                 </div><!-- .col-md-12 end -->
             </div><!-- .row end -->
@@ -158,21 +212,21 @@
     </section>
     <!-- #testimonial1 end -->
 
-    <!-- Info Box #9
+
+    <!-- Cover #5
     ============================================= -->
-    <section id="info9" class="info-box pt-0 pb-0">
+    <section id="cover5" class="section cover-5 mtop-100 pt-0 pb-0">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-img p-0">
-                    <div class="col-img bg-overlay">
+            <div class="row comm-height">
+                <div class="col-xs-12 col-sm-12 col-md-6 pr-0 pl-0">
+                    <div class="bg-overlay">
                         <div class="bg-section">
-                            <img src="assets/images/banners/5.jpg" alt="Background"/>
+                            <img src="{{asset('/images/Links/home-3.png')}}" alt="Background"/>
                         </div>
                     </div>
                 </div><!-- .col-md-6 end-->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-content bg-pastel center">
                     <h3>Customize For A Tailored & Timeless Accessory</h3>
-
                     <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">LET'S GO SHOPPING</a>
                 </div>
             </div>
@@ -180,5 +234,29 @@
         </div>
         <!-- .container end -->
     </section>
+    <!-- #cover5 end -->
+
+    <!-- Info Box #9
+    ============================================= -->
+    {{--<section id="info9" class="info-box pt-0 pb-0">--}}
+        {{--<div class="container-fluid">--}}
+            {{--<div class="row">--}}
+                {{--<div class="col-xs-12 col-sm-12 col-md-6 col-img p-0">--}}
+                    {{--<div class="col-img bg-overlay">--}}
+                        {{--<div class="bg-section">--}}
+                            {{--<img src="assets/images/banners/5.jpg" alt="Background"/>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div><!-- .col-md-6 end-->--}}
+                {{--<div class="col-xs-12 col-sm-12 col-md-6 col-content bg-pastel center">--}}
+                    {{--<h3>Customize For A Tailored & Timeless Accessory</h3>--}}
+
+                    {{--<a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">LET'S GO SHOPPING</a>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+            {{--<!-- .row end -->--}}
+        {{--</div>--}}
+        {{--<!-- .container end -->--}}
+    {{--</section>--}}
     <!-- #info9 end -->
 @endsection

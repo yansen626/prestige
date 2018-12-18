@@ -41,7 +41,7 @@
 
     <!-- Document Title
         ============================================= -->
-    <title>league | Multi-purpose Business Html5 Template</title>
+    <title>NAMA</title>
 </head>
 <body>
     <div class="preloader">
@@ -80,5 +80,6 @@
     <script type="text/javascript" src="{{ asset('revolution/js/extensions/revolution.extension.parallax.min.js')}}"></script>
     <!-- RS Configration JS Files -->
     <script src=" {{ asset('js/frontend/rsconfig.js')}}"></script>
+    <script src=" {{ asset('js/frontend/custom.js')}}"></script>
 </body>
 </html>

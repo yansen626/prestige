@@ -1,3 +1,6 @@
+p{
+  color: #000000;
+}
 .center{
     text-align: center;
 }
@@ -64,23 +67,112 @@ header style custom
     left: 100%;
     color: #000000;
 }
-.carousel-indicators li {
-    display: inline-block;
-    width: 48px;
-    height: 48px;
-    margin: 10px;
-    text-indent: 0;
-    cursor: pointer;
-    border: none;
-    border-radius: 10%;
-    background-color: #0000ff;
-    box-shadow: inset 1px 1px 1px 1px rgba(0,0,0,0.5);
-    list-style-type: square;
+
+/*
+body home custom
+*/
+.down-button{
+    left: 25%;
+    bottom: 0;
+    color: #000000;
+    position: absolute;
+    margin: 0 auto;
+    z-index: 99;
+    font-size: 20px;
+    -webkit-transition-delay: 1s; /* Safari */
+    transition-delay: 1s;
+}
+.down-button:hover {
+    color: #000 !important;
+}
+.slider .slide--item {
+    height: 0;
 }
 
-.carousel-indicators .active {
-    width: 48px;
-    height: 48px;
-    margin: 10px;
-    background-color: #ffff99;
+.slider .slide--headline {
+    color: #000000;
+    font-weight: 400;
+    padding-top: 30%;
+    font-size: 32px;
+    line-height: 46px;
 }
+
+.slider-home{
+    position: relative;
+    overflow: hidden;
+    z-index: 999;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height:700px;
+}
+
+.cover-5 h3{
+    font-size: 40px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 60px;
+}
+#slider .owl-item{
+    background-color: #EDF3F6;
+}
+.owl-dots{
+    left: 25%;
+}
+.owl-theme .owl-controls .owl-nav [class*="owl-"] {
+    color: #000;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+.owl-prev{
+    top: 50%;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    color: #000000;
+}
+
+.owl-next{
+    top: 50%;
+    position: absolute;
+    margin: 0 auto;
+    right: 0;
+    color: #000000;
+}
+.owl-next:hover {
+    color: #000 !important;
+    background:none !important;
+}
+.owl-prev:hover {
+    color: #000 !important;;
+    background:none !important;
+}
+
+.product--content .product--title a:hover {
+    color: #EAA2AE;
+}
+
+.product--img .product--hover .product--action a {
+    bottom: 60px;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+    border-color: #ffffff;
+    background-color: transparent;
+    text-align: center;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+}
+.product--img .product--hover .product--action a:hover {
+    background-color: transparent;
+    color: #ffffff;
+}
+
