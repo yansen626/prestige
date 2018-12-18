@@ -1226,6 +1226,14 @@ blockquot {
     background-color: #FBE4E8 !important;
 }
 
+.bg-windrift-blue {
+    background-color: #EDF3F6 !important;
+}
+
+.bg-ruby-peach {
+    background-color: #EAA2AE !important;
+}
+
 /* Background Image */
 .bg-section {
 	position: relative;
@@ -1625,7 +1633,7 @@ blockquot {
 	position: relative;
 	z-index: 2;
 	font-size: 18px;
-	font-weight: 500;
+	font-weight: 400;
 	text-transform: uppercase;
 	text-align: center;
 	border-radius: 0;
@@ -1661,7 +1669,7 @@ blockquot {
 .btn--secondary {
 	background-color: #282828;
 	color: #ffffff;
-	border: 2px solid #282828;
+	border: 1px solid #282828;
 }
 
 .btn--secondary:active,

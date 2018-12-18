@@ -35,12 +35,12 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6 col-md-6 center">
-                                        <a><H4 class="header-menu">SHOP ALL</H4></a>
-                                        <a><H4 class="header-menu">BAGS & TOTES</H4></a>
-                                        <a><H4 class="header-menu">WALLETS</H4></a>
-                                        <a><H4 class="header-menu">CARD HOLDERS</H4></a>
-                                        <a><H4 class="header-menu">POUCHES</H4></a>
-                                        <a><H4 class="header-menu">PHONE CASES</H4></a>
+                                        <a href="{{route('product.list')}}"><H4 class="header-menu">SHOP ALL</H4></a>
+                                        <a href="/product-list?category=1"><H4 class="header-menu">BAGS & TOTES</H4></a>
+                                        <a href="/product-list?category=2"><H4 class="header-menu">WALLETS</H4></a>
+                                        <a href="/product-list?category=3"><H4 class="header-menu">CARD HOLDERS</H4></a>
+                                        <a href="/product-list?category=4"><H4 class="header-menu">POUCHES</H4></a>
+                                        <a href="/product-list?category=5"><H4 class="header-menu">PHONE CASES</H4></a>
                                     </div><!-- .col-md-8 end -->
                                 </div><!-- .row end -->
                             </div><!-- .container end -->

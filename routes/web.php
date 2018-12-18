@@ -18,9 +18,18 @@
 Auth::routes();
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
+
+// product
+Route::get('/product-list', 'Frontend\ProductController@index')->name('product.list');
+Route::get('/product-detail/{product}', 'Frontend\ProductController@show')->name('product.detail');
+
+// cart & transaction
 Route::get('/cart', 'Frontend\CartController@getCart')->name('cart');
+
+// miscellaneous
 Route::get('/test-location', 'Frontend\HomeController@getLocation')->name('getLocation');
 Route::get('/test-province', 'Frontend\HomeController@getProvince')->name('getProvince');
+
 
 // ADMIN ROUTE
 // ====================================================================================================================

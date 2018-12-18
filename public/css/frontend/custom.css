@@ -176,3 +176,123 @@ body home custom
     color: #ffffff;
 }
 
+/*
+Product detail custom
+*/
+.accordion .panel .panel--heading a {
+    font-size: 18px;
+    color: #000000;
+    font-weight: 400;
+}
+.accordion .panel--heading .accordion-toggle:after {
+    content: "\f063";
+    /* symbol for "opening" panels */
+    font-size: 18px;
+    color: #000000;
+    background-color: transparent;
+    border: none;
+}
+
+.accordion .panel--heading .accordion-toggle.collapsed:after {
+    content: "\f061";
+    /* symbol for "collapsed" panels */
+    font-size: 18px;
+    color: #000000;
+    background-color: transparent;
+    border: none;
+}
+
+.show-menu-arrow{
+    border: none;
+}
+.accordion .panel .panel--body {
+    padding: 0 0 15%;
+}
+select {
+    /* styling */
+    background-color: white;
+    border: none;
+    display: inline-block;
+    font: inherit;
+    line-height: 1.5em;
+    padding: 0.5em 3.5em 0.5em 1em;
+
+    /* reset */
+    margin: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+select.minimal {
+    background-image:
+            linear-gradient(45deg, transparent 50%, gray 50%),
+            linear-gradient(135deg, gray 50%, transparent 50%),
+            linear-gradient(to right, #ccc, #ccc);
+    background-position:
+            calc(100% - 20px) calc(1em + 2px),
+            calc(100% - 15px) calc(1em + 2px),
+            calc(100% - 2.5em) 0.5em;
+    background-size:
+            5px 5px,
+            5px 5px,
+            1px 1.5em;
+    background-repeat: no-repeat;
+}
+
+select.minimal:focus {
+    background-image:
+            linear-gradient(45deg, green 50%, transparent 50%),
+            linear-gradient(135deg, transparent 50%, green 50%),
+            linear-gradient(to right, #ccc, #ccc);
+    background-position:
+            calc(100% - 15px) 1em,
+            calc(100% - 20px) 1em,
+            calc(100% - 2.5em) 0.5em;
+    background-size:
+            5px 5px,
+            5px 5px,
+            1px 1.5em;
+    background-repeat: no-repeat;
+    border-color: black;
+    outline: 0;
+}
+
+
+#slider-product .owl-dots{
+    left: 0;
+}
+#slider-product .owl-theme .owl-controls .owl-nav [class*="owl-"] {
+    color: #000;
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+    background: none;
+    cursor: pointer;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+}
+
+#slider-product .owl-prev{
+    top: 50%;
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    color: #000000;
+}
+
+#slider-product .owl-next{
+    top: 50%;
+    position: absolute;
+    margin: 0 auto;
+    right: 0;
+    color: #000000;
+}
+#slider-product .owl-next:hover {
+    color: #000 !important;
+    background:none !important;
+}
+#slider-product .owl-prev:hover {
+    color: #000 !important;;
+    background:none !important;
+}
+
