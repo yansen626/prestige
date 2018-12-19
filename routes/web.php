@@ -18,6 +18,7 @@
 Auth::routes();
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
+Route::post('/search/', 'Frontend\ProductController@search')->name('search');
 
 // product
 Route::get('/product-list', 'Frontend\ProductController@index')->name('product.list');

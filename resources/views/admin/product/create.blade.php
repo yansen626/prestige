@@ -121,7 +121,7 @@
                                                     {{--</div>--}}
                                                     <div class="row">
                                                         <a href="{{ route('admin.product.index') }}" class="btn btn-danger">Exit</a>
-                                                        <button class="btn btn-primary" type="submit">Publish</button>
+                                                        <button class="btn btn-primary" type="submit">Save</button>
                                                     </div>
                                                 </div>
                                             </div>

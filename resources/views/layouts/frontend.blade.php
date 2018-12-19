@@ -62,6 +62,7 @@
         @include('partials.frontend._footer')
     </div><!-- #wrapper end -->
 
+    @yield('styles')
     <!-- Footer Scripts
     ============================================= -->
     <script src="{{ asset('js/frontend/jquery-2.2.4.min.js')}}"></script>
@@ -81,5 +82,6 @@
     <!-- RS Configration JS Files -->
     <script src=" {{ asset('js/frontend/rsconfig.js')}}"></script>
     <script src=" {{ asset('js/frontend/custom.js')}}"></script>
+    @yield('scripts')
 </body>
 </html>

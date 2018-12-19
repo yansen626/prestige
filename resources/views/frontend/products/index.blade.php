@@ -2,6 +2,7 @@
 
 @section('content')
 
+    @if($filter != -1)
     <!-- Cover #5
     ============================================= -->
     <section id="cover5" class="section cover-5 mtop-100 pt-0 pb-0">
@@ -28,11 +29,45 @@
         <!-- .container end -->
     </section>
     <!-- #cover5 end -->
+    @endif
 
     <!-- Shop #4
     ============================================= -->
     <section id="shop" class="shop shop-4 bg-white" style="padding-bottom:50px;border-bottom: #0c0c0c;">
         <div class="container">
+            <!-- Search Result -->
+            @if($filter == -1)
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 center">
+                        <h3>Search Result of  "{{$searchText}}"</h3>
+                    </div>
+                    <!-- Product #1 -->
+                    @foreach($productResult as $product)
+                        @php($link = route('product.detail', ['product'=>$product->id] ))
+                    @php($productImage = $product->product_images->where('is_main_image', 1)->first())
+                        <div class="col-xs-12 col-sm-6 col-md-3 product-item">
+                            <div class="product--img">
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <div class="product--hover">
+                                    <div class="product--action">
+                                        <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
+                                    </div>
+                                </div><!-- .product-overlay end -->
+                            </div><!-- .product-img end -->
+                            <div class="product--content">
+                                <div class="product--title">
+                                    <h3><a href="{{$link}}">{{$product->name}}</a></h3>
+                                </div><!-- .product-title end -->
+                                <div class="product--price">
+                                    <span>${{$product->price}}</span>
+                                </div><!-- .product-price end -->
+                            </div><!-- .product-bio end -->
+                        </div>
+                @endforeach
+                <!-- .product end -->
+                </div><!-- .row end -->
+            @endif
+
             @if($filter == 0 || $filter == 1)
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 center">

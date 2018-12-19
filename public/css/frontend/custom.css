@@ -255,8 +255,10 @@ select.minimal:focus {
     border-color: black;
     outline: 0;
 }
-
-
+.product--content .product--title a {
+    font-size: 20px;
+    font-weight: 400;
+}
 #slider-product .owl-dots{
     left: 0;
 }

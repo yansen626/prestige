@@ -119,10 +119,15 @@
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6 col-md-6 center">
                                         <h4>Search</h4>
-                                        <form class="form-search">
-                                            <input type="text" class="form-control">
-                                            <button class="btn search-button" type="button"><i class="fa fa-long-arrow-right"></i></button>
-                                        </form><!-- .form-search end -->
+
+                                        {!! Form::open(array('action' => 'Frontend\ProductController@search', 'id'=>'form-search', 'class'=>'form-search', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}
+
+                                        <input type="text" class="form-control" id="search-text" name="search-text">
+                                        <button class="btn search-button" type="button" onClick="empty()" >
+                                            <i class="fa fa-long-arrow-right"></i>
+                                        </button>
+
+                                        {!! Form::close() !!}
                                     </div><!-- .col-md-8 end -->
                                 </div><!-- .row end -->
                             </div><!-- .container end -->
@@ -165,3 +170,18 @@
     </nav>
 
 </header>
+
+
+@section('scripts')
+    <script>
+        function empty() {
+            var x;
+            x = document.getElementById("search-text").value;
+            if (x == "" || x == null) {
+            }
+            else{
+                $('#form-search').submit();
+            }
+        }
+    </script>
+@endsection
