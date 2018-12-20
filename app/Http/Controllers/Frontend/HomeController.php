@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.home');
+        $products = Product::where('status', 1)->get();
+        $data=([
+           'products' => $products,
+        ]);
+        return view('frontend.home')->with($data);
     }
 
     public function getLocation(){

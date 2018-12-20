@@ -25,6 +25,7 @@ Route::get('/product-list', 'Frontend\ProductController@index')->name('product.l
 Route::get('/product-detail/{product}', 'Frontend\ProductController@show')->name('product.detail');
 
 // cart & transaction
+Route::post('/add-cart', 'Frontend\CartController@addCart')->name('add.cart');
 Route::get('/cart', 'Frontend\CartController@getCart')->name('cart');
 
 // miscellaneous

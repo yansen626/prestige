@@ -38,10 +38,10 @@ class ProductController extends Controller
      * show product detail.
      *
      */
-    public function show(Product $product){
-
+    public function show($product){
+        $productDB = Product::where('slug', $product)->first();
         $data = [
-            'product'      => $product
+            'product'      => $productDB
         ];
         return view('frontend.products.show')->with($data);
     }

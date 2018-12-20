@@ -9,59 +9,34 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-content bg-windrift-blue center" >
                     <section id="slider-product" class="carousel slider slider-shop slider-dots" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="true" data-dots="true" data-space="0" data-loop="true" data-speed="800">
-
-                        <!-- Slide #1 -->
-                        <div class="slide--item">
-                            {{--<div class="bg-section">--}}
-                            {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
-                            {{--</div>--}}
-                            <div class="pos-vertical-center">
-                                <div class="col-xs-12 col-sm-12 col-md-12 slider-home" style="background-image: url('{{asset('images/Links/product-detail-1.jpg')}}')">
-                                    {{--<div class="bg-section">--}}
-                                    {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
-                                    {{--</div>--}}
-                                </div>
-                            </div>
-                        </div><!-- .slide-item end -->
-
-                        <!-- Slide #2 -->
-                        <div class="slide--item">
-                            {{--<div class="bg-section">--}}
-                            {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
-                            {{--</div>--}}
-                            <div class="pos-vertical-center">
-                                <div class="col-xs-12 col-sm-12 col-md-12 slider-home" style="background-image: url('{{asset('images/Links/product-detail-2.jpg')}}')">
-                                    {{--<div class="bg-section">--}}
-                                    {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
-                                    {{--</div>--}}
-                                </div>
-                            </div>
-                        </div><!-- .slide-item end -->
-
-                        <!-- Slide #2 -->
-                        <div class="slide--item">
-                            {{--<div class="bg-section">--}}
-                            {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
-                            {{--</div>--}}
-                            <div class="pos-vertical-center">
-                                <div class="col-xs-12 col-sm-12 col-md-12 slider-home" style="background-image: url('{{asset('images/Links/product-detail-3.jpg')}}')">
-                                    {{--<div class="bg-section">--}}
-                                    {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
-                                    {{--</div>--}}
-                                </div>
-                            </div>
-                        </div><!-- .slide-item end -->
-
+                        @php($productImages = $product->product_images)
+                            @foreach($productImages as $images)
+                                <!-- Slide -->
+                                    <div class="slide--item">
+                                        {{--<div class="bg-section">--}}
+                                        {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
+                                        {{--</div>--}}
+                                        <div class="pos-vertical-center">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 slider-home" style="background-image: url('{{ asset('storage/products/'.$images->path) }}')">
+                                                {{--<div class="bg-section">--}}
+                                                {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
+                                                {{--</div>--}}
+                                            </div>
+                                        </div>
+                                    </div><!-- .slide-item end -->
+                            @endforeach
                     </section>
                 </div><!-- .col-md-8 end -->
                 <div class="col-xs-12 col-sm-12 col-md-6" style="padding-top: 5%;">
-                    <h2>LARGE TOTE BAG</h2>
-                    <H4>$80.00 USD</H4>
-                    <p>
-                        OUR SLOUCHY TOTE WITH INTERNAL AND EXTERNAL ZIP CLOSURES, <BR>
-                        LAPTOP POUCH AND PHONE POCKET IS SUSTAINABLE AND CHIC! <BR>
-                        MADE WITH ORGANIC LEATHER AND WAITING TO BE CUSTOMIZED! <BR>
+                    <h2>{{$product->name}}</h2>
+                    <H4>${{$product->price}} USD</H4>
+                    <p style="text-transform: uppercase;">
+                        {{$product->description}}
                     </p>
+
+                    {!! Form::open(array('action' => 'Frontend\CartController@addCart', 'id'=>'form-search', 'class'=>'form-search', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}
+
+                    <input type="hidden" name="slug" value="{{$product->slug}}">
                     <!-- Accordion #1
                     ============================================= -->
                     <div id="accordion1">
@@ -91,26 +66,25 @@
                                         <input type="text" class="form-control" name="custom-text" id="custom-text" placeholder="TEXT HERE"/>
                                         <div class="col-xs-12 col-sm-12 col-md-4">
                                             <p style="margin-bottom: 0;margin-left: 11%;">Choose Font</p>
-                                            <select class="minimal" data-width="auto">
-                                                <option>Mustard</option>
-                                                <option>Ketchup</option>
-                                                <option>Relish</option>
+                                            <select class="minimal" data-width="auto" name="custom-font">
+                                                <option>SERIF</option>
+                                                <option>SAN SERIF</option>
                                             </select>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-4">
                                             <p style="margin-bottom: 0;margin-left: 11%;">Choose Color</p>
-                                            <select class="selectpicker minimal" data-width="auto">
-                                                <option>Mustard</option>
-                                                <option>Ketchup</option>
-                                                <option>Relish</option>
+                                            <select class="selectpicker minimal" data-width="auto" name="custom-color">
+                                                <option>GOLD</option>
+                                                <option>SILVER</option>
+                                                <option>BRONZE</option>
                                             </select>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-4">
                                             <p style="margin-bottom: 0;margin-left: 11%;">Choose Size</p>
-                                            <select class="selectpicker minimal" data-width="auto">
-                                                <option>Mustard</option>
-                                                <option>Ketchup</option>
-                                                <option>Relish</option>
+                                            <select class="selectpicker minimal" data-width="auto" name="custom-size">
+                                                <option>LARGE</option>
+                                                <option>MEDIUM</option>
+                                                <option>SMALL</option>
                                             </select>
                                         </div>
                                     </form>
@@ -132,9 +106,11 @@
                         <!-- End .Accordion-->
 
                         <div style="padding: 5% 0 5% 0">
-                            <a class="btn btn--secondary btn--bordered" href="#">Add to Cart</a>
+                            <button class="btn btn--secondary btn--bordered" type="submit">Add to Cart</button>
                         </div>
                     </div>
+
+                    {!! Form::close() !!}
                 </div><!-- .col-md-6 end-->
             </div>
             <!-- .row end -->

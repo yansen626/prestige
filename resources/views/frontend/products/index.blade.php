@@ -43,7 +43,7 @@
                     </div>
                     <!-- Product #1 -->
                     @foreach($productResult as $product)
-                        @php($link = route('product.detail', ['product'=>$product->id] ))
+                        @php($link = route('product.detail', ['product'=>$product->slug] ))
                     @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
