@@ -128,6 +128,9 @@
     $module.find("input.form-control", ".btn", ".module-cancel").click(function(e) {
         e.stopPropagation();
     });
+    $module.find("textarea.form-control", ".btn", ".module-cancel").click(function(e) {
+        e.stopPropagation();
+    });
 
     /* ------------------ HEADER AFFIX ------------------ */
 

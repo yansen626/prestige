@@ -99,9 +99,10 @@
             var imageObj = new Image();
             imageObj.onload = function(){
                 context.drawImage(imageObj, 10, 10);
-                context.font = "20pt Calibri";
-                context.fillStyle = "#fff";
-                context.fillText("TEST!", posX, posY);
+                context.textAlign = 'center';
+                context.font = "24pt sans-serif";
+                context.fillStyle = "#FFD700";
+                context.fillText("TEST1234", posX, posY);
             };
 
             imageObj.src = "{{ asset('storage/products/'.$mainImage->path) }}";
@@ -116,9 +117,10 @@
             var imageObj = new Image();
             imageObj.onload = function(){
                 context.drawImage(imageObj, 10, 10);
-                context.font = "20pt Calibri";
-                context.fillStyle = "#fff";
-                context.fillText("TEST!", posX, posY);
+                context.textAlign = 'center';
+                context.font = "24pt sans-serif";
+                context.fillStyle = "#FFD700";
+                context.fillText("TEST1234", posX, posY);
             };
 
             imageObj.src = "{{ asset('storage/products/'.$mainImage->path) }}";

@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 06 Dec 2018 06:52:28 +0000.
+ * Date: Thu, 20 Dec 2018 03:51:33 +0000.
  */
 
 namespace App\Models;
@@ -41,6 +41,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Illuminate\Database\Eloquent\Collection $orders
  * @property \Illuminate\Database\Eloquent\Collection $order_return_products
  * @property \Illuminate\Database\Eloquent\Collection $product_downloadable_urls
+ * @property \Illuminate\Database\Eloquent\Collection $product_images
+ * @property \Illuminate\Database\Eloquent\Collection $product_positions
  * @property \Illuminate\Database\Eloquent\Collection $properties
  * @property \Illuminate\Database\Eloquent\Collection $product_reviews
  * @property \Illuminate\Database\Eloquent\Collection $product_variations
@@ -99,11 +101,6 @@ class Product extends Eloquent
 		return $this->hasMany(\App\Models\AvoredProductImage::class);
 	}
 
-	public function product_images()
-	{
-		return $this->hasMany(\App\Models\ProductImage::class);
-	}
-
 	public function categories()
 	{
 		return $this->belongsToMany(\App\Models\Category::class)
@@ -126,6 +123,16 @@ class Product extends Eloquent
 	public function product_downloadable_urls()
 	{
 		return $this->hasMany(\App\Models\ProductDownloadableUrl::class);
+	}
+
+	public function product_images()
+	{
+		return $this->hasMany(\App\Models\ProductImage::class);
+	}
+
+	public function product_positions()
+	{
+		return $this->hasMany(\App\Models\ProductPosition::class);
 	}
 
 	public function properties()
