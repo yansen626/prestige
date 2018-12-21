@@ -159,7 +159,7 @@
 
                     <!-- Home Menu -->
                     <li class="has-dropdown mega-dropdown">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle menu-item">CART</a>
+                        <a href="{{route('cart')}}" data-toggle="dropdown" class="dropdown-toggle menu-item">CART</a>
                         <!-- .mega-dropdown-menu end -->
                     </li>
                 </ul>

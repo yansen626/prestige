@@ -40,8 +40,7 @@
 
                     {!! Form::open(array('action' => 'Frontend\CartController@addCart', 'id'=>'form-search', 'class'=>'form-search', 'method' => 'POST', 'role' => 'form', 'onkeypress' => 'return event.keyCode != 13;', 'novalidate')) !!}
 
-                    <input type="hidden" name="slug" value="{{$product->slug}}">
-                    <input type="hidden" name="slug" value="{{$product->slug}}">
+                    <input type="hidden" id="slug" name="slug" value="{{$product->slug}}">
                     <input type="hidden" id="position_x" value="{{$product->product_positions[0]->pos_x}}">
                     <input type="hidden" id="position_y" value="{{$product->product_positions[0]->pos_y}}">
                     <!-- Accordion #1
@@ -77,24 +76,24 @@
                                         <div class="col-xs-12 col-sm-12 col-md-4">
                                             <p style="margin-bottom: 0;margin-left: 11%;">Choose Font</p>
                                             <select class="minimal" data-width="auto" id="custom-font" name="custom-font" onchange="ChangePosition()">
-                                                <option value="serif">SERIF</option>
-                                                <option value="sans-serif">SAN SERIF</option>
+                                                <option value="Serif">SERIF</option>
+                                                <option value="Sans-serif">SAN SERIF</option>
                                             </select>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-4">
                                             <p style="margin-bottom: 0;margin-left: 11%;">Choose Color</p>
                                             <select class="selectpicker minimal" data-width="auto" id="custom-color" name="custom-color" onchange="ChangePosition()">
-                                                <option value="GOLD-FFD700">GOLD</option>
-                                                <option value="SILVER-C0C0C0">SILVER</option>
-                                                <option value="BRONZE-CD7F32">BRONZE</option>
+                                                <option value="Gold-FFD700">GOLD</option>
+                                                <option value="Silver-C0C0C0">SILVER</option>
+                                                <option value="Bronze-CD7F32">BRONZE</option>
                                             </select>
                                         </div>
                                         <div class="col-xs-12 col-sm-12 col-md-4">
                                             <p style="margin-bottom: 0;margin-left: 11%;">Choose Size</p>
                                             <select class="selectpicker minimal" data-width="auto" id="custom-size" name="custom-size" onchange="ChangePosition()">
-                                                <option value="LARGE-24">LARGE</option>
-                                                <option value="MEDIUM-20">MEDIUM</option>
-                                                <option value="SMALL-16">SMALL</option>
+                                                <option value="Large-24">LARGE</option>
+                                                <option value="Medium-20">MEDIUM</option>
+                                                <option value="Small-16">SMALL</option>
                                             </select>
                                         </div>
                                     </form>
@@ -116,7 +115,7 @@
                         <!-- End .Accordion-->
 
                         <div style="padding: 5% 0 5% 0">
-                            {{--<button class="btn btn--secondary btn--bordered" type="submit">Add to Cart</button>--}}
+                            <button class="btn btn--secondary btn--bordered" type="submit">Add to Cart</button>
                         </div>
                     </div>
 
