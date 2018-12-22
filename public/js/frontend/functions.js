@@ -132,6 +132,10 @@
         e.stopPropagation();
     });
 
+    $module.find("contact-button.form-control", ".btn", ".module-cancel").click(function(e) {
+        e.stopPropagation();
+    });
+
     /* ------------------ HEADER AFFIX ------------------ */
 
     var $navAffix = $(".header-fixed .navbar-fixed-top");

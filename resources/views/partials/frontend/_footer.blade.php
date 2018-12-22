@@ -37,11 +37,18 @@
                         <h5>Join Our Newsletter</h5>
                     </div>
                     <div>
-                        <form>
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Name" required/>
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required/>
+                        <form id="subscription_form">
+                            <input type="hidden" id="csrf_token" name="_token" value="{{ csrf_token() }}">
+
+                            <input type="text" class="form-control" name="subscribe_name" id="subscribe_name" placeholder="Name" required/>
+                            <input type="email" class="form-control" name="subscribe_email" id="subscribe_email" placeholder="Email" required/>
                             <button type="submit" class="newsletter-button"><i class="fa fa-long-arrow-right"></i></button>
                         </form>
+                        <div id="subscribe_success_message" class="row mb-3" style="display: none;">
+                            <div class="col-12">
+                                <h5 class="text-center">Thank You for Registering</h5>
+                            </div>
+                        </div>
                         <div class="clearfix"></div>
                         <p>
                             COPYRIGHT 2018 NAMA LEATHER GOODS

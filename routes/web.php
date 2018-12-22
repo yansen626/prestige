@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
 Route::post('/search/', 'Frontend\ProductController@search')->name('search');
+Route::post('/contact-us/', 'Frontend\HomeController@contact')->name('contact');
+Route::post('/newsletter/', 'Frontend\HomeController@newsletter')->name('newsletter');
 
 // product
 Route::get('/product-list', 'Frontend\ProductController@index')->name('product.list');

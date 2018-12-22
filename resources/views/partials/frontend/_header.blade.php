@@ -28,7 +28,7 @@
                     <div class="module-icon search-icon color-black">
                         {{--<i class="fa fa-search"></i>--}}
                         {{--<span class="title">search</span>--}}
-                        <a href="#">SHOP</a>
+                        <a class="pointer">SHOP</a>
                     </div>
                     <div class="module-content module-fullscreen module--search2-box">
                         <div class="pos-vertical-center">
@@ -45,7 +45,7 @@
                                 </div><!-- .row end -->
                             </div><!-- .container end -->
                         </div>
-                        <a class="module-cancel" href="#"><i class="fa fa-close"></i></a>
+                        <a class="module-cancel pointer"><i class="fa fa-close"></i></a>
                     </div>
                 </div><!-- .module-Shop end -->
 
@@ -78,7 +78,7 @@
                     <div class="module-icon search-icon color-black">
                         {{--<i class="fa fa-search"></i>--}}
                         {{--<span class="title">search</span>--}}
-                        <a href="#">CONTACT</a>
+                        <a class="pointer">CONTACT</a>
                     </div>
                     <div class="module-content module-fullscreen module--search2-box">
                         <div class="pos-vertical-center">
@@ -88,21 +88,23 @@
                                         <h2>Contact</h2>
                                         <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                                         <br/>
-                                        <form class="form-search2">
+                                        {!! Form::open(array('action' => 'Frontend\HomeController@contact', 'id'=>'form-contact', 'class'=>'form-search2', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}
+
                                             <input type="text" class="form-control" name="name" id="name" placeholder="NAME" required/>
                                             <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
-                                            <input type="text" class="form-control" name="order" id="order" placeholder="ORDER NUMBER (IF APPLICABLE)" required/>
+                                            <input type="text" class="form-control" name="order" id="order" placeholder="ORDER NUMBER (IF APPLICABLE)"/>
                                             <textarea class="form-control" name="message" id="message" rows="2" placeholder="MESSAGE" required></textarea>
 
                                             <div style="text-align: center;">
                                                 <button type="submit" class="btn btn--secondary btn--bordered">SEND</button>
                                             </div>
-                                        </form><!-- .form-search end -->
+
+                                        {!! Form::close() !!}
                                     </div><!-- .col-md-8 end -->
                                 </div><!-- .row end -->
                             </div><!-- .container end -->
                         </div>
-                        <a class="module-cancel" href="#"><i class="fa fa-close"></i></a>
+                        <a class="module-cancel pointer"><i class="fa fa-close"></i></a>
                     </div>
                 </div><!-- .module-Contact end -->
 
@@ -111,7 +113,7 @@
                     <div class="module-icon search-icon color-black">
                         {{--<i class="fa fa-search"></i>--}}
                         {{--<span class="title">search</span>--}}
-                        <a href="#">SEARCH</a>
+                        <a class="pointer">SEARCH</a>
                     </div>
                     <div class="module-content module-fullscreen module--search-box">
                         <div class="pos-vertical-center">
@@ -123,7 +125,7 @@
                                         {!! Form::open(array('action' => 'Frontend\ProductController@search', 'id'=>'form-search', 'class'=>'form-search', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}
 
                                         <input type="text" class="form-control" id="search-text" name="search-text">
-                                        <button class="btn search-button" type="button" onClick="empty()" >
+                                        <button class="btn search-button contact-button" type="button" onClick="empty()" >
                                             <i class="fa fa-long-arrow-right"></i>
                                         </button>
 
@@ -132,7 +134,7 @@
                                 </div><!-- .row end -->
                             </div><!-- .container end -->
                         </div>
-                        <a class="module-cancel" href="#"><i class="fa fa-close"></i></a>
+                        <a class="module-cancel pointer"><i class="fa fa-close"></i></a>
                     </div>
                 </div><!-- .module-search end -->
 
@@ -146,7 +148,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="logo" href="#">
+                <a class="logo" href="{{route('home')}}">
                     {{--<img class="logo-light" src="{{ asset('images/icons/nama-brand-logo.svg') }}" alt="Nama Logo">--}}
                     {{--<img class="logo-dark" src="{{ asset('images/icons/nama-brand-logo.svg') }}" alt="Nama Logo">--}}
                     <img  src="{{ asset('images/icons/nama-brand-logo-black.png') }}" alt="Nama Logo">
@@ -158,8 +160,8 @@
                 <ul class="nav navbar-nav nav-pos-right navbar-left">
 
                     <!-- Home Menu -->
-                    <li class="has-dropdown mega-dropdown">
-                        <a href="{{route('cart')}}" data-toggle="dropdown" class="dropdown-toggle menu-item">CART</a>
+                    <li>
+                        <a href="{{route('cart')}}"  class="menu-item">CART</a>
                         <!-- .mega-dropdown-menu end -->
                     </li>
                 </ul>
@@ -183,5 +185,25 @@
                 $('#form-search').submit();
             }
         }
+        $('#subscription_form').on('submit', function(e) {
+            e.preventDefault();
+            var name = $('#subscribe_name').val();
+            var email = $('#subscribe_email').val();
+            // alert(name);
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('newsletter') }}',
+                datatype : "application/json",
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'name': name,
+                    'email': email
+                }, // no need to stringify
+                success: function (result) {
+                    $('#subscribe_success_message').slideDown(500);
+                }
+            });
+        });
     </script>
 @endsection

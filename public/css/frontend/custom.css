@@ -12,22 +12,24 @@ p{
 .newsletter-button {
     background-color: transparent;
     color: #000000;
-    font-size: 11px;
+    font-size: 25px;
     font-weight: 400;
     width: 15%;
     line-height: 42px;
     border: none;
-    bottom: 37%;
+    top: 37%;
     position: absolute;
     margin:0 auto;
-    left:0;
-    right:-70%;
+    left: 80%;
+    right: 0;
 }
 
 /*
 header style custom
 */
-
+.pointer{
+    cursor: pointer;
+}
 .module-active .module-fullscreen {
     width: 50%;
     background-color: #EDF3F6;

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactMessage;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\Subscribe;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class HomeController extends Controller
 {
@@ -31,6 +35,34 @@ class HomeController extends Controller
            'products' => $products,
         ]);
         return view('frontend.home')->with($data);
+    }
+
+    public function contact(Request $request)
+    {
+        $dateTimeNow = Carbon::now('Asia/Jakarta');
+        $newContact = ContactMessage::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'message' => $request->input('message'),
+            'created_at'        => $dateTimeNow->toDateTimeString(),
+        ]);
+        return redirect()->route('home');
+    }
+
+    public function newsletter(Request $request)
+    {
+        try{
+            $dateTimeNow = Carbon::now('Asia/Jakarta');
+            $newSubscriber = Subscribe::create([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'created_at'        => $dateTimeNow->toDateTimeString(),
+            ]);
+            return Response::json(array('success' => 'VALID'));
+        }
+        catch(\Exception $ex){
+            return Response::json(array('errors' => 'INVALID' . $request->input('id')));
+        }
     }
 
     public function getLocation(){
