@@ -134,16 +134,16 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-xs-6 col-sm-12 col-md-6">
-                        <div class="col-xs-6 col-sm-12 col-md-6">
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="col-xs-12 col-sm-12 col-md-6">
                             <input type="radio" name="another_shipment" value="ship" class=""/> Ship to a different address
                         </div>
                     </div>
 
-                    <div class="col-xs-6 col-sm-12 col-md-3">
+                    <div class="col-xs-6 col-sm-6 col-md-3 text-center-xs">
                         <a href="{{ route('cart') }}"><button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 130px;line-height: 0px; border: 1px solid #282828;">BACK TO CART</button></a>
                     </div>
-                    <div class="col-xs-6 col-sm-12 col-md-3" style="text-align: right;">
+                    <div class="col-xs-6 col-sm-6 col-md-3 text-center-xs" style="text-align: right;">
                         <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">CONTINUE</button>
                     </div>
                 </div>
