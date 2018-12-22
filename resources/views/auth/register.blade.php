@@ -4,7 +4,7 @@
     <section class="bg-white">
         <div class="container">
             <div class="row">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('register') }}">
                     @csrf
 
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -21,24 +21,8 @@
                                 </span>
                             @endforeach
                         </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="FIRST NAME" required/>
-                            @if ($errors->has('first_name'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('first_name') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="LAST NAME" required/>
-                            @if ($errors->has('last_name'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('last_name') }}</strong>
-                                </span>
-                            @endif
-                        </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
@@ -47,7 +31,7 @@
                             @endif
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <input type="text" class="form-control" name="phone" id="phone" placeholder="PHONE NUMBER" required/>
                             @if ($errors->has('phone'))
                                 <span class="invalid-feedback" role="alert">
@@ -57,30 +41,39 @@
                         </div>
 
                         <div class="col-md-12">
-                            <select name="country" id="country" class="form-control">
-                                <option value="-1">COUNTRY/REGION</option>
-                                @foreach($countries as $country)
-                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                @endforeach
-                            </select>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="PASSWORD" required/>
+                            @if ($errors->has('password'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="col-md-12">
-                            <select name="province" id="province" class="form-control">
-                                <option value="-1">PROVINCE</option>
-                                @foreach($provinces as $province)
-                                    <option value="{{ $province->id }}">{{ $province->name }}</option>
-                                @endforeach
-                            </select>
+                            <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="PASSWORD CONFIRMATION" required/>
+                            @if ($errors->has('password_confirmation'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="col-md-12">
-                            <select name="city" id="city" class="form-control">
-                                <option value="-1">CITY</option>
-                                @foreach($cities as $city)
-                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="FIRST NAME" required/>
+                            @if ($errors->has('first_name'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('first_name') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="LAST NAME" required/>
+                            @if ($errors->has('last_name'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('last_name') }}</strong>
+                                </span>
+                            @endif
                         </div>
 
                         <div class="col-md-12">

@@ -27,6 +27,8 @@ Route::get('/product-detail/{product}', 'Frontend\ProductController@show')->name
 // cart & transaction
 Route::post('/add-cart', 'Frontend\CartController@addCart')->name('add.cart');
 Route::get('/cart', 'Frontend\CartController@getCart')->name('cart');
+Route::get('/billing-shipment', 'Frontend\BillingController@getBilling')->name('billing');
+Route::get('/checkout', 'Frontend\CheckoutController@getCheckout')->name('checkout');
 
 // miscellaneous
 Route::get('/test-location', 'Frontend\HomeController@getLocation')->name('getLocation');
