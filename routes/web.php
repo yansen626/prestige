@@ -18,6 +18,10 @@
 Auth::routes();
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
+Route::get('/login', 'Auth\LoginController@login')->name('login');
+Route::get('/logout', 'Auth\LoginController@logoutUser')->name('logout');
+
+
 Route::post('/search/', 'Frontend\ProductController@search')->name('search');
 Route::post('/contact-us/', 'Frontend\HomeController@contact')->name('contact');
 Route::post('/newsletter/', 'Frontend\HomeController@newsletter')->name('newsletter');
@@ -35,6 +39,8 @@ Route::get('/checkout', 'Frontend\CheckoutController@getCheckout')->name('checko
 // miscellaneous
 Route::get('/test-location', 'Frontend\HomeController@getLocation')->name('getLocation');
 Route::get('/test-province', 'Frontend\HomeController@getProvince')->name('getProvince');
+Route::get('/set-cookie', 'Frontend\HomeController@setCookie')->name('setCookie');
+Route::get('/get-cookie', 'Frontend\HomeController@getCookie')->name('getCookie');
 
 
 // ADMIN ROUTE

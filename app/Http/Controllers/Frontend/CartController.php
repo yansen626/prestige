@@ -8,6 +8,8 @@ use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -35,26 +37,86 @@ class CartController extends Controller
                 "Font: ".$request->input('custom-font')."<br>".
                 "Color: ".$color[0]."<br>".
                 "Size: ".$size[0]."<br>";
-//            dd($productDB);
-            $cartDB = Cart::where('product_id', $productDB->id)->first();
-            if(!empty($cartDB)){
-                $qty = $cartDB->qty + 1;
-                $cartDB->qty = $qty;
-                $cartDB->updated_at = $dateTimeNow->toDateTimeString();
-                $cartDB->total_price = $qty * $productDB->price;
-                $cartDB->save();
+
+            //add cart to database
+            if (Auth::check())
+            {
+                $cartDB = Cart::where('product_id', $productDB->id)->where('user_id', Auth::user()->id)->first();
+                if(!empty($cartDB)){
+                    $qty = $cartDB->qty + 1;
+                    $cartDB->qty = $qty;
+                    $cartDB->updated_at = $dateTimeNow->toDateTimeString();
+                    $cartDB->total_price = $qty * $productDB->price;
+                    $cartDB->save();
+                }
+                else{
+                    $newCart = Cart::create([
+                        'product_id' => $productDB->id,
+                        'user_id' => Auth::user()->id,
+                        'description' => $description,
+                        'qty' => 1,
+                        'price' => $productDB->price,
+                        'total_price' => $productDB->price,
+                        'created_at'        => $dateTimeNow->toDateTimeString(),
+                        'updated_at'        => $dateTimeNow->toDateTimeString()
+                    ]);
+                }
             }
-            else{
-                $newCart = Cart::create([
-                    'product_id' => $productDB->id,
-                    'description' => $description,
-                    'qty' => 1,
-                    'price' => $productDB->price,
-                    'total_price' => $productDB->price,
-                    'created_at'        => $dateTimeNow->toDateTimeString(),
-                    'updated_at'        => $dateTimeNow->toDateTimeString()
-                ]);
+            //add cart to cookies
+            else
+            {
+                $value = Cookie::get('guest-cart');
+                $user_id = "";
+                $minutes = 1440;
+
+                //if cookie contains cart data
+                if(!empty($cookieValue)){
+                    $newValue = "";
+
+                    //if cookie already consist a product
+                    if(strpos($cookieValue, $productDB->slug) !== false){
+                        $valueArr = explode(";", $cookieValue);
+                        for($i=0;$i<count($valueArr);$i++){
+                            if(strpos($valueArr[$i], '|') !== false){
+                                $valueArr2 = explode("|", $valueArr[$i]);
+
+                                //if product slug = current product
+                                if($valueArr2[0] == $productDB->slug){
+                                    $qty = (double)$valueArr2[2] + 1;
+                                    $price = (double)$valueArr2[3];
+                                    $total_price = $qty * $price;
+                                    $newValue = $newValue.$valueArr2[0]."|".$valueArr2[1]."|".$qty."|".
+                                        $price."|".$total_price."|".$valueArr2[5].";";
+                                }
+                                //else rewrite current data from cookie to new cookie
+                                else{
+                                    $newValue = $newValue.$valueArr2[0]."|".$valueArr2[1]."|".$valueArr2[2]."|".
+                                        $valueArr2[3]."|".$valueArr2[4]."|".$valueArr2[5].";";
+                                }
+                            }
+                            else{
+                                break;
+                            }
+                        }
+                    }
+                    else{
+                        $newValue = $cookieValue;
+                        $description = "asdfdsaf";
+                        //cookie value = product_id|user_id|qty|price|total_price|description
+                        $newValue = $newValue.$productDB->slug."|".$user_id."|1|".$productDB->price."|".$productDB->price."|".$description.";";
+
+                    }
+                    Cookie::queue(Cookie::make('guest-cart', $newValue, $minutes));
+                }
+                //create new cookie store cart datas
+                else{
+                    //cookie value = product_id|user_id|qty|price|total_price|description
+                    $value = $productDB->slug."|".$user_id."|1|".$productDB->price."|".$productDB->price."|".$description.";";
+
+                    Cookie::queue(Cookie::make('guest-cart', $value, $minutes));
+                }
             }
+
             return redirect()->route('cart');
 
         }catch(\Exception $ex){
@@ -65,6 +127,13 @@ class CartController extends Controller
     }
 
     public function getCart(){
+        if (Auth::check())
+        {
+
+        }
+        else{
+
+        }
         return view('frontend.cart');
     }
 }

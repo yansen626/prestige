@@ -10,6 +10,7 @@ use App\Models\Subscribe;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Cookie;
 
 class HomeController extends Controller
 {
@@ -81,5 +82,67 @@ class HomeController extends Controller
         $currency = (array)json_decode($response);
 
         return $currency;
+    }
+
+    public function setCookie(){
+
+        $productDB = Product::find(5);
+        $description = "asdfdsaf";
+        $user_id = "";
+
+        $cookieValue = Cookie::get('guest-cart');
+        $minutes = 1440;
+
+        //if cookie contains cart data
+        if(!empty($cookieValue)){
+            $newValue = "";
+
+            //if cookie already consist a product
+            if(strpos($cookieValue, $productDB->slug) !== false){
+                $valueArr = explode(";", $cookieValue);
+                for($i=0;$i<count($valueArr);$i++){
+                    if(strpos($valueArr[$i], '|') !== false){
+                        $valueArr2 = explode("|", $valueArr[$i]);
+
+                        //if product slug = current product
+                        if($valueArr2[0] == $productDB->slug){
+                            $qty = (double)$valueArr2[2] + 1;
+                            $price = (double)$valueArr2[3];
+                            $total_price = $qty * $price;
+                            $newValue = $newValue.$valueArr2[0]."|".$valueArr2[1]."|".$qty."|".
+                                $price."|".$total_price."|".$valueArr2[5].";";
+                        }
+                        //else rewrite current data from cookie to new cookie
+                        else{
+                            $newValue = $newValue.$valueArr2[0]."|".$valueArr2[1]."|".$valueArr2[2]."|".
+                                $valueArr2[3]."|".$valueArr2[4]."|".$valueArr2[5].";";
+                        }
+                    }
+                    else{
+                        break;
+                    }
+                }
+            }
+            else{
+                $newValue = $cookieValue;
+                $description = "asdfdsaf";
+                //cookie value = product_id|user_id|qty|price|total_price|description
+                $newValue = $newValue.$productDB->slug."|".$user_id."|1|".$productDB->price."|".$productDB->price."|".$description.";";
+
+            }
+            Cookie::queue(Cookie::make('guest-cart', $newValue, $minutes));
+        }
+        //create new cookie store cart datas
+        else{
+            //cookie value = product_id|user_id|qty|price|total_price|description
+            $value = $productDB->slug."|".$user_id."|1|".$productDB->price."|".$productDB->price."|".$description.";";
+
+            Cookie::queue(Cookie::make('guest-cart', $value, $minutes));
+        }
+        return redirect()->route('getCookie');
+    }
+    public function getCookie(){
+        $cookieValue = Cookie::get('guest-cart');
+        return $cookieValue;
     }
 }

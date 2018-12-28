@@ -164,6 +164,11 @@
                         <a href="{{route('cart')}}"  class="menu-item">CART</a>
                         <!-- .mega-dropdown-menu end -->
                     </li>
+                    <!-- Home Menu -->
+                    <li>
+                        <a href="{{route('login')}}"  class="menu-item">LOGIN</a>
+                        <!-- .mega-dropdown-menu end -->
+                    </li>
                 </ul>
             </div>
             <!-- .navbar-collapse -->
