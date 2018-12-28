@@ -24,7 +24,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($carts != null && $flag == 1)
+                                @if($carts != null && ($flag == 1 || $flag == 2))
                                     @foreach($carts as $cart)
                                         <tr class="cart-product">
                                             <td class="cart-product-item">
@@ -35,37 +35,37 @@
                                             <td class="cart-product-quantity">
                                                 <div class="product-quantity">
                                                     <a href="#"><i class="fa fa-minus"></i></a>
-                                                    <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart[0] }}" name="qty" readonly>
+                                                    <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart->id }}" name="qty" readonly>
                                                     <a href="#"><i class="fa fa-plus"></i></a>
                                                 </div>
                                             </td>
-                                            <td class="cart-product-item">{{ $cart->description }}</td>
+                                            <td class="cart-product-item">{!! $cart->description  !!} </td>
                                             <td class="cart-product-total">{{ $cart->total_price }}</td>
                                             <td><i class="fa fa-close"></i></td>
                                         </tr>
                                     @endforeach
-                                @elseif($carts != null && $flag == 2)
-                                    @foreach($carts as $cart)
-                                        @if($cart[0] != '' && $cart[0] != null)
-                                        <tr class="cart-product">
-                                            <td class="cart-product-item">
-                                                <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
-                                            </td>
-                                            <td class="cart-product-item">{{ $cart[0] }}</td>
-                                            <td class="cart-product-item">-</td>
-                                            <td class="cart-product-quantity">
-                                                <div class="product-quantity">
-                                                    <a href="#"><i class="fa fa-minus" onclick="updateQty('{{ $cart[0] }}', 'min')"></i></a>
-                                                    <input type="text" value="{{ $cart[2] }}" id="qty{{ $cart[0] }}" name="qty" readonly>
-                                                    <a href="#"><i class="fa fa-plus" onclick="updateQty('{{ $cart[0] }}', 'plus')"></i></a>
-                                                </div>
-                                            </td>
-                                            <td class="cart-product-item">{!! $cart[5] !!}</td>
-                                            <td class="cart-product-total" id="total_price{{ $cart[0] }}">{{ $cart[4] }}</td>
-                                            <td><i class="fa fa-close"></i><input type="hidden" value="{{ $cart[3] }}" id="price{{ $cart[0] }}"></td>
-                                        </tr>
-                                        @endif
-                                    @endforeach
+                                {{--@elseif($carts != null && $flag == 2)--}}
+                                    {{--@foreach($carts as $cart)--}}
+                                        {{--@if($cart[0] != '' && $cart[0] != null)--}}
+                                        {{--<tr class="cart-product">--}}
+                                            {{--<td class="cart-product-item">--}}
+                                                {{--<img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>--}}
+                                            {{--</td>--}}
+                                            {{--<td class="cart-product-item">{{ $cart[0] }}</td>--}}
+                                            {{--<td class="cart-product-item">-</td>--}}
+                                            {{--<td class="cart-product-quantity">--}}
+                                                {{--<div class="product-quantity">--}}
+                                                    {{--<a href="#"><i class="fa fa-minus" onclick="updateQty('{{ $cart[0] }}', 'min')"></i></a>--}}
+                                                    {{--<input type="text" value="{{ $cart[2] }}" id="qty{{ $cart[0] }}" name="qty" readonly>--}}
+                                                    {{--<a href="#"><i class="fa fa-plus" onclick="updateQty('{{ $cart[0] }}', 'plus')"></i></a>--}}
+                                                {{--</div>--}}
+                                            {{--</td>--}}
+                                            {{--<td class="cart-product-item">{!! $cart[5] !!}</td>--}}
+                                            {{--<td class="cart-product-total" id="total_price{{ $cart[0] }}">{{ $cart[4] }}</td>--}}
+                                            {{--<td><i class="fa fa-close"></i><input type="hidden" value="{{ $cart[3] }}" id="price{{ $cart[0] }}"></td>--}}
+                                        {{--</tr>--}}
+                                        {{--@endif--}}
+                                    {{--@endforeach--}}
                                 @else
                                     <tr class="cart-product">
                                         <td colspan="6">Sorry You haven't put anything in the cart yet!</td>
