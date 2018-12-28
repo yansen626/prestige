@@ -24,6 +24,52 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if($carts != null && $flag == 1)
+                                    @foreach($carts as $cart)
+                                        <tr class="cart-product">
+                                            <td class="cart-product-item">
+                                                <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
+                                            </td>
+                                            <td class="cart-product-item">{{ $cart->product->name }}</td>
+                                            <td class="cart-product-item">{{ $cart->product->colour }}</td>
+                                            <td class="cart-product-quantity">
+                                                <div class="product-quantity">
+                                                    <a href="#"><i class="fa fa-minus"></i></a>
+                                                    <input type="text" value="{{ $cart->qty }}" id="pro1-qunt" readonly>
+                                                    <a href="#"><i class="fa fa-plus"></i></a>
+                                                </div>
+                                            </td>
+                                            <td class="cart-product-item">{{ $cart->description }}</td>
+                                            <td class="cart-product-total">{{ $cart->total_price }}</td>
+                                            <td><i class="fa fa-close"></i></td>
+                                        </tr>
+                                    @endforeach
+                                @elseif($carts != null && $flag == 2)
+                                    @foreach($carts as $cart)
+                                        <tr class="cart-product">
+                                            <td class="cart-product-item">
+                                                <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
+                                            </td>
+                                            <td class="cart-product-item">{{ $cart->slug }}</td>
+                                            <td class="cart-product-item">-</td>
+                                            <td class="cart-product-quantity">
+                                                <div class="product-quantity">
+                                                    <a href="#"><i class="fa fa-minus"></i></a>
+                                                    <input type="text" value="{{ $cart->qty }}" id="pro1-qunt" readonly>
+                                                    <a href="#"><i class="fa fa-plus"></i></a>
+                                                </div>
+                                            </td>
+                                            <td class="cart-product-item">{{ $cart->description }}</td>
+                                            <td class="cart-product-total">{{ $cart->total_price }}</td>
+                                            <td><i class="fa fa-close"></i></td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr class="cart-product">
+                                        <td colspan="6">Sorry You haven't put anything in the cart yet!</td>
+                                    </tr>
+                                @endif
+
                                 <tr class="cart-product">
                                     <td class="cart-product-item">
                                         <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>

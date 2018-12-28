@@ -129,11 +129,28 @@ class CartController extends Controller
     public function getCart(){
         if (Auth::check())
         {
-
+            //Read DB
+            $user = Auth::user();
+            $carts = Cart::where('user_id', $user->id)->get();
+            $flag = 1;
+        }
+        else if(Cookie::get('guest-cart') != null){
+            //Get from Cookie
+            $carts = [];
+            $temporary = Cookie::get('guest-cart');
+            $valArr1 = explode(';', $temporary);
+            for($i=0;$i<count($valArr1);$i++){
+                $valArr2 = explode("|", $valArr1[$i]);
+                array_push($carts, $valArr2);
+            }
+            $flag = 2;
+            dd($temporary);
         }
         else{
-
+            $carts = null;
+            $flag = 0;
         }
-        return view('frontend.cart');
+
+        return view('frontend.cart', compact('carts', 'flag'));
     }
 }

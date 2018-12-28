@@ -19,6 +19,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $sku
  * @property string $tag
  * @property string $description
+ * @property string $colour
  * @property int $status
  * @property int $in_stock
  * @property int $track_stock
@@ -86,7 +87,8 @@ class Product extends Eloquent
 		'height',
 		'length',
 		'meta_title',
-		'meta_description'
+		'meta_description',
+        'colour'
 	];
 
 	public function attributes()

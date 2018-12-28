@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Province;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class BillingController extends Controller
 {
@@ -18,4 +19,7 @@ class BillingController extends Controller
 
         return view('frontend.billing-shipment', compact('countries', 'provinces', 'cities'));
     }
+
+
+
 }
