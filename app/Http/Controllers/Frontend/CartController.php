@@ -65,7 +65,7 @@ class CartController extends Controller
             //add cart to cookies
             else
             {
-                $value = Cookie::get('guest-cart');
+                $cookieValue = Cookie::get('guest-cart');
                 $user_id = "";
                 $minutes = 1440;
 
