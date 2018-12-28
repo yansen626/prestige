@@ -7,6 +7,7 @@ use App\Models\Cart;
 use App\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Auth;
@@ -14,18 +15,6 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     public function addCart(Request $request){
-//        $validator = Validator::make($request->all(),[
-//            'start_date'        => 'required',
-//            'end_date'          => 'required',
-//            'description'       => 'required|max:300'
-//        ]);
-//
-//        if ($validator->fails()) {
-//            return redirect()
-//                ->back()
-//                ->withErrors($validator)
-//                ->withInput($request->all());
-//        }
         try{
             $productDB = Product::where('slug', $request->input('slug'))->first();
             $dateTimeNow = Carbon::now('Asia/Jakarta');
@@ -62,116 +51,24 @@ class CartController extends Controller
                     ]);
                 }
             }
-            //add cart to cookies
+            //add cart to Session
             else
             {
-                //Add to cookie
-                if(Cookie::get('guest-cart') != null){
-                    $value = Cookie::get('guest-cart');
+                $oldCart = Session::has('cart') ? Session::get('cart') : null;
+                $cart = new \App\Cart($oldCart);
+                $tmpCart = new Cart([
+                    'product_id' => $productDB->id,
+                    'description' => $description,
+                    'qty' => 1,
+                    'price' => $productDB->price,
+                    'total_price' => $productDB->price,
+                    'created_at'        => $dateTimeNow->toDateTimeString(),
+                    'updated_at'        => $dateTimeNow->toDateTimeString()
+                ]);
 
-                    if(strpos($value, '#') !== false) {
-                        $valueArr2 = explode("#", $value);
-                        $flag=true;
-                        for($i=0;$i<count($valueArr2);$i++){
-                            $cartDB = Cart::find($valueArr2[$i]);
-                            if(!empty($cartDB)){
-                                if($cartDB->product_id == $productDB->id){;
-                                    $qty = $cartDB->qty + 1;
-                                    $price = $cartDB->price;
-                                    $total_price = $qty * $price;
+                $cart->add($tmpCart, $productDB->id);
 
-                                    $cartDB->qty = $qty;
-                                    $cartDB->total_price = $total_price;
-                                    $cartDB->save();
-                                    $flag=false;
-                                }
-                            }
-                        }
-                        if($flag){
-                            $newCart = Cart::create([
-                                'product_id' => $productDB->id,
-                                'description' => $description,
-                                'qty' => 1,
-                                'price' => $productDB->price,
-                                'total_price' => $productDB->price,
-                                'created_at'        => $dateTimeNow->toDateTimeString(),
-                                'updated_at'        => $dateTimeNow->toDateTimeString()
-                            ]);
-
-                            $value .= '#' . $newCart->id;
-                            $minutes = 1440;
-                            $name = 'guest-cart';
-                            Cookie::queue($name, $value, $minutes);
-                        }
-                    }
-                }
-                else{
-                    $newCart = Cart::create([
-                        'product_id' => $productDB->id,
-                        'description' => $description,
-                        'qty' => 1,
-                        'price' => $productDB->price,
-                        'total_price' => $productDB->price,
-                        'created_at'        => $dateTimeNow->toDateTimeString(),
-                        'updated_at'        => $dateTimeNow->toDateTimeString()
-                    ]);
-
-                    $minutes = 1440;
-                    $name = 'guest-cart';
-                    Cookie::queue($name, $newCart->id, $minutes);
-                }
-
-//
-//                $cookieValue = Cookie::get('guest-cart');
-//                $user_id = "";
-//                $minutes = 1440;
-//
-//                //if cookie contains cart data
-//                if(!empty($cookieValue)){
-//                    $newValue = "";
-//
-//                    //if cookie already consist a product
-//                    if(strpos($cookieValue, $productDB->slug) !== false){
-//                        $valueArr = explode(";", $cookieValue);
-//                        for($i=0;$i<count($valueArr);$i++){
-//                            if(strpos($valueArr[$i], '|') !== false){
-//                                $valueArr2 = explode("|", $valueArr[$i]);
-//
-//                                //if product slug = current product
-//                                if($valueArr2[0] == $productDB->slug){
-//                                    $qty = (double)$valueArr2[2] + 1;
-//                                    $price = (double)$valueArr2[3];
-//                                    $total_price = $qty * $price;
-//                                    $newValue = $newValue.$valueArr2[0]."|".$valueArr2[1]."|".$qty."|".
-//                                        $price."|".$total_price."|".$valueArr2[5].";";
-//                                }
-//                                //else rewrite current data from cookie to new cookie
-//                                else{
-//                                    $newValue = $newValue.$valueArr2[0]."|".$valueArr2[1]."|".$valueArr2[2]."|".
-//                                        $valueArr2[3]."|".$valueArr2[4]."|".$valueArr2[5].";";
-//                                }
-//                            }
-//                            else{
-//                                break;
-//                            }
-//                        }
-//                    }
-//                    else{
-//                        $newValue = $cookieValue;
-//                        $description = "asdfdsaf";
-//                        //cookie value = product_id|user_id|qty|price|total_price|description
-//                        $newValue = $newValue.$productDB->slug."|".$user_id."|1|".$productDB->price."|".$productDB->price."|".$description.";";
-//
-//                    }
-//                    Cookie::queue(Cookie::make('guest-cart', $newValue, $minutes));
-//                }
-//                //create new cookie store cart datas
-//                else{
-//                    //cookie value = product_id|user_id|qty|price|total_price|description
-//                    $value = $productDB->slug."|".$user_id."|1|".$productDB->price."|".$productDB->price."|".$description.";";
-//
-//                    Cookie::queue(Cookie::make('guest-cart', $value, $minutes));
-//                }
+                $request->session()->put('cart', $cart);
             }
 
             return redirect()->route('cart');
@@ -190,33 +87,55 @@ class CartController extends Controller
             $user = Auth::user();
             $carts = Cart::where('user_id', $user->id)->get();
             $flag = 1;
+            $totalPrice = 0;
         }
-        else if(Cookie::get('guest-cart') != null){
-//            dd(Cookie::get('guest-cart'));
-            //Get from Cookie
-            $carts = [];
-            $temporary = Cookie::get('guest-cart');
-            $valArr1 = explode(';', $temporary);
-            for($i=0;$i<count($valArr1);$i++){
-                $valArr2 = explode("#", $valArr1[$i]);
-
-                for($i=0;$i<count($valArr2);$i++){
-                    $cartDB = Cart::find($valArr2[$i]);
-                    array_push($carts, $cartDB);
-                }
-            }
+        else if(Session::has('cart')){
+            $oldCart = Session::get('cart');
+            $cart = new \App\Cart($oldCart);
+            $carts = $cart->items;
+            $totalPrice = $cart->totalPrice;
             $flag = 2;
             //dd($carts);
         }
         else{
             $carts = null;
             $flag = 0;
+            $totalPrice = 0;
         }
-        return view('frontend.cart', compact('carts', 'flag'));
+        //dd($carts);
+        return view('frontend.cart', compact('carts', 'flag', 'totalPrice'));
     }
 
     public function submitCart(Request $request)
     {
+        try{
+            if (Auth::check()){
+                // Update Qty in DB
+                $items = $request->input('id');
+                $qtys = $request->input('qty');
+                foreach ($items as $item){
+                    $cart = Cart::find($item);
+                    $cart->qty = $qtys[$item];
+                    $cart->save();
+                }
+            }
+            else{
+                // Update Session
+                $oldCart = Session::has('cart') ? Session::get('cart') : null;
+                $cart = new \App\Cart($oldCart);
+                $items = $request->input('id');
+                $qtys = $request->input('qty');
+                foreach ($items as $item){
+                    $cart->update($item, $qtys[$item]);
+                }
+                $request->session()->put('cart', $cart);
+            }
+
+            return redirect()->route('billing');
+        }
+        catch (\Exception $exception){
+            dd($exception);
+        }
     }
 
     public function deleteCart(Request $request){
@@ -230,31 +149,14 @@ class CartController extends Controller
                 $cart->delete();
             }
             else{
-//                $cart = Cart::find($request->input('cartId'));
-//                $cart->delete();
-
-                //Delete from Cookie
-                $tmp = Cookie::get('guest-cart');
-                $valArr1 = explode('#', $tmp);
-                $newCookie = '';
-                foreach ($valArr1 as $arr){
-                    if($arr != $request->input('cartId')){
-                        $newCookie .= '#' . $arr;
-                    }
-                }
-
-                if($newCookie == null || $newCookie == ''){
-                    Cookie::forget('guest-cart');
-                    dd($valArr1);
-                }
-                else{
-                    Cookie::queue(Cookie::forget('guest-cart'));
-                    $minutes = 1440;
-                    $name = 'guest-cart';
-                    Cookie::queue($name, $newCookie, $minutes);
-                }
-                dd($tmp);
+                // delete from Session
+                $oldCart = Session::has('cart') ? Session::get('cart') : null;
+                $cart = new \App\Cart($oldCart);
+                $cart->remove($request->input('cartId'));
+                $request->session()->put('cart', $cart);
             }
+
+            return redirect()->route('cart');
         }
         catch (\Exception $exception){
 

@@ -24,18 +24,21 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($carts != null && ($flag == 1 || $flag == 2))
+                                @if($carts != null && $flag == 1)
                                     @foreach($carts as $cart)
                                         <tr class="cart-product">
                                             <td class="cart-product-item">
                                                 <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
                                             </td>
-                                            <td class="cart-product-item">{{ $cart->product->name }}</td>
+                                            <td class="cart-product-item">
+                                                {{ $cart->product->name }}
+                                                <input type="hidden" name="id[]" value="{{ $cart->id }}"/>
+                                            </td>
                                             <td class="cart-product-item">{{ $cart->product->colour }}</td>
                                             <td class="cart-product-quantity">
                                                 <div class="product-quantity">
                                                     <a href="#"><i class="fa fa-minus" onclick="updateQty('{{ $cart->id }}', 'min')"></i></a>
-                                                    <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart->id }}" name="qty" readonly>
+                                                    <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart->id }}" name="qty[{{ $cart->id }}]" readonly>
                                                     <a href="#"><i class="fa fa-plus" onclick="updateQty('{{ $cart->id }}', 'plus')"></i></a>
                                                 </div>
                                             </td>
@@ -47,28 +50,32 @@
                                             </td>
                                         </tr>
                                     @endforeach
-                                {{--@elseif($carts != null && $flag == 2)--}}
-                                    {{--@foreach($carts as $cart)--}}
-                                        {{--@if($cart[0] != '' && $cart[0] != null)--}}
-                                        {{--<tr class="cart-product">--}}
-                                            {{--<td class="cart-product-item">--}}
-                                                {{--<img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>--}}
-                                            {{--</td>--}}
-                                            {{--<td class="cart-product-item">{{ $cart[0] }}</td>--}}
-                                            {{--<td class="cart-product-item">-</td>--}}
-                                            {{--<td class="cart-product-quantity">--}}
-                                                {{--<div class="product-quantity">--}}
-                                                    {{--<a href="#"><i class="fa fa-minus" onclick="updateQty('{{ $cart[0] }}', 'min')"></i></a>--}}
-                                                    {{--<input type="text" value="{{ $cart[2] }}" id="qty{{ $cart[0] }}" name="qty" readonly>--}}
-                                                    {{--<a href="#"><i class="fa fa-plus" onclick="updateQty('{{ $cart[0] }}', 'plus')"></i></a>--}}
-                                                {{--</div>--}}
-                                            {{--</td>--}}
-                                            {{--<td class="cart-product-item">{!! $cart[5] !!}</td>--}}
-                                            {{--<td class="cart-product-total" id="total_price{{ $cart[0] }}">{{ $cart[4] }}</td>--}}
-                                            {{--<td><i class="fa fa-close"></i><input type="hidden" value="{{ $cart[3] }}" id="price{{ $cart[0] }}"></td>--}}
-                                        {{--</tr>--}}
-                                        {{--@endif--}}
-                                    {{--@endforeach--}}
+                                @elseif($carts != null && $flag == 2)
+                                    @foreach($carts as $cart)
+                                        <tr class="cart-product">
+                                            <td class="cart-product-item">
+                                                <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
+                                            </td>
+                                            <td class="cart-product-item">
+                                                {{ $cart['item']['product']['name'] }}
+                                                <input type="hidden" name="id[]" value="{{ $cart['item']['product_id'] }}"/>
+                                            </td>
+                                            <td class="cart-product-item">{{ $cart['item']['product']['colour'] }}</td>
+                                            <td class="cart-product-quantity">
+                                                <div class="product-quantity">
+                                                    <a href="#"><i class="fa fa-minus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'min')"></i></a>
+                                                    <input type="text" value="{{ $cart['qty'] }}" id="qty{{ $cart['item']['product_id'] }}" name="qty[{{ $cart['item']['product_id'] }}]" readonly>
+                                                    <a href="#"><i class="fa fa-plus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'plus')"></i></a>
+                                                </div>
+                                            </td>
+                                            <td class="cart-product-item">{!! $cart['item']['description'] !!}</td>
+                                            <td class="cart-product-total" id="total_price{{ $cart['item']['product_id'] }}">{{ $cart['item']['price'] }}</td>
+                                            <td>
+                                                <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>
+                                                <input type="hidden" value="{{ $cart['item']['price'] }}" id="price{{ $cart['item']['product_id'] }}">
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @else
                                     <tr class="cart-product">
                                         <td colspan="6">Sorry You haven't put anything in the cart yet!</td>
@@ -103,7 +110,7 @@
                             SUBTOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            $160.00 USD
+                            ${{$totalPrice}} USD
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6">
                             SHIPPING
@@ -130,7 +137,7 @@
                             <hr style="height:1px;border:none;color:black;background-color:#333;" />
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6">
-                            <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 130px;line-height: 0px; border: 1px solid #282828;">CONTINUE SHOPPING</button>
+                            <a href="{{ route('home') }}"><button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 130px;line-height: 0px; border: 1px solid #282828;">CONTINUE SHOPPING</button></a>
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
                             <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">PROCEED</button>

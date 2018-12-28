@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="bg-white">
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('submit.billing') }}">
             @csrf
             <div class="container">
                 <div class="row">
@@ -21,7 +21,7 @@
                             @endforeach
                         </div>
 
-                        @if(\Illuminate\Support\Facades\Auth::guard('web')->check())
+                        @if(!\Illuminate\Support\Facades\Auth::guard('web')->check())
                             <div class="col-md-6">
                                 <input type="text" class="form-control" name="first_name" id="first_name" placeholder="FIRST NAME" required/>
                                 @if ($errors->has('first_name'))

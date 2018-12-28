@@ -161,7 +161,9 @@
 
                     <!-- Home Menu -->
                     <li>
-                        <a href="{{route('cart')}}"  class="menu-item">CART</a>
+                        <a href="{{route('cart')}}"  class="menu-item">
+                            CART <span class="badge">{{ \Illuminate\Support\Facades\Session::has('cart') ? \Illuminate\Support\Facades\Session::get('cart')->totalQty : '' }}</span>
+                        </a>
                         <!-- .mega-dropdown-menu end -->
                     </li>
                     <!-- Home Menu -->
