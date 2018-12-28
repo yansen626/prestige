@@ -35,7 +35,7 @@
                                             <td class="cart-product-quantity">
                                                 <div class="product-quantity">
                                                     <a href="#"><i class="fa fa-minus"></i></a>
-                                                    <input type="text" value="{{ $cart->qty }}" id="pro1-qunt" readonly>
+                                                    <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart[0] }}" readonly>
                                                     <a href="#"><i class="fa fa-plus"></i></a>
                                                 </div>
                                             </td>
@@ -46,64 +46,31 @@
                                     @endforeach
                                 @elseif($carts != null && $flag == 2)
                                     @foreach($carts as $cart)
+                                        @if($cart[0] != '' && $cart[0] != null)
                                         <tr class="cart-product">
                                             <td class="cart-product-item">
                                                 <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
                                             </td>
-                                            <td class="cart-product-item">{{ $cart->slug }}</td>
+                                            <td class="cart-product-item">{{ $cart[0] }}</td>
                                             <td class="cart-product-item">-</td>
                                             <td class="cart-product-quantity">
                                                 <div class="product-quantity">
-                                                    <a href="#"><i class="fa fa-minus"></i></a>
-                                                    <input type="text" value="{{ $cart->qty }}" id="pro1-qunt" readonly>
-                                                    <a href="#"><i class="fa fa-plus"></i></a>
+                                                    <a href="#"><i class="fa fa-minus" onclick="updateQty('{{ $cart[0] }}', 'min')"></i></a>
+                                                    <input type="text" value="{{ $cart[2] }}" id="qty{{ $cart[0] }}" readonly>
+                                                    <a href="#"><i class="fa fa-plus" onclick="updateQty('{{ $cart[0] }}', 'plus')"></i></a>
                                                 </div>
                                             </td>
-                                            <td class="cart-product-item">{{ $cart->description }}</td>
-                                            <td class="cart-product-total">{{ $cart->total_price }}</td>
-                                            <td><i class="fa fa-close"></i></td>
+                                            <td class="cart-product-item">{!! $cart[5] !!}</td>
+                                            <td class="cart-product-total" id="total_price{{ $cart[0] }}">{{ $cart[4] }}</td>
+                                            <td><i class="fa fa-close"></i><input type="hidden" value="{{ $cart[3] }}" id="price{{ $cart[0] }}"></td>
                                         </tr>
+                                        @endif
                                     @endforeach
                                 @else
                                     <tr class="cart-product">
                                         <td colspan="6">Sorry You haven't put anything in the cart yet!</td>
                                     </tr>
                                 @endif
-
-                                <tr class="cart-product">
-                                    <td class="cart-product-item">
-                                        <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
-                                    </td>
-                                    <td class="cart-product-item">Brave Soul Crew Neck Military Sweater</td>
-                                    <td class="cart-product-item">Tan</td>
-                                    <td class="cart-product-quantity">
-                                        <div class="product-quantity">
-                                            <a href="#"><i class="fa fa-minus"></i></a>
-                                            <input type="text" value="1" id="pro1-qunt" readonly>
-                                            <a href="#"><i class="fa fa-plus"></i></a>
-                                        </div>
-                                    </td>
-                                    <td class="cart-product-item">6 Letters<br/>San Serof, Silver</td>
-                                    <td class="cart-product-total">$ 10.00</td>
-                                    <td><i class="fa fa-close"></i></td>
-                                </tr>
-                                <tr class="cart-product">
-                                    <td class="cart-product-item">
-                                        <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
-                                    </td>
-                                    <td class="cart-product-item">Large Tote Bag</td>
-                                    <td class="cart-product-item">Tan</td>
-                                    <td class="cart-product-quantity">
-                                        <div class="product-quantity">
-                                            <a href="#"><i class="fa fa-minus"></i></a>
-                                            <input type="text" value="1" id="pro1-qunt" readonly>
-                                            <a href="#"><i class="fa fa-plus"></i></a>
-                                        </div>
-                                    </td>
-                                    <td class="cart-product-item">6 Letters<br/>San Serof, Silver</td>
-                                    <td class="cart-product-total">$ 10.00</td>
-                                    <td><i class="fa fa-close"></i></td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -174,4 +141,32 @@
             </form>
         </div><!-- .container end -->
     </section>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        function updateQty(identifier, state){
+            //if it plus
+            if(state === 'plus'){
+                var qty = 'qty' + identifier;
+                var tmpQty = parseInt($('#' + qty).val());
+                tmpQty++;
+                $('#' + qty).val(tmpQty);
+
+                //Update Price
+                var price = 'price' + identifier;
+                var totalPrice = 'total_price' + identifier;
+                var tmpPrice = parseFloat($('#' + price).val());
+
+            }
+            else if(state === 'min'){
+                var qty = 'qty' + identifier;
+                var tmpQty = parseInt($('#' + qty).val());
+                if(tmpQty != 0){
+                    tmpQty--;
+                    $('#' + qty).val(tmpQty);
+                }
+            }
+        }
+    </script>
 @endsection
