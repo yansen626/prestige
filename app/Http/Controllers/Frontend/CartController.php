@@ -214,4 +214,50 @@ class CartController extends Controller
         }
         return view('frontend.cart', compact('carts', 'flag'));
     }
+
+    public function submitCart(Request $request)
+    {
+    }
+
+    public function deleteCart(Request $request){
+        //dd($request->input('cartId'));
+
+        try{
+            //Delete Cart from DB and Cookie
+            //from DB
+            if (Auth::check()){
+                $cart = Cart::find($request->input('cartId'));
+                $cart->delete();
+            }
+            else{
+//                $cart = Cart::find($request->input('cartId'));
+//                $cart->delete();
+
+                //Delete from Cookie
+                $tmp = Cookie::get('guest-cart');
+                $valArr1 = explode('#', $tmp);
+                $newCookie = '';
+                foreach ($valArr1 as $arr){
+                    if($arr != $request->input('cartId')){
+                        $newCookie .= '#' . $arr;
+                    }
+                }
+
+                if($newCookie == null || $newCookie == ''){
+                    Cookie::forget('guest-cart');
+                    dd($valArr1);
+                }
+                else{
+                    Cookie::queue(Cookie::forget('guest-cart'));
+                    $minutes = 1440;
+                    $name = 'guest-cart';
+                    Cookie::queue($name, $newCookie, $minutes);
+                }
+                dd($tmp);
+            }
+        }
+        catch (\Exception $exception){
+
+        }
+    }
 }

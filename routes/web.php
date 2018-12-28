@@ -33,6 +33,8 @@ Route::get('/product-detail/{product}', 'Frontend\ProductController@show')->name
 // cart & transaction
 Route::post('/add-cart', 'Frontend\CartController@addCart')->name('add.cart');
 Route::get('/cart', 'Frontend\CartController@getCart')->name('cart');
+Route::post('/submit-cart', 'Frontend\CartController@submitCart')->name('submit.cart');
+Route::post('/delete-cart', 'Frontend\CartController@deleteCart')->name('delete.cart');
 Route::get('/billing-shipment', 'Frontend\BillingController@getBilling')->name('billing');
 Route::get('/checkout', 'Frontend\CheckoutController@getCheckout')->name('checkout');
 

@@ -4,7 +4,7 @@
 
     <section id="shopcart" class="shop shop-cart bg-white">
         <div class="container" style="color: black;">
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" action="{{ route('submit.cart') }}">
                 @csrf
 
                 <div class="row">
@@ -34,14 +34,17 @@
                                             <td class="cart-product-item">{{ $cart->product->colour }}</td>
                                             <td class="cart-product-quantity">
                                                 <div class="product-quantity">
-                                                    <a href="#"><i class="fa fa-minus"></i></a>
+                                                    <a href="#"><i class="fa fa-minus" onclick="updateQty('{{ $cart->id }}', 'min')"></i></a>
                                                     <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart->id }}" name="qty" readonly>
-                                                    <a href="#"><i class="fa fa-plus"></i></a>
+                                                    <a href="#"><i class="fa fa-plus" onclick="updateQty('{{ $cart->id }}', 'plus')"></i></a>
                                                 </div>
                                             </td>
                                             <td class="cart-product-item">{!! $cart->description  !!} </td>
-                                            <td class="cart-product-total">{{ $cart->total_price }}</td>
-                                            <td><i class="fa fa-close"></i></td>
+                                            <td class="cart-product-total" id="total_price{{ $cart->id }}">{{ $cart->total_price }}</td>
+                                            <td>
+                                                <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart->id }}" data-target="#myModal"></i>
+                                                <input type="hidden" value="{{ $cart->price }}" id="price{{ $cart->id }}">
+                                            </td>
                                         </tr>
                                     @endforeach
                                 {{--@elseif($carts != null && $flag == 2)--}}
@@ -141,6 +144,30 @@
             </form>
         </div><!-- .container end -->
     </section>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <form method="POST" action="{{ route('delete.cart') }}">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Delete Item</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure want to delete this?</p>
+                        <input type="hidden" id="cartId" name="cartId" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -170,5 +197,13 @@
             var tmpTotalPrice = tmpQty * tmpPrice;
             $('#' + totalPrice).html(tmpTotalPrice);
         }
+
+        $(document).on("click", ".delete", function () {
+            var cartId = $(this).data('id');
+            $(".modal-body #cartId").val( cartId );
+            // As pointed out in comments,
+            // it is superfluous to have to manually call the modal.
+            // $('#addBookDialog').modal('show');
+        });
     </script>
 @endsection
