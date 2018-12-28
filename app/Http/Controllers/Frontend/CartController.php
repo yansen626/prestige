@@ -144,7 +144,7 @@ class CartController extends Controller
                 array_push($carts, $valArr2);
             }
             $flag = 2;
-            dd($carts);
+            //dd($carts);
         }
         else{
             $carts = null;

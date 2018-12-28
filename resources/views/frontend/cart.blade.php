@@ -35,7 +35,7 @@
                                             <td class="cart-product-quantity">
                                                 <div class="product-quantity">
                                                     <a href="#"><i class="fa fa-minus"></i></a>
-                                                    <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart[0] }}" readonly>
+                                                    <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart[0] }}" name="qty" readonly>
                                                     <a href="#"><i class="fa fa-plus"></i></a>
                                                 </div>
                                             </td>
@@ -56,7 +56,7 @@
                                             <td class="cart-product-quantity">
                                                 <div class="product-quantity">
                                                     <a href="#"><i class="fa fa-minus" onclick="updateQty('{{ $cart[0] }}', 'min')"></i></a>
-                                                    <input type="text" value="{{ $cart[2] }}" id="qty{{ $cart[0] }}" readonly>
+                                                    <input type="text" value="{{ $cart[2] }}" id="qty{{ $cart[0] }}" name="qty" readonly>
                                                     <a href="#"><i class="fa fa-plus" onclick="updateQty('{{ $cart[0] }}', 'plus')"></i></a>
                                                 </div>
                                             </td>
@@ -147,26 +147,28 @@
     <script type="text/javascript">
         function updateQty(identifier, state){
             //if it plus
+            var tmpQty;
             if(state === 'plus'){
                 var qty = 'qty' + identifier;
-                var tmpQty = parseInt($('#' + qty).val());
+                tmpQty = parseInt($('#' + qty).val());
                 tmpQty++;
                 $('#' + qty).val(tmpQty);
-
-                //Update Price
-                var price = 'price' + identifier;
-                var totalPrice = 'total_price' + identifier;
-                var tmpPrice = parseFloat($('#' + price).val());
-
             }
             else if(state === 'min'){
                 var qty = 'qty' + identifier;
-                var tmpQty = parseInt($('#' + qty).val());
+                tmpQty = parseInt($('#' + qty).val());
                 if(tmpQty != 0){
                     tmpQty--;
                     $('#' + qty).val(tmpQty);
                 }
             }
+
+            //Update Price
+            var price = 'price' + identifier;
+            var totalPrice = 'total_price' + identifier;
+            var tmpPrice = parseFloat($('#' + price).val());
+            var tmpTotalPrice = tmpQty * tmpPrice;
+            $('#' + totalPrice).html(tmpTotalPrice);
         }
     </script>
 @endsection
