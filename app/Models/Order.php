@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 06 Dec 2018 06:52:28 +0000.
+ * Date: Sat, 29 Dec 2018 03:05:03 +0000.
  */
 
 namespace App\Models;
@@ -25,7 +25,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $track_code
  * 
  * @property \App\Models\Address $address
- * @property \App\Models\AvoredOrderStatus $avored_order_status
+ * @property \App\Models\OrderStatus $order_status
  * @property \App\Models\User $user
  * @property \Illuminate\Database\Eloquent\Collection $order_histories
  * @property \Illuminate\Database\Eloquent\Collection $products
@@ -58,9 +58,9 @@ class Order extends Eloquent
 		return $this->belongsTo(\App\Models\Address::class, 'shipping_address_id');
 	}
 
-	public function avored_order_status()
+	public function order_status()
 	{
-		return $this->belongsTo(\App\Models\AvoredOrderStatus::class, 'order_status_id');
+		return $this->belongsTo(\App\Models\OrderStatus::class);
 	}
 
 	public function user()

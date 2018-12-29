@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 06 Dec 2018 06:52:28 +0000.
+ * Date: Sat, 29 Dec 2018 02:57:20 +0000.
  */
 
 namespace App\Models;
@@ -10,7 +10,7 @@ namespace App\Models;
 use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
- * Class AvoredOrderStatus
+ * Class OrderStatus
  * 
  * @property int $id
  * @property string $name
@@ -23,7 +23,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  *
  * @package App\Models
  */
-class AvoredOrderStatus extends Eloquent
+class OrderStatus extends Eloquent
 {
 	protected $casts = [
 		'is_default' => 'int'
@@ -36,11 +36,11 @@ class AvoredOrderStatus extends Eloquent
 
 	public function order_histories()
 	{
-		return $this->hasMany(\App\Models\OrderHistory::class, 'order_status_id');
+		return $this->hasMany(\App\Models\OrderHistory::class);
 	}
 
 	public function orders()
 	{
-		return $this->hasMany(\App\Models\Order::class, 'order_status_id');
+		return $this->hasMany(\App\Models\Order::class);
 	}
 }

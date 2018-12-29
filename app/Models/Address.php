@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 11 Dec 2018 08:39:37 +0000.
+ * Date: Sat, 29 Dec 2018 02:56:43 +0000.
  */
 
 namespace App\Models;
@@ -25,16 +25,15 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $name
  * 
  * @property \App\Models\User $user
+ * @property \Illuminate\Database\Eloquent\Collection $orders
  *
  * @package App\Models
  */
 class Address extends Eloquent
 {
-	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'id' => 'int',
 		'user_id' => 'int',
 		'primary' => 'int',
 		'province' => 'int',
@@ -68,5 +67,10 @@ class Address extends Eloquent
 	public function user()
 	{
 		return $this->belongsTo(\App\Models\User::class);
+	}
+
+	public function orders()
+	{
+		return $this->hasMany(\App\Models\Order::class, 'shipping_address_id');
 	}
 }
