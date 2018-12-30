@@ -21,115 +21,161 @@
                             @endforeach
                         </div>
 
-                        @if(!\Illuminate\Support\Facades\Auth::guard('web')->check())
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="FIRST NAME" required/>
-                                @if ($errors->has('first_name'))
-                                    <span class="invalid-feedback" role="alert">
+                        @if(!\Illuminate\Support\Facades\Auth::guard('web')->check() && $address == null)
+                            <div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="FIRST NAME" required/>
+                                    @if ($errors->has('first_name'))
+                                        <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('first_name') }}</strong>
                                 </span>
-                                @endif
-                            </div>
+                                    @endif
+                                </div>
 
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="LAST NAME" required/>
-                                @if ($errors->has('last_name'))
-                                    <span class="invalid-feedback" role="alert">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="LAST NAME" required/>
+                                    @if ($errors->has('last_name'))
+                                        <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('last_name') }}</strong>
                                 </span>
-                                @endif
-                            </div>
+                                    @endif
+                                </div>
 
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback" role="alert">
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
+                                    @if ($errors->has('email'))
+                                        <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('email') }}</strong>
                                 </span>
-                                @endif
-                            </div>
+                                    @endif
+                                </div>
 
-                            <div class="col-md-6">
-                                <input type="text" class="form-control" name="phone" id="phone" placeholder="PHONE NUMBER" required/>
-                                @if ($errors->has('phone'))
-                                    <span class="invalid-feedback" role="alert">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="PHONE NUMBER" required/>
+                                    @if ($errors->has('phone'))
+                                        <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('phone') }}</strong>
                                 </span>
-                                @endif
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
+                        {{-- guset or user don't have address --}}
+                        @if($flag==0)
+                            <div>
+                                <div class="col-md-12">
+                                    <select name="country" id="country" class="form-control">
+                                        <option value="-1" selected>COUNTRY/REGION</option>
+                                        @foreach($countries as $country)
+                                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <select name="province" id="province" class="form-control">
+                                        <option value="-1" selected>PROVINCE</option>
+                                        @foreach($provinces as $province)
+                                            <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <select name="city" id="city" class="form-control">
+                                        <option value="-1" selected>CITY</option>
+                                        @foreach($cities as $city)
+                                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="address_detail" id="address_detail" placeholder="HOUSE/APARTMENT/UNIT NUMBER" required/>
+                                    @if ($errors->has('address_detail'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('address_detail') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="street" id="street" placeholder="STREET" required/>
+                                    @if ($errors->has('street'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('street') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" name="suburb" id="suburb" placeholder="SUBURB" required/>
+                                    @if ($errors->has('suburb'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('suburb') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="post_code" id="post_code" placeholder="POST CODE" required/>
+                                    @if ($errors->has('post_code'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('post_code') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="state" id="state" placeholder="STATE" required/>
+                                    @if ($errors->has('state'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('state') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+                            </div>
+                        {{-- guset or user already have address --}}
+                        @else
+                            <div>
+                                <div class="col-md-12">
+                                    <h4>Country : {{$address->country->name}}</h4>
+                                    <input type="hidden" name="country" value="{{$address->country_id}}">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <h4>Province : {{$address->province->name}}</h4>
+                                    <input type="hidden" name="province" value="{{$address->province_id}}">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <h4>City : {{$address->city->name}}</h4>
+                                    <input type="hidden" name="city" value="{{$address->city_id}}">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <h4>{{$address->description}}, {{$address->street}}</h4>
+                                    <input type="hidden" name="address_detail" value="{{$address->description}}">
+                                    <input type="hidden" name="street" value="{{$address->street}}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h4>Suburb : {{$address->suburb}}</h4>
+                                    <input type="hidden" name="suburb" value="{{$address->suburb}}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h4>Post Code : {{$address->postal_code}}</h4>
+                                    <input type="hidden" name="post_code" value="{{$address->postal_code}}">
+                                </div>
+
+                                <div class="col-md-6">
+                                    <h4>State : {{$address->state}}</h4>
+                                    <input type="hidden" name="state" value="{{$address->state}}">
+                                </div>
                             </div>
                         @endif
 
-                        <div class="col-md-12">
-                            <select name="country" id="country" class="form-control">
-                                <option value="-1" selected>COUNTRY/REGION</option>
-                                @foreach($countries as $country)
-                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-md-12">
-                            <select name="province" id="province" class="form-control">
-                                <option value="-1" selected>PROVINCE</option>
-                                @foreach($provinces as $province)
-                                    <option value="{{ $province->id }}">{{ $province->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-md-12">
-                            <select name="city" id="city" class="form-control">
-                                <option value="-1" selected>CITY</option>
-                                @foreach($cities as $city)
-                                    <option value="{{ $city->id }}">{{ $city->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="address_detail" id="address_detail" placeholder="HOUSE/APARTMENT/UNIT NUMBER" required/>
-                            @if ($errors->has('address_detail'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('address_detail') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="street" id="street" placeholder="STREET" required/>
-                            @if ($errors->has('street'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('street') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="suburb" id="suburb" placeholder="SUBURB" required/>
-                            @if ($errors->has('suburb'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('suburb') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="post_code" id="post_code" placeholder="POST CODE" required/>
-                            @if ($errors->has('post_code'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('post_code') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="state" id="state" placeholder="STATE" required/>
-                            @if ($errors->has('state'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('state') }}</strong>
-                                </span>
-                            @endif
-                        </div>
                     </div>
                 </div>
 

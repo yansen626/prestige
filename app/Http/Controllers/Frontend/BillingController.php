@@ -21,53 +21,108 @@ class BillingController extends Controller
     public function getBilling()
     {
         // Have to Check to if User already Login
+        $flag=0;
+        $address = null;
+        if (Auth::check())
+        {
+            //Read DB
+            $user = Auth::user();
+            $flag=1;
+        }
+        else if(Session::has('cart')){
+            //guest has address
+            if(Session::has('user')){
+                $user = Session::get('user');
+                $flag = 2;
+            }
+        }
+        if($flag != 0){
+            $addressDB = Address::where('user_id', $user->id)->get();
+            if(!empty($addressDB)){
+                $address = Address::where('user_id', $user->id)->where('primary', 1)->first();
+            }
+        }
+
         $countries = Country::all();
         $provinces = Province::all();
         $cities = City::all();
 
-        return view('frontend.billing-shipment', compact('countries', 'provinces', 'cities'));
+        $data=([
+            'flag' => $flag,
+            'address' => $address,
+            'countries' => $countries,
+            'provinces' => $provinces,
+            'cities' => $cities,
+        ]);
+
+        return view('frontend.billing-shipment')->with($data);
     }
 
     public function submitBilling(Request $request)
     {
+        // Get Data from Session or DB and then Continue
+        // Create Transaction
+        // Check Delivery Fee from Rajaongkir or DHL
+        // Clear Session
         try{
-            // Get Data from Session or DB and then Continue
-            // Create Transaction
-            // Check Delivery Fee from Rajaongkir or DHL
-            // Clear Session
+            $user = null;
+            // Get Data from Session
             if(!Auth::check()){
-                if(!Session::has('cart')) {
-                    // Validation for Users
-                    $validator = Validator::make($request->all(), [
-                        'first_name'        => 'required|max:100',
-                        'last_name'         => 'required|max:100',
-                        'email'             => 'required|regex:/^\S*$/u|unique:users|max:50',
-                        'role_id'           => 'required'
-                    ],[
-                        'email.unique'      => 'ID Login Akses telah terdaftar!',
-                        'email.regex'       => 'ID Login Akses harus tanpa spasi!'
-                    ]);
+                if(Session::has('cart')) {
 
-                    if ($validator->fails()) return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+                    //checking if guest already have account from session
+                    //dd(!Session::has('user'));
+                    if(!Session::has('user')) {
+                        // Validation for Users
+                        $validator = Validator::make($request->all(), [
+                            'first_name'        => 'required|max:100',
+                            'last_name'         => 'required|max:100',
+                            'email'             => 'required|regex:/^\S*$/u|unique:users|max:50',
+//                        'role_id'           => 'required'
+                        ],[
+                            'email.unique'      => 'ID Login Akses telah terdaftar!',
+                            'email.regex'       => 'ID Login Akses harus tanpa spasi!'
+                        ]);
+                        if ($validator->fails()) return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
-                    // Create User with Guest Status
-                    $user = User::create([
-                        'first_name' => $request->input('first_name'),
-                        'last_name' => $request->input('first_name'),
-                        'email' => $request->input('first_name'),
-                        'phone' => $request->input('first_name'),
-                        'email_token' => base64_encode($request->input('email')),
-                        'status_id' => 3
-                    ]);
+                        // Create User with Guest Status
+                        $user = User::create([
+                            'first_name' => $request->input('first_name'),
+                            'last_name' => $request->input('last_name'),
+                            'email' => $request->input('email'),
+                            'phone' => $request->input('phone'),
+                            'email_token' => base64_encode($request->input('email')),
+                            'status_id' => 3
+                        ]);
+                    }
+                    else{
+                        $user = Session::get('user');
+                    }
 
-                    // Create Address
-                    $userAddress = Address::create([
-                        'user_id' => $user->id,
-                        'primary' => 1,
-                        'province' => $request->input('province'),
-                        'city' => $request->input('city'),
-                        'postal_code' => $request->input('post_code')
-                    ]);
+//                    if($request->input('another_shipment') == true){
+//
+//                    }
+//                    else{
+//                    }
+
+                    //checking if guest already have address
+                    $addressDB = Address::where('user_id', $user->id)->get();
+                    if(count($addressDB) != 0){
+                        $userAddress = Address::where('user_id', $user->id)->where('primary', 1)->first();
+                    }
+                    else{
+                        $description = $request->input('address_detail').", ".$request->input('street');
+                        // Create Address
+                        $userAddress = Address::create([
+                            'user_id' => $user->id,
+                            'primary' => 1,
+                            'description' => $description,
+                            'province' => $request->input('province'),
+                            'city' => $request->input('city'),
+                            'postal_code' => $request->input('post_code')
+                        ]);
+                    }
+                    //dd($userAddress->city_id);
 
                     // Save to DB Table Cart
                     $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -86,7 +141,6 @@ class BillingController extends Controller
                             'updated_at' => Carbon::now('Asia/Jakarta')
                         ]);
                     }
-
                     // Add Transaction
                     $client = new \GuzzleHttp\Client();
                     $response = $client->request('POST', 'https://api.rajaongkir.com/starter/cost', [
@@ -102,13 +156,54 @@ class BillingController extends Controller
                     ]);
                     $response = $response->getBody()->getContents();
                     $data = (array)json_decode($response);
-                    dd($data);
+//                    dd($data);
                     // Session for Cart deleted
                     // Session for user Created to be used later for payment at Checkout
                     // and Shipment for Rajaongkir or DHL
                     Session::forget('cart');
-                    $request->session()->put('user', $user);
+                    if(!Session::has('user')) {
+                        $request->session()->put('user', $user);
+                    }
                 }
+            }
+
+            // Get Data from DB
+            else{
+                $user = Auth::user();
+
+                //checking if user already have address
+                $addressDB = Address::where('user_id', $user->id)->get();
+                if(count($addressDB) != 0){
+                    $userAddress = Address::where('user_id', $user->id)->where('primary', 1)->first();
+                }
+                else{
+                    $description = $request->input('address_detail').", ".$request->input('street');
+                    // Create Address
+                    $userAddress = Address::create([
+                        'user_id' => $user->id,
+                        'primary' => 1,
+                        'description' => $description,
+                        'province' => $request->input('province'),
+                        'city' => $request->input('city'),
+                        'postal_code' => $request->input('post_code')
+                    ]);
+                }
+
+                // Add Transaction
+                $client = new \GuzzleHttp\Client();
+                $response = $client->request('POST', 'https://api.rajaongkir.com/starter/cost', [
+                    'headers' => [
+                        'key' => '49c2d8cab7d32fa5222c6355a07834d4'
+                    ],
+                    'form_params' => [
+                        'origin' => 152,
+                        'destination' => $userAddress->city,
+                        'weight' => 1000,
+                        'courier' => 'jne'
+                    ]
+                ]);
+                $response = $response->getBody()->getContents();
+                $data = (array)json_decode($response);
             }
             // Redirect to Checkout
             return redirect()->route('checkout');

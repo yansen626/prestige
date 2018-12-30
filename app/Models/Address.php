@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 29 Dec 2018 02:56:43 +0000.
+ * Date: Sun, 30 Dec 2018 08:10:31 +0000.
  */
 
 namespace App\Models;
@@ -16,14 +16,21 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $user_id
  * @property string $description
  * @property int $primary
- * @property int $province
- * @property int $city
- * @property int $disctrict
+ * @property int $country_id
+ * @property int $province_id
+ * @property int $city_id
+ * @property int $disctrict_id
+ * @property string $state
+ * @property string $street
+ * @property string $suburb
  * @property string $postal_code
  * @property string $recipient_name
  * @property string $recipient_phone
  * @property string $name
  * 
+ * @property \App\Models\City $city
+ * @property \App\Models\Country $country
+ * @property \App\Models\Province $province
  * @property \App\Models\User $user
  * @property \Illuminate\Database\Eloquent\Collection $orders
  *
@@ -36,18 +43,23 @@ class Address extends Eloquent
 	protected $casts = [
 		'user_id' => 'int',
 		'primary' => 'int',
-		'province' => 'int',
-		'city' => 'int',
-		'disctrict' => 'int'
+		'country_id' => 'int',
+		'province_id' => 'int',
+		'city_id' => 'int',
+		'disctrict_id' => 'int'
 	];
 
 	protected $fillable = [
 		'user_id',
 		'description',
 		'primary',
-		'province',
-		'city',
-		'disctrict',
+		'country_id',
+		'province_id',
+		'city_id',
+		'disctrict_id',
+		'state',
+		'street',
+		'suburb',
 		'postal_code',
 		'recipient_name',
 		'recipient_phone',
@@ -56,12 +68,17 @@ class Address extends Eloquent
 
 	public function city()
 	{
-		return $this->belongsTo(\App\Models\City::class, 'city');
+		return $this->belongsTo(\App\Models\City::class);
+	}
+
+	public function country()
+	{
+		return $this->belongsTo(\App\Models\Country::class);
 	}
 
 	public function province()
 	{
-		return $this->belongsTo(\App\Models\Province::class, 'province');
+		return $this->belongsTo(\App\Models\Province::class);
 	}
 
 	public function user()
