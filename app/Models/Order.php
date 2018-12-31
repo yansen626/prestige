@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 29 Dec 2018 03:05:03 +0000.
+ * Date: Mon, 31 Dec 2018 05:20:30 +0000.
  */
 
 namespace App\Models;
@@ -13,16 +13,20 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * Class Order
  * 
  * @property int $id
+ * @property int $user_id
+ * @property int $billing_address_id
  * @property string $shipping_option
+ * @property int $shipping_address_id
+ * @property string $shipping_charge
  * @property string $payment_option
- * @property int $order_status_id
+ * @property float $payment_charge
+ * @property float $tax_amount
+ * @property float $grand_total
+ * @property string $track_code
  * @property string $currency_code
+ * @property int $order_status_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * @property int $user_id
- * @property int $shipping_address_id
- * @property int $billing_address_id
- * @property string $track_code
  * 
  * @property \App\Models\Address $address
  * @property \App\Models\OrderStatus $order_status
@@ -36,21 +40,28 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Order extends Eloquent
 {
 	protected $casts = [
-		'order_status_id' => 'int',
 		'user_id' => 'int',
+		'billing_address_id' => 'int',
 		'shipping_address_id' => 'int',
-		'billing_address_id' => 'int'
+		'payment_charge' => 'float',
+		'tax_amount' => 'float',
+		'grand_total' => 'float',
+		'order_status_id' => 'int'
 	];
 
 	protected $fillable = [
-		'shipping_option',
-		'payment_option',
-		'order_status_id',
-		'currency_code',
 		'user_id',
-		'shipping_address_id',
 		'billing_address_id',
-		'track_code'
+		'shipping_option',
+		'shipping_address_id',
+		'shipping_charge',
+		'payment_option',
+		'payment_charge',
+		'tax_amount',
+		'grand_total',
+		'track_code',
+		'currency_code',
+		'order_status_id'
 	];
 
 	public function address()
@@ -75,8 +86,8 @@ class Order extends Eloquent
 
 	public function products()
 	{
-		return $this->belongsToMany(\App\Models\Product::class, 'order_product_variations')
-					->withPivot('id', 'attribute_id', 'attribute_dropdown_option_id')
+		return $this->belongsToMany(\App\Models\Product::class, 'order_products')
+					->withPivot('id', 'qty', 'price', 'tax_amount', 'grand_total', 'product_info')
 					->withTimestamps();
 	}
 

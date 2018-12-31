@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Thu, 20 Dec 2018 03:51:33 +0000.
+ * Date: Mon, 31 Dec 2018 04:48:40 +0000.
  */
 
 namespace App\Models;
@@ -19,7 +19,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $sku
  * @property string $tag
  * @property string $description
- * @property string $colour
  * @property int $status
  * @property int $in_stock
  * @property int $track_stock
@@ -27,6 +26,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $is_taxable
  * @property float $price
  * @property float $cost_price
+ * @property string $colour
  * @property float $weight
  * @property float $width
  * @property float $height
@@ -37,7 +37,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $updated_at
  * 
  * @property \Illuminate\Database\Eloquent\Collection $attributes
- * @property \Illuminate\Database\Eloquent\Collection $avored_product_images
+ * @property \Illuminate\Database\Eloquent\Collection $carts
  * @property \Illuminate\Database\Eloquent\Collection $categories
  * @property \Illuminate\Database\Eloquent\Collection $orders
  * @property \Illuminate\Database\Eloquent\Collection $order_return_products
@@ -82,25 +82,25 @@ class Product extends Eloquent
 		'is_taxable',
 		'price',
 		'cost_price',
+		'colour',
 		'weight',
 		'width',
 		'height',
 		'length',
 		'meta_title',
-		'meta_description',
-        'colour'
+		'meta_description'
 	];
 
 	public function attributes()
 	{
-		return $this->belongsToMany(\App\Models\Attribute::class, 'avored_product_attribute_integer_values')
-					->withPivot('id', 'value')
+		return $this->belongsToMany(\App\Models\Attribute::class)
+					->withPivot('id')
 					->withTimestamps();
 	}
 
-	public function avored_product_images()
+	public function carts()
 	{
-		return $this->hasMany(\App\Models\AvoredProductImage::class);
+		return $this->hasMany(\App\Models\Cart::class);
 	}
 
 	public function categories()
@@ -139,8 +139,8 @@ class Product extends Eloquent
 
 	public function properties()
 	{
-		return $this->belongsToMany(\App\Models\Property::class, 'product_property_varchar_values')
-					->withPivot('id', 'value')
+		return $this->belongsToMany(\App\Models\Property::class)
+					->withPivot('id')
 					->withTimestamps();
 	}
 

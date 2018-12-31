@@ -37,7 +37,7 @@ Route::post('/submit-cart', 'Frontend\CartController@submitCart')->name('submit.
 Route::post('/delete-cart', 'Frontend\CartController@deleteCart')->name('delete.cart');
 Route::get('/billing-shipment', 'Frontend\BillingController@getBilling')->name('billing');
 Route::post('/submit-billing-shipment', 'Frontend\BillingController@submitBilling')->name('submit.billing');
-Route::get('/checkout', 'Frontend\CheckoutController@getCheckout')->name('checkout');
+Route::get('/checkout/{order}', 'Frontend\CheckoutController@getCheckout')->name('checkout');
 Route::post('/submit-checkout', 'Frontend\CheckoutController@submitCheckout')->name('submit.checkout');
 
 // miscellaneous

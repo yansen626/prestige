@@ -179,13 +179,72 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-6">
-                        <div class="col-xs-12 col-sm-12 col-md-6">
-                            <input type="radio" name="another_shipment" value="ship" class=""/> Ship to a different address
-                        </div>
+                {{-- Input new Address --}}
+                <div id="new-address" style="display:none;">
+                    <div class="col-md-12">
+                        <h1>New Shipping Address</h1>
+                        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+                        <br/>
+                    </div>
+                    <div class="col-md-12">
+                        <select name="country_secondary" id="country" class="form-control">
+                            <option value="-1" selected>COUNTRY/REGION</option>
+                            @foreach($countries as $country)
+                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
 
+                    <div class="col-md-12">
+                        <select name="province_secondary" id="province" class="form-control">
+                            <option value="-1" selected>PROVINCE</option>
+                            @foreach($provinces as $province)
+                                <option value="{{ $province->id }}">{{ $province->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-12">
+                        <select name="city_secondary" id="city" class="form-control">
+                            <option value="-1" selected>CITY</option>
+                            @foreach($cities as $city)
+                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="address_detail_secondary" id="address_detail" placeholder="HOUSE/APARTMENT/UNIT NUMBER" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="street_secondary" id="street" placeholder="STREET" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" name="suburb_secondary" id="suburb" placeholder="SUBURB" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="post_code_secondary" id="post_code" placeholder="POST CODE" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="state_secondary" id="state" placeholder="STATE" />
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            @if($flag==0)
+                                &nbsp;
+                            @else
+                                <input type="checkbox" name="another_shipment" id="another_shipment" class=""/> Ship to a different address
+                            @endif
+                        </div>
+                    </div>
                     <div class="col-xs-6 col-sm-6 col-md-3 text-center-xs">
                         <a href="{{ route('cart') }}"><button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 130px;line-height: 0px; border: 1px solid #282828;">BACK TO CART</button></a>
                     </div>
@@ -196,4 +255,17 @@
             </div>
         </form>
     </section>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $("#another_shipment").change(function() {
+            if(this.checked) {
+                $('#new-address').show();
+            }
+            else{
+                $('#new-address').hide();
+            }
+        });
+    </script>
 @endsection

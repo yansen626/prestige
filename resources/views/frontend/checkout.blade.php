@@ -26,8 +26,9 @@
                         @endif
 
                         <div class="col-md-6">
-                            <input type="radio" name="credit_card" id="credit_card" placeholder="STREET"/> Pay with Credit Card
-                            <input type="radio" name="transfer" id="transfer" placeholder="STREET"/> Pay with Transfer
+                            <input type="radio" name="payment_method" id="credit_card" placeholder="STREET"/> Pay with Credit Card
+                            <input type="radio" name="payment_method" id="transfer" placeholder="STREET"/> Pay with Transfer
+                            <input type="radio" name="payment_method" id="transfer" placeholder="STREET"/> Pay with Transfer
                         </div>
 
                         <div class="col-md-12">

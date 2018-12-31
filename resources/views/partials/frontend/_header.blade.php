@@ -167,10 +167,18 @@
                         <!-- .mega-dropdown-menu end -->
                     </li>
                     <!-- Home Menu -->
-                    <li>
-                        <a href="{{route('login')}}"  class="menu-item">LOGIN</a>
-                        <!-- .mega-dropdown-menu end -->
-                    </li>
+
+                    @if(auth()->guard('web')->check())
+                        <li>
+                            <a href="{{route('logout')}}"  class="menu-item">LOGOUT</a>
+                            <!-- .mega-dropdown-menu end -->
+                        </li>
+                    @else
+                        <li>
+                            <a href="{{route('login')}}"  class="menu-item">LOGIN</a>
+                            <!-- .mega-dropdown-menu end -->
+                        </li>
+                    @endif
                 </ul>
             </div>
             <!-- .navbar-collapse -->

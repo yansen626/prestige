@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sat, 29 Dec 2018 03:04:44 +0000.
+ * Date: Mon, 31 Dec 2018 04:50:31 +0000.
  */
 
 namespace App\Models;
@@ -18,6 +18,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $qty
  * @property float $price
  * @property float $tax_amount
+ * @property float $grand_total
  * @property string $product_info
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
@@ -29,14 +30,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class OrderProduct extends Eloquent
 {
-	protected $table = 'order_product';
-
 	protected $casts = [
 		'product_id' => 'int',
 		'order_id' => 'int',
 		'qty' => 'int',
 		'price' => 'float',
-		'tax_amount' => 'float'
+		'tax_amount' => 'float',
+		'grand_total' => 'float'
 	];
 
 	protected $fillable = [
@@ -45,6 +45,7 @@ class OrderProduct extends Eloquent
 		'qty',
 		'price',
 		'tax_amount',
+		'grand_total',
 		'product_info'
 	];
 
