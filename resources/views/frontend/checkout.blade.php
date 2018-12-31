@@ -26,59 +26,61 @@
                         @endif
 
                         <div class="col-md-6">
-                            <input type="radio" name="payment_method" id="credit_card" placeholder="STREET"/> Pay with Credit Card
-                            <input type="radio" name="payment_method" id="transfer" placeholder="STREET"/> Pay with Transfer
-                            <input type="radio" name="payment_method" id="transfer" placeholder="STREET"/> Pay with Transfer
+                            <input type="radio" name="payment_method" id="cc"/> Pay with Credit Card
+                            &nbsp;
+                            <input type="radio" name="payment_method" id="va"/> Pay with Virtual Account
+                            &nbsp;
+                            <input type="radio" name="payment_method" id="bank"/> Pay with Transfer Bank
                         </div>
 
-                        <div class="col-md-12">
-                            <select name="card_type" id="card_type" class="form-control">
-                                <option value="-1" selected>CARD TYPE</option>
-                            </select>
-                        </div>
+                        {{--<div class="col-md-12">--}}
+                            {{--<select name="card_type" id="card_type" class="form-control">--}}
+                                {{--<option value="-1" selected>CARD TYPE</option>--}}
+                            {{--</select>--}}
+                        {{--</div>--}}
 
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="holder_name" id="holder_name" placeholder="CARD HOLDER NAME" required/>
-                            @if ($errors->has('holder_name'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('holder_name') }}</strong>
-                                </span>
-                            @endif
-                        </div>
+                        {{--<div class="col-md-12">--}}
+                            {{--<input type="text" class="form-control" name="holder_name" id="holder_name" placeholder="CARD HOLDER NAME" required/>--}}
+                            {{--@if ($errors->has('holder_name'))--}}
+                                {{--<span class="invalid-feedback" role="alert">--}}
+                                    {{--<strong>{{ $errors->first('holder_name') }}</strong>--}}
+                                {{--</span>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
 
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="card_number" id="card_number" placeholder="CARD NUMBER" required/>
-                            @if ($errors->has('card_number'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('card_number') }}</strong>
-                                </span>
-                            @endif
-                        </div>
+                        {{--<div class="col-md-12">--}}
+                            {{--<input type="text" class="form-control" name="card_number" id="card_number" placeholder="CARD NUMBER" required/>--}}
+                            {{--@if ($errors->has('card_number'))--}}
+                                {{--<span class="invalid-feedback" role="alert">--}}
+                                    {{--<strong>{{ $errors->first('card_number') }}</strong>--}}
+                                {{--</span>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
 
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" name="card_date" id="card_date" placeholder="MM/YY" maxlength="5" required />
-                            @if ($errors->has('card_date'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('card_date') }}</strong>
-                                </span>
-                            @endif
-                        </div>
+                        {{--<div class="col-md-6">--}}
+                            {{--<input type="text" class="form-control" name="card_date" id="card_date" placeholder="MM/YY" maxlength="5" required />--}}
+                            {{--@if ($errors->has('card_date'))--}}
+                                {{--<span class="invalid-feedback" role="alert">--}}
+                                    {{--<strong>{{ $errors->first('card_date') }}</strong>--}}
+                                {{--</span>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
 
-                        <div class="col-md-6">
-                            <input type="number" class="form-control" name="card_cvv" id="card_cvv" placeholder="CVV" maxlength="3"  pattern="\d{4}" required/>
-                            @if ($errors->has('card_cvv'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('card_cvv') }}</strong>
-                                </span>
-                            @endif
-                        </div>
+                        {{--<div class="col-md-6">--}}
+                            {{--<input type="number" class="form-control" name="card_cvv" id="card_cvv" placeholder="CVV" maxlength="3"  pattern="\d{4}" required/>--}}
+                            {{--@if ($errors->has('card_cvv'))--}}
+                                {{--<span class="invalid-feedback" role="alert">--}}
+                                    {{--<strong>{{ $errors->first('card_cvv') }}</strong>--}}
+                                {{--</span>--}}
+                            {{--@endif--}}
+                        {{--</div>--}}
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row border">
                     <div class="col-xs-6 col-sm-12 col-md-6">
                         <div class="col-xs-6 col-sm-12 col-md-6">
-                            <input type="radio" name="another_shipment" value="ship" class=""/> I've read and accept the T&C's
+                            <input type="checkbox" name="another_shipment" value="ship" class=""/> I've read and accept the T&C's
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-12 col-md-6">
@@ -89,6 +91,7 @@
                 </div>
 
                 <br/>
+
                 <div class="row">
                     <table class="table">
                         <tr>
@@ -96,88 +99,64 @@
                         </tr>
                         <tr>
                             <td>
-                                <table class="table">
-                                    <tr>
-                                        <td rowspan="2" align="center">
-                                            <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
-                                        </td>
-                                        <td width="15%">
-                                            PRODUCT
-                                        </td>
-                                        <td style="text-align: right;">
-                                            TOTAL
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="word-wrap:break-word;">
-                                            Large Tote Bag, Tan
-                                            Customized (LRM)
-                                            San Serif, Silver,
-                                            1x
-                                        </td>
-                                        <td style="text-align: right;">
-                                            $80.00 USD
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td rowspan="2" align="center">
-                                            <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
-                                        </td>
-                                        <td width="50%">
-                                            PRODUCT
-                                        </td>
-                                        <td style="text-align: right;">
-                                            TOTAL
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="word-wrap:break-word;">
-                                            Large Tote Bag, Tan
-                                            Customized (LRM)
-                                            San Serif, Silver,
-                                            1x
-                                        </td>
-                                        <td style="text-align: right;">
-                                            $80.00 USD
-                                        </td>
-                                    </tr>
-                                </table>
-                            </td>
-                            <td>
-                                <table class="table" style="border: none;">
-                                    <tr style="border: none;">
-                                        <td colspan="2">SHIPPING TO</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" style="word-wrap:break-word;">
-                                            Name, Number, Street Address,
-                                            Suburb, Postcode, State, Country
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><hr/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>SUBTOTAL</td>
-                                        <td align="left">$160.00 USD</td>
-                                    </tr>
-                                    <tr>
-                                        <td>SHIPPING</td>
-                                        <td align="left">$10.00 USD</td>
-                                    </tr>
-                                    <tr>
-                                        <td>TAX</td>
-                                        <td align="left">$00.00 USD</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2"><hr/></td>
-                                    </tr>
-                                    <tr>
-                                        <td>TOTAL</td>
-                                        <td align="left">$170.00 USD</td>
-                                    </tr>
-                                </table>
+                                <div class="row">
+                                    <div class="col-md-7 border-bottom-black mb-20">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-4">PRODUCT</div>
+                                        <div class="col-md-2">QUANTITY</div>
+                                        <div class="col-md-4 right">TOTAL</div>
+                                    </div>
+                                    <div class="col-md-5 border-bottom-black mb-20">
+                                        SHIPPING TO
+                                    </div>
+                                    <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+                                    <div class="col-md-7">
+                                        @foreach($orderProduct as $product)
+                                            <div class="col-md-12 mb-10">
+                                                <div class="col-md-2">
+                                                    <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    {{$product->product->name}}
+                                                    Customized :<br>
+                                                    {!! $product->product_info !!}
+                                                </div>
+                                                <div class="col-md-2">
+                                                    {{$product->qty}}
+                                                </div>
+                                                <div class="col-md-4 right">
+                                                    {{$product->grand_total}}
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="col-md-12 border-bottom-black mb-20">
+                                            {{$order->address->description}}, {{$order->address->street}},
+                                            {{$order->address->suburb}}, {{$order->address->postal_code}}, {{$order->address->state}}, {{$order->address->country->name}},
+                                        </div>
+                                        <div class="col-md-12 mb-20">
+                                            <div class="col-md-6 bold">SUBTOTAL</div>
+                                            <div class="col-md-6 right">{{$order->sub_total}}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-20">
+                                            <div class="col-md-6 bold">SERVICE</div>
+                                            <div class="col-md-6 right">{{$order->payment_charge}}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-20">
+                                            <div class="col-md-6 bold">SHIPPING</div>
+                                            <div class="col-md-6 right">{{$order->shipping_charge}}</div>
+                                        </div>
+                                        <div class="col-md-12 border-bottom-black mb-20">
+                                            <div class="col-md-6 bold">TAX</div>
+                                            <div class="col-md-6 right">{{$order->tax_amount}}</div>
+                                        </div>
+                                        <div class="col-md-12 mb-20">
+                                            <div class="col-md-6 bold"><h5>TOTAL</h5></div>
+                                            <div class="col-md-6 right bold"><h5>{{$order->grand_total}}</h5></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
 
@@ -186,6 +165,18 @@
             </div>
         </form>
     </section>
+@endsection
+
+@section('styles')
+    <style>
+        .border-bottom-black {
+            border-bottom: 1px solid #000000 !important;
+            padding-bottom: 10px;
+        }
+        .right{
+            text-align: right;
+        }
+    </style>
 @endsection
 
 @section('scripts')

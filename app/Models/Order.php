@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 31 Dec 2018 05:20:30 +0000.
+ * Date: Mon, 31 Dec 2018 10:11:22 +0000.
  */
 
 namespace App\Models;
@@ -20,6 +20,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $shipping_charge
  * @property string $payment_option
  * @property float $payment_charge
+ * @property float $sub_total
  * @property float $tax_amount
  * @property float $grand_total
  * @property string $track_code
@@ -44,6 +45,7 @@ class Order extends Eloquent
 		'billing_address_id' => 'int',
 		'shipping_address_id' => 'int',
 		'payment_charge' => 'float',
+		'sub_total' => 'float',
 		'tax_amount' => 'float',
 		'grand_total' => 'float',
 		'order_status_id' => 'int'
@@ -57,6 +59,7 @@ class Order extends Eloquent
 		'shipping_charge',
 		'payment_option',
 		'payment_charge',
+		'sub_total',
 		'tax_amount',
 		'grand_total',
 		'track_code',
