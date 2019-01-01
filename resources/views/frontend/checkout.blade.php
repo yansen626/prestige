@@ -99,7 +99,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <div class="row">
+                                <div class="col-md-12">
                                     <div class="col-md-7 border-bottom-black mb-20">
                                         <div class="col-md-2"></div>
                                         <div class="col-md-4">PRODUCT</div>
