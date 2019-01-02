@@ -26,11 +26,17 @@
                         @endif
 
                         <div class="col-md-6">
-                            <input type="radio" name="payment_method" id="cc"/> Pay with Credit Card
+                            <input type="radio" name="payment_method" id="cc"/>
+                            <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
+                            {{--Pay with Credit Card--}}
                             &nbsp;
-                            <input type="radio" name="payment_method" id="va"/> Pay with Virtual Account
+                            <input type="radio" name="payment_method" id="va"/>
+                            <img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-50">
+                            {{--Pay with Virtual Account--}}
                             &nbsp;
-                            <input type="radio" name="payment_method" id="bank"/> Pay with Transfer Bank
+                            <input type="radio" name="payment_method" id="bank"/>
+                            <img src="{{ asset('images/icons/nama-brand-facebook.svg') }}" class="width-50">
+                            {{--Pay with Transfer Bank--}}
                         </div>
 
                         {{--<div class="col-md-12">--}}
@@ -80,7 +86,7 @@
                 <div class="row border">
                     <div class="col-xs-6 col-sm-12 col-md-6">
                         <div class="col-xs-6 col-sm-12 col-md-6">
-                            <input type="checkbox" name="another_shipment" value="ship" class=""/> I've read and accept the T&C's
+                            <input type="checkbox" name="TC_Aggrement" value="ship" class=""/> I've read and accept the T&C's
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-12 col-md-6">
