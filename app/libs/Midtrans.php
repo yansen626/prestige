@@ -13,136 +13,95 @@ use GuzzleHttp\Client;
 
 class Midtrans
 {
-    public static function setRequestData($userId, $enabledPayments, $carts, $orderId){
+    public static function setRequestData($order, $orderProducts, $paymentMethod){
         try{
-            //get all item from DB
-            //$carts = Cart::where('user_id', 'like', $userId)->get();
-            $totalPrice = 0;
-
-            //transaction_details 1
-            $adminFee = 0;
-            $transactionDetailsArr = [];
-
             //item_details
-            $itemArr = [];
-            foreach($carts as $cart){
-                if(!empty($cart->size_option) && empty($cart->weight_option) && empty($cart->qty_option)){
-                    $size = $cart->product->product_properties()->where('name','=','size')
-                        ->where('description', $cart->size_option)
-                        ->first();
-
-                    if(!empty($size->price)){
-                        $price = $size->getOriginal('price');
-                    }
-                    else{
-                        $price = $cart->product->getOriginal('price_discounted');
-                    }
-                }
-                elseif(empty($cart->size_option) && !empty($cart->weight_option) && empty($cart->qty_option)){
-                    $weight = $cart->product->product_properties()->where('name','=','weight')
-                        ->where('description', $cart->weight_option)
-                        ->first();
-
-                    if(!empty($weight->price)){
-                        $price = $weight->getOriginal('price');
-                    }
-                    else{
-                        $price = $cart->product->getOriginal('price_discounted');
-                    }
-                }
-                elseif(empty($cart->size_option) && empty($cart->weight_option) && !empty($cart->qty_option)){
-                    $qty = $cart->product->product_properties()->where('name','=','qty')
-                        ->where('description', $cart->qty_option)
-                        ->first();
-
-                    if(!empty($qty->price)){
-                        $price = $qty->getOriginal('price');
-                    }
-                    else{
-                        $price = $cart->product->getOriginal('price_discounted');
-                    }
-                }
-                else{
-                    $price = $cart->product->getOriginal('price_discounted');
-                }
-
-                $totalPriceOri = $price * $cart->quantity;
-                $totalPrice += $totalPriceOri;
-
+            $item_details = [];
+            foreach($orderProducts as $orderProduct){
                 //set item detail
-                $arrItem = [];
-                $arrItem = array_add($arrItem, 'id', $cart->id);
-                $arrItem = array_add($arrItem, 'price', $price);
-                $arrItem = array_add($arrItem, 'quantity', $cart->quantity);
-                $arrItem = array_add($arrItem, 'name', $cart->Product->name);
-                array_push($itemArr, $arrItem);
-
-                $selectedCourier = $cart->Courier->description;
-                $selectedDeliveryType = $cart->DeliveryType->description;
-                $ShippingPrice = (int)$cart->getOriginal('delivery_fee');
-
-                //set order id and admin fee to cart DB
-                $adminFee = $cart->getOriginal('admin_fee');
+                $item_detail = array(
+                    'id' => $orderProduct->id,
+                    'price' => $orderProduct->price,
+                    'quantity' => $orderProduct->qty,
+                    'name' => $orderProduct->Product->name
+                );
+                array_push($item_details, $item_detail);
             }
 
-            $transactionDetailsArr = array_add($transactionDetailsArr, 'order_id', $orderId);
+            //add shipping as item for midtrans
+            $item_shipping = array(
+                'id' => $order->id,
+                'price' => $order->shipping_charge,
+                'quantity' => 1,
+                'name' => "Shipping ".$order->shipping_option
+            );
+            array_push($item_details, $item_shipping);
 
-            $arrShipping = [];
-            $arrShipping = array_add($arrShipping, 'id', uniqid());
-            $arrShipping = array_add($arrShipping, 'price', $ShippingPrice);
-            $arrShipping = array_add($arrShipping, 'quantity', 1);
-            $arrShipping = array_add($arrShipping, 'name', 'Ongkos Kirim '.$selectedCourier.'-'.$selectedDeliveryType);
+            //add other service as item for midtrans
+            $item_service = array(
+                'id' => $order->id,
+                'price' => $order->payment_charge,
+                'quantity' => 1,
+                'name' => "Service"
+            );
+            array_push($item_details, $item_service);
 
-            array_push($itemArr, $arrShipping);
+            //add tax as item for midtrans
+            $item_tax = array(
+                'id' => $order->id,
+                'price' => $order->tax_amount,
+                'quantity' => 1,
+                'name' => "Tax"
+            );
+            array_push($item_details, $item_tax);
 
-            $arrAdminFee = [];
-            $arrAdminFee = array_add($arrAdminFee, 'id', uniqid());
-            $arrAdminFee = array_add($arrAdminFee, 'price', $adminFee);
-            $arrAdminFee = array_add($arrAdminFee, 'quantity', 1);
-            $arrAdminFee = array_add($arrAdminFee, 'name', 'Biaya admin');
-
-            array_push($itemArr, $arrAdminFee);
-
-            $totalPrice += $ShippingPrice;
-            $totalPrice += $adminFee;
-
-            //transaction_details 2
-            $transactionDetailsArr = array_add($transactionDetailsArr, 'gross_amount', $totalPrice);
 
             //vtweb
-            $vtWebArr = [];
-            $vtWebArr = array_add($vtWebArr, 'credit_card_3d_secure', true);
+
             // credit card = credit_card
             // bank transfer = bank_transfer
             // e-wallet =
             // direct debit = mandiri_clickpay, cimb_clicks, bri_epay, bca_klikpay
 
-            // $vtWebArr = array_add($vtWebArr, 'enabled_payments', ['credit_card', 'mandiri_clickpay', 'cimb_clicks', 'bca_klikpay', 'bri_epay', 'echannel','permata_va','bca_va','other_va']);
             $hostUrl = env('SERVER_HOST_URL');
-
-            $vtWebArr = array_add($vtWebArr, 'enabled_payments', [$enabledPayments]);
-
-            if($enabledPayments == 'bank_transfer'){
-                $vtWebArr = array_add($vtWebArr, 'finish_redirect_url', $hostUrl. '/checkout/success/bank_transfer');
-                $vtWebArr = array_add($vtWebArr, 'unfinish_redirect_url', $hostUrl. '/checkout-4');
+            if($paymentMethod == 'bank_transfer'){
+                $finish_redirect_url = $hostUrl. '/checkout/success/bank_transfer';
+                $unfinish_redirect_url = $hostUrl. '/checkout-4';
             }
             else{
-                $vtWebArr = array_add($vtWebArr, 'finish_redirect_url', $hostUrl. '/checkout-success/'.$userId);
-                $vtWebArr = array_add($vtWebArr, 'unfinish_redirect_url', $hostUrl. '/checkout-failed');
+                $finish_redirect_url = $hostUrl. '/checkout-success/'.$order->user_id;
+                $unfinish_redirect_url = $hostUrl. '/checkout-failed';
             }
+            $vt_web = array(
+                'credit_card_3d_secure' => true,
+                'enabled_payments' => $paymentMethod,
+                'finish_redirect_url' => $finish_redirect_url,
+                'unfinish_redirect_url' => $unfinish_redirect_url,
+                'error_redirect_url' => $hostUrl. '/payment/error'
+            );
+            
+            $transaction_details = array(
+                'order_id' => rand(),
+                'gross_amount' => $order->grand_total, // no decimal allowed
+            );
 
-            $vtWebArr = array_add($vtWebArr, 'error_redirect_url', $hostUrl. '/checkout-failed');
+            $customer_details = array(
+                'email'         => $order->user->email,
+                'phone'         => $order->user->phone
+            );
+            $transaction = array(
+                'payment_type' => "vtweb",
+                'transaction_details' => $transaction_details,
+                'customer_details' => $customer_details,
+                'item_details' => $item_details,
+                'vtweb' => $vt_web,
+            );
 
-
-            $transactionDataArr = [];
-            $transactionDataArr = array_add($transactionDataArr, 'payment_type', 'vtweb');
-            $transactionDataArr = array_add($transactionDataArr, 'transaction_details', $transactionDetailsArr);
-            $transactionDataArr = array_add($transactionDataArr, 'item_details', $itemArr);
-            $transactionDataArr = array_add($transactionDataArr, 'vtweb', $vtWebArr);
-
-            return $transactionDataArr;
+            return $transaction;
         }
         catch (\Exception $ex){
+            error_log($ex);
+            dd($ex);
             Utilities::ExceptionLog('midtransSetRequestData EX = '. $ex);
         }
     }
@@ -156,7 +115,7 @@ class Midtrans
         }
         else{
             $serverKey = env('MIDTRANS_API_KEY_PRODUCTION');
-            $serverURL = env('MIDTRANS_API_URL_PRODUCTION');
+            $serverURL = env('MIDTRANS_URL_PRODUCTION');
         }
         json_encode($transactionDataArr);
         $base64ServerKey = base64_encode($serverKey);

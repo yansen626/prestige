@@ -38,13 +38,19 @@ Route::post('/delete-cart', 'Frontend\CartController@deleteCart')->name('delete.
 Route::get('/billing-shipment', 'Frontend\BillingController@getBilling')->name('billing');
 Route::post('/submit-billing-shipment', 'Frontend\BillingController@submitBilling')->name('submit.billing');
 Route::get('/checkout/{order}', 'Frontend\CheckoutController@getCheckout')->name('checkout');
-Route::post('/submit-checkout', 'Frontend\CheckoutController@submitCheckout')->name('submit.checkout');
+Route::post('/submit-checkout/{order}', 'Frontend\CheckoutController@submitCheckout')->name('submit.checkout');
+
+Route::prefix('payment')->group(function(){
+    Route::post('/checkout-notification', 'Frontend\MidtransController@notification')->name('notification.checkout');
+    Route::get('/finish', 'Frontend\MidtransController@finish')->name('finish.checkout');
+    Route::get('/unfinish', 'Frontend\MidtransController@unfinish')->name('unfinish.checkout');
+    Route::get('/error', 'Frontend\MidtransController@error')->name('error.checkout');
+});
 
 // miscellaneous
 Route::get('/test-location', 'Frontend\HomeController@getLocation')->name('getLocation');
 Route::get('/test-province', 'Frontend\HomeController@getProvince')->name('getProvince');
-Route::get('/set-cookie', 'Frontend\HomeController@setCookie')->name('setCookie');
-Route::get('/get-cookie', 'Frontend\HomeController@getCookie')->name('getCookie');
+Route::get('/testing', 'Frontend\HomeController@TestingPurpose')->name('testing');
 
 
 // ADMIN ROUTE

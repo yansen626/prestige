@@ -5,6 +5,8 @@
         ============================================= -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {{-- gsuite meta tag --}}
+    <meta name="google-site-verification" content="c2mtea-KKk-OAoXjQuoopCGSF0ILtZalyoC0HL0MB94" />
     <!--IE Compatibility Meta-->
     <meta name="author" content="zytheme"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">

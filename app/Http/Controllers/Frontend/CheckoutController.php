@@ -13,22 +13,26 @@ class CheckoutController extends Controller
     public function getCheckout(Order $order)
     {
         $orderProduct = OrderProduct::where('order_id', $order->id)->get();
-
+        $isIndonesian = true;
         $data=([
             'order' => $order,
-            'orderProduct' => $orderProduct
+            'orderProduct' => $orderProduct,
+            'isIndonesian' => $isIndonesian
         ]);
         return view('frontend.checkout')->with($data);
     }
 
-    public function submitCheckout(){
-//        //set data to request
-//        $transactionDataArr = Midtrans::setRequestData($userId, Input::get('checkout-payment-method-input'), $orderId, $cartCreate);
-////                dd($transactionDataArr);
-//        //sending to midtrans
-//        $redirectUrl = Midtrans::sendRequest($transactionDataArr);
-////                dd($redirectUrl);
-//
-//        return redirect($redirectUrl);
+    public function submitCheckout(Request $request, Order $order){
+        $paymentMethod = $request->input('payment_method');
+        $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+
+        //set data to request
+        $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
+                dd($transactionDataArr);
+        //sending to midtrans
+        $redirectUrl = Midtrans::sendRequest($transactionDataArr);
+//                dd($redirectUrl);
+
+        return redirect($redirectUrl);
     }
 }

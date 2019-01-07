@@ -83,7 +83,9 @@ class HomeController extends Controller
 
         return $currency;
     }
+    public function TestingPurpose(){
 
+    }
     public function setCookie(){
 
         Cookie::queue(Cookie::make('guest-cart', "3#4", 1440));

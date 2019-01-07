@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="bg-white">
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('submit.checkout', ["order"=>$order->id]) }}">
             @csrf
             <div class="container">
                 <div class="row">
@@ -26,19 +26,16 @@
                         @endif
 
                         <div class="col-md-6">
-                            <input type="radio" name="payment_method" id="cc"/>
-                            <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
-                            {{--Pay with Credit Card--}}
-                            &nbsp;
-                            <input type="radio" name="payment_method" id="va"/>
-                            <img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-50">
-                            {{--Pay with Virtual Account--}}
-                            &nbsp;
-                            <input type="radio" name="payment_method" id="bank"/>
-                            <img src="{{ asset('images/icons/nama-brand-facebook.svg') }}" class="width-50">
-                            {{--Pay with Transfer Bank--}}
+                            @if($isIndonesian)
+                                <input type="radio" name="payment_method" id="cc" value="credit_card" selected/>
+                                <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
+                                {{--Pay with Credit Card--}}
+                                &nbsp;
+                                <input type="radio" name="payment_method" id="va" value="bank_transfer"/>
+                                <img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-50">
+                                {{--Pay with Virtual Account--}}
+                            @endif
                         </div>
-
                         {{--<div class="col-md-12">--}}
                             {{--<select name="card_type" id="card_type" class="form-control">--}}
                                 {{--<option value="-1" selected>CARD TYPE</option>--}}
