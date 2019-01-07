@@ -54,7 +54,7 @@
                     <div class="module-icon search-icon color-black">
                         {{--<i class="fa fa-search"></i>--}}
                         {{--<span class="title">search</span>--}}
-                        <a href="#">ABOUT</a>
+                        <a href="{{route('about.us')}}">ABOUT</a>
                     </div>
                     {{--<div class="module-content module-fullscreen module--search2-box">--}}
                     {{--<div class="pos-vertical-center">--}}

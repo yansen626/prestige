@@ -66,6 +66,29 @@ class HomeController extends Controller
         }
     }
 
+    public function aboutUs(){
+        $products = Product::where('status', 1)->get();
+        $data=([
+            'products' => $products,
+        ]);
+        return view('frontend.about-us')->with($data);
+    }
+
+    public function Others($type){
+        //faq
+        if($type == 'FAQ'){
+            return view('frontend.FAQ');
+        }
+        //term and condition
+        else if($type == 'Term-Condition'){
+            return view('frontend.term-condition');
+        }
+        //privacy policy
+        else{
+            return view('frontend.privacy-policy');
+        }
+    }
+
     public function getLocation(){
         dd(\Request::ip());
         $asdf = geoip($ip = \Request::ip());

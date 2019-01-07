@@ -13,10 +13,10 @@
 
                         <div class="col-xs-12 col-sm-6 col-md-6 footer--widget footer--widget-about">
                             <ul class="list-unstyled mb-0">
-                                <li>T&C'S</li>
-                                <li>FAQ'S</li>
+                                <li><a href="{{route('others', ['type'=>'Term-Condition'])}}">T&C'S</a></li>
+                                <li><a href="{{route('others', ['type'=>'FAQ'])}}">FAQ'S</a></li>
                                 <li>SHIPPING</li>
-                                <li>PRIVACY</li>
+                                <li><a href="{{route('others', ['type'=>'Privacy-Policy'])}}">PRIVACY</a></li>
                             </ul>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6 footer--widget footer--widget-about">
