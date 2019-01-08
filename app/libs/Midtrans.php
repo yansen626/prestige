@@ -100,46 +100,58 @@ class Midtrans
             return $transaction;
         }
         catch (\Exception $ex){
-            error_log($ex);
+//            error_log($ex);
             dd($ex);
             Utilities::ExceptionLog('midtransSetRequestData EX = '. $ex);
         }
     }
 
     public static function sendRequest($transactionDataArr){
-        $isDevelopment = env('MIDTRANS_IS_DEVELOPMENT');
+        try{
+            $isDevelopment = env('MIDTRANS_IS_DEVELOPMENT');
 
-        if($isDevelopment == "true"){
-            $serverKey = env('MIDTRANS_API_KEY_SANDBOX');
-            $serverURL = env('MIDTRANS_API_URL_SANDBOX');
+            if($isDevelopment == "true"){
+                $serverKey = env('MIDTRANS_API_KEY_SANDBOX');
+                $serverURL = env('MIDTRANS_API_URL_SANDBOX');
+            }
+            else{
+                $serverKey = env('MIDTRANS_API_KEY_PRODUCTION');
+                $serverURL = env('MIDTRANS_URL_PRODUCTION');
+            }
+            json_encode($transactionDataArr);
+            $base64ServerKey = base64_encode($serverKey);
+
+            $client = new Client([
+                'base_uri' => $serverURL,
+                'headers' => [
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Basic '.$base64ServerKey
+                ],
+            ]);
+            $request = $client->request('POST', $serverURL, [
+                'json' => $transactionDataArr
+            ]);
+
+            Utilities::ExceptionLog($request->getBody());
+
+            if($request->getStatusCode() == 200){
+                $collect = json_decode($request->getBody());
+                dd($request->getBody());
+                if($collect->status_code == 200){
+
+                }
+                else{
+                    $redirectUrl = $collect->redirect_url;
+                }
+
+                return $redirectUrl;
+            }
         }
-        else{
-            $serverKey = env('MIDTRANS_API_KEY_PRODUCTION');
-            $serverURL = env('MIDTRANS_URL_PRODUCTION');
+        catch (\Exception $ex){
+//            error_log($ex);
+            dd($ex);
+            Utilities::ExceptionLog('midtransSendRequest EX = '. $ex);
         }
-        json_encode($transactionDataArr);
-        $base64ServerKey = base64_encode($serverKey);
-
-        $client = new Client([
-            'base_uri' => $serverURL,
-            'headers' => [
-                'Accept' => 'application/json',
-                'Content-Type' => 'application/json',
-                'Authorization' => 'Basic '.$base64ServerKey
-            ],
-        ]);
-        $request = $client->request('POST', $serverURL, [
-            'json' => $transactionDataArr
-        ]);
-
-        Utilities::ExceptionLog($request->getBody());
-
-        if($request->getStatusCode() == 200){
-            $collect = json_decode($request->getBody());
-            $redirectUrl = $collect->redirect_url;
-
-            return $redirectUrl;
-        }
-
     }
 }

@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\libs\Midtrans;
 use App\Models\ContactMessage;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Subscribe;
@@ -107,7 +110,16 @@ class HomeController extends Controller
         return $currency;
     }
     public function TestingPurpose(){
+        $paymentMethod = "credit_card";
+        $order = Order::find(1);
+        $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
+        //set data to request
+        $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
+//        dd($transactionDataArr);
+        //sending to midtrans
+        $redirectUrl = Midtrans::sendRequest($transactionDataArr);
+        dd($redirectUrl);
     }
     public function setCookie(){
 
