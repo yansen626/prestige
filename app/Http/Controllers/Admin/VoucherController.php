@@ -74,20 +74,25 @@ class VoucherController extends Controller
 
         if ($validator->fails()) return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
+        if(empty($request->input('voucher_amount')) && empty($request->input('voucher_percentage'))){
+            return redirect()->back()->withErrors("Voucher Percentage or Voucher Amount is required!")->withInput($request->all());
+        }
         //Sort out Data
         $startDate = Carbon::parse($request->input('start_date'));
         $finishDate = Carbon::parse($request->input('finish_date'));
 
         //Check DateTime
         if(!$finishDate->greaterThan($startDate)){
-            Session::flash('error', 'Finish Date cannot be less than Start Date!');
-            return redirect()->back();
+//            Session::flash('error', 'Finish Date cannot be less than Start Date!');
+            return redirect()->back()->withErrors("Finish Date cannot be less than Start Date!")->withInput($request->all());
         }
 
         $user = Auth::guard('admin')->user();
         $voucher = Voucher::create([
             'code'  => $request->input('code'),
             'description'   => $request->input('description'),
+            'voucher_amount'   => $request->input('voucher_amount'),
+            'voucher_percentage'   => $request->input('voucher_percentage'),
             'start_date'    => $startDate,
             'finish_date'   => $finishDate,
             'category_id'   => $request->input('category'),
@@ -175,6 +180,8 @@ class VoucherController extends Controller
         $voucher = Voucher::find($request->input('id'));
 
         $voucher->code = $request->input('code');
+        $voucher->voucher_amount   = $request->input('voucher_amount');
+        $voucher->voucher_percentage   = $request->input('voucher_percentage');
         $voucher->description = $request->input('description');
         $voucher->start_date = $startDate;
         $voucher->finish_date = $finishDate;

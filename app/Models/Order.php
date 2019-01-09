@@ -14,6 +14,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property int $id
  * @property int $user_id
+ * @property string $voucher_code
+ * @property float $voucher_amount
  * @property int $billing_address_id
  * @property string $shipping_option
  * @property int $shipping_address_id
@@ -53,6 +55,8 @@ class Order extends Eloquent
 
 	protected $fillable = [
 		'user_id',
+		'voucher_code',
+		'voucher_amount',
 		'billing_address_id',
 		'shipping_option',
 		'shipping_address_id',

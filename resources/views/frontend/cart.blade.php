@@ -93,11 +93,14 @@
                         <div class="col-xs-12 col-sm-12 col-md-12">
                             <span>Have a coupon code?</span>
                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <span id="voucher_response" style="display:none;color:red;"></span>
+                        </div>
                         <div class="col-xs-12 col-sm-12 col-md-8">
-                            <input type="text" class="form-control input-bordered" name="coupon" id="coupon" placeholder="TYPE CODE HERE" style="text-align: center"/>
+                            <input type="text" class="form-control input-bordered" name="voucher" id="voucher" placeholder="TYPE CODE HERE" style="text-align: center"/>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4">
-                            <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 100%;line-height: 0px; border: 1px solid #282828;">APPLY CODE</button>
+                            <button id="apply-voucher" type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 100%;line-height: 0px; border: 1px solid #282828;">APPLY CODE</button>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -5%;">
                             <hr style="height:1px;border:none;color:#eee;background-color:#eee;" />
@@ -111,18 +114,13 @@
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
                             ${{$totalPrice}} USD
+                            <input type="hidden" id="subtotal" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6">
-                            SHIPPING
+                            VOUCHER
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            $00.00 USD
-                        </div>
-                        <div class="col-xs-6 col-sm-12 col-md-6">
-                            TAX
-                        </div>
-                        <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            $00.00 USD
+                            $<span id="voucher_amount">0</span> USD
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -1%;">
                             <hr style="height:1px;border:none;color:#eee;background-color:#eee;" />
@@ -131,7 +129,8 @@
                             TOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="font-size: 14px; text-align: right;" >
-                            $160.00 USD
+                            ${{$totalPrice}} USD
+                            <input type="hidden" id="total" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -3px;">
                             <hr style="height:1px;border:none;color:black;background-color:#333;" />
@@ -211,6 +210,47 @@
             // As pointed out in comments,
             // it is superfluous to have to manually call the modal.
             // $('#addBookDialog').modal('show');
+        });
+        $('#apply-voucher').on("click", function () {
+            var voucherCode = $('#voucher').val();
+            // alert(name);
+            if(voucherCode != ""){
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('check.voucher') }}',
+                    datatype : "application/json",
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'voucher-code': voucherCode,
+                    }, // no need to stringify
+                    success: function (result) {
+                        if (typeof result == "string")
+                            result = JSON.parse(result);
+                        if (result.success) {
+                            $('#voucher_response').show();
+                            $('#voucher_response').text("Voucher is applied");
+                            var voucherData = result.success.split('#');
+                            var subtotal = $('#subtotal').val();
+                            var grandTotal = $('#total').val();
+                            alert(voucherData[0] + " "+voucherData[1]);
+                            if(voucherData[0] != 0){
+                                var newTotal = grandTotal - voucherData[0];
+                                $('#total').val(newTotal);
+                                $('#voucher_amount').text(voucherData[0]);
+                            }
+                            if(voucherData[1] != 0){
+                                var voucherAmount = (subtotal * voucherData[1])/100;
+                                var newTotal = grandTotal - voucherAmount;
+                                $('#total').val(newTotal);
+                                $('#voucher_amount').text(voucherAmount);
+                            }
+                        } else {
+                            $('#voucher_response').show();
+                            $('#voucher_response').text("Voucher is not valid");
+                        }
+                    }
+                });
+            }
         });
     </script>
 @endsection

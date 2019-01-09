@@ -67,6 +67,20 @@
                                         </div>
                                     </div>
 
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label" for="voucher_amount">Voucher Amount </label>
+                                            <input id="voucher_amount" type="number" class="form-control"
+                                                   name="voucher_amount" value="{{ old('voucher_amount') }}">
+                                        </div>
+                                        <div class="col-md-6 mb-6">
+                                            <label class="form-label" for="voucher_percentage">Voucher Percentage </label>
+                                            <input id="voucher_percentage" type="number" class="form-control"
+                                                   name="voucher_percentage" value="{{ old('voucher_percentage') }}">
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="category">Category *</label>

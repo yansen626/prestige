@@ -38,6 +38,8 @@ Route::post('/add-cart', 'Frontend\CartController@addCart')->name('add.cart');
 Route::get('/cart', 'Frontend\CartController@getCart')->name('cart');
 Route::post('/submit-cart', 'Frontend\CartController@submitCart')->name('submit.cart');
 Route::post('/delete-cart', 'Frontend\CartController@deleteCart')->name('delete.cart');
+Route::post('/check-voucher', 'Frontend\CartController@voucherValidation')->name('check.voucher');
+
 Route::get('/billing-shipment', 'Frontend\BillingController@getBilling')->name('billing');
 Route::post('/submit-billing-shipment', 'Frontend\BillingController@submitBilling')->name('submit.billing');
 Route::get('/checkout/{order}', 'Frontend\CheckoutController@getCheckout')->name('checkout');

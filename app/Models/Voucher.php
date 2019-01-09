@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 12 Dec 2018 08:06:03 +0000.
+ * Date: Wed, 09 Jan 2019 09:26:29 +0000.
  */
 
 namespace App\Models;
@@ -15,6 +15,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $id
  * @property string $code
  * @property string $description
+ * @property int $voucher_percentage
+ * @property float $voucher_amount
  * @property int $category_id
  * @property int $product_id
  * @property \Carbon\Carbon $start_date
@@ -24,9 +26,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $created_by
  * @property int $updated_by
  * @property int $status_id
- *
- * @property \App\Models\AdminUser $createdBy
- * @property \App\Models\AdminUser $updatedBy
+ * 
+ * @property \App\Models\AdminUser $admin_user
  * @property \App\Models\Status $status
  *
  * @package App\Models
@@ -34,6 +35,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Voucher extends Eloquent
 {
 	protected $casts = [
+		'voucher_percentage' => 'int',
+		'voucher_amount' => 'float',
 		'category_id' => 'int',
 		'product_id' => 'int',
 		'created_by' => 'int',
@@ -49,6 +52,8 @@ class Voucher extends Eloquent
 	protected $fillable = [
 		'code',
 		'description',
+		'voucher_percentage',
+		'voucher_amount',
 		'category_id',
 		'product_id',
 		'start_date',
@@ -58,15 +63,10 @@ class Voucher extends Eloquent
 		'status_id'
 	];
 
-    public function createdBy()
-    {
-        return $this->belongsTo(\App\Models\AdminUser::class, 'created_by');
-    }
-
-    public function updatedBy()
-    {
-        return $this->belongsTo(\App\Models\AdminUser::class, 'updated_by');
-    }
+	public function admin_user()
+	{
+		return $this->belongsTo(\App\Models\AdminUser::class, 'updated_by');
+	}
 
 	public function status()
 	{

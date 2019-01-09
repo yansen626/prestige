@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Product;
+use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -87,7 +89,12 @@ class CartController extends Controller
             $user = Auth::user();
             $carts = Cart::where('user_id', $user->id)->get();
             $flag = 1;
-            $totalPrice = 0;
+            if(!empty($carts)){
+                $totalPrice = $carts->sum('total_price');
+            }
+            else{
+                $totalPrice = 0;
+            }
         }
         else if(Session::has('cart')){
             $oldCart = Session::get('cart');
@@ -160,6 +167,26 @@ class CartController extends Controller
         }
         catch (\Exception $exception){
 
+        }
+    }
+
+    public function voucherValidation(Request $request){
+        //dd($request->input('cartId'));
+
+        try{
+            $voucher = $request->input('voucher-code');
+            $voucherDB = Voucher::where('code', $voucher)->first();
+            if(!empty($voucherDB)){
+                $voucherAmount = $voucherDB->voucher_amount;
+                $voucherPercentage = $voucherDB->voucher_percentage;
+                return Response::json(array('success' => $voucherAmount.'#'.$voucherPercentage));
+            }
+            else{
+                return Response::json(array('errors' => 'INVALID'));
+            }
+        }
+        catch (\Exception $exception){
+            return Response::json(array('errors' => 'INVALID' . $request->input('id')));
         }
     }
 }

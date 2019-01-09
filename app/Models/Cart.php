@@ -15,13 +15,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $id
  * @property int $user_id
  * @property int $product_id
+ * @property string $voucher_code
  * @property string $description
  * @property int $qty
  * @property float $price
  * @property float $total_price
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * 
+ *
  * @property \App\Models\Product $product
  * @property \App\Models\User $user
  *
@@ -40,6 +41,7 @@ class Cart extends Eloquent
 	protected $fillable = [
 		'user_id',
 		'product_id',
+		'voucher_code',
 		'description',
 		'qty',
 		'price',
