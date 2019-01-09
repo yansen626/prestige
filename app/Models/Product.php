@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Mon, 31 Dec 2018 04:48:40 +0000.
+ * Date: Wed, 09 Jan 2019 04:31:08 +0000.
  */
 
 namespace App\Models;
@@ -14,6 +14,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * 
  * @property int $id
  * @property string $type
+ * @property int $category_id
  * @property string $name
  * @property string $slug
  * @property string $sku
@@ -36,6 +37,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
+ * @property \App\Models\Category $category
  * @property \Illuminate\Database\Eloquent\Collection $attributes
  * @property \Illuminate\Database\Eloquent\Collection $carts
  * @property \Illuminate\Database\Eloquent\Collection $categories
@@ -55,6 +57,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Product extends Eloquent
 {
 	protected $casts = [
+		'category_id' => 'int',
 		'status' => 'int',
 		'in_stock' => 'int',
 		'track_stock' => 'int',
@@ -70,6 +73,7 @@ class Product extends Eloquent
 
 	protected $fillable = [
 		'type',
+		'category_id',
 		'name',
 		'slug',
 		'sku',
@@ -90,6 +94,11 @@ class Product extends Eloquent
 		'meta_title',
 		'meta_description'
 	];
+
+	public function category()
+	{
+		return $this->belongsTo(\App\Models\Category::class);
+	}
 
 	public function attributes()
 	{
@@ -112,8 +121,8 @@ class Product extends Eloquent
 
 	public function orders()
 	{
-		return $this->belongsToMany(\App\Models\Order::class, 'order_product_variations')
-					->withPivot('id', 'attribute_id', 'attribute_dropdown_option_id')
+		return $this->belongsToMany(\App\Models\Order::class, 'order_products')
+					->withPivot('id', 'qty', 'price', 'tax_amount', 'grand_total', 'product_info')
 					->withTimestamps();
 	}
 

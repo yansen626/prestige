@@ -7,22 +7,37 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
     public function getCheckout(Order $order)
     {
-        $orderProduct = OrderProduct::where('order_id', $order->id)->get();
-        $isIndonesian = true;
-        $data=([
-            'order' => $order,
-            'orderProduct' => $orderProduct,
-            'isIndonesian' => $isIndonesian
-        ]);
-        return view('frontend.checkout')->with($data);
+        if (Auth::check()){
+            $user = Auth::user();
+            if($order->user_id == $user->id){
+                $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+
+                $isIndonesian = true;
+                $data=([
+                    'order' => $order,
+                    'orderProduct' => $orderProduct,
+                    'isIndonesian' => $isIndonesian
+                ]);
+                return view('frontend.checkout')->with($data);
+            }
+        }
+        return redirect()->route('home');
     }
 
     public function submitCheckout(Request $request, Order $order){
+        // Credit card = credit_card
+        // Bank Transfer = bank_transfer, echannel,
+        // Internet Banking = bca_klikpay, bca_klikbca, mandiri_clickpay, bri_epay, cimb_clicks, danamon_online,
+        // Ewallet = telkomsel_cash, indosat_dompetku, mandiri_ecash,
+        // Over the counter = cstore
+        // Cardless Credit = akulaku
+
         $paymentMethod = $request->input('payment_method');
         $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 

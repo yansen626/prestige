@@ -4,7 +4,7 @@
     <section class="bg-white">
         <div class="container">
             <div class="row">
-                <form method="POST" action="{{ route('login') }}">
+                <form method="POST" action="{{ route('signin') }}">
                     @csrf
 
                     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
@@ -14,12 +14,14 @@
                             <br/>
                         </div>
                         <div class="col-md-12">
-                            @foreach($errors->all() as $error)
-                                <span class="form-message">
-                                    <strong> {{ $error }} </strong>
-                                    <br/>
-                                </span>
-                            @endforeach
+                            @if($errors->count() > 0)
+                                @foreach($errors->all() as $error)
+                                    <span class="form-message">
+                                        <strong> {{ $error }} </strong>
+                                        <br/>
+                                    </span>
+                                @endforeach
+                            @endif
                         </div>
                         <div class="col-md-12">
                             <input type="email" class="form-control" name="email" id="email" placeholder="Email" required/>

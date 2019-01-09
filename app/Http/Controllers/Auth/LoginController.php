@@ -42,7 +42,13 @@ class LoginController extends Controller
         $this->middleware('guest')->except(['logout', 'logoutUser']);
     }
 
-    public function login(Request $request){
+    public function login(){
+
+        return View("auth.login");
+    }
+
+    public function authenticate(Request $request)
+    {
         $rules = array(
             'email'                 => 'required|email',
             'password'              => 'required',

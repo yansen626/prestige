@@ -19,16 +19,16 @@ class ProductController extends Controller
         $category = request()->category;
         if(!empty($category)){
             $filter = $category;
-            $items = CategoryProduct::where('category_id', $filter)
-                ->orderBy('created_at', 'desc')->get();
+
+            $items = Product::where('status', 1)->where('category_id', $filter)->orderBy('created_at', 'desc')->get();
         }
         else{
-            $items = CategoryProduct::all();
+            $items = Product::all();
             $filter = 0;
         }
-
+//        dd($items);
         $data = [
-            'items'      => $items,
+            'productResult'      => $items,
             'filter'      => $filter
         ];
         return view('frontend.products.index')->with($data);

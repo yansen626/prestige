@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/', 'Frontend\HomeController@index')->name('home');
 Route::get('/login', 'Auth\LoginController@login')->name('login');
+Route::post('/signin', 'Auth\LoginController@authenticate')->name('signin');
 Route::get('/logout', 'Auth\LoginController@logoutUser')->name('logout');
 
 

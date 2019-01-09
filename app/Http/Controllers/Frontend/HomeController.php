@@ -110,6 +110,13 @@ class HomeController extends Controller
         return $currency;
     }
     public function TestingPurpose(){
+        // Credit card = credit_card
+        // Bank Transfer = bank_transfer, echannel,
+        // Internet Banking = bca_klikpay, bca_klikbca, mandiri_clickpay, bri_epay, cimb_clicks, danamon_online,
+        // Ewallet = telkomsel_cash, indosat_dompetku, mandiri_ecash,
+        // Over the counter = cstore
+        // Cardless Credit = akulaku
+
         $paymentMethod = "credit_card";
         $order = Order::find(1);
         $orderProduct = OrderProduct::where('order_id', $order->id)->get();
@@ -119,7 +126,8 @@ class HomeController extends Controller
 //        dd($transactionDataArr);
         //sending to midtrans
         $redirectUrl = Midtrans::sendRequest($transactionDataArr);
-        dd($redirectUrl);
+//        dd($redirectUrl);
+        return redirect($redirectUrl);
     }
     public function setCookie(){
 

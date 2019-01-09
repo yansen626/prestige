@@ -44,7 +44,7 @@
                     <!-- Product #1 -->
                     @foreach($productResult as $product)
                         @php($link = route('product.detail', ['product'=>$product->slug] ))
-                    @php($productImage = $product->product_images->where('is_main_image', 1)->first())
+                        @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
                                 <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
@@ -74,11 +74,13 @@
                         <h3>Bags & Totes</h3>
                     </div>
                     <!-- Product #1 -->
-                    @for($i=0;$i<4;$i++)
-                        @php($link = route('product.detail', ['product'=>1] ))
+                    @php($products = $productResult->where('category_id', 1))
+                    @foreach($products as $product)
+                        @php($link = route('product.detail', ['product'=>$product->slug] ))
+                        @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
-                                <img src="{{ asset('images/Links/product-1.jpg') }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
                                 <div class="product--hover">
                                     <div class="product--action">
                                         <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
@@ -87,14 +89,14 @@
                             </div><!-- .product-img end -->
                             <div class="product--content">
                                 <div class="product--title">
-                                    <h3><a href="{{$link}}">Le Coq Sportif Triangle T-Shirt</a></h3>
+                                    <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>$18.00</span>
+                                    <span>${{$product->price}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
-                @endfor
+                @endforeach
                 <!-- .product end -->
                 </div><!-- .row end -->
             @endif
@@ -104,11 +106,13 @@
                         <h3>Wallets</h3>
                     </div>
                     <!-- Product #1 -->
-                    @for($i=0;$i<4;$i++)
-                        @php($link = route('product.detail', ['product'=>1] ))
+                    @php($products = $productResult->where('category_id', 2))
+                    @foreach($products as $product)
+                        @php($link = route('product.detail', ['product'=>$product->slug] ))
+                        @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
-                                <img src="{{ asset('images/Links/product-2.jpg') }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
                                 <div class="product--hover">
                                     <div class="product--action">
                                         <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
@@ -117,14 +121,14 @@
                             </div><!-- .product-img end -->
                             <div class="product--content">
                                 <div class="product--title">
-                                    <h3><a href="{{$link}}">Le Coq Sportif Triangle T-Shirt</a></h3>
+                                    <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>$18.00</span>
+                                    <span>${{$product->price}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
-                @endfor
+                @endforeach
                 <!-- .product end -->
                 </div><!-- .row end -->
             @endif
@@ -134,11 +138,13 @@
                         <h3>Card Holders</h3>
                     </div>
                     <!-- Product #1 -->
-                    @for($i=0;$i<4;$i++)
-                        @php($link = route('product.detail', ['product'=>1] ))
+                    @php($products = $productResult->where('category_id', 3))
+                    @foreach($products as $product)
+                        @php($link = route('product.detail', ['product'=>$product->slug] ))
+                        @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
-                                <img src="{{ asset('images/Links/product-3.jpg') }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
                                 <div class="product--hover">
                                     <div class="product--action">
                                         <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
@@ -147,14 +153,14 @@
                             </div><!-- .product-img end -->
                             <div class="product--content">
                                 <div class="product--title">
-                                    <h3><a href="{{$link}}">Le Coq Sportif Triangle T-Shirt</a></h3>
+                                    <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>$18.00</span>
+                                    <span>${{$product->price}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
-                @endfor
+                @endforeach
                 <!-- .product end -->
                 </div><!-- .row end -->
             @endif
@@ -164,11 +170,13 @@
                         <h3>Pouches</h3>
                     </div>
                     <!-- Product #1 -->
-                    @for($i=0;$i<4;$i++)
-                        @php($link = route('product.detail', ['product'=>1] ))
+                    @php($products = $productResult->where('category_id', 4))
+                    @foreach($products as $product)
+                        @php($link = route('product.detail', ['product'=>$product->slug] ))
+                        @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
-                                <img src="{{ asset('images/Links/product-4.jpg') }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
                                 <div class="product--hover">
                                     <div class="product--action">
                                         <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
@@ -177,14 +185,14 @@
                             </div><!-- .product-img end -->
                             <div class="product--content">
                                 <div class="product--title">
-                                    <h3><a href="{{$link}}">Le Coq Sportif Triangle T-Shirt</a></h3>
+                                    <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>$18.00</span>
+                                    <span>${{$product->price}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
-                @endfor
+                @endforeach
                 <!-- .product end -->
                 </div><!-- .row end -->
             @endif
@@ -194,11 +202,13 @@
                         <h3>Phone Cases</h3>
                     </div>
                     <!-- Product #1 -->
-                    @for($i=0;$i<4;$i++)
-                        @php($link = route('product.detail', ['product'=>1] ))
+                    @php($products = $productResult->where('category_id', 5))
+                    @foreach($products as $product)
+                        @php($link = route('product.detail', ['product'=>$product->slug] ))
+                        @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
-                                <img src="{{ asset('images/Links/product-5.png') }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
                                 <div class="product--hover">
                                     <div class="product--action">
                                         <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
@@ -207,14 +217,14 @@
                             </div><!-- .product-img end -->
                             <div class="product--content">
                                 <div class="product--title">
-                                    <h3><a href="{{$link}}">Le Coq Sportif Triangle T-Shirt</a></h3>
+                                    <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>$18.00</span>
+                                    <span>${{$product->price}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
-                @endfor
+                @endforeach
                 <!-- .product end -->
                 </div><!-- .row end -->
             @endif

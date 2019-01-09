@@ -9,50 +9,62 @@
 namespace App\libs;
 
 use App\Models\Cart;
+use App\Models\Currency;
 use GuzzleHttp\Client;
 
 class Midtrans
 {
     public static function setRequestData($order, $orderProducts, $paymentMethod){
         try{
+            $rateDB = Currency::where('name', $order->currency_code)->first();
+            $rate = $rateDB->rate;
+            $grandTotal = 0;
             //item_details
             $item_details = [];
             foreach($orderProducts as $orderProduct){
                 //set item detail
+                $price = (int)($orderProduct->price * $rate);
                 $item_detail = array(
-                    'id' => $orderProduct->id,
-                    'price' => $orderProduct->price,
+                    'id' => $order->id."-".$orderProduct->id,
+                    'price' => $price,
                     'quantity' => $orderProduct->qty,
                     'name' => $orderProduct->Product->name
                 );
+                $grandTotal += $price;
                 array_push($item_details, $item_detail);
             }
 
             //add shipping as item for midtrans
+            $shippingPrice = (int)($order->shipping_charge * $rate);
             $item_shipping = array(
-                'id' => $order->id,
-                'price' => $order->shipping_charge,
+                'id' => $order->id."-Shipping",
+                'price' => $shippingPrice,
                 'quantity' => 1,
                 'name' => "Shipping ".$order->shipping_option
             );
+            $grandTotal += $shippingPrice;
             array_push($item_details, $item_shipping);
 
             //add other service as item for midtrans
+            $servicePrice = (int)($order->payment_charge * $rate);
             $item_service = array(
-                'id' => $order->id,
-                'price' => $order->payment_charge,
+                'id' => $order->id."-Service",
+                'price' => $servicePrice,
                 'quantity' => 1,
                 'name' => "Service"
             );
+            $grandTotal += $servicePrice;
             array_push($item_details, $item_service);
 
             //add tax as item for midtrans
+            $taxPrice = (int)($order->tax_amount * $rate);
             $item_tax = array(
-                'id' => $order->id,
-                'price' => $order->tax_amount,
+                'id' => $order->id."-Tax",
+                'price' => $taxPrice,
                 'quantity' => 1,
                 'name' => "Tax"
             );
+            $grandTotal += $taxPrice;
             array_push($item_details, $item_tax);
 
 
@@ -82,7 +94,7 @@ class Midtrans
             
             $transaction_details = array(
                 'order_id' => rand(),
-                'gross_amount' => $order->grand_total, // no decimal allowed
+                'gross_amount' => $grandTotal, // no decimal allowed
             );
 
             $customer_details = array(
@@ -111,11 +123,11 @@ class Midtrans
             $isDevelopment = env('MIDTRANS_IS_DEVELOPMENT');
 
             if($isDevelopment == "true"){
-                $serverKey = env('MIDTRANS_API_KEY_SANDBOX');
-                $serverURL = env('MIDTRANS_API_URL_SANDBOX');
+                $serverKey = env('MIDTRANS_SERVER_KEY_SANDBOX');
+                $serverURL = env('MIDTRANS_URL_SANDBOX');
             }
             else{
-                $serverKey = env('MIDTRANS_API_KEY_PRODUCTION');
+                $serverKey = env('MIDTRANS_SERVER_KEY');
                 $serverURL = env('MIDTRANS_URL_PRODUCTION');
             }
             json_encode($transactionDataArr);
@@ -137,14 +149,13 @@ class Midtrans
 
             if($request->getStatusCode() == 200){
                 $collect = json_decode($request->getBody());
-                dd($request->getBody());
-                if($collect->status_code == 200){
-
-                }
-                else{
+//                dd($collect);
+                if($collect->status_code == 201){
                     $redirectUrl = $collect->redirect_url;
                 }
-
+                else{
+                    $redirectUrl = "";
+                }
                 return $redirectUrl;
             }
         }
