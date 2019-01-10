@@ -27,7 +27,7 @@
                                 <div class="container-fluid animatedParent animateOnce my-3">
                                     <div class="animated fadeInUpShort">
                                         <!-- Input -->
-                                        {{ Form::open(['route'=>['admin.product.store'],'method' => 'post','id' => 'general-form', 'enctype' => 'multipart/form-data']) }}
+                                        {{ Form::open(['route'=>['admin.product.update'],'method' => 'post','id' => 'general-form', 'enctype' => 'multipart/form-data']) }}
 
                                         @include('partials.admin._messages')
                                         @foreach($errors->all() as $error)
@@ -79,7 +79,7 @@
                                                         <select id="category" name="category" class="custom-select form-control">
                                                             <option value="-1">Select Product Category</option>
                                                             @foreach($categories as $category)
-                                                                <option value="{{ $category->id }}" @if($category->id == $selectedCategory->category_id) selected @endif > {{ $category->name }}</option>
+                                                                <option value="{{ $category->id }}" @if($category->id == $product->category_id) selected @endif > {{ $category->name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

@@ -37,9 +37,10 @@ class Cart
         unset($this->items[$id]);
     }
 
-    public function update($id, $newQty){
+    public function update($id, $newQty, $voucher){
         $this->items[$id]['qty'] = $newQty;
         $this->items[$id]['price'] = $this->items[$id]['price'] * $this->items[$id]['qty'];
+        $this->items[$id]['voucher_code'] = $voucher;
         $this->totalPrice = $this->items[$id]['price'] * $newQty;
     }
 }

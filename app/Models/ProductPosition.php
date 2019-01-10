@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 12 Dec 2018 04:31:58 +0000.
+ * Date: Thu, 10 Jan 2019 06:30:38 +0000.
  */
 
 namespace App\Models;
@@ -17,8 +17,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $name
  * @property int $pos_x
  * @property int $pos_y
- * @property \Carbon\Carbon $created_at
- * @property \Carbon\Carbon $updated_at
  * 
  * @property \App\Models\Product $product
  *
@@ -26,6 +24,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  */
 class ProductPosition extends Eloquent
 {
+	public $timestamps = false;
+
 	protected $casts = [
 		'product_id' => 'int',
 		'pos_x' => 'int',

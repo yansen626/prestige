@@ -133,6 +133,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/product/edit-customize/{item}', 'Admin\ProductController@editCustomize')->name('admin.product.edit.customize');
     Route::post('/product/update-customize/{item}', 'Admin\ProductController@updateCustomize')->name('admin.product.update.customize');
     Route::get('/product/edit/{item}', 'Admin\ProductController@edit')->name('admin.product.edit');
+    Route::post('/product/update', 'Admin\ProductController@update')->name('admin.product.update');
 });
 
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');

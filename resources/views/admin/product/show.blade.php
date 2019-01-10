@@ -51,7 +51,7 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label for="category">Category</label>
-                                                        <input type="text" class="form-control" id="sku" name="sku" value="{{$productCategory->category->name}}" disabled>
+                                                        <input type="text" class="form-control" id="sku" name="sku" value="{{$product->category->name}}" disabled>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label for="validationCustom04">Price</label>

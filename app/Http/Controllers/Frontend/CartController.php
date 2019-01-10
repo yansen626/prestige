@@ -120,9 +120,11 @@ class CartController extends Controller
                 // Update Qty in DB
                 $items = $request->input('id');
                 $qtys = $request->input('qty');
+                $voucher = $request->input('voucher');
                 foreach ($items as $item){
                     $cart = Cart::find($item);
                     $cart->qty = $qtys[$item];
+                    $cart->voucher_code = $voucher;
                     $cart->save();
                 }
             }
@@ -132,8 +134,9 @@ class CartController extends Controller
                 $cart = new \App\Cart($oldCart);
                 $items = $request->input('id');
                 $qtys = $request->input('qty');
+                $voucher = $request->input('voucher');
                 foreach ($items as $item){
-                    $cart->update($item, $qtys[$item]);
+                    $cart->update($item, $qtys[$item], $voucher);
                 }
                 $request->session()->put('cart', $cart);
             }

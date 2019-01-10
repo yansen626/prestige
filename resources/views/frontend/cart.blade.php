@@ -98,6 +98,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-8">
                             <input type="text" class="form-control input-bordered" name="voucher" id="voucher" placeholder="TYPE CODE HERE" style="text-align: center"/>
+                            <input type="hidden" id="voucher_applied" value=""/>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-4">
                             <button id="apply-voucher" type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 100%;line-height: 0px; border: 1px solid #282828;">APPLY CODE</button>
@@ -120,7 +121,8 @@
                             VOUCHER
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            $<span id="voucher_amount">0</span> USD
+                            $<span id="voucher_amount_span">0</span> USD
+                            <input type="hidden" name="subtotal" id="voucher_amount" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -1%;">
                             <hr style="height:1px;border:none;color:#eee;background-color:#eee;" />
@@ -129,8 +131,8 @@
                             TOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="font-size: 14px; text-align: right;" >
-                            ${{$totalPrice}} USD
-                            <input type="hidden" id="total" value="{{$totalPrice}}" >
+                            $<span id="grand_total_span">{{$totalPrice}}</span> USD
+                            <input type="hidden" id="grand_total" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -3px;">
                             <hr style="height:1px;border:none;color:black;background-color:#333;" />
@@ -213,43 +215,54 @@
         });
         $('#apply-voucher').on("click", function () {
             var voucherCode = $('#voucher').val();
+            var voucherCodeApplied = $('#voucher_applied').val();
             // alert(name);
             if(voucherCode != ""){
-                $.ajax({
-                    type: 'POST',
-                    url: '{{ route('check.voucher') }}',
-                    datatype : "application/json",
-                    data: {
-                        '_token': '{{ csrf_token() }}',
-                        'voucher-code': voucherCode,
-                    }, // no need to stringify
-                    success: function (result) {
-                        if (typeof result == "string")
-                            result = JSON.parse(result);
-                        if (result.success) {
-                            $('#voucher_response').show();
-                            $('#voucher_response').text("Voucher is applied");
-                            var voucherData = result.success.split('#');
-                            var subtotal = $('#subtotal').val();
-                            var grandTotal = $('#total').val();
-                            alert(voucherData[0] + " "+voucherData[1]);
-                            if(voucherData[0] != 0){
-                                var newTotal = grandTotal - voucherData[0];
-                                $('#total').val(newTotal);
-                                $('#voucher_amount').text(voucherData[0]);
+                if(voucherCodeApplied == voucherCode){
+                    $('#voucher_response').text("Voucher already applied");
+                }
+                else{
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('check.voucher') }}',
+                        datatype : "application/json",
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'voucher-code': voucherCode,
+                        }, // no need to stringify
+                        success: function (result) {
+                            if (typeof result == "string")
+                                result = JSON.parse(result);
+                            if (result.success) {
+                                $('#voucher_response').show();
+                                $('#voucher_response').text("Voucher is applied");
+                                var voucherData = result.success.split('#');
+                                var subtotal = $('#subtotal').val();
+                                var grandTotal = $('#grand_total').val();
+                                // alert(grandTotal);
+                                if(voucherData[0] != 0){
+                                    var newTotal = grandTotal - voucherData[0];
+                                    $('#grand_total').val(newTotal);
+                                    $('#grand_total_span').text(newTotal);
+                                    $('#voucher_amount').val(voucherData[0]);
+                                    $('#voucher_amount_span').text(voucherData[0]);
+                                }
+                                if(voucherData[1] != 0){
+                                    var voucherAmount = (subtotal * voucherData[1])/100;
+                                    var newTotal = grandTotal - voucherAmount;
+                                    $('#grand_total').val(newTotal);
+                                    $('#grand_total_span').text(newTotal);
+                                    $('#voucher_amount').val(voucherAmount);
+                                    $('#voucher_amount_span').text(voucherAmount);
+                                }
+                                $('#voucher_applied').val(voucherCode);
+                            } else {
+                                $('#voucher_response').show();
+                                $('#voucher_response').text("Voucher is not valid");
                             }
-                            if(voucherData[1] != 0){
-                                var voucherAmount = (subtotal * voucherData[1])/100;
-                                var newTotal = grandTotal - voucherAmount;
-                                $('#total').val(newTotal);
-                                $('#voucher_amount').text(voucherAmount);
-                            }
-                        } else {
-                            $('#voucher_response').show();
-                            $('#voucher_response').text("Voucher is not valid");
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     </script>

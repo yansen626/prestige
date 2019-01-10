@@ -198,8 +198,6 @@ class ProductController extends Controller
                 'name' => $request->input('position_name'),
                 'pos_x' => $request->input('position_x'),
                 'pos_y' => $request->input('position_y'),
-                'created_at'        => $dateTimeNow->toDateTimeString(),
-                'updated_at'        => $dateTimeNow->toDateTimeString(),
             ]);
 
             return redirect()->route('admin.product.show',['item' => $item->id]);
