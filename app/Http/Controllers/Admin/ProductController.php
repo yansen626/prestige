@@ -236,7 +236,6 @@ class ProductController extends Controller
             $item->name = $request->input('position_name');
             $item->pos_x = $request->input('position_x');
             $item->pos_y = $request->input('position_y');
-            $item->updated_at = $dateTimeNow->toDateTimeString();
             $item->save();
 
             return redirect()->route('admin.product.show',['item' => $item->product_id]);
@@ -265,7 +264,7 @@ class ProductController extends Controller
     }
 
     public function update(Request $request, Product $product){
-
+//        dd($request);
         try{
             $validator = Validator::make($request->all(), [
                 'name'        => 'required',
@@ -275,7 +274,6 @@ class ProductController extends Controller
                 'qty'             => 'required',
                 'weight'             => 'required',
                 'description'             => 'required',
-                'tags'             => 'required',
             ]);
 
             if ($request->input('category') == "-1") {
@@ -293,6 +291,7 @@ class ProductController extends Controller
 
 //            dd($slug);
             // update product
+            $product->category_id = $request->input('category');
             $product->name = $request->input('name');
             $product->slug = $slug;
             $product->sku = $request->input('sku');
@@ -308,11 +307,11 @@ class ProductController extends Controller
 
             $product->save();
 
-            // update product category
-            $selectedCategory = CategoryProduct::where('product_id', $product->id)->first();
-            $selectedCategory->category_id = $request->input('category');
-            $selectedCategory->updated_at = $dateTimeNow->toDateTimeString();
-            $selectedCategory->save();
+//            // update product category
+//            $selectedCategory = CategoryProduct::where('product_id', $product->id)->first();
+//            $selectedCategory->category_id = $request->input('category');
+//            $selectedCategory->updated_at = $dateTimeNow->toDateTimeString();
+//            $selectedCategory->save();
 
 
             // update product main image, and image detail
@@ -352,7 +351,7 @@ class ProductController extends Controller
             return redirect()->route('admin.product.show',['item' => $product->id]);
 
         }catch(\Exception $ex){
-//            dd($ex);
+            dd($ex);
             error_log($ex);
             return back()->withErrors("Something Went Wrong")->withInput();
         }

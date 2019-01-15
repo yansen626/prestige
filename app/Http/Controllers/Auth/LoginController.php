@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -65,6 +66,8 @@ class LoginController extends Controller
 
             return $this->sendLockoutResponse($request);
         }
+
+        Session::forget('cart');
 
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->back()->withErrors('Wrong Email or Password!!', 'default')->withInput($request->only('email'));

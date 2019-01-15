@@ -73,23 +73,34 @@
                                         <input type="text" class="form-control auto-blur"
                                                name="custom-text" id="custom-text" placeholder="TEXT HERE" maxlength="8"
                                                onfocusout="ChangePosition()" style="text-transform:uppercase" />
-                                        <div class="col-xs-12 col-sm-12 col-md-4">
-                                            <p style="margin-bottom: 0;margin-left: 11%;">Choose Font</p>
+                                        <div class="col-xs-12 col-sm-12 col-md-3">
+                                            <p style="margin-bottom: 0;margin-left: 11%;">Position</p>
+                                            <select class="minimal" data-width="auto"
+                                                    id="custom-position" name="custom-position"
+                                                    onchange="ChangeSelectedPosition()" style="width: 130px;">
+                                                @foreach($product->product_positions as $position)
+                                                    @php($value=$position->pos_x."-".$position->pos_y)
+                                                    <option value="{{$value}}">{{$position->name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-3">
+                                            <p style="margin-bottom: 0;margin-left: 11%;">Font</p>
                                             <select class="minimal" data-width="auto" id="custom-font" name="custom-font" onchange="ChangePosition()">
                                                 <option value="Serif">SERIF</option>
                                                 <option value="Sans-serif">SAN SERIF</option>
                                             </select>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-4">
-                                            <p style="margin-bottom: 0;margin-left: 11%;">Choose Color</p>
+                                        <div class="col-xs-12 col-sm-12 col-md-3">
+                                            <p style="margin-bottom: 0;margin-left: 11%;">Color</p>
                                             <select class="selectpicker minimal" data-width="auto" id="custom-color" name="custom-color" onchange="ChangePosition()">
                                                 <option value="Gold-FFD700">GOLD</option>
                                                 <option value="Silver-C0C0C0">SILVER</option>
                                                 <option value="Bronze-CD7F32">BRONZE</option>
                                             </select>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-4">
-                                            <p style="margin-bottom: 0;margin-left: 11%;">Choose Size</p>
+                                        <div class="col-xs-12 col-sm-12 col-md-3">
+                                            <p style="margin-bottom: 0;margin-left: 11%;">Size</p>
                                             <select class="selectpicker minimal" data-width="auto" id="custom-size" name="custom-size" onchange="ChangePosition()">
                                                 <option value="Large-24">LARGE</option>
                                                 <option value="Medium-20">MEDIUM</option>
@@ -132,11 +143,19 @@
 
 @section('scripts')
     <script>
+        function ChangeSelectedPosition(){
+            var selectedPosition = $('#custom-position').val();
+            var positionArr = selectedPosition.split("-");
+            $('#position_x').val(positionArr[0]);
+            $('#position_y').val(positionArr[1]);
+            ChangePosition();
+        }
         function ChangePosition(){
             $('#slider-product').hide();
             $('#custom-section').show();
 
             var text = $('#custom-text').val().toUpperCase();
+            var selectedPosition = $('#custom-position').val();
             var selectedFont = $('#custom-font').val();
             var color = $('#custom-color').val();
             var size = $('#custom-size').val();

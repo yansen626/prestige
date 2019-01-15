@@ -11,6 +11,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Province;
 use App\Models\User;
+use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,7 @@ class BillingController extends Controller
         // Have to Check to if User already Login
         $flag=0;
         $address = null;
+        $user = null;
         if (Auth::check())
         {
             //Read DB
@@ -46,17 +48,27 @@ class BillingController extends Controller
                 }
             }
         }
+        //get cart total weight for rajaongkir process
+        $cartDB = Cart::where('user_id', $user->id)->get();
+        $totalWeight = 0;
+        foreach ($cartDB as $cart){
+            $weight = $cart->product->weight * $cart->qty;
+            $totalWeight += $weight;
+        }
 
         $countries = Country::all();
         $provinces = Province::all();
         $cities = City::all();
 
+        $isIndonesian = true;
         $data=([
             'flag' => $flag,
             'address' => $address,
             'countries' => $countries,
             'provinces' => $provinces,
             'cities' => $cities,
+            'totalWeight' => $totalWeight,
+            'isIndonesian' => $isIndonesian,
         ]);
 //        dd($data);
         return view('frontend.billing-shipment')->with($data);
@@ -69,8 +81,6 @@ class BillingController extends Controller
         // Check Delivery Fee from Rajaongkir or DHL
         // Clear Session
         try{
-            //dd($request);
-
             $user = null;
             $userAddress = null;
             // Get Data from Session
@@ -147,8 +157,7 @@ class BillingController extends Controller
                     }
                     // Session for Cart deleted
                     // Session for user Created to be used later for payment at Checkout
-                    // and Shipment for Rajaongkir or DHL
-                    Session::forget('cart');
+                    // and Shipment for Rajaongkir or DHLl
                     if(!Session::has('user')) {
                         $request->session()->put('user', $user);
                     }
@@ -199,25 +208,34 @@ class BillingController extends Controller
 //            dd($userAddress);
 
             // get rajaongkir Data
-//            $client = new \GuzzleHttp\Client();
-//            $response = $client->request('POST', 'https://api.rajaongkir.com/starter/cost', [
-//                'headers' => [
-//                    'key' => '49c2d8cab7d32fa5222c6355a07834d4'
-//                ],
-//                'form_params' => [
-//                    'origin' => 152,
-//                    'destination' => $userAddress->city,
-//                    'weight' => 1000,
-//                    'courier' => 'jne'
-//                ]
-//            ]);
-//            $response = $response->getBody()->getContents();
-//            $data = (array)json_decode($response);
-//            dd($data);
-            $data = null;
+            $courier = $request->input('courier');
+            $selectedCourier = explode('-',$courier);
+            $totalWeight = $request->input('weight');
+            $data = array();
+            $data = $this->getRajaongkirData($totalWeight, $selectedCourier, $userAddress);
+            if(empty($data)){
+                return redirect()->back()->withErrors("Internal Server Error");
+            }
+
+            //dd($data);
+            $results = array();
+            $results = $data->rajaongkir->results;
+//            dd($results);
+            $shippingPrice = 0;
+            foreach($results as $result){
+                foreach ($result->costs as $cost){
+                    if($cost->service == $selectedCourier[1]){
+                        $shippingPrice = $cost->cost[0]->value;
+                    }
+                }
+            }
+//            dd($shippingPrice);
+            if($shippingPrice == 0){
+                return redirect()->back()->withErrors("Shipping service not available");
+            }
 
             // create transaction from setTransaction
-            $transactionSuccess = $this->setTransaction($user, $userAddress, $data);
+            $transactionSuccess = $this->setTransaction($user, $userAddress, $courier, $shippingPrice);
             if($transactionSuccess > 0){
                 // Redirect to Checkout
                 return redirect()->route('checkout', ['order'=>$transactionSuccess]);
@@ -233,23 +251,58 @@ class BillingController extends Controller
         }
     }
 
-    public function setTransaction($user, $userAddress, $rajaongkirData){
+    public function getRajaongkirData($totalWeight, $selectedCourier, $userAddress){
+        $result = array();
+        try{
+            $client = new \GuzzleHttp\Client();
+            $url = "https://api.rajaongkir.com/starter/cost";
+//            $url = env('RAJAONGKIR_URL').'/cost';
+            $key = env('RAJAONGKIR_KEY');
+
+            $response = $client->request('POST', $url, [
+                'headers' => [
+                    'key' => $key
+                ],
+                'form_params' => [
+                    'origin' => 152,
+                    'destination' => 25,
+                    'weight' => $totalWeight,
+                    'courier' => $selectedCourier[0]
+                ]
+            ]);
+//            dd($response);
+            $response = $response->getBody()->getContents();
+            $result = json_decode($response);
+//            dd($result);
+            return $result;
+        }
+        catch (\Exception $exception){
+            //dd($exception);
+            return $result;
+        }
+    }
+
+    public function setTransaction($user, $userAddress, $courier, $shippingPrice){
         try{
             $carts = Cart::where('user_id', $user->id)->get();
             $totalPrice = $carts->sum('total_price');
+            //create order
             $newOrder = Order::create([
                 'user_id' => $user->id,
                 'billing_address_id' => $userAddress->id,
-                'shipping_option' => "jne-REG",
+                'shipping_option' => $courier,
                 'shipping_address_id' => $userAddress->id,
-                'shipping_charge' => 0,
+                'shipping_charge' => $shippingPrice,
                 'payment_option' => "",
+                'sub_total' => $totalPrice,
                 'grand_total' => $totalPrice,
+                'currency_code' => "IDR",
                 'order_status_id' => 1,
                 'created_at' => Carbon::now('Asia/Jakarta'),
                 'updated_at' => Carbon::now('Asia/Jakarta')
             ]);
 
+            //create order product
             foreach ($carts as $cart){
                 $newOrderProduct = OrderProduct::create([
                     'order_id' => $newOrder->id,
@@ -261,13 +314,39 @@ class BillingController extends Controller
                     'created_at' => Carbon::now('Asia/Jakarta'),
                     'updated_at' => Carbon::now('Asia/Jakarta')
                 ]);
+                $newOrder->voucher_code = $cart->voucher_code;
+                $newOrder->save();
                 $cart->delete();
+            }
+
+            //edit voucher if using voucher
+            $voucherDB = Voucher::where('code', $cart->voucher_code)->first();
+            if(!empty($voucherDB)){
+                $voucherAmount = $voucherDB->voucher_amount;
+                if(!empty($voucherAmount)){
+                    $newSubTotal = $totalPrice - $voucherAmount;
+
+                    $newOrder->voucher_amount = $voucherAmount;
+                    $newOrder->sub_total = $newSubTotal;
+                    $newOrder->grand_total = $newSubTotal;
+                    $newOrder->save();
+                }
+                $voucherPercentage = $voucherDB->voucher_percentage;
+                if(!empty($voucherPercentage)){
+                    $voucherPercentageAmount = ($totalPrice * $voucherPercentage) / 100;
+                    $newSubTotal = $totalPrice - $voucherPercentageAmount;
+
+                    $newOrder->voucher_amount = $voucherPercentageAmount;
+                    $newOrder->sub_total = $newSubTotal;
+                    $newOrder->grand_total = $newSubTotal;
+                    $newOrder->save();
+                }
             }
 
             return $newOrder->id;
         }
         catch (\Exception $exception){
-            dd($exception);
+//            dd($exception);
             return 0;
         }
     }

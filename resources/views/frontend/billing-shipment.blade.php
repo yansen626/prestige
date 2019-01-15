@@ -20,7 +20,7 @@
                                 </span>
                             @endforeach
                         </div>
-
+                        <input type="hidden" name="weight" value="{{$totalWeight}}">
                         @if(!\Illuminate\Support\Facades\Auth::guard('web')->check() && $address == null)
                             <div>
                                 <div class="col-md-6">
@@ -234,8 +234,60 @@
                     </div>
                 </div>
 
+                <div class="col-md-12">
+                    <h1>Shipping Service</h1>
+                    <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+                    <br/>
+                </div>
                 <div class="row">
+                    <div class="col-md-12">
+                        @if($isIndonesian)
 
+                            <div class="col-md-4">
+                                <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
+                                <br>
+                                <input type="radio" name="courier" id="jne" value="jne-OKE" selected/> OKE <br>
+                                <input type="radio" name="courier" id="jne" value="jne-REG"/> REG <br>
+                                <input type="radio" name="courier" id="jne" value="jne-YES"/> YES <br>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
+                                <br>
+                                <input type="radio" name="courier" id="jne" value="tiki-REG" /> REG (REGULER SERVICE) <br>
+                                <input type="radio" name="courier" id="jne" value="tiki-ONS" /> ONS (OVER NIGHT SERVICE) <br>
+                                <input type="radio" name="courier" id="jne" value="tiki-SDS" /> SDS (SAME DAY SERVICE) <br>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
+                                <br>
+                                <input type="radio" name="courier" id="jne" value="pos-Paket Kilat Khusus" /> Paket Kilat Khusus <br>
+                            </div>
+                            {{--jne, pos, tiki, rpx, esl, pcp, pandu, wahana, sicepat, jnt, pahala, cahaya, sap, jet, indah, dse, slis, first, ncs, star, ninja, lion, idl--}}
+                            {{--<input type="radio" name="courier" id="jne" value="jne" />--}}
+                            {{--<img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">--}}
+                            {{--&nbsp;--}}
+                            {{--<input type="radio" name="courier" id="tiki" value="tiki"/>--}}
+                            {{--<img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-50">--}}
+
+                            {{--<input type="radio" name="courier" id="pos" value="pos"/>--}}
+                            {{--<img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-50">--}}
+
+                            {{--<input type="radio" name="courier" id="sicepat" value="sicepat"/>--}}
+                            {{--<img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-50">--}}
+
+                            {{--<input type="radio" name="courier" id="jnt" value="jnt"/>--}}
+                            {{--<img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-50">--}}
+
+                            {{--<input type="radio" name="courier" id="jet" value="jet"/>--}}
+                            {{--<img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-50">--}}
+
+                            {{--<input type="radio" name="courier" id="ninja" value="ninja"/>--}}
+                            {{--<img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-50">--}}
+                        @endif
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-6">
                         <div class="col-xs-12 col-sm-12 col-md-6">
                             @if($flag==0)
