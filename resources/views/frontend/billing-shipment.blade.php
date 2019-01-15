@@ -234,7 +234,19 @@
                     </div>
                 </div>
 
-                <div class="col-md-12">
+                <div class="row padding-top-3">
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                            @if($flag==0)
+                                &nbsp;
+                            @else
+                                <input type="checkbox" name="another_shipment" id="another_shipment" class=""/> Ship to a different address
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 padding-top-3">
                     <h1>Shipping Service</h1>
                     <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                     <br/>
@@ -246,8 +258,8 @@
                             <div class="col-md-4">
                                 <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
                                 <br>
-                                <input type="radio" name="courier" id="jne" value="jne-OKE" selected/> OKE <br>
-                                <input type="radio" name="courier" id="jne" value="jne-REG"/> REG <br>
+                                <input type="radio" name="courier" id="jne" value="jne-REG" checked/> REG <br>
+                                <input type="radio" name="courier" id="jne" value="jne-OKE"/> OKE <br>
                                 <input type="radio" name="courier" id="jne" value="jne-YES"/> YES <br>
                             </div>
                             <div class="col-md-4">
@@ -261,6 +273,18 @@
                                 <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
                                 <br>
                                 <input type="radio" name="courier" id="jne" value="pos-Paket Kilat Khusus" /> Paket Kilat Khusus <br>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
+                                <br>
+                                <input type="radio" name="courier" id="jne" value="sicepat-REG" checked/> REG (Layanan Reguler) <br>
+                                <input type="radio" name="courier" id="jne" value="jne-OKE"/> BEST (Besok Sampai Tujuan) <br>
+                            </div>
+                            <div class="col-md-4">
+                                <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
+                                <br>
+                                <input type="radio" name="courier" id="jne" value="J&T-EZ" /> EZ (Regular Service) <br>
+                                <input type="radio" name="courier" id="jne" value="J&T-JSD" /> JSD (Same Day Service) <br>
                             </div>
                             {{--jne, pos, tiki, rpx, esl, pcp, pandu, wahana, sicepat, jnt, pahala, cahaya, sap, jet, indah, dse, slis, first, ncs, star, ninja, lion, idl--}}
                             {{--<input type="radio" name="courier" id="jne" value="jne" />--}}
@@ -287,15 +311,9 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row padding-top-3">
                     <div class="col-xs-12 col-sm-12 col-md-6">
-                        <div class="col-xs-12 col-sm-12 col-md-6">
-                            @if($flag==0)
-                                &nbsp;
-                            @else
-                                <input type="checkbox" name="another_shipment" id="another_shipment" class=""/> Ship to a different address
-                            @endif
-                        </div>
+                        &nbsp;
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-3 text-center-xs">
                         <a href="{{ route('cart') }}"><button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 130px;line-height: 0px; border: 1px solid #282828;">BACK TO CART</button></a>
@@ -309,6 +327,16 @@
     </section>
 @endsection
 
+@section('styles')
+    <style>
+       .padding-top-3{
+           padding-top: 3% !important;
+       }
+        .bg-white{
+            padding-bottom:0;
+        }
+    </style>
+@endsection
 @section('scripts')
     <script type="text/javascript">
         $("#another_shipment").change(function() {

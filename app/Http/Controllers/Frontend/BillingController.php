@@ -265,7 +265,9 @@ class BillingController extends Controller
                 ],
                 'form_params' => [
                     'origin' => 152,
-                    'destination' => 25,
+                    'originType' => 'city',
+                    'destination' => $userAddress->city_id,
+                    'destinationType' => 'city',
                     'weight' => $totalWeight,
                     'courier' => $selectedCourier[0]
                 ]
