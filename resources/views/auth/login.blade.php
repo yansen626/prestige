@@ -48,8 +48,8 @@
                                 <span>Remember Me</span>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <button type="submit" class="btn btn--primary btn--block">Login</button>
+                        <div class="col-md-12 text--center">
+                            <button type="submit" class="btn btn--secondary btn--bordered">Login</button>
                         </div>
                     </div><!-- .col-md-12 end -->
                 </form>

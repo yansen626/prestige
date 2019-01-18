@@ -66,14 +66,14 @@
                                         Customization
                                     </a>
                                 </div>
-                                <div id="collapse01-2" class="panel--body panel-collapse collapse">
+                                <div id="collapse01-2" class="panel--body panel-collapse collapse responsive-height">
                                     <span>Enter personalized text (max 8 characters)</span>
                                     <span>&nbsp;</span>
                                     <form>
                                         <input type="text" class="form-control auto-blur"
                                                name="custom-text" id="custom-text" placeholder="TEXT HERE" maxlength="8"
                                                onfocusout="ChangePosition()" style="text-transform:uppercase" />
-                                        <div class="col-xs-12 col-sm-12 col-md-3">
+                                        <div class="col-xs-12 col-sm-12 col-md-3 text-center">
                                             <p style="margin-bottom: 0;margin-left: 11%;">Position</p>
                                             <select class="minimal" data-width="auto"
                                                     id="custom-position" name="custom-position"
@@ -84,14 +84,14 @@
                                                 @endforeach
                                             </select>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-3">
+                                        <div class="col-xs-12 col-sm-12 col-md-3 text-center">
                                             <p style="margin-bottom: 0;margin-left: 11%;">Font</p>
                                             <select class="minimal" data-width="auto" id="custom-font" name="custom-font" onchange="ChangePosition()">
                                                 <option value="Serif">SERIF</option>
                                                 <option value="Sans-serif">SAN SERIF</option>
                                             </select>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-3">
+                                        <div class="col-xs-12 col-sm-12 col-md-3 text-center">
                                             <p style="margin-bottom: 0;margin-left: 11%;">Color</p>
                                             <select class="selectpicker minimal" data-width="auto" id="custom-color" name="custom-color" onchange="ChangePosition()">
                                                 <option value="Gold-FFD700">GOLD</option>
@@ -99,7 +99,7 @@
                                                 <option value="Bronze-CD7F32">BRONZE</option>
                                             </select>
                                         </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-3">
+                                        <div class="col-xs-12 col-sm-12 col-md-3 text-center">
                                             <p style="margin-bottom: 0;margin-left: 11%;">Size</p>
                                             <select class="selectpicker minimal" data-width="auto" id="custom-size" name="custom-size" onchange="ChangePosition()">
                                                 <option value="Large-24">LARGE</option>
@@ -125,7 +125,7 @@
                         </div>
                         <!-- End .Accordion-->
 
-                        <div style="padding: 5% 0 5% 0">
+                        <div class="mobile-center" style="padding: 5% 0 5% 0">
                             <button class="btn btn--secondary btn--bordered" type="submit">Add to Cart</button>
                         </div>
                     </div>
@@ -139,7 +139,6 @@
     </section>
     <!-- #cover5 end -->
 @endsection
-
 
 @section('scripts')
     <script>

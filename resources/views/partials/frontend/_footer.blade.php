@@ -5,7 +5,7 @@
     <div class="footer-widget">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6 footer--widget footer--widget-about">
+                <div class="col-xs-12 col-sm-6 col-md-6 footer--widget footer--widget-about centered">
                     <div class="footer--widget-title">
                         <h2>nama.</h2>
                     </div>
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div><!-- .col-md-3 end -->
-                <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="col-xs-12 col-sm-6 col-md-6 centered">
                     <div>
                         <h5>Join Our Newsletter</h5>
                     </div>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="clearfix"></div>
                         <p>
-                            COPYRIGHT 2018 NAMA LEATHER GOODS
+                            COPYRIGHT 2019 NAMA LEATHER GOODS
                         </p>
                     </div>
                 </div><!-- .col-md-3 end -->
@@ -60,3 +60,4 @@
     </div><!-- .footer-widget end -->
 
 </footer>
+
