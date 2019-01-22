@@ -21,8 +21,8 @@
         display:none;
     }
     /* product detail*/
-    .responsive-height {
-        height: 400px;
+    .responsive-height, .slider-home{
+        height: 400px !important;
     }
     .mobile-center{
         text-align: center;
@@ -53,8 +53,8 @@
     }
 
     /* product detail*/
-    .responsive-height {
-        height: 400px;
+    .responsive-height, .slider-home {
+        height: 400px !important;
     }
     .mobile-center{
         text-align: center;

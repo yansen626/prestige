@@ -4,7 +4,7 @@
         <div class="container">
             <div class="bottom-bar-border">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 top--contact hidden-xs center color-black">
+                    <div class="col-xs-12 col-sm-12 col-md-12 top--contact center color-black">
                         <ul class="list-inline mb-0">
                             <li>
                                 <span>FREE SHIPPING ON All ORDERS OVER XXX</span>
