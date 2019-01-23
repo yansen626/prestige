@@ -2,7 +2,8 @@
 
 @section('content')
 
-    <section id="shopcart" class="shop shop-cart bg-white">
+    <!-- DESKTOP -->
+    <section id="shopcart" class="shop shop-cart bg-white hidden-sm hidden-xs">
         <div class="container" style="color: black;">
             <form method="POST" action="{{ route('submit.cart') }}">
                 @csrf
@@ -37,9 +38,9 @@
                                             <td class="cart-product-item">{{ $cart->product->colour }}</td>
                                             <td class="cart-product-quantity">
                                                 <div class="product-quantity">
-                                                    <a href="#"><i class="fa fa-minus" onclick="updateQty('{{ $cart->id }}', 'min')"></i></a>
+                                                    <a><i class="fa fa-minus" onclick="updateQty('{{ $cart->id }}', 'min')"></i></a>
                                                     <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart->id }}" name="qty[{{ $cart->id }}]" readonly>
-                                                    <a href="#"><i class="fa fa-plus" onclick="updateQty('{{ $cart->id }}', 'plus')"></i></a>
+                                                    <a><i class="fa fa-plus" onclick="updateQty('{{ $cart->id }}', 'plus')"></i></a>
                                                 </div>
                                             </td>
                                             <td class="cart-product-item">{!! $cart->description  !!} </td>
@@ -63,9 +64,9 @@
                                             <td class="cart-product-item">{{ $cart['item']['product']['colour'] }}</td>
                                             <td class="cart-product-quantity">
                                                 <div class="product-quantity">
-                                                    <a href="#"><i class="fa fa-minus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'min')"></i></a>
+                                                    <a><i class="fa fa-minus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'min')"></i></a>
                                                     <input type="text" value="{{ $cart['qty'] }}" id="qty{{ $cart['item']['product_id'] }}" name="qty[{{ $cart['item']['product_id'] }}]" readonly>
-                                                    <a href="#"><i class="fa fa-plus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'plus')"></i></a>
+                                                    <a><i class="fa fa-plus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'plus')"></i></a>
                                                 </div>
                                             </td>
                                             <td class="cart-product-item">{!! $cart['item']['description'] !!}</td>
@@ -87,6 +88,144 @@
                     </div>
                 </div><!-- .row end -->
                 
+                <div class="row">
+                    <!-- Coupon Side -->
+                    <div class="col-xs-12 col-sm-12 col-md-8">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <span>Have a coupon code?</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <span id="voucher_response" style="display:none;color:red;"></span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8">
+                            <input type="text" class="form-control input-bordered" name="voucher" id="voucher" placeholder="TYPE CODE HERE" style="text-align: center"/>
+                            <input type="hidden" id="voucher_applied" value=""/>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <button id="apply-voucher" type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 100%;line-height: 0px; border: 1px solid #282828;">APPLY CODE</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -5%;">
+                            <hr style="height:1px;border:none;color:#eee;background-color:#eee;" />
+                        </div>
+                    </div>
+
+                    <!-- Subtotal Side -->
+                    <div class="col-xs-12 col-sm-12 col-md-4" style="margin-left: -1%; font-weight: 500;">
+                        <div class="col-xs-6 col-sm-12 col-md-6">
+                            SUBTOTAL
+                        </div>
+                        <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
+                            ${{$totalPrice}} USD
+                            <input type="hidden" id="subtotal" value="{{$totalPrice}}" >
+                        </div>
+                        <div class="col-xs-6 col-sm-12 col-md-6">
+                            VOUCHER
+                        </div>
+                        <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
+                            $<span id="voucher_amount_span">0</span> USD
+                            <input type="hidden" name="subtotal" id="voucher_amount" value="{{$totalPrice}}" >
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -1%;">
+                            <hr style="height:1px;border:none;color:#eee;background-color:#eee;" />
+                        </div>
+                        <div class="col-xs-6 col-sm-12 col-md-6">
+                            TOTAL
+                        </div>
+                        <div class="col-xs-6 col-sm-12 col-md-6" style="font-size: 14px; text-align: right;" >
+                            $<span id="grand_total_span">{{$totalPrice}}</span> USD
+                            <input type="hidden" id="grand_total" value="{{$totalPrice}}" >
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -3px;">
+                            <hr style="height:1px;border:none;color:black;background-color:#333;" />
+                        </div>
+                        <div class="col-xs-6 col-sm-12 col-md-6">
+                            <a href="{{ route('home') }}"><button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 130px;line-height: 0px; border: 1px solid #282828;">CONTINUE SHOPPING</button></a>
+                        </div>
+                        <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
+                            <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">PROCEED</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 10px; text-align: justify;">
+                            * Note: Shipping and taxes will be updated during checkout
+                            based on your billing and shipping information.
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- .container end -->
+    </section>
+
+    <!-- MOBILE -->
+    <section id="shopcart" class="shop shop-cart bg-white hidden-md hidden-lg">
+        <div class="container" style="color: black;">
+            <form method="POST" action="{{ route('submit.cart') }}">
+                @csrf
+
+                <div class="row">
+                    <h1>Your Cart</h1>
+                        @if($carts != null && $flag == 1)
+                            @foreach($carts as $cart)
+                                <div class="col-xs-12 col-sm-12 col-md-12 border-b">
+                                    <div class="col-xs-6 col-sm-6">
+                                        <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product" style="width: 100%;"/>
+
+                                        <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart->id }}" data-target="#myModal"></i>
+                                        <input type="hidden" value="{{ $cart->price }}" id="price{{ $cart->id }}">
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6">
+                                        {{ $cart->product->name }}, {{ $cart->product->colour }}
+                                        <input type="hidden" name="id[]" value="{{ $cart->id }}"/>
+                                        <br>
+                                        {!! $cart->description  !!}
+
+                                        <br>
+                                        TOTAL<br>
+                                        <span id="total_price{{ $cart->id }}">{{ $cart->total_price }} </span>
+
+                                        <div class="product-quantity">
+                                            <a><i class="fa fa-minus" onclick="updateQty('{{ $cart->id }}', 'min')"></i></a>
+                                            <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart->id }}" name="qty[{{ $cart->id }}]" readonly>
+                                            <a><i class="fa fa-plus" onclick="updateQty('{{ $cart->id }}', 'plus')"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @elseif($carts != null && $flag == 2)
+                            @foreach($carts as $cart)
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="col-xs-6 col-sm-6" style="font-size: 20px; text-align: center;">
+                                        <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product" style="width: 100%;"/>
+                                        <br>
+                                        <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>
+                                        <input type="hidden" value="{{ $cart['item']['price'] }}" id="price{{ $cart['item']['product_id'] }}">
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6">
+                                        {{ $cart['item']['product']['name'] }}, {{ $cart['item']['product']['colour'] }}
+                                        <input type="hidden" name="id[]" value="{{ $cart['item']['product_id'] }}"/>
+                                        <br>
+                                        {!! $cart['item']['description'] !!}
+
+                                        <br>
+                                        TOTAL<br>
+                                        <span id="total_price{{ $cart['item']['product_id'] }}">{{ $cart['item']['price'] }} </span>
+
+                                        <div class="product-quantity">
+                                            <a><i class="fa fa-minus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'min')"></i></a>
+                                            <input type="text" value="{{ $cart['qty'] }}" id="qty{{ $cart['item']['product_id'] }}" name="qty[{{ $cart['item']['product_id'] }}]" readonly>
+                                            <a><i class="fa fa-plus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'plus')"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <h3>Sorry You haven't put anything in the cart yet!</h3>
+                            </div>
+                            <tr class="cart-product">
+                                <td colspan="6"></td>
+                            </tr>
+                        @endif
+                </div><!-- .row end -->
+
                 <div class="row">
                     <!-- Coupon Side -->
                     <div class="col-xs-12 col-sm-12 col-md-8">

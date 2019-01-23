@@ -9,6 +9,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\Product;
 use App\Models\Province;
 use App\Models\User;
 use App\Models\Voucher;
@@ -27,6 +28,8 @@ class BillingController extends Controller
         $flag=0;
         $address = null;
         $user = null;
+        $totalWeight = 0;
+
         if (Auth::check())
         {
             //Read DB
@@ -47,14 +50,31 @@ class BillingController extends Controller
                     $flag = 2;
                 }
             }
+            else{
+                $oldCart = Session::has('cart') ? Session::get('cart') : null;
+                $cart = new \App\Cart($oldCart);
+                $carts = $cart->items;
+
+                foreach ($carts as $cartData) {
+                    $productDB = Product::find($cartData['item']['product_id']);
+
+                    $weight = $productDB->weight *  $cartData['item']['qty'];
+                    $totalWeight += $weight;
+                }
+            }
         }
-        //get cart total weight for rajaongkir process
-        $cartDB = Cart::where('user_id', $user->id)->get();
-        $totalWeight = 0;
-        foreach ($cartDB as $cart){
-            $weight = $cart->product->weight * $cart->qty;
-            $totalWeight += $weight;
+
+        if(!empty($user)){
+            //get cart total weight for rajaongkir process
+            $cartDB = Cart::where('user_id', $user->id)->get();
+            foreach ($cartDB as $cart){
+                $weight = $cart->product->weight * $cart->qty;
+                $totalWeight += $weight;
+            }
         }
+
+
+
 
         $countries = Country::all();
         $provinces = Province::all();
@@ -144,11 +164,12 @@ class BillingController extends Controller
                     $carts = $cart->items;
 
                     foreach ($carts as $cartData) {
+                        dd($carts);
                         $newCart = Cart::create([
                             'product_id' => $cartData['item']['product_id'],
                             'user_id' => $user->id,
                             'description' => $cartData['item']['description'],
-                            'qty' => 1,
+                            'qty' => $cartData['item']['qty'],
                             'price' => $cartData['item']['product_id'],
                             'total_price' => $cartData['price'],
                             'created_at' => Carbon::now('Asia/Jakarta'),
