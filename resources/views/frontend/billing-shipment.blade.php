@@ -85,7 +85,7 @@
                                     <select name="city" id="city" class="form-control">
                                         <option value="-1" selected>CITY</option>
                                         @foreach($cities as $city)
-                                            <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                            <option value="{{ $city->province_id . '-' . $city->id }}">{{ $city->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -208,7 +208,7 @@
                         <select name="city_secondary" id="city" class="form-control">
                             <option value="-1" selected>CITY</option>
                             @foreach($cities as $city)
-                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                <option value="{{ $city->province_id . '-' . $city->id }}">{{ $city->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -347,5 +347,39 @@
                 $('#new-address').hide();
             }
         });
+
+        (function($){
+            var province = $('#province');
+            var city = $('#city');
+            var cityOptions = city.children();
+
+            province.on('change', function(){
+                //remove the options
+                cityOptions.detach();
+                //readd only the options for the country
+                cityOptions.filter(function(){
+                    return this.value.indexOf(province.val() + "-") === 0;
+                }).appendTo(city);
+                //clear out the value so it doesn't default to one it should not
+                city.val('');
+            });
+        }(jQuery));
+
+        (function($){
+            var province = $('#province_secondary');
+            var city = $('#city_secondary');
+            var cityOptions = city.children();
+
+            province.on('change', function(){
+                //remove the options
+                cityOptions.detach();
+                //readd only the options for the country
+                cityOptions.filter(function(){
+                    return this.value.indexOf(province.val() + "-") === 0;
+                }).appendTo(city);
+                //clear out the value so it doesn't default to one it should not
+                city.val('');
+            });
+        }(jQuery));
     </script>
 @endsection
