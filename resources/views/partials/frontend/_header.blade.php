@@ -16,9 +16,9 @@
         </div>
     </div>
 
-    <!-- Menu section
+    <!-- Menu section DESKTOP
     ============================================= -->
-    <nav id="primary-menu" class="navbar navbar-fixed-top">
+    <nav id="primary-menu" class="navbar navbar-fixed-top hidden-sm hidden-xs">
         <div class="container">
             <!-- Collect the nav links, forms, and other content for toggling -->
 
@@ -182,6 +182,149 @@
                 </ul>
             </div>
             <!-- .navbar-collapse -->
+        </div>
+        <!-- .container end  -->
+    </nav>
+
+    <!-- Menu section MOBILE
+    ============================================= -->
+    <nav id="primary-menu" class="navbar navbar-fixed-top hidden-md hidden-lg">
+        <div class="container">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+
+            <!-- .navbar-collapse -->
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#navbar-collapse-3" aria-expanded="false"
+                        style="float: left;">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="logo center" href="{{route('home')}}">
+                    <img  src="{{ asset('images/icons/nama-brand-logo-black.png') }}" alt="Nama Logo">
+                </a>
+
+                @if(auth()->guard('web')->check())
+                    <a href="{{route('logout')}}" class="navbar-toggle collapsed icon-header-responsive" style="float: right;">
+                        <span class="sr-only">Toggle navigation</span>
+                        <img src="{{asset('/images/icons/login.png')}}" style="width: 100%; height:100%;">
+                    </a>
+                @else
+                    <a href="{{route('login')}}" class="navbar-toggle collapsed icon-header-responsive" style="float: right;">
+                        <span class="sr-only">Toggle navigation</span>
+                        <img src="{{asset('/images/icons/login.png')}}" style="width: 100%; height:100%;">
+                    </a>
+                @endif
+                <a href="{{route('cart')}}" class="navbar-toggle collapsed icon-header-responsive"
+                        style="float: right;">
+                    <span class="sr-only">Toggle navigation</span>
+                    <img src="{{asset('/images/icons/cart-image.png')}}" style="width: 100%; height:100%;">
+                </a>
+            </div>
+
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse-3">
+                <!-- Module Shop -->
+                <div class="module module-search2 pull-left">
+                    <div class="module-icon search-icon color-black">
+                        {{--<i class="fa fa-search"></i>--}}
+                        {{--<span class="title">search</span>--}}
+                        <a class="pointer">SHOP</a>
+                    </div>
+                    <div class="module-content module-fullscreen module--search2-box">
+                        <div class="pos-vertical-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 center">
+                                        <a href="{{route('product.list')}}"><H4 class="header-menu">SHOP ALL</H4></a>
+                                        <a href="/product-list?category=1"><H4 class="header-menu">BAGS & TOTES</H4></a>
+                                        <a href="/product-list?category=2"><H4 class="header-menu">WALLETS</H4></a>
+                                        <a href="/product-list?category=3"><H4 class="header-menu">CARD HOLDERS</H4></a>
+                                        <a href="/product-list?category=4"><H4 class="header-menu">POUCHES</H4></a>
+                                        <a href="/product-list?category=5"><H4 class="header-menu">PHONE CASES</H4></a>
+                                    </div><!-- .col-md-8 end -->
+                                </div><!-- .row end -->
+                            </div><!-- .container end -->
+                        </div>
+                        <a class="module-cancel pointer"><i class="fa fa-close"></i></a>
+                    </div>
+                </div><!-- .module-Shop end -->
+
+                <!-- Module About -->
+                <div class="module module-search2 pull-left">
+                    <div class="module-icon search-icon color-black">
+                        <a href="{{route('about.us')}}">ABOUT</a>
+                    </div>
+                </div><!-- .module-About end -->
+
+                <!-- Module Contact -->
+                <div class="module module-search2 pull-left">
+                    <div class="module-icon search-icon color-black">
+                        {{--<i class="fa fa-search"></i>--}}
+                        {{--<span class="title">search</span>--}}
+                        <a class="pointer">CONTACT</a>
+                    </div>
+                    <div class="module-content module-fullscreen module--search2-box">
+                        <div class="pos-vertical-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12" style="padding: 0 1% 0 7%;">
+                                        <h2>Contact</h2>
+                                        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+                                        <br/>
+                                        {!! Form::open(array('action' => 'Frontend\HomeController@contact', 'id'=>'form-contact', 'class'=>'form-search2', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}
+
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="NAME" required/>
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
+                                        <input type="text" class="form-control" name="order" id="order" placeholder="ORDER NUMBER (IF APPLICABLE)"/>
+                                        <textarea class="form-control" name="message" id="message" rows="2" placeholder="MESSAGE" required></textarea>
+
+                                        <div style="text-align: center;">
+                                            <button type="submit" class="btn btn--secondary btn--bordered">SEND</button>
+                                        </div>
+
+                                        {!! Form::close() !!}
+                                    </div><!-- .col-md-8 end -->
+                                </div><!-- .row end -->
+                            </div><!-- .container end -->
+                        </div>
+                        <a class="module-cancel pointer"><i class="fa fa-close"></i></a>
+                    </div>
+                </div><!-- .module-Contact end -->
+
+                <!-- Module Search -->
+                <div class="module module-search pull-left">
+                    <div class="module-icon search-icon color-black">
+                        {{--<i class="fa fa-search"></i>--}}
+                        {{--<span class="title">search</span>--}}
+                        <a class="pointer">SEARCH</a>
+                    </div>
+                    <div class="module-content module-fullscreen module--search-box">
+                        <div class="pos-vertical-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 center">
+                                        <h4>Search</h4>
+
+                                        {!! Form::open(array('action' => 'Frontend\ProductController@search', 'id'=>'form-search', 'class'=>'form-search', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}
+
+                                        <input type="text" class="form-control" id="search-text" name="search-text">
+                                        <button class="btn search-button contact-button" type="button" onClick="empty()" >
+                                            <i class="fa fa-long-arrow-right"></i>
+                                        </button>
+
+                                        {!! Form::close() !!}
+                                    </div><!-- .col-md-8 end -->
+                                </div><!-- .row end -->
+                            </div><!-- .container end -->
+                        </div>
+                        <a class="module-cancel pointer"><i class="fa fa-close"></i></a>
+                    </div>
+                </div><!-- .module-search end -->
+
+            </div>
         </div>
         <!-- .container end  -->
     </nav>

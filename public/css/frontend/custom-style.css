@@ -3755,7 +3755,7 @@ table tbody tr td {
 /* Module Search */
 .module--search-box .form-search {
 	margin-bottom: 0;
-	border-bottom: 2px solid #eeeeee;
+	/*border-bottom: 2px solid #eeeeee;*/
 	padding-bottom: 24px;
 }
 
