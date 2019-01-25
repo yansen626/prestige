@@ -113,6 +113,19 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
+                        <i class="icon icon-settings light-green-text s-18 "></i> <span>Orders</span>
+                        <i class="icon icon-angle-left s-18 pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('admin.orders.index') }}">
+                                <i class="icon icon-user-circle text-green"></i>List Order
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
                         <i class="icon icon-settings light-green-text s-18 "></i> <span>Setup</span>
                         <i class="icon icon-angle-left s-18 pull-right"></i>
                     </a>

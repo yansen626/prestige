@@ -134,6 +134,10 @@ Route::prefix('admin')->group(function(){
     Route::post('/product/update-customize/{item}', 'Admin\ProductController@updateCustomize')->name('admin.product.update.customize');
     Route::get('/product/edit/{item}', 'Admin\ProductController@edit')->name('admin.product.edit');
     Route::post('/product/update', 'Admin\ProductController@update')->name('admin.product.update');
+
+    // Orders
+    Route::get('/orders', 'Admin\OrderController@index')->name('admin.orders.index');
+    Route::get('/orders/detail/{item}', 'Admin\OrderController@show')->name('admin.orders.detail');
 });
 
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
@@ -151,6 +155,7 @@ Route::get('/datatables-contact-message', 'Admin\ContactMessageController@getInd
 Route::get('/datatables-subscribes', 'Admin\SubscribeController@getIndex')->name('datatables.subscribes');
 Route::get('/datatables-vouchers', 'Admin\VoucherController@getIndex')->name('datatables.vouchers');
 Route::get('/datatables-faqs', 'Admin\FaqController@getIndex')->name('datatables.faqs');
+Route::get('/datatables-orders', 'Admin\OrderController@getIndex')->name('datatables.orders');
 
 // Select2
 Route::get('/select-roles', 'Admin\RoleController@getRoles')->name('select.roles');

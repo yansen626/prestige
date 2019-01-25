@@ -91,6 +91,11 @@ class Order extends Eloquent
 		return $this->hasMany(\App\Models\OrderHistory::class);
 	}
 
+    public function order_products()
+    {
+        return $this->hasMany(\App\Models\OrderProduct::class);
+    }
+
 	public function products()
 	{
 		return $this->belongsToMany(\App\Models\Product::class, 'order_products')
