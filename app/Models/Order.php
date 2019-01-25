@@ -30,6 +30,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $order_status_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property string $order_number
  * 
  * @property \App\Models\Address $address
  * @property \App\Models\OrderStatus $order_status
@@ -68,7 +69,8 @@ class Order extends Eloquent
 		'grand_total',
 		'track_code',
 		'currency_code',
-		'order_status_id'
+		'order_status_id',
+        'order_number'
 	];
 
 	public function address()

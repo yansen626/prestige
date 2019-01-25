@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\libs\Utilities;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\City;
@@ -309,6 +310,14 @@ class BillingController extends Controller
         try{
             $carts = Cart::where('user_id', $user->id)->get();
             $totalPrice = $carts->sum('total_price');
+
+            // Order number generator
+            $today = Carbon::today();
+            $prepend = "INV/". $today->year. $today->month. $today->day;
+
+            $nextNo = Utilities::GetNextOrderNumber($prepend);
+            $orderNumber = Utilities::GenerateOrderNumber($prepend, $nextNo);
+
             //create order
             $newOrder = Order::create([
                 'user_id' => $user->id,
@@ -321,9 +330,13 @@ class BillingController extends Controller
                 'grand_total' => $totalPrice,
                 'currency_code' => "IDR",
                 'order_status_id' => 1,
+                'order_number' => $orderNumber,
                 'created_at' => Carbon::now('Asia/Jakarta'),
                 'updated_at' => Carbon::now('Asia/Jakarta')
             ]);
+
+            // Update auto number of Order Number
+            Utilities::UpdateOrderNumber($prepend);
 
             //create order product
             foreach ($carts as $cart){

@@ -29,6 +29,7 @@ class OrderTransformer extends TransformerAbstract
             }
 
             return[
+                'order_number'      => $order->order_number ?? '',
                 'created_at'        => $createdDate,
                 'customer'          => $order->user->first_name . ' ' . $order->user->last_name,
                 'email'             => $order->user->email,
