@@ -24,7 +24,8 @@
                         @if(!\Illuminate\Support\Facades\Auth::guard('web')->check() && $address == null)
                             <div>
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="FIRST NAME" required/>
+                                    <input type="text" class="form-control" name="first_name" id="first_name"
+                                           placeholder="FIRST NAME" value="{{old('first_name')}}" required/>
                                     @if ($errors->has('first_name'))
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('first_name') }}</strong>
@@ -33,7 +34,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="LAST NAME" required/>
+                                    <input type="text" class="form-control" name="last_name" id="last_name"
+                                           placeholder="LAST NAME" value="{{old('last_name')}}" required/>
                                     @if ($errors->has('last_name'))
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('last_name') }}</strong>
@@ -42,7 +44,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
+                                    <input type="email" class="form-control" name="email" id="email"
+                                           placeholder="EMAIL ADDRESS" value="{{old('email')}}" required/>
                                     @if ($errors->has('email'))
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('email') }}</strong>
@@ -51,7 +54,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="phone" id="phone" placeholder="PHONE NUMBER" required/>
+                                    <input type="text" class="form-control" name="phone" id="phone"
+                                           placeholder="PHONE NUMBER" value="{{old('phone')}}" required/>
                                     @if ($errors->has('phone'))
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('phone') }}</strong>
@@ -91,7 +95,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="address_detail" id="address_detail" placeholder="HOUSE/APARTMENT/UNIT NUMBER" required/>
+                                    <input type="text" class="form-control" name="address_detail" id="address_detail"
+                                           placeholder="HOUSE/APARTMENT/UNIT NUMBER" value="{{old('address_detail')}}" required/>
                                     @if ($errors->has('address_detail'))
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('address_detail') }}</strong>
@@ -100,7 +105,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="street" id="street" placeholder="STREET" required/>
+                                    <input type="text" class="form-control" name="street" id="street"
+                                           placeholder="STREET" value="{{old('street')}}" required/>
                                     @if ($errors->has('street'))
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('street') }}</strong>
@@ -109,7 +115,8 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <input type="text" class="form-control" name="suburb" id="suburb" placeholder="SUBURB" required/>
+                                    <input type="text" class="form-control" name="suburb" id="suburb"
+                                           placeholder="SUBURB" value="{{old('suburb')}}" required/>
                                     @if ($errors->has('suburb'))
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('suburb') }}</strong>
@@ -118,7 +125,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="post_code" id="post_code" placeholder="POST CODE" required/>
+                                    <input type="text" class="form-control" name="post_code" id="post_code"
+                                           placeholder="POST CODE" value="{{old('post_code')}}" required/>
                                     @if ($errors->has('post_code'))
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('post_code') }}</strong>
@@ -127,7 +135,8 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="state" id="state" placeholder="STATE" required/>
+                                    <input type="text" class="form-control" name="state" id="state"
+                                           placeholder="STATE" value="{{old('state')}}" required/>
                                     @if ($errors->has('state'))
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('state') }}</strong>
@@ -274,7 +283,7 @@
                                 <br>
                                 <input type="radio" name="courier" id="jne" value="pos-Paket Kilat Khusus" /> Paket Kilat Khusus <br>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-offset-2 col-md-4">
                                 <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
                                 <br>
                                 <input type="radio" name="courier" id="jne" value="sicepat-REG" checked/> REG (Layanan Reguler) <br>

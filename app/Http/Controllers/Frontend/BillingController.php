@@ -104,6 +104,12 @@ class BillingController extends Controller
         try{
             $user = null;
             $userAddress = null;
+            $cityId = $request->input('city');
+
+            if(strpos($cityId, '-') !== false){
+                $splitedCity = explode('-', $cityId);
+                $cityId = $splitedCity[1];
+            }
             // Get Data from Session
             if(!Auth::check()){
                 if(Session::has('cart')) {
@@ -150,14 +156,13 @@ class BillingController extends Controller
                             'description' => $request->input('address_detail'),
                             'country_id' => $request->input('country'),
                             'province_id' => $request->input('province'),
-                            'city_id' => $request->input('city'),
+                            'city_id' => $cityId,
                             'street' => $request->input('street'),
                             'suburb' => $request->input('suburb'),
                             'state' => $request->input('state'),
                             'postal_code' => $request->input('post_code')
                         ]);
                     }
-                    //dd($userAddress->city_id);
 
                     // Save to DB Table Cart
                     $oldCart = Session::has('cart') ? Session::get('cart') : null;
@@ -165,7 +170,7 @@ class BillingController extends Controller
                     $carts = $cart->items;
 
                     foreach ($carts as $cartData) {
-                        dd($carts);
+//                        dd($carts);
                         $newCart = Cart::create([
                             'product_id' => $cartData['item']['product_id'],
                             'user_id' => $user->id,
@@ -203,7 +208,7 @@ class BillingController extends Controller
                         'description' => $request->input('address_detail'),
                         'country_id' => $request->input('country'),
                         'province_id' => $request->input('province'),
-                        'city_id' => $request->input('city'),
+                        'city_id' => $cityId,
                         'street' => $request->input('street'),
                         'suburb' => $request->input('suburb'),
                         'state' => $request->input('state'),
@@ -235,6 +240,7 @@ class BillingController extends Controller
             $totalWeight = $request->input('weight');
             $data = array();
             $data = $this->getRajaongkirData($totalWeight, $selectedCourier, $userAddress);
+
             if(empty($data)){
                 return redirect()->back()->withErrors("Internal Server Error");
             }

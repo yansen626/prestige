@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\libs\Midtrans;
+use App\libs\Utilities;
 use App\Models\ContactMessage;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -110,24 +111,40 @@ class HomeController extends Controller
         return $currency;
     }
     public function TestingPurpose(){
-        // Credit card = credit_card
-        // Bank Transfer = bank_transfer, echannel,
-        // Internet Banking = bca_klikpay, bca_klikbca, mandiri_clickpay, bri_epay, cimb_clicks, danamon_online,
-        // Ewallet = telkomsel_cash, indosat_dompetku, mandiri_ecash,
-        // Over the counter = cstore
-        // Cardless Credit = akulaku
+        $type = 2;
+        switch ($type){
+            //testing midtrans
+            case 1:
+                // Credit card = credit_card
+                // Bank Transfer = bank_transfer, echannel,
+                // Internet Banking = bca_klikpay, bca_klikbca, mandiri_clickpay, bri_epay, cimb_clicks, danamon_online,
+                // Ewallet = telkomsel_cash, indosat_dompetku, mandiri_ecash,
+                // Over the counter = cstore
+                // Cardless Credit = akulaku
+                $paymentMethod = "credit_card";
+                $order = Order::find(1);
+                $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
-        $paymentMethod = "credit_card";
-        $order = Order::find(1);
-        $orderProduct = OrderProduct::where('order_id', $order->id)->get();
-
-        //set data to request
-        $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
+                //set data to request
+                $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
 //        dd($transactionDataArr);
-        //sending to midtrans
-        $redirectUrl = Midtrans::sendRequest($transactionDataArr);
+                //sending to midtrans
+                $redirectUrl = Midtrans::sendRequest($transactionDataArr);
 //        dd($redirectUrl);
-        return redirect($redirectUrl);
+                return redirect($redirectUrl);
+
+                break;
+                //testing utilities create order number
+            case 2:
+                // Order number generator
+                $today = Carbon::today();
+                $prepend = "INV/". $today->year. $today->month. $today->day;
+//                dd($prepend);
+                $nextNo = Utilities::GetNextOrderNumber($prepend);
+                $orderNumber = Utilities::GenerateOrderNumber($prepend, $nextNo);
+                return $orderNumber;
+                break;
+        }
     }
     public function setCookie(){
 

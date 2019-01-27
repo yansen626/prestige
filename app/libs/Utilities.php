@@ -56,7 +56,7 @@ class Utilities
             return $nextNo;
         }
         catch (\Exception $ex){
-            throw;
+            throw $ex;
         }
     }
 
@@ -68,7 +68,7 @@ class Utilities
             $orderNumber->save();
         }
         catch (\Exception $ex){
-            throw;
+            throw $ex;
         }
     }
 
@@ -103,7 +103,7 @@ class Utilities
             return $prepend. "/". $modulus. $nextNumber;
         }
         catch (\Exception $ex){
-            throw;
+            throw $ex;
         }
     }
 }
