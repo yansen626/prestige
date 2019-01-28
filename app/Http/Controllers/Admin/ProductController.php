@@ -117,7 +117,7 @@ class ProductController extends Controller
                 'height' => $request->input('height'),
                 'length' => $request->input('length'),
                 'tag' => $request->input('tags'),
-                'status_id' => 1,
+                'status' => 1,
                 'created_at'        => $dateTimeNow->toDateTimeString(),
                 'updated_at'        => $dateTimeNow->toDateTimeString()
             ]);
@@ -263,7 +263,7 @@ class ProductController extends Controller
         return view('admin.product.edit')->with($data);
     }
 
-    public function update(Request $request, Product $product){
+    public function update(Request $request){
 //        dd($request);
         try{
             $validator = Validator::make($request->all(), [
@@ -275,7 +275,7 @@ class ProductController extends Controller
                 'weight'             => 'required',
                 'description'             => 'required',
             ]);
-
+            $product = Product::find($request->input('id'));
             if ($request->input('category') == "-1") {
                 return back()->withErrors("Category is required")->withInput($request->all());
             }
@@ -317,10 +317,28 @@ class ProductController extends Controller
             // update product main image, and image detail
 
             if(!empty($mainImages)){
-                $mainImage = ProductImage::where('product_id', $product->id)->where('is_main_image', 1)->first();
 
-                $img = Image::make($mainImages);
-                $img->save(public_path('storage/products/'. $mainImage->path), 75);
+                $mainImage = ProductImage::where('product_id', $product->id)->where('is_main_image', 1)->first();
+                if(!empty($mainImage)){
+                    $path = $mainImage->path;
+
+                    $img = Image::make($mainImages);
+                    $img->save(public_path('storage/products/'. $path), 75);
+                }
+                else{
+                    $img = Image::make($mainImages);
+                    $extStr = $img->mime();
+                    $ext = explode('/', $extStr, 2);
+                    $filename = $product->id.'_main_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
+
+                    $img->save(public_path('storage/products/'. $filename), 75);
+                    $newProductImage = ProductImage::create([
+                        'product_id' => $product->id,
+                        'path' => $filename,
+                        'is_main_image' => 1
+                    ]);
+                }
+
 
             }
             if(!empty($detailImages)){

@@ -59,7 +59,7 @@
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>${{$product->price}}</span>
+                                    <span>Rp {{$product->price}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
@@ -92,7 +92,7 @@
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>${{$product->price}}</span>
+                                    <span>Rp {{$product->price}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
@@ -124,7 +124,7 @@
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>${{$product->price}}</span>
+                                    <span>Rp {{$product->price}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
@@ -156,7 +156,7 @@
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>${{$product->price}}</span>
+                                    <span>Rp {{$product->price}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
@@ -188,7 +188,7 @@
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>${{$product->price}}</span>
+                                    <span>Rp {{$product->price}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
@@ -220,7 +220,7 @@
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>${{$product->price}}</span>
+                                    <span>Rp {{$product->price}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>

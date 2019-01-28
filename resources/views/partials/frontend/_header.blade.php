@@ -332,7 +332,7 @@
 </header>
 
 
-@section('scripts')
+@section('scripts-footer-header')
     <script>
         function empty() {
             var x;

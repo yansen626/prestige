@@ -85,5 +85,6 @@
     <script src=" {{ asset('js/frontend/rsconfig.js')}}"></script>
     <script src=" {{ asset('js/frontend/custom.js')}}"></script>
     @yield('scripts')
+    @yield('scripts-footer-header')
 </body>
 </html>

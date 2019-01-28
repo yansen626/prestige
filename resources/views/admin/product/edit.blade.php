@@ -41,6 +41,7 @@
                                         @endforeach
                                         <div class="row">
                                             <div class="col-md-12">
+                                                <input type="hidden" name="id" value="{{$product->id}}"/>
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Upload Main Image *</label>
@@ -84,11 +85,11 @@
                                                         </select>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
-                                                        <label for="validationCustom04">Price</label>
-                                                        <input type="number" class="form-control" id="price"  name="price" value="{{$product->price}}" required>
+                                                        <label>Price</label>
+                                                        <input type="number" class="form-control" id="price-edit"  name="price" value="{{$product->price}}" required>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
-                                                        <label for="sku">Quantity</label>
+                                                        <label>Quantity</label>
                                                         <input type="number" class="form-control" id="qty" name="qty" value="{{$product->qty}}" required>
                                                     </div>
                                                 </div>

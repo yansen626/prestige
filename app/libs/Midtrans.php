@@ -23,7 +23,7 @@ class Midtrans
             $item_details = [];
             foreach($orderProducts as $orderProduct){
                 //set item detail
-                $price = (int)($orderProduct->price * $rate);
+                $price = (int)($orderProduct->grand_total * $rate);
                 $item_detail = array(
                     'id' => $order->id."-".$orderProduct->id,
                     'price' => $price,
@@ -44,28 +44,28 @@ class Midtrans
             );
             $grandTotal += $shippingPrice;
             array_push($item_details, $item_shipping);
-
-            //add other service as item for midtrans
-            $servicePrice = (int)($order->payment_charge * $rate);
-            $item_service = array(
-                'id' => $order->id."-Service",
-                'price' => $servicePrice,
-                'quantity' => 1,
-                'name' => "Service"
-            );
-            $grandTotal += $servicePrice;
-            array_push($item_details, $item_service);
-
-            //add tax as item for midtrans
-            $taxPrice = (int)($order->tax_amount * $rate);
-            $item_tax = array(
-                'id' => $order->id."-Tax",
-                'price' => $taxPrice,
-                'quantity' => 1,
-                'name' => "Tax"
-            );
-            $grandTotal += $taxPrice;
-            array_push($item_details, $item_tax);
+//
+//            //add other service as item for midtrans
+//            $servicePrice = (int)($order->payment_charge * $rate);
+//            $item_service = array(
+//                'id' => $order->id."-Service",
+//                'price' => $servicePrice,
+//                'quantity' => 1,
+//                'name' => "Service"
+//            );
+//            $grandTotal += $servicePrice;
+//            array_push($item_details, $item_service);
+//
+//            //add tax as item for midtrans
+//            $taxPrice = (int)($order->tax_amount * $rate);
+//            $item_tax = array(
+//                'id' => $order->id."-Tax",
+//                'price' => $taxPrice,
+//                'quantity' => 1,
+//                'name' => "Tax"
+//            );
+//            $grandTotal += $taxPrice;
+//            array_push($item_details, $item_tax);
 
 
             //vtweb
@@ -93,7 +93,7 @@ class Midtrans
             );
             
             $transaction_details = array(
-                'order_id' => rand(),
+                'order_id' => $order->order_number,
                 'gross_amount' => $grandTotal, // no decimal allowed
             );
 

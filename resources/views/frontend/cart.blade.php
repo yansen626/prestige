@@ -29,7 +29,9 @@
                                     @foreach($carts as $cart)
                                         <tr class="cart-product">
                                             <td class="cart-product-item">
-                                                <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
+{{--                                                @php($productImage = \App\libs\Utilities::GetProductMainImage($cart->product_id))--}}
+                                                @php($productImage = \App\Models\ProductImage::where('product_id', $cart->product_id)->first())
+                                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100px"/>
                                             </td>
                                             <td class="cart-product-item">
                                                 {{ $cart->product->name }}
@@ -55,7 +57,8 @@
                                     @foreach($carts as $cart)
                                         <tr class="cart-product">
                                             <td class="cart-product-item">
-                                                <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
+                                                @php($productImage = \App\Models\ProductImage::where('product_id', $cart['item']['product_id'])->first())
+                                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100px"/>
                                             </td>
                                             <td class="cart-product-item">
                                                 {{ $cart['item']['product']['name'] }}
@@ -115,14 +118,14 @@
                             SUBTOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            ${{$totalPrice}} USD
+                            Rp {{$totalPrice}}
                             <input type="hidden" id="subtotal" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6">
                             VOUCHER
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            $<span id="voucher_amount_span">0</span> USD
+                            Rp <span id="voucher_amount_span">0</span>
                             <input type="hidden" name="subtotal" id="voucher_amount" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -1%;">
@@ -132,7 +135,7 @@
                             TOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="font-size: 14px; text-align: right;" >
-                            $<span id="grand_total_span">{{$totalPrice}}</span> USD
+                            Rp <span id="grand_total_span">{{$totalPrice}}</span>
                             <input type="hidden" id="grand_total" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -3px;">
@@ -253,14 +256,14 @@
                             SUBTOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            ${{$totalPrice}} USD
+                            Rp {{$totalPrice}}
                             <input type="hidden" id="subtotal" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6">
                             VOUCHER
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            $<span id="voucher_amount_span">0</span> USD
+                            Rp <span id="voucher_amount_span">0</span>
                             <input type="hidden" name="subtotal" id="voucher_amount" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -1%;">
@@ -270,7 +273,7 @@
                             TOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="font-size: 14px; text-align: right;" >
-                            $<span id="grand_total_span">{{$totalPrice}}</span> USD
+                            Rp <span id="grand_total_span">{{$totalPrice}}</span>
                             <input type="hidden" id="grand_total" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -3px;">

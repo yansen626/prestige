@@ -37,16 +37,22 @@ class CheckoutController extends Controller
         // Ewallet = telkomsel_cash, indosat_dompetku, mandiri_ecash,
         // Over the counter = cstore
         // Cardless Credit = akulaku
+        try{
+            $paymentMethod = $request->input('payment_method');
+            $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
-        $paymentMethod = $request->input('payment_method');
-        $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+            //set data to request
+            $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
+//            dd($transactionDataArr);
 
-        //set data to request
-        $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
-                dd($transactionDataArr);
-        //sending to midtrans
-        $redirectUrl = Midtrans::sendRequest($transactionDataArr);
-//                dd($redirectUrl);
+            //sending to midtrans
+            $redirectUrl = Midtrans::sendRequest($transactionDataArr);
+            //dd($exception);
+        }
+        catch (\Exception $exception){
+            return 0;
+        }
+        //                dd($redirectUrl);
 
         return redirect($redirectUrl);
     }

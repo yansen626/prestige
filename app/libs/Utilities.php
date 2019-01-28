@@ -9,6 +9,7 @@
 namespace App\libs;
 
 use App\Models\OrderNumber;
+use App\Models\Product;
 use Carbon\Carbon;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -16,6 +17,13 @@ use Monolog\Logger;
 
 class Utilities
 {
+    public static function GetProductMainImage($id){
+        $product = Product::find($id);
+        $productImage = $product->product_images->where('is_main_image', 1)->first();
+//        dd($productImage);
+        return $product->product_images->where('is_main_image', 1)->first();
+    }
+
     public static function ExceptionLog($ex){
         $logContent = ['id' => 1,
             'description' => $ex];

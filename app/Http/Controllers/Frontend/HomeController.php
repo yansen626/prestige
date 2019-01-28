@@ -111,7 +111,7 @@ class HomeController extends Controller
         return $currency;
     }
     public function TestingPurpose(){
-        $type = 2;
+        $type = 3;
         switch ($type){
             //testing midtrans
             case 1:
@@ -143,6 +143,12 @@ class HomeController extends Controller
                 $nextNo = Utilities::GetNextOrderNumber($prepend);
                 $orderNumber = Utilities::GenerateOrderNumber($prepend, $nextNo);
                 return $orderNumber;
+                break;
+                //testing main image
+            case 3:
+                // Order number generator
+                $productImage = Utilities::GetProductMainImage(1);
+                return $productImage->path;
                 break;
         }
     }

@@ -33,7 +33,7 @@
                 </div><!-- .col-md-8 end -->
                 <div class="col-xs-12 col-sm-12 col-md-6" style="padding-top: 5%;">
                     <h2>{{$product->name}}</h2>
-                    <H4>${{$product->price}} USD</H4>
+                    <H4>Rp {{$product->price}}</H4>
                     <p style="text-transform: uppercase;">
                         {{$product->description}}
                     </p>

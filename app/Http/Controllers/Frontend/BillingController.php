@@ -323,7 +323,7 @@ class BillingController extends Controller
 
             $nextNo = Utilities::GetNextOrderNumber($prepend);
             $orderNumber = Utilities::GenerateOrderNumber($prepend, $nextNo);
-
+            $grandTotal = $totalPrice + $shippingPrice;
             //create order
             $newOrder = Order::create([
                 'user_id' => $user->id,
@@ -333,7 +333,7 @@ class BillingController extends Controller
                 'shipping_charge' => $shippingPrice,
                 'payment_option' => "",
                 'sub_total' => $totalPrice,
-                'grand_total' => $totalPrice,
+                'grand_total' => $grandTotal,
                 'currency_code' => "IDR",
                 'order_status_id' => 1,
                 'order_number' => $orderNumber,

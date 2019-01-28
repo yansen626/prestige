@@ -92,7 +92,7 @@
                             @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                             <div class="testimonial-panel product-item">
                                 <div class="product--img">
-                                    <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                    <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: 100%;"/>
                                     <div class="product--hover">
                                         <div class="product--action">
                                             <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
@@ -104,7 +104,7 @@
                                         <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                     </div><!-- .product-title end -->
                                     <div class="product--price">
-                                        <span>${{$product->price}}</span>
+                                        <span>Rp {{$product->price}}</span>
                                     </div><!-- .product-price end -->
                                 </div><!-- .product-bio end -->
                             </div>

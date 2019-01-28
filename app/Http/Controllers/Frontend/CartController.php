@@ -124,6 +124,7 @@ class CartController extends Controller
                 foreach ($items as $item){
                     $cart = Cart::find($item);
                     $cart->qty = $qtys[$item];
+                    $cart->total_price = $cart->price * $qtys[$item];
                     $cart->voucher_code = $voucher;
                     $cart->save();
                 }
