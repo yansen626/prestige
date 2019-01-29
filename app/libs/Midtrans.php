@@ -44,29 +44,33 @@ class Midtrans
             );
             $grandTotal += $shippingPrice;
             array_push($item_details, $item_shipping);
-//
-//            //add other service as item for midtrans
-//            $servicePrice = (int)($order->payment_charge * $rate);
-//            $item_service = array(
-//                'id' => $order->id."-Service",
-//                'price' => $servicePrice,
-//                'quantity' => 1,
-//                'name' => "Service"
-//            );
-//            $grandTotal += $servicePrice;
-//            array_push($item_details, $item_service);
-//
-//            //add tax as item for midtrans
-//            $taxPrice = (int)($order->tax_amount * $rate);
-//            $item_tax = array(
-//                'id' => $order->id."-Tax",
-//                'price' => $taxPrice,
-//                'quantity' => 1,
-//                'name' => "Tax"
-//            );
-//            $grandTotal += $taxPrice;
-//            array_push($item_details, $item_tax);
 
+            //add other service as item for midtrans
+            if(!empty($order->payment_charge)){
+                $servicePrice = (int)($order->payment_charge * $rate);
+                dd($servicePrice);
+                $item_service = array(
+                    'id' => $order->id."-Service",
+                    'price' => $servicePrice,
+                    'quantity' => 1,
+                    'name' => "Service"
+                );
+                $grandTotal += $servicePrice;
+                array_push($item_details, $item_service);
+            }
+
+            //add tax as item for midtrans
+            if(!empty($order->tax_amount)){
+                $taxPrice = (int)($order->tax_amount * $rate);
+                $item_tax = array(
+                    'id' => $order->id."-Tax",
+                    'price' => $taxPrice,
+                    'quantity' => 1,
+                    'name' => "Tax"
+                );
+                $grandTotal += $taxPrice;
+                array_push($item_details, $item_tax);
+            }
 
             //vtweb
 

@@ -129,6 +129,14 @@ class ProductController extends Controller
                 'created_at'        => $dateTimeNow->toDateTimeString(),
             ]);
 
+            // save product position
+            $newProductCategory = ProductPosition::create([
+                'product_id' => $newProduct->id,
+                'name' => "test",
+                'pos_x' => 250,
+                'pos_y' => 300,
+            ]);
+
 
             // save product main image, and image detail
             $img = Image::make($mainImages);
@@ -137,7 +145,8 @@ class ProductController extends Controller
 
             $filename = $newProduct->id.'_main_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
 
-            $img->save(public_path('storage/products/'. $filename), 75);
+            $img->save('../public_html/storage/products/'. $filename, 75);
+//            $img->save(public_path('storage/products/'. $filename), 75);
             $newProductImage = ProductImage::create([
                 'product_id' => $newProduct->id,
                 'path' => $filename,
@@ -150,7 +159,8 @@ class ProductController extends Controller
 
                 $filename = $newProduct->id.'_'.$i.'_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
 
-                $img->save(public_path('storage/products/'. $filename), 75);
+                $img->save('../public_html/storage/products/'. $filename, 75);
+//                $img->save(public_path('storage/products/'. $filename), 75);
 
                 $newProductImage = ProductImage::create([
                     'product_id' => $newProduct->id,
@@ -323,7 +333,8 @@ class ProductController extends Controller
                     $path = $mainImage->path;
 
                     $img = Image::make($mainImages);
-                    $img->save(public_path('storage/products/'. $path), 75);
+                    $img->save('../public_html/storage/products/'. $path, 75);
+//                    $img->save(public_path('storage/products/'. $path), 75);
                 }
                 else{
                     $img = Image::make($mainImages);
@@ -331,7 +342,8 @@ class ProductController extends Controller
                     $ext = explode('/', $extStr, 2);
                     $filename = $product->id.'_main_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
 
-                    $img->save(public_path('storage/products/'. $filename), 75);
+                    $img->save('../public_html/storage/products/'. $filename, 75);
+//                    $img->save(public_path('storage/products/'. $filename), 75);
                     $newProductImage = ProductImage::create([
                         'product_id' => $product->id,
                         'path' => $filename,
@@ -355,7 +367,8 @@ class ProductController extends Controller
 
                     $filename = $product->id.'_'.$i.'_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
 
-                    $img->save(public_path('storage/products/'. $filename), 75);
+                    $img->save('../public_html/storage/products/'. $filename, 75);
+//                    $img->save(public_path('storage/products/'. $filename), 75);
 
                     $newProductImage = ProductImage::create([
                         'product_id' => $product->id,
@@ -369,7 +382,7 @@ class ProductController extends Controller
             return redirect()->route('admin.product.show',['item' => $product->id]);
 
         }catch(\Exception $ex){
-            dd($ex);
+//            dd($ex);
             error_log($ex);
             return back()->withErrors("Something Went Wrong")->withInput();
         }

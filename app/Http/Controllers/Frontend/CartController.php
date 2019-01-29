@@ -100,7 +100,11 @@ class CartController extends Controller
             $oldCart = Session::get('cart');
             $cart = new \App\Cart($oldCart);
             $carts = $cart->items;
-            $totalPrice = $cart->totalPrice;
+            $totalPrice = 0;
+            //dd($carts);
+            foreach ($carts as $item){
+                $totalPrice += ($item['price'] * $item['qty']);
+            }
             $flag = 2;
             //dd($carts);
         }

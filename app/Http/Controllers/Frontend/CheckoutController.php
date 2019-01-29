@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CheckoutController extends Controller
 {
@@ -15,17 +16,20 @@ class CheckoutController extends Controller
     {
         if (Auth::check()){
             $user = Auth::user();
-            if($order->user_id == $user->id){
-                $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+        }
+        else{
+            $user = Session::get('user');
+        }
+        if($order->user_id == $user->id){
+            $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
-                $isIndonesian = true;
-                $data=([
-                    'order' => $order,
-                    'orderProduct' => $orderProduct,
-                    'isIndonesian' => $isIndonesian
-                ]);
-                return view('frontend.checkout')->with($data);
-            }
+            $isIndonesian = true;
+            $data=([
+                'order' => $order,
+                'orderProduct' => $orderProduct,
+                'isIndonesian' => $isIndonesian
+            ]);
+            return view('frontend.checkout')->with($data);
         }
         return redirect()->route('home');
     }
@@ -49,7 +53,8 @@ class CheckoutController extends Controller
             $redirectUrl = Midtrans::sendRequest($transactionDataArr);
             //dd($exception);
         }
-        catch (\Exception $exception){
+        catch (\Exception $ex){
+            dd($ex);
             return 0;
         }
         //                dd($redirectUrl);

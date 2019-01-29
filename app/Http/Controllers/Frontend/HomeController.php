@@ -111,7 +111,7 @@ class HomeController extends Controller
         return $currency;
     }
     public function TestingPurpose(){
-        $type = 3;
+        $type = 4;
         switch ($type){
             //testing midtrans
             case 1:
@@ -122,7 +122,7 @@ class HomeController extends Controller
                 // Over the counter = cstore
                 // Cardless Credit = akulaku
                 $paymentMethod = "credit_card";
-                $order = Order::find(1);
+                $order = Order::find(6);
                 $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
                 //set data to request
@@ -149,6 +149,33 @@ class HomeController extends Controller
                 // Order number generator
                 $productImage = Utilities::GetProductMainImage(1);
                 return $productImage->path;
+                break;
+                //testing rajaongkir
+            case 4:
+                // Order number generator
+                $client = new \GuzzleHttp\Client();
+                $url = "https://api.rajaongkir.com/starter/cost";
+//            $url = env('RAJAONGKIR_URL').'/cost';
+                $key = env('RAJAONGKIR_KEY');
+
+                $response = $client->request('POST', $url, [
+                    'headers' => [
+                        'key' => $key
+                    ],
+                    'form_params' => [
+                        'origin' => 152,
+                        'originType' => 'city',
+                        'destination' => 455,
+                        'destinationType' => 'city',
+                        'weight' => 2500,
+                        'courier' => 'jne'
+                    ]
+                ]);
+//            dd($response);
+                $response = $response->getBody()->getContents();
+                $result = json_decode($response);
+            dd($result);
+                return $result;
                 break;
         }
     }

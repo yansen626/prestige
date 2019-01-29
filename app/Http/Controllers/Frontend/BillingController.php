@@ -239,13 +239,13 @@ class BillingController extends Controller
             $selectedCourier = explode('-',$courier);
             $totalWeight = $request->input('weight');
             $data = array();
+//            dd($totalWeight, $selectedCourier, $userAddress);
             $data = $this->getRajaongkirData($totalWeight, $selectedCourier, $userAddress);
-
+//dd($data);
             if(empty($data)){
-                return redirect()->back()->withErrors("Internal Server Error");
+                return redirect()->back()->withErrors("Shipping Service Not Available");
             }
 
-            //dd($data);
             $results = array();
             $results = $data->rajaongkir->results;
 //            dd($results);
@@ -274,6 +274,7 @@ class BillingController extends Controller
 
         }
         catch (\Exception $exception){
+//            dd($exception);
             return redirect()->route('cart')->withErrors($exception);
 //            return redirect()->route('cart')->withErrors("Something Went Wrong");
         }
@@ -363,6 +364,7 @@ class BillingController extends Controller
 
             //edit voucher if using voucher
             $voucherDB = Voucher::where('code', $cart->voucher_code)->first();
+//            dd($voucherDB);
             if(!empty($voucherDB)){
                 $voucherAmount = $voucherDB->voucher_amount;
                 if(!empty($voucherAmount)){
@@ -384,7 +386,7 @@ class BillingController extends Controller
                     $newOrder->save();
                 }
             }
-
+//dd($newOrder);
             return $newOrder->id;
         }
         catch (\Exception $exception){
