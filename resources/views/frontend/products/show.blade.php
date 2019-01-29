@@ -27,7 +27,7 @@
                                 </div><!-- .slide-item end -->
                         @endforeach
                     </section>
-                    <div id="custom-section" style="display: none;">
+                    <div id="custom-section" style="display: none; margin-left:-50px !important;">
                         <canvas id="myCanvas" width="600" height="600"></canvas>
                     </div>
                 </div><!-- .col-md-8 end -->
