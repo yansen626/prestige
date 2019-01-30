@@ -45,6 +45,9 @@ Route::post('/submit-billing-shipment', 'Frontend\BillingController@submitBillin
 Route::get('/checkout/{order}', 'Frontend\CheckoutController@getCheckout')->name('checkout');
 Route::post('/submit-checkout/{order}', 'Frontend\CheckoutController@submitCheckout')->name('submit.checkout');
 
+Route::get('/checkout-success/{order}', 'Frontend\CheckoutController@checkoutSuccess')->name('checkout-success');
+Route::get('/checkout-failed/{order}', 'Frontend\CheckoutController@checkoutFailed')->name('checkout-failed');
+
 Route::prefix('payment')->group(function(){
     Route::post('/checkout-notification', 'Frontend\MidtransController@notification')->name('notification.checkout');
     Route::get('/finish', 'Frontend\MidtransController@finish')->name('finish.checkout');

@@ -29,7 +29,7 @@ class CheckoutController extends Controller
                 'orderProduct' => $orderProduct,
                 'isIndonesian' => $isIndonesian
             ]);
-            return view('frontend.checkout')->with($data);
+            return view('frontend.transactions.checkout')->with($data);
         }
         return redirect()->route('home');
     }
@@ -54,11 +54,24 @@ class CheckoutController extends Controller
             //dd($exception);
         }
         catch (\Exception $ex){
-            dd($ex);
+//            dd($ex);
             return 0;
         }
         //                dd($redirectUrl);
 
         return redirect($redirectUrl);
+    }
+
+    public function checkoutSuccess(Order $order){
+        $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+
+        $data=([
+            'order' => $order,
+            'orderProduct' => $orderProduct,
+        ]);
+        return view('frontend.transactions.checkout-success')->with($data);
+    }
+    public function checkoutFailed(Order $order){
+
     }
 }

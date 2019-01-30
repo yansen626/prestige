@@ -92,7 +92,7 @@ class BillingController extends Controller
             'isIndonesian' => $isIndonesian,
         ]);
 //        dd($data);
-        return view('frontend.billing-shipment')->with($data);
+        return view('frontend.transactions.billing-shipment')->with($data);
     }
 
     public function submitBilling(Request $request)

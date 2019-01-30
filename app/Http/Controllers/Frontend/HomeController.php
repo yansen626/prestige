@@ -75,21 +75,21 @@ class HomeController extends Controller
         $data=([
             'products' => $products,
         ]);
-        return view('frontend.about-us')->with($data);
+        return view('frontend.others.about-us')->with($data);
     }
 
     public function Others($type){
         //faq
         if($type == 'FAQ'){
-            return view('frontend.FAQ');
+            return view('frontend.others.FAQ');
         }
         //term and condition
         else if($type == 'Term-Condition'){
-            return view('frontend.term-condition');
+            return view('frontend.others.term-condition');
         }
         //privacy policy
         else{
-            return view('frontend.privacy-policy');
+            return view('frontend.others.privacy-policy');
         }
     }
 
@@ -111,7 +111,7 @@ class HomeController extends Controller
         return $currency;
     }
     public function TestingPurpose(){
-        $type = 4;
+        $type = 5;
         switch ($type){
             //testing midtrans
             case 1:
@@ -152,7 +152,6 @@ class HomeController extends Controller
                 break;
                 //testing rajaongkir
             case 4:
-                // Order number generator
                 $client = new \GuzzleHttp\Client();
                 $url = "https://api.rajaongkir.com/starter/cost";
 //            $url = env('RAJAONGKIR_URL').'/cost';
@@ -176,6 +175,18 @@ class HomeController extends Controller
                 $result = json_decode($response);
             dd($result);
                 return $result;
+                break;
+            //testing SUCCESS PAGE
+            case 5:
+                // Order number generator
+                $order = Order::find(19);
+                $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+
+                $data=([
+                    'order' => $order,
+                    'orderProduct' => $orderProduct,
+                ]);
+                return view('frontend.transactions.checkout-success')->with($data);
                 break;
         }
     }

@@ -81,13 +81,13 @@
                 </div>
 
                 <div class="row border">
-                    <div class="col-xs-6 col-sm-12 col-md-6">
-                        <div class="col-xs-6 col-sm-12 col-md-6">
-                            <input type="checkbox" name="TC_Aggrement" value="ship" class=""/> I've read and accept the T&C's
-                        </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-12 col-md-6">
-                        <div class="col-xs-6 col-sm-12 col-md-12" style="text-align: right;">
+                    {{--<div class="col-xs-6 col-sm-12 col-md-6">--}}
+                        {{--<div class="col-xs-6 col-sm-12 col-md-6">--}}
+                            {{--<input type="checkbox" name="TC_Aggrement" value="ship" class=""/> I've read and accept the T&C's--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    <div class="col-lg-offset-6 col-xs-6 col-sm-12 col-md-6">
+                        <div class="col-xs-12 col-sm-12 col-md-12" style="text-align: right;">
                             <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">PAY NOW</button>
                         </div>
                     </div>

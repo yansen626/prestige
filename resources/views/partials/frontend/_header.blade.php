@@ -148,10 +148,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="logo" href="{{route('home')}}">
+                <a class="logo" href="{{route('home')}}" style="padding-top: 1%;">
                     {{--<img class="logo-light" src="{{ asset('images/icons/nama-brand-logo.svg') }}" alt="Nama Logo">--}}
                     {{--<img class="logo-dark" src="{{ asset('images/icons/nama-brand-logo.svg') }}" alt="Nama Logo">--}}
-                    <img  src="{{ asset('images/icons/nama-brand-logo-black.png') }}" alt="Nama Logo">
+                    {{--<img  src="{{ asset('images/icons/nama-brand-logo-black.png') }}" alt="Nama Logo">--}}
+                    <h1 style="font-size: 48px;">nama.</h1>
                 </a>
             </div>
 

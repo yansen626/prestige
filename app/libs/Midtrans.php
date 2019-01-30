@@ -48,7 +48,7 @@ class Midtrans
             //add other service as item for midtrans
             if(!empty($order->payment_charge)){
                 $servicePrice = (int)($order->payment_charge * $rate);
-                dd($servicePrice);
+//                dd($servicePrice);
                 $item_service = array(
                     'id' => $order->id."-Service",
                     'price' => $servicePrice,
@@ -85,8 +85,8 @@ class Midtrans
                 $unfinish_redirect_url = $hostUrl. '/checkout-4';
             }
             else{
-                $finish_redirect_url = $hostUrl. '/checkout-success/'.$order->user_id;
-                $unfinish_redirect_url = $hostUrl. '/checkout-failed';
+                $finish_redirect_url = $hostUrl. '/checkout-success/'.$order->id;
+                $unfinish_redirect_url = $hostUrl. '/checkout-failed/'.$order->id;
             }
             $vt_web = array(
                 'credit_card_3d_secure' => true,
