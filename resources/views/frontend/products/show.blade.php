@@ -45,15 +45,15 @@
                     <input type="hidden" id="position_y" value="{{$product->product_positions[0]->pos_y}}">
 
                     <br><br>
+                    <div class="col-xs-6 col-sm-6 col-md-6 text--left">
+                        <H4>Customization</H4>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 text--right">
+                        <button type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off">
+                            <div class="handle"></div>
+                        </button>
+                    </div>
                     <div id="customize-section" class="customize-section">
-                        <div class="col-xs-6 col-sm-6 col-md-6 text--left">
-                            <H4>Customization</H4>
-                        </div>
-                        <div class="col-xs-6 col-sm-6 col-md-6 text--right">
-                            <button type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off">
-                                <div class="handle"></div>
-                            </button>
-                        </div>
                         <div class="col-md-12">
                             <p>Enter personalized text (max 8 characters)</p>
                             <form>
@@ -200,7 +200,7 @@
 @section('styles')
     <style>
         .customize-section{
-            padding-bottom: 10%;
+            padding-bottom: 35%;
         }
         body {
             font-family: "Montserrat", "Lato", "Open Sans", "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
