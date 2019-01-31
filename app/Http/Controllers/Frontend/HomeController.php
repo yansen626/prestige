@@ -42,6 +42,11 @@ class HomeController extends Controller
         return view('frontend.home')->with($data);
     }
 
+    public function contactForm()
+    {
+        return view('frontend.others.contact-us');
+    }
+
     public function contact(Request $request)
     {
         $dateTimeNow = Carbon::now('Asia/Jakarta');

@@ -38,8 +38,7 @@
                             <H4>Rp {{$product->price}}</H4>
                             <p style="text-transform: uppercase;">
                                 {{$product->description}}
-                            </p>{!! Form::open(array('action' => 'Frontend\CartController@addCart', 'id'=>'form-search', 'method' => 'POST', 'role' => 'form', 'onkeypress' => 'return event.keyCode != 13;', 'novalidate')) !!}
-
+                            </p>
                         </div>
                     </div>
                     {!! Form::open(array('action' => 'Frontend\CartController@addCart', 'id'=>'form-search', 'method' => 'POST', 'role' => 'form', 'onkeypress' => 'return event.keyCode != 13;', 'novalidate')) !!}

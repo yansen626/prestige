@@ -24,6 +24,7 @@ Route::get('/logout', 'Auth\LoginController@logoutUser')->name('logout');
 
 
 Route::post('/search/', 'Frontend\ProductController@search')->name('search');
+Route::get('/contact-us-form/', 'Frontend\HomeController@contactForm')->name('contact-form');
 Route::post('/contact-us/', 'Frontend\HomeController@contact')->name('contact');
 Route::post('/newsletter/', 'Frontend\HomeController@newsletter')->name('newsletter');
 Route::get('others/about-us/', 'Frontend\HomeController@aboutUs')->name('about.us');
