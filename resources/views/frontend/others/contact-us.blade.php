@@ -9,53 +9,10 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="heading heading-2 mb-60">
-                        <p class="heading--subtitle">Contact Us</p>
-                        <h2 class="heading--title">Get in Touch</h2>
-                        <div class="divider--line m-0">
-                        </div>
-                        <p class="heading--desc mt-20">League is not just about graphic design; it's more than that. We offer integral communication services, and we're responsible for our process and results. We thank each client and their projects.</p>
-                    </div>
-                    <div class=" clearfix"></div>
-                    <div class="row mb-50">
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="contact--info">
-                                <h3>Our Address</h3>
-                                <p>Alnahas Building, 2 AlBahr St, Tanta</p>
-                                <p>AlGharbia, Egypt.</p>
-                            </div>
-                        </div><!-- .col-md-6 end -->
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="contact--info">
-                                <h3>Our Phone</h3>
-                                <p>Office Telephone : 002 01065370701</p>
-                                <p>Mobile : 002 01065370701</p>
-                            </div>
-                        </div><!-- .col-md-6 end -->
-                    </div><!-- .row end -->
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="contact--info">
-                                <h3>Our Email</h3>
-                                <p>Main Email : ayman@zytheme.com</p>
-                                <p>Inquiries : Info@zytheme.com</p>
-                            </div>
-                        </div><!-- .col-md-6 end -->
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="contact--info">
-                                <h3>Our Support</h3>
-                                <p>Support : ayman@zytheme.com</p>
-                                <p>Sales : Sales@zytheme.com</p>
-                            </div>
-                        </div><!-- .col-md-6 end -->
-                    </div>
-                </div><!-- .col-md-6 end -->
-                <div class="col-xs-12 col-sm-12 col-md-6">
-                    <div class="heading heading-2 mb-60">
                         <p class="heading--subtitle">Feel Free</p>
-                        <h2 class="heading--title">Write To Us</h2>
+                        <h2 class="heading--title">Contact Us</h2>
                         <div class="divider--line m-0">
                         </div>
-                        <p class="heading--desc mt-20">League is not just about graphic design; it's more than that. We offer integral communication services, and we're responsible for our process and results. We thank each client and their projects.</p>
                     </div>
                     <div class=" clearfix"></div>
                     <div class="contact-form">
@@ -91,6 +48,48 @@
                         {{--</div>--}}
 
                         {!! Form::close() !!}
+                    </div>
+                </div><!-- .col-md-6 end -->
+                <div class="col-xs-12 col-sm-12 col-md-6">
+                    <div class="heading heading-2 mb-60">
+                        <p class="heading--subtitle">Contact Us</p>
+                        <h2 class="heading--title">Get in Touch</h2>
+                        <div class="divider--line m-0">
+                        </div>
+                        <p class="heading--desc mt-20">League is not just about graphic design; it's more than that. We offer integral communication services, and we're responsible for our process and results. We thank each client and their projects.</p>
+                    </div>
+                    <div class=" clearfix"></div>
+                    <div class="row mb-50">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="contact--info center">
+                                <img src="{{asset('/images/icons/address.png')}}" style="width: 20%; height:100%;">
+                                <p><br>Alnahas Building, 2 AlBahr St, Tanta</p>
+                                <p>AlGharbia, Egypt.</p>
+                            </div>
+                        </div><!-- .col-md-6 end -->
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="contact--info center">
+                                <img src="{{asset('/images/icons/phone.png')}}" style="width: 20%; height:100%;">
+                                <p><br>Office Telephone : 002 01065370701</p>
+                                <p>Mobile : 002 01065370701</p>
+                            </div>
+                        </div><!-- .col-md-6 end -->
+                    </div><!-- .row end -->
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="contact--info center">
+                                <img src="{{asset('/images/icons/mail.png')}}" style="width: 20%; height:100%;">
+                                <p><br>Main Email : ayman@zytheme.com</p>
+                                <p>Inquiries : Info@zytheme.com</p>
+                            </div>
+                        </div><!-- .col-md-6 end -->
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="contact--info center">
+                                <img src="{{asset('/images/icons/support.png')}}" style="width: 20%; height:100%;">
+                                <p><br>Support : ayman@zytheme.com</p>
+                                <p>Sales : Sales@zytheme.com</p>
+                            </div>
+                        </div><!-- .col-md-6 end -->
                     </div>
                 </div><!-- .col-md-6 end -->
             </div>
