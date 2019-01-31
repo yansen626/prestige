@@ -132,6 +132,8 @@ class CartController extends Controller
                     $cart->voucher_code = $voucher;
                     $cart->save();
                 }
+
+                return redirect()->route('billing');
             }
             else{
                 // Update Session
@@ -144,9 +146,10 @@ class CartController extends Controller
                     $cart->update($item, $qtys[$item], $voucher);
                 }
                 $request->session()->put('cart', $cart);
-            }
+                Session::put('shopping', 'yes');
 
-            return redirect()->route('billing');
+                return redirect()->route('login.register');
+            }
         }
         catch (\Exception $exception){
             dd($exception);

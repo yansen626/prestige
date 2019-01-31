@@ -21,49 +21,6 @@
                             @endforeach
                         </div>
                         <input type="hidden" name="weight" value="{{$totalWeight}}">
-                        @if(!\Illuminate\Support\Facades\Auth::guard('web')->check() && $address == null)
-                            <div>
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="first_name" id="first_name"
-                                           placeholder="FIRST NAME" value="{{old('first_name')}}" required/>
-                                    @if ($errors->has('first_name'))
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('first_name') }}</strong>
-                                </span>
-                                    @endif
-                                </div>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="last_name" id="last_name"
-                                           placeholder="LAST NAME" value="{{old('last_name')}}" required/>
-                                    @if ($errors->has('last_name'))
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('last_name') }}</strong>
-                                </span>
-                                    @endif
-                                </div>
-
-                                <div class="col-md-6">
-                                    <input type="email" class="form-control" name="email" id="email"
-                                           placeholder="EMAIL ADDRESS" value="{{old('email')}}" required/>
-                                    @if ($errors->has('email'))
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
-                                    @endif
-                                </div>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="phone" id="phone"
-                                           placeholder="PHONE NUMBER" value="{{old('phone')}}" required/>
-                                    @if ($errors->has('phone'))
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('phone') }}</strong>
-                                </span>
-                                    @endif
-                                </div>
-                            </div>
-                        @endif
                         {{-- guset or user don't have address --}}
                         @if($flag==0)
                             <div>

@@ -9,6 +9,7 @@ use App\Models\Province;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
@@ -79,7 +80,7 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
             'email_token' => base64_encode($data['email']),
-            'status_id' => 4
+            'status_id' => 1
         ]);
     }
 
@@ -106,10 +107,19 @@ class RegisterController extends Controller
 
         $user = $this->create($request->all());
 
-        $emailVerify = new EmailVerification($user);
-        Mail::to($user->email)->send($emailVerify);
+//        $emailVerify = new EmailVerification($user);
+//        Mail::to($user->email)->send($emailVerify);
 
-        return View('auth.send-email', compact('user'));
+        //return View('auth.send-email', compact('user'));
+        $shopping = Session::get('shopping');
+        if($shopping != null){
+            $test = Auth::attempt(['email' => $user->email, 'password' => $request->password]);
+            //dd($user, $test, $request->password);
+            return redirect()->route('billing');
+        }
+        else{
+            return View("auth.login");
+        }
     }
 
     public function verify($token)
@@ -141,5 +151,14 @@ class RegisterController extends Controller
         $cities = City::all();
 
         return view('auth.register', compact('countries', 'provinces', 'cities'));
+    }
+
+    public function loginRegister()
+    {
+        return view('auth.login-register');
+    }
+
+    public function deleteSession(){
+        Session::flush();
     }
 }

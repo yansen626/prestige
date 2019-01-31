@@ -74,9 +74,6 @@ class BillingController extends Controller
             }
         }
 
-
-
-
         $countries = Country::all();
         $provinces = Province::all();
         $cities = City::all();
@@ -128,16 +125,6 @@ class BillingController extends Controller
                             'email.regex'       => 'ID Login Akses harus tanpa spasi!'
                         ]);
                         if ($validator->fails()) return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
-
-                        // Create User with Guest Status
-                        $user = User::create([
-                            'first_name' => $request->input('first_name'),
-                            'last_name' => $request->input('last_name'),
-                            'email' => $request->input('email'),
-                            'phone' => $request->input('phone'),
-                            'email_token' => base64_encode($request->input('email')),
-                            'status_id' => 3
-                        ]);
                     }
                     else{
                         $user = Session::get('user');
@@ -171,7 +158,7 @@ class BillingController extends Controller
 
                     foreach ($carts as $cartData) {
 //                        dd($carts);
-                        $newCart = Cart::create([
+                        Cart::create([
                             'product_id' => $cartData['item']['product_id'],
                             'user_id' => $user->id,
                             'description' => $cartData['item']['description'],
@@ -182,6 +169,7 @@ class BillingController extends Controller
                             'updated_at' => Carbon::now('Asia/Jakarta')
                         ]);
                     }
+                    Session::forget('cart');
                     // Session for Cart deleted
                     // Session for user Created to be used later for payment at Checkout
                     // and Shipment for Rajaongkir or DHLl
@@ -194,6 +182,32 @@ class BillingController extends Controller
             // Get Data from DB
             else{
                 $user = Auth::user();
+
+                $shopping = Session::get('shopping');
+
+                //New Conditions
+                if($shopping != null){
+                    // Save to DB Table Cart
+                    $oldCart = Session::has('cart') ? Session::get('cart') : null;
+                    $cart = new \App\Cart($oldCart);
+                    $carts = $cart->items;
+
+                    foreach ($carts as $cartData) {
+//                        dd($carts);
+                        Cart::create([
+                            'product_id' => $cartData['item']['product_id'],
+                            'user_id' => $user->id,
+                            'description' => $cartData['item']['description'],
+                            'qty' => $cartData['item']['qty'],
+                            'price' => $cartData['item']['product_id'],
+                            'total_price' => $cartData['price'],
+                            'created_at' => Carbon::now('Asia/Jakarta'),
+                            'updated_at' => Carbon::now('Asia/Jakarta')
+                        ]);
+                    }
+
+                    Session::forget('cart');
+                }
 
                 //checking if user already have address
                 $addressDB = Address::where('user_id', $user->id)->get();

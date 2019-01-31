@@ -67,7 +67,7 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-        Session::forget('cart');
+        //Session::forget('cart');
 
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->back()->withErrors('Wrong Email or Password!!', 'default')->withInput($request->only('email'));
@@ -91,5 +91,21 @@ class LoginController extends Controller
     public function logoutUser(){
         Auth::guard('web')->logout();
         return redirect()->guest(route('home'));
+    }
+
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        $this->clearLoginAttempts($request);
+
+        $shopping = Session::get('shopping');
+
+        if($shopping != null){
+            return Redirect::route('billing');
+        }
+
+        return $this->authenticated($request, $this->guard()->user())
+            ?: redirect()->intended($this->redirectPath());
     }
 }
