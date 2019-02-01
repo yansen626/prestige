@@ -34,4 +34,12 @@ class Promotion extends Eloquent
 		'discount_type',
 		'amount'
 	];
+
+	protected $appends = [
+	    'amount_string'
+    ];
+
+    public function getAmountStringAttribute(){
+        return number_format($this->attributes['amount'], 0, ",", ".");
+    }
 }

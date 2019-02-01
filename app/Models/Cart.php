@@ -48,6 +48,19 @@ class Cart extends Eloquent
 		'total_price'
 	];
 
+	protected $appends = [
+	    'price_string',
+        'total_price_string'
+    ];
+
+    public function getPriceStringAttribute(){
+        return number_format($this->attributes['price'], 0, ",", ".");
+    }
+
+    public function getTotalPriceStringAttribute(){
+        return number_format($this->attributes['total_price'], 0, ",", ".");
+    }
+
 	public function product()
 	{
 		return $this->belongsTo(\App\Models\Product::class);

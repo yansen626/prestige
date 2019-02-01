@@ -95,6 +95,19 @@ class Product extends Eloquent
 		'meta_description'
 	];
 
+	protected $appends = [
+	    'price_string',
+        'cost_price_string'
+    ];
+
+    public function getPriceStringAttribute(){
+        return number_format($this->attributes['price'], 0, ",", ".");
+    }
+
+    public function getCostPriceStringAttribute(){
+        return number_format($this->attributes['cost_price'], 0, ",", ".");
+    }
+
 	public function category()
 	{
 		return $this->belongsTo(\App\Models\Category::class);

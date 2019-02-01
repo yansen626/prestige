@@ -63,6 +63,14 @@ class Voucher extends Eloquent
 		'status_id'
 	];
 
+	protected $appends = [
+	    'voucher_amount_string'
+    ];
+
+    public function getVoucherAmountStringAttribute(){
+        return number_format($this->attributes['voucher_amount'], 0, ",", ".");
+    }
+
 	public function admin_user()
 	{
 		return $this->belongsTo(\App\Models\AdminUser::class, 'updated_by');

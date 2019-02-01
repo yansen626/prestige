@@ -73,6 +73,29 @@ class Order extends Eloquent
         'order_number'
 	];
 
+	protected $appends = [
+	    'payment_charge_string',
+        'sub_total_string',
+        'tax_amount_string',
+        'grand_total_string'
+    ];
+
+    public function getPaymentChargeStringAttribute(){
+        return number_format($this->attributes['payment_charge'], 0, ",", ".");
+    }
+
+    public function getSubTotalStringAttribute(){
+        return number_format($this->attributes['sub_total'], 0, ",", ".");
+    }
+
+    public function getTaxAmountStringAttribute(){
+        return number_format($this->attributes['tax_amount'], 0, ",", ".");
+    }
+
+    public function getGrandTotalStringAttribute(){
+        return number_format($this->attributes['grand_total'], 0, ",", ".");
+    }
+
 	public function address()
 	{
 		return $this->belongsTo(\App\Models\Address::class, 'shipping_address_id');

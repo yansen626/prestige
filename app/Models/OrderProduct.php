@@ -49,6 +49,24 @@ class OrderProduct extends Eloquent
 		'product_info'
 	];
 
+	protected $appends = [
+	    'price_string',
+        'tax_amount_string',
+        'grand_total_string'
+    ];
+
+    public function getPriceStringAttribute(){
+        return number_format($this->attributes['price'], 0, ",", ".");
+    }
+
+    public function getTaxAmountStringAttribute(){
+        return number_format($this->attributes['tax_amount'], 0, ",", ".");
+    }
+
+    public function getGrandTotalStringAttribute(){
+        return number_format($this->attributes['grand_total'], 0, ",", ".");
+    }
+
 	public function order()
 	{
 		return $this->belongsTo(\App\Models\Order::class);
