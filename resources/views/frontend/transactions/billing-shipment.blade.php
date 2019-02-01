@@ -220,36 +220,36 @@
                 <div class="row">
                     <div class="col-md-12">
                         @if($isIndonesian)
-                            <div class="col-md-12">
+                            <div class="col-md-12 padding-bottom-3">
                                 <div class="col-md-4">
-                                    <h1>JNE</h1>
+                                    <img src="{{ asset('images/icons/jne.jpg') }}" class="width-100">
                                     <br>
                                     <input type="radio" name="courier" id="jne" value="jne-REG" checked/> REG <br>
                                     <input type="radio" name="courier" id="jne" value="jne-OKE"/> OKE <br>
                                     <input type="radio" name="courier" id="jne" value="jne-YES"/> YES <br>
                                 </div>
                                 <div class="col-md-4">
-                                    <h1>TIKI</h1>
+                                    <img src="{{ asset('images/icons/tiki.png') }}" class="width-100">
                                     <br>
                                     <input type="radio" name="courier" id="jne" value="tiki-REG" /> REG (REGULER SERVICE) <br>
                                     <input type="radio" name="courier" id="jne" value="tiki-ONS" /> ONS (OVER NIGHT SERVICE) <br>
                                     <input type="radio" name="courier" id="jne" value="tiki-SDS" /> SDS (SAME DAY SERVICE) <br>
                                 </div>
                                 <div class="col-md-4">
-                                    <h1>POS Indonesia</h1>
+                                    <img src="{{ asset('images/icons/pos.png') }}" class="width-100">
                                     <br>
                                     <input type="radio" name="courier" id="jne" value="pos-Paket Kilat Khusus" /> Paket Kilat Khusus <br>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="col-md-4">
-                                    <h1>Sicepat</h1>
+                                    <img src="{{ asset('images/icons/sicepat.jpg') }}" class="width-100">
                                     <br>
                                     <input type="radio" name="courier" id="jne" value="sicepat-REG"/> REG (Layanan Reguler) <br>
                                     <input type="radio" name="courier" id="jne" value="sicepat-OKE"/> BEST (Besok Sampai Tujuan) <br>
                                 </div>
                                 <div class="col-md-4">
-                                    <h1>J&T</h1>
+                                    <img src="{{ asset('images/icons/JNT.png') }}" class="width-100">
                                     {{--<img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">--}}
                                     <br>
                                     <input type="radio" name="courier" id="jne" value="J&T-EZ" /> EZ (Regular Service) <br>
@@ -301,6 +301,9 @@
     <style>
        .padding-top-3{
            padding-top: 3% !important;
+       }
+       .padding-bottom-3{
+           padding-bottom: 3% !important;
        }
         .bg-white{
             padding-bottom:0;

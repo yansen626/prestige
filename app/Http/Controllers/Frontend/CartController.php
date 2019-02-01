@@ -24,10 +24,15 @@ class CartController extends Controller
             $color = explode("-", $color);
             $size = $request->input('custom-size');
             $size = explode("-", $size);
-            $description = "Text: ".strtoupper($request->input('custom-text'))."<br>".
-                "Font: ".$request->input('custom-font')."<br>".
-                "Color: ".$color[0]."<br>".
-                "Size: ".$size[0]."<br>";
+            if($request->input('customize-toggle') == 'true'){
+                $description = "Text: ".strtoupper($request->input('custom-text'))."<br>".
+                    "Font: ".$request->input('custom-font')."<br>".
+                    "Color: ".$color[0]."<br>".
+                    "Size: ".$size[0]."<br>";
+            }
+            else{
+                $description = "";
+            }
 
             //add cart to database
             if (Auth::check())
@@ -152,7 +157,7 @@ class CartController extends Controller
             }
         }
         catch (\Exception $exception){
-            dd($exception);
+//            dd($exception);
         }
     }
 

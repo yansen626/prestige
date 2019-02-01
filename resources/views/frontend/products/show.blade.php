@@ -58,7 +58,7 @@
                                     <button type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="true" onclick="onToggleCustomize();">
                                         <div class="handle"></div>
                                     </button>
-                                    <input type="hidden" id="customize-toggle" value="true" />
+                                    <input type="hidden" id="customize-toggle" name="customize-toggle" value="true" />
                                 </div>
                             </div>
                             <div id="customize-section" class="row customize-section">

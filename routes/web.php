@@ -46,7 +46,7 @@ Route::post('/check-voucher', 'Frontend\CartController@voucherValidation')->name
 Route::get('/billing-shipment', 'Frontend\BillingController@getBilling')->name('billing');
 Route::post('/submit-billing-shipment', 'Frontend\BillingController@submitBilling')->name('submit.billing');
 Route::get('/checkout/{order}', 'Frontend\CheckoutController@getCheckout')->name('checkout');
-Route::post('/submit-checkout/{order}', 'Frontend\CheckoutController@submitCheckout')->name('submit.checkout');
+Route::post('/submit-checkout', 'Frontend\CheckoutController@submitCheckout')->name('submit.checkout');
 
 Route::get('/checkout-success/{order}', 'Frontend\CheckoutController@checkoutSuccess')->name('checkout-success');
 Route::get('/checkout-failed/{order}', 'Frontend\CheckoutController@checkoutFailed')->name('checkout-failed');

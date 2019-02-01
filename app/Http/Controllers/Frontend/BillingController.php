@@ -190,20 +190,21 @@ class BillingController extends Controller
                     // Save to DB Table Cart
                     $oldCart = Session::has('cart') ? Session::get('cart') : null;
                     $cart = new \App\Cart($oldCart);
-                    $carts = $cart->items;
+                    if(!empty($carts)){
+                        $carts = $cart->items;
 
-                    foreach ($carts as $cartData) {
-//                        dd($carts);
-                        Cart::create([
-                            'product_id' => $cartData['item']['product_id'],
-                            'user_id' => $user->id,
-                            'description' => $cartData['item']['description'],
-                            'qty' => $cartData['item']['qty'],
-                            'price' => $cartData['item']['product_id'],
-                            'total_price' => $cartData['price'],
-                            'created_at' => Carbon::now('Asia/Jakarta'),
-                            'updated_at' => Carbon::now('Asia/Jakarta')
-                        ]);
+                        foreach ($carts as $cartData) {
+                            Cart::create([
+                                'product_id' => $cartData['item']['product_id'],
+                                'user_id' => $user->id,
+                                'description' => $cartData['item']['description'],
+                                'qty' => $cartData['item']['qty'],
+                                'price' => $cartData['item']['product_id'],
+                                'total_price' => $cartData['price'],
+                                'created_at' => Carbon::now('Asia/Jakarta'),
+                                'updated_at' => Carbon::now('Asia/Jakarta')
+                            ]);
+                        }
                     }
 
                     Session::forget('cart');

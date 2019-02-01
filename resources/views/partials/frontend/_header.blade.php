@@ -79,38 +79,38 @@
                     </div>
                 </div><!-- .module-About end -->
 
-                <!-- Module Contact -->
-                <div class="module module-search2 pull-left">
-                    <div class="module-icon search-icon color-black">
-                        <a class="pointer">CONTACT OLD</a>
-                    </div>
-                    <div class="module-content module-fullscreen module--search2-box">
-                        <div class="pos-vertical-center">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6" style="padding: 0 1% 0 7%;">
-                                        <h2>Contact</h2>
-                                        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
-                                        <br/>
-                                        {!! Form::open(array('action' => 'Frontend\HomeController@contact', 'id'=>'form-contact', 'class'=>'form-search2', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}
+                {{--<!-- Module Contact -->--}}
+                {{--<div class="module module-search2 pull-left">--}}
+                    {{--<div class="module-icon search-icon color-black">--}}
+                        {{--<a class="pointer">CONTACT OLD</a>--}}
+                    {{--</div>--}}
+                    {{--<div class="module-content module-fullscreen module--search2-box">--}}
+                        {{--<div class="pos-vertical-center">--}}
+                            {{--<div class="container">--}}
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-xs-6 col-sm-6 col-md-6" style="padding: 0 1% 0 7%;">--}}
+                                        {{--<h2>Contact</h2>--}}
+                                        {{--<hr style="height:1px;border:none;color:#333;background-color:#333;" />--}}
+                                        {{--<br/>--}}
+                                        {{--{!! Form::open(array('action' => 'Frontend\HomeController@contact', 'id'=>'form-contact', 'class'=>'form-search2', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}--}}
 
-                                            <input type="text" class="form-control" name="name" id="name" placeholder="NAME" required/>
-                                            <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
-                                            <input type="text" class="form-control" name="order" id="order" placeholder="ORDER NUMBER (IF APPLICABLE)"/>
-                                            <textarea class="form-control" name="message" id="message" rows="2" placeholder="MESSAGE" required></textarea>
+                                            {{--<input type="text" class="form-control" name="name" id="name" placeholder="NAME" required/>--}}
+                                            {{--<input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>--}}
+                                            {{--<input type="text" class="form-control" name="order" id="order" placeholder="ORDER NUMBER (IF APPLICABLE)"/>--}}
+                                            {{--<textarea class="form-control" name="message" id="message" rows="2" placeholder="MESSAGE" required></textarea>--}}
 
-                                            <div style="text-align: center;">
-                                                <button type="submit" class="btn btn--secondary btn--bordered">SEND</button>
-                                            </div>
+                                            {{--<div style="text-align: center;">--}}
+                                                {{--<button type="submit" class="btn btn--secondary btn--bordered">SEND</button>--}}
+                                            {{--</div>--}}
 
-                                        {!! Form::close() !!}
-                                    </div><!-- .col-md-8 end -->
-                                </div><!-- .row end -->
-                            </div><!-- .container end -->
-                        </div>
-                        <a class="module-cancel pointer"><i class="fa fa-close"></i></a>
-                    </div>
-                </div><!-- .module-Contact end -->
+                                        {{--{!! Form::close() !!}--}}
+                                    {{--</div><!-- .col-md-8 end -->--}}
+                                {{--</div><!-- .row end -->--}}
+                            {{--</div><!-- .container end -->--}}
+                        {{--</div>--}}
+                        {{--<a class="module-cancel pointer"><i class="fa fa-close"></i></a>--}}
+                    {{--</div>--}}
+                {{--</div><!-- .module-Contact end -->--}}
 
                 <!-- Module Search -->
                 <div class="module module-search pull-left">

@@ -116,7 +116,7 @@ class HomeController extends Controller
         return $currency;
     }
     public function TestingPurpose(){
-        $type = 5;
+        $type = 1;
         switch ($type){
             //testing midtrans
             case 1:
@@ -127,7 +127,7 @@ class HomeController extends Controller
                 // Over the counter = cstore
                 // Cardless Credit = akulaku
                 $paymentMethod = "credit_card";
-                $order = Order::find(6);
+                $order = Order::find(19);
                 $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
                 //set data to request
@@ -135,7 +135,7 @@ class HomeController extends Controller
 //        dd($transactionDataArr);
                 //sending to midtrans
                 $redirectUrl = Midtrans::sendRequest($transactionDataArr);
-//        dd($redirectUrl);
+        dd($redirectUrl);
                 return redirect($redirectUrl);
 
                 break;
@@ -178,7 +178,7 @@ class HomeController extends Controller
 //            dd($response);
                 $response = $response->getBody()->getContents();
                 $result = json_decode($response);
-            dd($result);
+//            dd($result);
                 return $result;
                 break;
             //testing SUCCESS PAGE

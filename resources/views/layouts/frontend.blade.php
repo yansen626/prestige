@@ -44,6 +44,7 @@
     <!-- Document Title
         ============================================= -->
     <title>NAMA</title>
+    @yield('scripts-top')
 </head>
 <body>
     <div class="preloader">

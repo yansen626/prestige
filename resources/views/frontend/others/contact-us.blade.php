@@ -79,15 +79,15 @@
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="contact--info center">
                                 <img src="{{asset('/images/icons/mail.png')}}" style="width: 20%; height:100%;">
-                                <p><br>Main Email : ayman@zytheme.com</p>
-                                <p>Inquiries : Info@zytheme.com</p>
+                                <p><br>Main Email : Main@nama-official.com</p>
+                                <p>Inquiries : Info@nama-official.com</p>
                             </div>
                         </div><!-- .col-md-6 end -->
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="contact--info center">
                                 <img src="{{asset('/images/icons/support.png')}}" style="width: 20%; height:100%;">
-                                <p><br>Support : ayman@zytheme.com</p>
-                                <p>Sales : Sales@zytheme.com</p>
+                                <p><br>Support : Support@nama-official.com</p>
+                                <p>Sales : Sales@nama-official.com</p>
                             </div>
                         </div><!-- .col-md-6 end -->
                     </div>
@@ -97,39 +97,39 @@
     </section>
     <!-- #contact1 end -->
 
-    <!-- Contact
-    ============================================= -->
-    <section id="contact" class="contact pb-0 pt-0">
-        <div class="container-fluid pr-0 pl-0">
-            <div class="row">
-                <div class="col-xs-12  col-sm-12  col-md-12 pr-0 pl-0">
-                    <div id="googleMap" style="width:100%;height:498px;">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section><!-- #contact end -->
+    {{--<!-- Contact--}}
+    {{--============================================= -->--}}
+    {{--<section id="contact" class="contact pb-0 pt-0">--}}
+        {{--<div class="container-fluid pr-0 pl-0">--}}
+            {{--<div class="row">--}}
+                {{--<div class="col-xs-12  col-sm-12  col-md-12 pr-0 pl-0">--}}
+                    {{--<div id="googleMap" style="width:100%;height:498px;">--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
+    {{--</section><!-- #contact end -->--}}
 @endsection
 
 @section('scripts')
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&amp;key=AIzaSyCiRALrXFl5vovX0hAkccXXBFh7zP8AOW8"></script>
-    <script type="text/javascript" src="assets/js/plugins/jquery.gmap.min.js"></script>
-    <script type="text/javascript">
+    {{--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&amp;key=AIzaSyCiRALrXFl5vovX0hAkccXXBFh7zP8AOW8"></script>--}}
+    {{--<script type="text/javascript" src="assets/js/plugins/jquery.gmap.min.js"></script>--}}
+    {{--<script type="text/javascript">--}}
 
-        $('#googleMap').gMap({
-            address: "121 King St,Melbourne, Australia",
-            zoom: 20,
-            markers:[
-                {
-                    address: "Melbourne, Australia",
-                    maptype:'ROADMAP',
-                    icon: {
-                        image: "assets/images/gmap/maker.png",
-                        iconsize: [35, 35],
-                        iconanchor: [17,35]
-                    }
-                }
-            ]
-        });
-    </script>
+        {{--$('#googleMap').gMap({--}}
+            {{--address: "121 King St,Melbourne, Australia",--}}
+            {{--zoom: 20,--}}
+            {{--markers:[--}}
+                {{--{--}}
+                    {{--address: "Melbourne, Australia",--}}
+                    {{--maptype:'ROADMAP',--}}
+                    {{--icon: {--}}
+                        {{--image: "assets/images/gmap/maker.png",--}}
+                        {{--iconsize: [35, 35],--}}
+                        {{--iconanchor: [17,35]--}}
+                    {{--}--}}
+                {{--}--}}
+            {{--]--}}
+        {{--});--}}
+    {{--</script>--}}
 @endsection

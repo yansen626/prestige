@@ -2,8 +2,8 @@
 
 @section('content')
     <section class="bg-white">
-        <form method="POST" action="{{ route('submit.checkout', ["order"=>$order->id]) }}">
-            @csrf
+        {{--<form method="POST" action="{{ route('submit.checkout', ["order"=>$order->id]) }}">--}}
+            {{--@csrf--}}
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -27,12 +27,17 @@
 
                         <div class="col-md-6">
                             @if($isIndonesian)
-                                <input type="radio" name="payment_method" id="cc" value="credit_card" selected/>
-                                <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">
+                                <input type="radio" name="payment_method" id="payment_method" value="credit_card" checked/>
+                                <span style="font-size: 16px;">Card Payment</span>
+                                <img src="{{ asset('images/icons/checkout-visa.png') }}" class="width-50">
+                                <img src="{{ asset('images/icons/checkout-mastercard.png') }}" class="width-50">
+                                <img src="{{ asset('images/icons/checkout-jcb.png') }}" class="width-50">
+                                <img src="{{ asset('images/icons/checkout-american.png') }}" class="width-50">
                                 {{--Pay with Credit Card--}}
-                                &nbsp;
-                                <input type="radio" name="payment_method" id="va" value="bank_transfer"/>
-                                <img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-50">
+                                &nbsp;<br>
+                                <input type="radio" name="payment_method" id="payment_method" value="bank_transfer"/>
+                                <span style="font-size: 16px;">Bank Transfer</span>
+                                <img src="{{ asset('images/icons/checkout-banktransfer.png') }}" class="width-50">
                                 {{--Pay with Virtual Account--}}
                             @endif
                         </div>
@@ -88,7 +93,7 @@
                     {{--</div>--}}
                     <div class="col-lg-offset-6 col-xs-6 col-sm-12 col-md-6">
                         <div class="col-xs-12 col-sm-12 col-md-12" style="text-align: right;">
-                            <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">PAY NOW</button>
+                            <button type="button" id="pay-button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">PAY NOW</button>
                         </div>
                     </div>
                 </div>
@@ -166,7 +171,7 @@
                     </table>
                 </div>
             </div>
-        </form>
+        {{--</form>--}}
     </section>
 @endsection
 
@@ -181,8 +186,48 @@
         }
     </style>
 @endsection
-
+@section ('scripts-top')
+    <script type="text/javascript"
+            src="{{$snapURL}}"
+            data-client-key="{{$clientKey}}"></script>
+@endsection
 @section('scripts')
+    <script type="text/javascript">
+        // var payButton = document.getElementById('pay-button');
+        // payButton.addEventListener('click', function () {
+        //     snap.pay('<SNAP_TOKEN>');
+        // });
+
+        $(document).on('click', '#pay-button', function (e) {
+            var orderId = "{{$order->id}}";
+            var paymentMethod = $('#payment_method').val();
+            var snapToken;
+            // Request get token to your server & save result to snapToken variable
+
+            snap.show();
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('submit.checkout') }}',
+                datatype : "application/json",
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'order': orderId,
+                    'payment_method': paymentMethod,
+                }, // no need to stringify
+                success: function (result) {
+                    if (typeof result == "string")
+                        result = JSON.parse(result);
+                    if (result.success) {
+                        snapToken = result.success;
+                        snap.pay(snapToken);
+                    } else {
+                        snap.hide();
+                    }
+                }
+            });
+        });
+
+    </script>
     <script type="text/javascript">
         //Set input Restriction
         function setInputFilter(textbox, inputFilter) {

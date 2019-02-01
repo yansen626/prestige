@@ -88,9 +88,13 @@ class Midtrans
                 $finish_redirect_url = $hostUrl. '/checkout-success/'.$order->id;
                 $unfinish_redirect_url = $hostUrl. '/checkout-failed/'.$order->id;
             }
+
+            $paymentList = array();
+            array_push($paymentList, $paymentMethod);
+
             $vt_web = array(
                 'credit_card_3d_secure' => true,
-                'enabled_payments' => $paymentMethod,
+                'enabled_payments' => $paymentList,
                 'finish_redirect_url' => $finish_redirect_url,
                 'unfinish_redirect_url' => $unfinish_redirect_url,
                 'error_redirect_url' => $hostUrl. '/payment/error'
@@ -129,39 +133,49 @@ class Midtrans
             if($isDevelopment == "true"){
                 $serverKey = env('MIDTRANS_SERVER_KEY_SANDBOX');
                 $serverURL = env('MIDTRANS_URL_SANDBOX');
+                $serverSnapURL = env('MIDTRANS_SNAP_URL_SANDBOX');
             }
             else{
                 $serverKey = env('MIDTRANS_SERVER_KEY');
                 $serverURL = env('MIDTRANS_URL_PRODUCTION');
+                $serverSnapURL = env('MIDTRANS_SNAP_URL_PRODUCTION');
             }
             json_encode($transactionDataArr);
             $base64ServerKey = base64_encode($serverKey);
 
             $client = new Client([
-                'base_uri' => $serverURL,
+                'base_uri' => $serverSnapURL,
                 'headers' => [
                     'Accept' => 'application/json',
                     'Content-Type' => 'application/json',
                     'Authorization' => 'Basic '.$base64ServerKey
                 ],
             ]);
-            $request = $client->request('POST', $serverURL, [
+            $request = $client->request('POST', $serverSnapURL, [
                 'json' => $transactionDataArr
             ]);
 
+//            dd($request);
             Utilities::ExceptionLog($request->getBody());
 
-            if($request->getStatusCode() == 200){
+            if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
                 $collect = json_decode($request->getBody());
-//                dd($collect);
-                if($collect->status_code == 201){
-                    $redirectUrl = $collect->redirect_url;
-                }
-                else{
-                    $redirectUrl = "";
-                }
-                return $redirectUrl;
+                $redirectUrl = $collect->redirect_url;
+                $token = $collect->token;
+
+                return $token;
             }
+//            if($request->getStatusCode() == 200){
+//                $collect = json_decode($request->getBody());
+////                dd($request);
+//                if($collect->status_code == 201){
+//                    $redirectUrl = $collect->redirect_url;
+//                }
+//                else{
+//                    $redirectUrl = "";
+//                }
+//                return $redirectUrl;
+//            }
         }
         catch (\Exception $ex){
 //            error_log($ex);
