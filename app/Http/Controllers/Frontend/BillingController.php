@@ -104,6 +104,18 @@ class BillingController extends Controller
             $cityId = $request->input('city');
             $dateTimeNow = Carbon::now('Asia/Jakarta');
 
+            if($request->input('another_shipment') == true){
+                $cityIdSecondary = $request->input('city');
+
+                if($cityIdSecondary == '-1'){
+                    return redirect()->back()->withErrors('Mohon pilih kota!', 'default')->withInput($request->all());
+                }
+
+                if(strpos($cityIdSecondary, '-') !== false){
+                    $splitedCity2 = explode('-', $cityIdSecondary);
+                    $cityIdSecondary = $splitedCity2[1];
+                }
+            }
             if($cityId == '-1'){
                 return redirect()->back()->withErrors('Mohon pilih kota!', 'default')->withInput($request->all());
             }
@@ -271,13 +283,14 @@ class BillingController extends Controller
 
             //add new secondary address
             if($request->input('another_shipment') == true){
+
                 $userAddress = Address::create([
                     'user_id' => $user->id,
                     'primary' => 0,
                     'description' => $request->input('address_detail_secondary'),
                     'country_id' => $request->input('country_secondary'),
                     'province_id' => $request->input('province_secondary'),
-                    'city_id' => $request->input('city_secondary'),
+                    'city_id' => $cityIdSecondary,
                     'street' => $request->input('street_secondary'),
                     'suburb' => $request->input('suburb_secondary'),
                     'state' => $request->input('state_secondary'),
@@ -295,7 +308,7 @@ class BillingController extends Controller
             $data = $this->getRajaongkirData($totalWeight, $selectedCourier, $userAddress);
 //            dd($data);
             if(empty($data)){
-                return redirect()->back()->withErrors("Shipping Service Not Available");
+                return redirect()->back()->withErrors("Shipping Service Not Available")->withInput($request->all());
             }
 
             $results = array();
@@ -311,7 +324,7 @@ class BillingController extends Controller
             }
 //            dd($shippingPrice);
             if($shippingPrice == 0){
-                return redirect()->back()->withErrors("Shipping service not available");
+                return redirect()->back()->withErrors("Shipping service not available")->withInput($request->all());
             }
 
             // create transaction from setTransaction

@@ -145,7 +145,12 @@
                             <a href="{{ route('home') }}"><button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 130px;line-height: 0px; border: 1px solid #282828;">CONTINUE SHOPPING</button></a>
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">PROCEED</button>
+                            @if($totalPrice == 0)
+                                @php($disabled = 'disabled')
+                            @else
+                                @php($disabled = '')
+                            @endif
+                            <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;" {{$disabled}}>PROCEED</button>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 10px; text-align: justify;">
                             * Note: Shipping and taxes will be updated during checkout
@@ -334,8 +339,8 @@
             else if(state === 'min'){
                 var qty = 'qty' + identifier;
                 tmpQty = parseInt($('#' + qty).val());
-                if(tmpQty != 0){
-                    tmpQty--;
+                tmpQty--;
+                if(tmpQty > 0){
                     $('#' + qty).val(tmpQty);
                 }
             }

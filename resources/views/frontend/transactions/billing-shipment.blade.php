@@ -28,7 +28,11 @@
                                     <select name="country" id="country" class="form-control">
                                         <option value="-1" selected>COUNTRY/REGION</option>
                                         @foreach($countries as $country)
-                                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                            @if($country->id == 106)
+                                                <option value="{{ $country->id }}" selected>{{ $country->name }}</option>
+                                            @else
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -156,7 +160,11 @@
                         <select name="country_secondary" id="country" class="form-control">
                             <option value="-1" selected>COUNTRY/REGION</option>
                             @foreach($countries as $country)
-                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                @if($country->id == 106)
+                                    <option value="{{ $country->id }}" selected>{{ $country->name }}</option>
+                                @else
+                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>

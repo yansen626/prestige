@@ -35,7 +35,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h2>{{$product->name}}</h2>
-                            <H4>Rp {{$product->price}}</H4>
+                            <H4>Rp {{$product->price_string}}</H4>
                             <p style="text-transform: uppercase;">
                                 {{$product->description}}
                             </p>
@@ -63,46 +63,48 @@
                             </div>
                             <div id="customize-section" class="row customize-section">
                                 <div class="col-md-12">
-                                    <p>Enter personalized text (max 8 characters)</p>
-                                    <form>
-                                        <input type="text" class="form-control auto-blur"
-                                               name="custom-text" id="custom-text" placeholder="TEXT HERE" maxlength="8"
-                                               onfocusout="ChangePosition()" style="text-transform:uppercase" />
-                                        <div class="col-xs-12 col-sm-12 col-md-3 text-center">
-                                            <p style="margin-bottom: 0;margin-left: 11%;">Position</p>
-                                            <select class="minimal" data-width="auto"
-                                                    id="custom-position" name="custom-position"
-                                                    onchange="ChangeSelectedPosition()" style="width: 130px;">
-                                                @foreach($product->product_positions as $position)
-                                                    @php($value=$position->pos_x."-".$position->pos_y)
-                                                    <option value="{{$value}}">{{$position->name}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-3 text-center">
-                                            <p style="margin-bottom: 0;margin-left: 11%;">Font</p>
-                                            <select class="minimal" data-width="auto" id="custom-font" name="custom-font" onchange="ChangePosition()">
-                                                <option value="Serif">SERIF</option>
-                                                <option value="Sans-serif">SAN SERIF</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-3 text-center">
-                                            <p style="margin-bottom: 0;margin-left: 11%;">Color</p>
-                                            <select class="selectpicker minimal" data-width="auto" id="custom-color" name="custom-color" onchange="ChangePosition()">
-                                                <option value="Gold-FFD700">GOLD</option>
-                                                <option value="Silver-C0C0C0">SILVER</option>
-                                                <option value="Bronze-CD7F32">BRONZE</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-xs-12 col-sm-12 col-md-3 text-center">
-                                            <p style="margin-bottom: 0;margin-left: 11%;">Size</p>
-                                            <select class="selectpicker minimal" data-width="auto" id="custom-size" name="custom-size" onchange="ChangePosition()">
-                                                <option value="Large-24">LARGE</option>
-                                                <option value="Medium-20">MEDIUM</option>
-                                                <option value="Small-16">SMALL</option>
-                                            </select>
-                                        </div>
-                                    </form>
+                                    <div class="col-md-12 bg-white" style="padding-bottom: 25px;">
+                                        <p>Enter personalized text (max 8 characters)</p>
+                                        <form>
+                                            <input type="text" class="form-control auto-blur"
+                                                   name="custom-text" id="custom-text" placeholder="TEXT HERE" maxlength="8"
+                                                   onfocusout="ChangePosition()" style="text-transform:uppercase" />
+                                            <div class="col-xs-12 col-sm-12 col-md-3 text-center">
+                                                <p style="margin-bottom: 0;margin-left: 11%;">Position</p>
+                                                <select class="minimal" data-width="auto"
+                                                        id="custom-position" name="custom-position"
+                                                        onchange="ChangeSelectedPosition()" style="width: 130px;">
+                                                    @foreach($product->product_positions as $position)
+                                                        @php($value=$position->pos_x."-".$position->pos_y)
+                                                        <option value="{{$value}}">{{$position->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-3 text-center">
+                                                <p style="margin-bottom: 0;margin-left: 11%;">Font</p>
+                                                <select class="minimal" data-width="auto" id="custom-font" name="custom-font" onchange="ChangePosition()">
+                                                    <option value="Serif">SERIF</option>
+                                                    <option value="Sans-serif">SAN SERIF</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-3 text-center">
+                                                <p style="margin-bottom: 0;margin-left: 11%;">Color</p>
+                                                <select class="selectpicker minimal" data-width="auto" id="custom-color" name="custom-color" onchange="ChangePosition()">
+                                                    <option value="Gold-FFD700">GOLD</option>
+                                                    <option value="Silver-C0C0C0">SILVER</option>
+                                                    <option value="Bronze-CD7F32">BRONZE</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-3 text-center">
+                                                <p style="margin-bottom: 0;margin-left: 11%;">Size</p>
+                                                <select class="selectpicker minimal" data-width="auto" id="custom-size" name="custom-size" onchange="ChangePosition()">
+                                                    <option value="Large-24">LARGE</option>
+                                                    <option value="Medium-20">MEDIUM</option>
+                                                    <option value="Small-16">SMALL</option>
+                                                </select>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
