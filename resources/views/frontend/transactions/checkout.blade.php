@@ -138,7 +138,7 @@
                                                     {{$product->qty}}
                                                 </div>
                                                 <div class="col-md-4 right">
-                                                    {{$product->grand_total}}
+                                                    {{$product->grand_total_string}}
                                                 </div>
                                             </div>
                                         @endforeach
@@ -150,23 +150,23 @@
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SUBTOTAL</div>
-                                            <div class="col-md-6 right">{{$order->sub_total}}</div>
+                                            <div class="col-md-6 right">{{$order->sub_total_string}}</div>
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SERVICE</div>
-                                            <div class="col-md-6 right">{{$order->payment_charge}}</div>
+                                            <div class="col-md-6 right">{{$order->payment_charge_string}}</div>
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SHIPPING</div>
-                                            <div class="col-md-6 right">{{$order->shipping_charge}}</div>
+                                            <div class="col-md-6 right">{{$order->shipping_charge_string}}</div>
                                         </div>
                                         <div class="col-md-12 border-bottom-black mb-20">
                                             <div class="col-md-6 bold">TAX</div>
-                                            <div class="col-md-6 right">{{$order->tax_amount}}</div>
+                                            <div class="col-md-6 right">{{$order->tax_amount_string}}</div>
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold"><h5>TOTAL</h5></div>
-                                            <div class="col-md-6 right bold"><h5>{{$order->grand_total}}</h5></div>
+                                            <div class="col-md-6 right bold"><h5>{{$order->grand_total_string}}</h5></div>
                                         </div>
                                     </div>
                                 </div>

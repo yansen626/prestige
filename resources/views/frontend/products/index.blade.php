@@ -56,10 +56,10 @@
                             </div><!-- .product-img end -->
                             <div class="product--content">
                                 <div class="product--title">
-                                    <h3><a href="{{$link}}">{{$product->name}}</a></h3>
+                                    <h3><a href="{{$link}}">{{ $product->name }}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>Rp {{$product->price}}</span>
+                                    <span>Rp {{ $product->price_string }}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
