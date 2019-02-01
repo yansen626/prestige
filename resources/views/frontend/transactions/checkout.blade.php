@@ -93,6 +93,11 @@
                     {{--</div>--}}
                     <div class="col-lg-offset-6 col-xs-6 col-sm-12 col-md-6">
                         <div class="col-xs-12 col-sm-12 col-md-12" style="text-align: right;">
+                            <a href="{{ route('cart') }}">
+                               <button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">
+                                   CANCEL
+                               </button>
+                            </a>
                             <button type="button" id="pay-button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">PAY NOW</button>
                         </div>
                     </div>

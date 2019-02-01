@@ -127,15 +127,16 @@ class HomeController extends Controller
                 // Over the counter = cstore
                 // Cardless Credit = akulaku
                 $paymentMethod = "credit_card";
-                $order = Order::find(19);
+                $order = Order::find(24);
                 $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
                 //set data to request
                 $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
-//        dd($transactionDataArr);
+
+//                dd(json_encode($transactionDataArr));
                 //sending to midtrans
                 $redirectUrl = Midtrans::sendRequest($transactionDataArr);
-        dd($redirectUrl);
+                dd($redirectUrl);
                 return redirect($redirectUrl);
 
                 break;

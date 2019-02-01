@@ -63,6 +63,7 @@ class CheckoutController extends Controller
             //set data to request
             $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
 //            dd($transactionDataArr);
+//            error_log($transactionDataArr);
 
             //sending to midtrans
             $redirectUrl = Midtrans::sendRequest($transactionDataArr);

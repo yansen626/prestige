@@ -213,7 +213,7 @@
 @section('styles')
     <style>
         .customize-section{
-            /*padding-bottom: 35%;*/
+            padding-bottom: 5%;
         }
         body {
             font-family: "Montserrat", "Lato", "Open Sans", "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;

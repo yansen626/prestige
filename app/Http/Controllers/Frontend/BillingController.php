@@ -102,11 +102,15 @@ class BillingController extends Controller
             $user = null;
             $userAddress = null;
             $cityId = $request->input('city');
+            $dateTimeNow = Carbon::now('Asia/Jakarta');
 
             if(strpos($cityId, '-') !== false){
                 $splitedCity = explode('-', $cityId);
                 $cityId = $splitedCity[1];
             }
+
+            $totalWeight = $request->input('weight');
+
             // Get Data from Session
             if(!Auth::check()){
                 if(Session::has('cart')) {
@@ -182,32 +186,61 @@ class BillingController extends Controller
             // Get Data from DB
             else{
                 $user = Auth::user();
+                $userCart = Cart::where('user_id', $user->id)->count();
 
                 $shopping = Session::get('shopping');
-
                 //New Conditions
                 if($shopping != null){
-                    // Save to DB Table Cart
                     $oldCart = Session::has('cart') ? Session::get('cart') : null;
-                    $cart = new \App\Cart($oldCart);
-                    if(!empty($carts)){
-                        $carts = $cart->items;
+                    if(!empty($oldCart)){
+                        $cart = new \App\Cart($oldCart);
+//                    dd($cart);
+                        // Save to DB Table Cart if cart is empty
+                        if($userCart == 0){
+                            $carts = $cart->items;
 
-                        foreach ($carts as $cartData) {
-                            Cart::create([
-                                'product_id' => $cartData['item']['product_id'],
-                                'user_id' => $user->id,
-                                'description' => $cartData['item']['description'],
-                                'qty' => $cartData['item']['qty'],
-                                'price' => $cartData['item']['product_id'],
-                                'total_price' => $cartData['price'],
-                                'created_at' => Carbon::now('Asia/Jakarta'),
-                                'updated_at' => Carbon::now('Asia/Jakarta')
-                            ]);
+                            foreach ($carts as $cartData) {
+                                Cart::create([
+                                    'product_id' => $cartData['item']['product_id'],
+                                    'user_id' => $user->id,
+                                    'description' => $cartData['item']['description'],
+                                    'qty' => $cartData['item']['qty'],
+                                    'price' => $cartData['item']['product_id'],
+                                    'total_price' => $cartData['price'],
+                                    'created_at' => Carbon::now('Asia/Jakarta'),
+                                    'updated_at' => Carbon::now('Asia/Jakarta')
+                                ]);
+
+                                if($totalWeight == 0){
+                                    $weight = $cartData['item']['weight'] *  $cartData['item']['qty'];
+                                    $totalWeight += $weight;
+                                }
+                            }
                         }
-                    }
+                        // update DB Table Cart
+                        else{
+                            $carts = $cart->items;
+                            foreach ($carts as $cartData) {
+                                $cartDB = Cart::where('product_id', $cartData['item']['product_id'])->where('user_id', $user->id)->first();
+                                if(!empty($cartDB)){
+//                                dd($totalWeight);
+                                    $qty = $cartDB->qty + 1;
+                                    $cartDB->qty = $qty;
+                                    $cartDB->updated_at = $dateTimeNow->toDateTimeString();
+                                    $cartDB->total_price = $qty * $cartData['item']['price'];
+                                    $cartDB->save();
 
-                    Session::forget('cart');
+                                    if($totalWeight == 0){
+                                        $weight = $cartData['item']['weight'] *  $cartData['item']['qty'];
+                                        $totalWeight += $weight;
+                                    }
+                                }
+                            }
+                        }
+
+                        Session::forget('cart');
+                        Session::forget('shopping');
+                    }
                 }
 
                 //checking if user already have address
@@ -252,11 +285,11 @@ class BillingController extends Controller
             // get rajaongkir Data
             $courier = $request->input('courier');
             $selectedCourier = explode('-',$courier);
-            $totalWeight = $request->input('weight');
+
             $data = array();
 //            dd($totalWeight, $selectedCourier, $userAddress);
             $data = $this->getRajaongkirData($totalWeight, $selectedCourier, $userAddress);
-//dd($data);
+//            dd($data);
             if(empty($data)){
                 return redirect()->back()->withErrors("Shipping Service Not Available");
             }

@@ -89,8 +89,9 @@ class Midtrans
                 $unfinish_redirect_url = $hostUrl. '/checkout-failed/'.$order->id;
             }
 
-            $paymentList = array();
-            array_push($paymentList, $paymentMethod);
+            $paymentList = [];
+            $paymentList[] = $paymentMethod;
+//            array_push($paymentList, $paymentMethod);
 
             $vt_web = array(
                 'credit_card_3d_secure' => true,
@@ -141,6 +142,8 @@ class Midtrans
                 $serverSnapURL = env('MIDTRANS_SNAP_URL_PRODUCTION');
             }
             json_encode($transactionDataArr);
+//            $transactionDataJSON = json_encode($transactionDataArr);
+
             $base64ServerKey = base64_encode($serverKey);
 
             $client = new Client([
