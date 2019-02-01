@@ -104,6 +104,10 @@ class BillingController extends Controller
             $cityId = $request->input('city');
             $dateTimeNow = Carbon::now('Asia/Jakarta');
 
+            if($cityId == '-1'){
+                return redirect()->back()->withErrors('Mohon pilih kota!', 'default')->withInput($request->all());
+            }
+
             if(strpos($cityId, '-') !== false){
                 $splitedCity = explode('-', $cityId);
                 $cityId = $splitedCity[1];

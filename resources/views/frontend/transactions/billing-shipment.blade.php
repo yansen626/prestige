@@ -329,12 +329,15 @@
             province.on('change', function(){
                 //remove the options
                 cityOptions.detach();
+
+                city.append("<option value='-1' selected>CITY</option>");
+
                 //readd only the options for the country
                 cityOptions.filter(function(){
                     return this.value.indexOf(province.val() + "-") === 0;
                 }).appendTo(city);
                 //clear out the value so it doesn't default to one it should not
-                city.val('');
+                city.val('-1');
             });
         }(jQuery));
 
@@ -346,12 +349,15 @@
             province.on('change', function(){
                 //remove the options
                 cityOptions.detach();
+
+                city.append("<option value='-1' selected>CITY</option>");
+
                 //readd only the options for the country
                 cityOptions.filter(function(){
                     return this.value.indexOf(province.val() + "-") === 0;
                 }).appendTo(city);
                 //clear out the value so it doesn't default to one it should not
-                city.val('');
+                city.val('-1');
             });
         }(jQuery));
     </script>
