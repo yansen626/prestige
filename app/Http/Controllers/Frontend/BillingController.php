@@ -279,6 +279,8 @@ class BillingController extends Controller
                         'postal_code' => $request->input('post_code')
                     ]);
                 }
+
+                Session::forget('cartQty');
             }
 
             //add new secondary address

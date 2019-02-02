@@ -43,12 +43,15 @@ class CartController extends Controller
             if (Auth::check())
             {
                 $cartDB = Cart::where('product_id', $productDB->id)->where('user_id', Auth::user()->id)->first();
+                $cartQty = 0;
                 if(!empty($cartDB)){
                     $qty = $cartDB->qty + 1;
                     $cartDB->qty = $qty;
                     $cartDB->updated_at = $dateTimeNow->toDateTimeString();
                     $cartDB->total_price = $qty * $productDB->price;
                     $cartDB->save();
+
+                    $cartQty = $qty;
                 }
                 else{
                     $newCart = Cart::create([
@@ -61,7 +64,11 @@ class CartController extends Controller
                         'created_at'        => $dateTimeNow->toDateTimeString(),
                         'updated_at'        => $dateTimeNow->toDateTimeString()
                     ]);
+
+                    $cartQty = 1;
                 }
+
+                $request->session()->put('cartQty', $cartQty);
             }
             //add cart to Session
             else
