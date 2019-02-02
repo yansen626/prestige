@@ -67,8 +67,6 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
 
-        //Session::forget('cart');
-
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return redirect()->back()->withErrors('Wrong Email or Password!!', 'default')->withInput($request->only('email'));
         }
@@ -84,6 +82,9 @@ class LoginController extends Controller
         if ($this->guard()->attempt($credentials, $request->has('remember'))) {
             return $this->sendLoginResponse($request);
         }
+
+        Session::forget('cart');
+        Session::forget('cartQty');
 
         return Redirect::route('index');
     }

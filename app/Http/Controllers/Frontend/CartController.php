@@ -64,8 +64,11 @@ class CartController extends Controller
                         'created_at'        => $dateTimeNow->toDateTimeString(),
                         'updated_at'        => $dateTimeNow->toDateTimeString()
                     ]);
+                }
 
-                    $cartQty = 1;
+                $cartsDb = Cart::where('product_id', '!=', $productDB->id)->where('user_id', Auth::user()->id)->get();
+                foreach ($cartsDb as $cart){
+                    $cartQty += $cart->qty;
                 }
 
                 $request->session()->put('cartQty', $cartQty);
@@ -111,6 +114,16 @@ class CartController extends Controller
             }
             else{
                 $totalPrice = 0;
+            }
+
+            if(Session::get('cartQty') == null) {
+                $cartQty = 0;
+                $cartsDb = Cart::where('user_id', Auth::user()->id)->get();
+                foreach ($cartsDb as $cart) {
+                    $cartQty += $cart->qty;
+                }
+
+                Session::put('cartQty', $cartQty);
             }
         }
         else if(Session::has('cart')){
