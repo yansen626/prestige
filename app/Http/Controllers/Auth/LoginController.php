@@ -79,14 +79,13 @@ class LoginController extends Controller
             return View('auth.send-email', compact('email'));
         }
 
+        Session::forget('cart');
+        Session::forget('cartQty');
         if ($this->guard()->attempt($credentials, $request->has('remember'))) {
             return $this->sendLoginResponse($request);
         }
 
-        Session::forget('cart');
-        Session::forget('cartQty');
-
-        return Redirect::route('index');
+        return Redirect::route('home');
     }
 
     public function logoutUser(){
@@ -105,8 +104,10 @@ class LoginController extends Controller
         if($shopping != null){
             return Redirect::route('billing');
         }
+//
+//        return $this->authenticated($request, $this->guard()->user())
+//            ?: redirect()->intended($this->redirectPath());
 
-        return $this->authenticated($request, $this->guard()->user())
-            ?: redirect()->intended($this->redirectPath());
+        return Redirect::route('home');
     }
 }

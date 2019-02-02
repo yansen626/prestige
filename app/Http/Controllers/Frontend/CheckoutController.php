@@ -43,6 +43,12 @@ class CheckoutController extends Controller
                 'snapURL' => $snapURL,
                 'clientKey' => $clientKey
             ]);
+
+            //change order status to pending payment
+            $orderDB = Order::find($order->id);
+            $orderDB->order_status_id = 2;
+            $orderDB->save();
+
             return view('frontend.transactions.checkout')->with($data);
         }
         return redirect()->route('home');
@@ -68,11 +74,6 @@ class CheckoutController extends Controller
             //sending to midtrans
             $redirectUrl = Midtrans::sendRequest($transactionDataArr);
             //dd($exception);
-
-            //change order status to pending payment
-            $orderDB = Order::find($order->id);
-            $orderDB->order_status_id = 2;
-            $orderDB->save();
 
             return Response::json(array('success' => $redirectUrl));
         }

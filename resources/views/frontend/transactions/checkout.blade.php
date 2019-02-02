@@ -93,7 +93,7 @@
                     {{--</div>--}}
                     <div class="col-lg-offset-6 col-xs-6 col-sm-12 col-md-6">
                         <div class="col-xs-12 col-sm-12 col-md-12" style="text-align: right;">
-                            <a href="{{ route('cart') }}">
+                            <a href="{{ route('orders') }}">
                                <button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">
                                    CANCEL
                                </button>
@@ -119,9 +119,10 @@
                                         <div class="col-md-2">QUANTITY</div>
                                         <div class="col-md-4 right">TOTAL</div>
                                     </div>
-                                    <div class="col-md-5 border-bottom-black mb-20">
-                                        SHIPPING TO
+                                    <div class="col-md-5 border-bottom-black mb-20 hidden-xs hidden-sm">
+                                        SHIPPING <b>({{$order->shipping_option}})</b> TO
                                     </div>
+                                    <hr class="hidden-xs hidden-sm" style="height:1px;border:none;color:#333;background-color:#333;" />
                                     <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                                     <div class="col-md-7">
                                         @foreach($orderProduct as $product)
@@ -138,35 +139,38 @@
                                                     {{$product->qty}}
                                                 </div>
                                                 <div class="col-md-4 right">
-                                                    {{$product->grand_total_string}}
+                                                    Rp {{$product->grand_total_string}}
                                                 </div>
                                             </div>
                                         @endforeach
                                     </div>
                                     <div class="col-md-5">
+                                        <div class="col-md-12 border-bottom-black mb-20 hidden-md hidden-lg">
+                                            SHIPPING <b>({{$order->shipping_option}})</b> TO
+                                        </div>
                                         <div class="col-md-12 border-bottom-black mb-20">
                                             {{$order->address->description}}, {{$order->address->street}},
                                             {{$order->address->suburb}}, {{$order->address->postal_code}}, {{$order->address->province->name}}, {{$order->address->country->name}},
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SUBTOTAL</div>
-                                            <div class="col-md-6 right">{{$order->sub_total_string}}</div>
+                                            <div class="col-md-6 right">Rp {{$order->sub_total_string}}</div>
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SERVICE</div>
-                                            <div class="col-md-6 right">{{$order->payment_charge_string}}</div>
+                                            <div class="col-md-6 right">Rp {{$order->payment_charge_string}}</div>
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SHIPPING</div>
-                                            <div class="col-md-6 right">{{$order->shipping_charge_string}}</div>
+                                            <div class="col-md-6 right">Rp {{$order->shipping_charge_string}}</div>
                                         </div>
                                         <div class="col-md-12 border-bottom-black mb-20">
                                             <div class="col-md-6 bold">TAX</div>
-                                            <div class="col-md-6 right">{{$order->tax_amount_string}}</div>
+                                            <div class="col-md-6 right">Rp {{$order->tax_amount_string}}</div>
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold"><h5>TOTAL</h5></div>
-                                            <div class="col-md-6 right bold"><h5>{{$order->grand_total_string}}</h5></div>
+                                            <div class="col-md-6 right bold"><h5>Rp {{$order->grand_total_string}}</h5></div>
                                         </div>
                                     </div>
                                 </div>

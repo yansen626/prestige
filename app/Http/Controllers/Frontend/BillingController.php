@@ -253,9 +253,6 @@ class BillingController extends Controller
                                 }
                             }
                         }
-
-                        Session::forget('cart');
-                        Session::forget('shopping');
                     }
                 }
 
@@ -326,13 +323,15 @@ class BillingController extends Controller
             }
 //            dd($shippingPrice);
             if($shippingPrice == 0){
-                return redirect()->back()->withErrors("Shipping service not available")->withInput($request->all());
+                return redirect()->back()->withErrors("Please Wait")->withInput($request->all());
             }
 
             // create transaction from setTransaction
             $transactionSuccess = $this->setTransaction($user, $userAddress, $courier, $shippingPrice);
             if($transactionSuccess > 0){
                 // Redirect to Checkout
+                Session::forget('cart');
+                Session::forget('shopping');
                 return redirect()->route('checkout', ['order'=>$transactionSuccess]);
             }
             else{
