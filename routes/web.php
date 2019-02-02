@@ -58,6 +58,9 @@ Route::prefix('payment')->group(function(){
     Route::get('/error', 'Frontend\MidtransController@error')->name('error.checkout');
 });
 
+Route::get('/orders', 'Frontend\OrderController@Index')->name('orders');
+Route::get('/order/{order}', 'Frontend\OrderController@Show')->name('order.detail');
+
 // miscellaneous
 Route::get('/test-location', 'Frontend\HomeController@getLocation')->name('getLocation');
 Route::get('/test-province', 'Frontend\HomeController@getProvince')->name('getProvince');

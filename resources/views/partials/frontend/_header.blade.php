@@ -175,6 +175,10 @@
 
                     @if(auth()->guard('web')->check())
                         <li>
+                            <a href="{{route('orders')}}"  class="menu-item">My ORDER</a>
+                            <!-- .mega-dropdown-menu end -->
+                        </li>
+                        <li>
                             <a href="{{route('logout')}}"  class="menu-item">LOGOUT</a>
                             <!-- .mega-dropdown-menu end -->
                         </li>

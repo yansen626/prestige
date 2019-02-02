@@ -146,7 +146,7 @@
                                     <div class="col-md-5">
                                         <div class="col-md-12 border-bottom-black mb-20">
                                             {{$order->address->description}}, {{$order->address->street}},
-                                            {{$order->address->suburb}}, {{$order->address->postal_code}}, {{$order->address->state}}, {{$order->address->country->name}},
+                                            {{$order->address->suburb}}, {{$order->address->postal_code}}, {{$order->address->province->name}}, {{$order->address->country->name}},
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SUBTOTAL</div>

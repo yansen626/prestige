@@ -74,11 +74,16 @@ class Order extends Eloquent
 	];
 
 	protected $appends = [
+	    'shipping_charge_string',
 	    'payment_charge_string',
         'sub_total_string',
         'tax_amount_string',
         'grand_total_string'
     ];
+
+    public function getShippingChargeStringAttribute(){
+        return number_format($this->attributes['shipping_charge'], 0, ",", ".");
+    }
 
     public function getPaymentChargeStringAttribute(){
         return number_format($this->attributes['payment_charge'], 0, ",", ".");

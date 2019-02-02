@@ -2,36 +2,31 @@
 
 @section('content')
     <section class="bg-white">
-        <form method="POST" action="{{ route('submit.checkout', ["order"=>$order->id]) }}">
-            @csrf
             <div class="container">
                 <div class="row" style="margin-bottom:5%;">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="col-md-12">
-                            <h1>Success!</h1>
+                            <h1>Order {{$order->order_number}}</h1>
                             <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                             <br/>
                         </div>
-                        <div class="col-md-8">
-                            <p>
-                                we are pleased to tell you your order has been confirmed and is underway.<br>
-                                please allow for 10 business days before dispatch while we personalize your order.<br>
-                                we will send an email when your items are ready for dispatch.
-                            </p>
+                        <div class="col-md-12 mb-20">
+                            <div class="col-md-2"><h5>Date</h5></div>
+                            <div class="col-md-10"><h5>: {{$order->created_at}}</h5> </div>
                         </div>
-                        <div class="col-md-4">
-                            <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;margin-bottom:2%;">DOWNLOAD INVOICE</a>
-                            <br>
-                            <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;margin-bottom:2%;">TRACK ORDER</a>
+                        <div class="col-md-12 mb-20">
+                            <div class="col-md-2"><h5>Shipping</h5></div>
+                            <div class="col-md-10"><h5>: {{$order->shipping_option}}</h5> </div>
+                        </div>
+                        <div class="col-md-12 mb-20">
+                            <div class="col-md-2"><h5>Status</h5></div>
+                            <div class="col-md-10"><h5>: {{$order->order_status->name}}</h5> </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <table class="table">
-                        <tr>
-                            <td colspan="2">{{$order->order_number}}</td>
-                        </tr>
                         <tr>
                             <td>
                                 <div class="col-md-12">
@@ -48,7 +43,7 @@
                                     <div class="col-md-7">
                                         @foreach($orderProduct as $product)
                                             <div class="col-md-12 mb-10">
-                                                <div class="col-md-2">
+                                                <div class="col-md-2 ">
                                                     <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
                                                 </div>
                                                 <div class="col-md-4">
@@ -91,7 +86,7 @@
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold"><h5>TOTAL</h5></div>
-                                            <div class="col-md-6 right bold"><h5>{{$order->grand_total_string}}</h5></div>
+                                            <div class="col-md-6 right bold"><h5>Rp {{$order->grand_total_string}}</h5></div>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +96,6 @@
                     </table>
                 </div>
             </div>
-        </form>
     </section>
 @endsection
 
