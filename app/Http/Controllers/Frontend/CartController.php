@@ -42,7 +42,10 @@ class CartController extends Controller
             //add cart to database
             if (Auth::check())
             {
-                $cartDB = Cart::where('product_id', $productDB->id)->where('user_id', Auth::user()->id)->first();
+                $cartDB = Cart::where('product_id', $productDB->id)
+                    ->where('user_id', Auth::user()->id)
+                    ->where('description', $description)
+                    ->first();
                 $cartQty = 0;
                 if(!empty($cartDB)){
                     $qty = $cartDB->qty + 1;
@@ -195,12 +198,20 @@ class CartController extends Controller
             if (Auth::check()){
                 $cart = Cart::find($request->input('cartId'));
                 $cart->delete();
+                $cartQty=0;
+                $cartsDb = Cart::where('user_id', Auth::user()->id)->get();
+                foreach ($cartsDb as $cart){
+                    $cartQty += $cart->qty;
+                }
+
+                $request->session()->put('cartQty', $cartQty);
             }
             else{
                 // delete from Session
                 $oldCart = Session::has('cart') ? Session::get('cart') : null;
                 $cart = new \App\Cart($oldCart);
                 $cart->remove($request->input('cartId'));
+//                dd($cart);
                 $request->session()->put('cart', $cart);
             }
 
