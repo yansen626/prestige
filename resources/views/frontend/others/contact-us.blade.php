@@ -56,7 +56,7 @@
                         <h2 class="heading--title">Get in Touch</h2>
                         <div class="divider--line m-0">
                         </div>
-                        <p class="heading--desc mt-20">League is not just about graphic design; it's more than that. We offer integral communication services, and we're responsible for our process and results. We thank each client and their projects.</p>
+                        <p class="heading--desc mt-20">Need help? Do you have a question about your order or just simply want to say hi? Please don’t hesitate to shoot us a message at hi@nama-official.com</p>
                     </div>
                     <div class=" clearfix"></div>
                     <div class="row mb-50">
