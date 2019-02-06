@@ -18,6 +18,7 @@ use App\Models\ProductPosition;
 use App\Transformer\ProductTransformer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
@@ -105,38 +106,47 @@ class ProductController extends Controller
 
 //            dd($slug);
             // save product
+            $colourNew = Utilities::CreateProductSlug($request->input('colour'));
+            $is_primary = 1;
+            $is_exist = Product::where('name', $request->input('name'))->first();
+            if(!empty($is_exist)){
+                $is_primary = 0;
+            }
+//            dd($colourNew);
             $newProduct = Product::create([
                 'name' => $request->input('name'),
-                'slug' => $slug,
+                'slug' => $slug."--".$colourNew,
                 'sku' => $request->input('sku'),
+                'category_id' => $request->input('category'),
                 'description' => $request->input('description'),
                 'qty' => $request->input('qty'),
                 'price' => (double) $request->input('price'),
+                'colour' => $colourNew,
                 'weight' => $request->input('weight'),
                 'width' => $request->input('width'),
                 'height' => $request->input('height'),
                 'length' => $request->input('length'),
                 'tag' => $request->input('tags'),
+                'is_primary' => $is_primary,
                 'status' => 1,
                 'created_at'        => $dateTimeNow->toDateTimeString(),
                 'updated_at'        => $dateTimeNow->toDateTimeString()
             ]);
 
             // save product category
-            $newProductCategory = CategoryProduct::create([
-                'category_id' => $request->input('category'),
-                'product_id' => $newProduct->id,
-                'created_at'        => $dateTimeNow->toDateTimeString(),
-            ]);
+//                $newProductCategory = CategoryProduct::create([
+//                    'category_id' => $request->input('category'),
+//                    'product_id' => $newProduct->id,
+//                    'created_at'        => $dateTimeNow->toDateTimeString(),
+//                ]);
 
             // save product position
-            $newProductCategory = ProductPosition::create([
-                'product_id' => $newProduct->id,
-                'name' => "test",
-                'pos_x' => 250,
-                'pos_y' => 300,
-            ]);
-
+        $newProductCategory = ProductPosition::create([
+            'product_id' => $newProduct->id,
+            'name' => "Top Middle",
+            'pos_x' => 250,
+            'pos_y' => 300,
+        ]);
 
             // save product main image, and image detail
             $img = Image::make($mainImages);
@@ -145,8 +155,12 @@ class ProductController extends Controller
 
             $filename = $newProduct->id.'_main_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
 
-            $img->save('../public_html/storage/products/'. $filename, 75);
-//            $img->save(public_path('storage/products/'. $filename), 75);
+            if(env('SERVER_HOST_URL') == 'http://localhost:8000/'){
+                $img->save(public_path('storage/products/'. $filename), 75);
+            }
+            else{
+                $img->save('../public_html/storage/products/'. $filename, 75);
+            }
             $newProductImage = ProductImage::create([
                 'product_id' => $newProduct->id,
                 'path' => $filename,
@@ -159,8 +173,12 @@ class ProductController extends Controller
 
                 $filename = $newProduct->id.'_'.$i.'_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
 
-                $img->save('../public_html/storage/products/'. $filename, 75);
-//                $img->save(public_path('storage/products/'. $filename), 75);
+                if(env('SERVER_HOST_URL') == 'http://localhost:8000/'){
+                    $img->save(public_path('storage/products/'. $filename), 75);
+                }
+                else{
+                    $img->save('../public_html/storage/products/'. $filename, 75);
+                }
 
                 $newProductImage = ProductImage::create([
                     'product_id' => $newProduct->id,
@@ -168,8 +186,8 @@ class ProductController extends Controller
                     'is_main_image' => 0
                 ]);
             }
-
-            return redirect()->route('admin.product.create.customize',['item' => $newProduct->id]);
+//                dd($newProductCategory);
+            return redirect()->route('admin.product.edit.customize',['item' => $newProductCategory->id]);
 
         }catch(\Exception $ex){
 //            dd($ex);
@@ -299,11 +317,13 @@ class ProductController extends Controller
             $dateTimeNow = Carbon::now('Asia/Jakarta');
             $slug = Utilities::CreateProductSlug($request->input('name'));
 
+            $colourNew = Utilities::CreateProductSlug($request->input('colour'));
+
 //            dd($slug);
             // update product
             $product->category_id = $request->input('category');
             $product->name = $request->input('name');
-            $product->slug = $slug;
+            $product->slug = $slug."--".$colourNew;
             $product->sku = $request->input('sku');
             $product->description = $request->input('description');
             $product->qty = $request->input('qty');
@@ -333,8 +353,12 @@ class ProductController extends Controller
                     $path = $mainImage->path;
 
                     $img = Image::make($mainImages);
-                    $img->save('../public_html/storage/products/'. $path, 75);
-//                    $img->save(public_path('storage/products/'. $path), 75);
+                    if(env('SERVER_HOST_URL') == 'http://localhost:8000/'){
+                        $img->save(public_path('storage/products/'. $path), 75);
+                    }
+                    else{
+                        $img->save('../public_html/storage/products/'. $path, 75);
+                    }
                 }
                 else{
                     $img = Image::make($mainImages);
@@ -342,8 +366,12 @@ class ProductController extends Controller
                     $ext = explode('/', $extStr, 2);
                     $filename = $product->id.'_main_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
 
-                    $img->save('../public_html/storage/products/'. $filename, 75);
-//                    $img->save(public_path('storage/products/'. $filename), 75);
+                    if(env('SERVER_HOST_URL') == 'http://localhost:8000/'){
+                        $img->save(public_path('storage/products/'. $filename), 75);
+                    }
+                    else{
+                        $img->save('../public_html/storage/products/'. $filename, 75);
+                    }
                     $newProductImage = ProductImage::create([
                         'product_id' => $product->id,
                         'path' => $filename,
@@ -367,8 +395,12 @@ class ProductController extends Controller
 
                     $filename = $product->id.'_'.$i.'_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
 
-                    $img->save('../public_html/storage/products/'. $filename, 75);
-//                    $img->save(public_path('storage/products/'. $filename), 75);
+                    if(env('SERVER_HOST_URL') == 'http://localhost:8000/'){
+                        $img->save(public_path('storage/products/'. $filename), 75);
+                    }
+                    else{
+                        $img->save('../public_html/storage/products/'. $filename, 75);
+                    }
 
                     $newProductImage = ProductImage::create([
                         'product_id' => $product->id,

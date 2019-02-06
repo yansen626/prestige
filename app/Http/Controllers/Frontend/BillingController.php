@@ -283,18 +283,39 @@ class BillingController extends Controller
             //add new secondary address
             if($request->input('another_shipment') == true){
 
-                $userAddress = Address::create([
-                    'user_id' => $user->id,
-                    'primary' => 0,
-                    'description' => $request->input('address_detail_secondary'),
-                    'country_id' => $request->input('country_secondary'),
-                    'province_id' => $request->input('province_secondary'),
-                    'city_id' => $cityIdSecondary,
-                    'street' => $request->input('street_secondary'),
-                    'suburb' => $request->input('suburb_secondary'),
-                    'state' => $request->input('state_secondary'),
-                    'postal_code' => $request->input('post_code_secondary')
-                ]);
+                $addressDB = Address::where('user_id', $user->id)->get();
+                if(count($addressDB) != 0){
+                    $userAddress1 = Address::where('user_id', $user->id)->where('primary', 1)->first();
+                    $userAddress1->delete();
+
+                    $userAddress = Address::create([
+                        'user_id' => $user->id,
+                        'primary' => 1,
+                        'description' => $request->input('address_detail_secondary'),
+                        'country_id' => $request->input('country_secondary'),
+                        'province_id' => $request->input('province_secondary'),
+                        'city_id' => $cityIdSecondary,
+                        'street' => $request->input('street_secondary'),
+                        'suburb' => $request->input('suburb_secondary'),
+                        'state' => $request->input('state_secondary'),
+                        'postal_code' => $request->input('post_code_secondary')
+                    ]);
+                }
+                else{
+                    // Create Address
+                    $userAddress = Address::create([
+                        'user_id' => $user->id,
+                        'primary' => 1,
+                        'description' => $request->input('address_detail_secondary'),
+                        'country_id' => $request->input('country_secondary'),
+                        'province_id' => $request->input('province_secondary'),
+                        'city_id' => $cityIdSecondary,
+                        'street' => $request->input('street_secondary'),
+                        'suburb' => $request->input('suburb_secondary'),
+                        'state' => $request->input('state_secondary'),
+                        'postal_code' => $request->input('post_code_secondary')
+                    ]);
+                }
             }
 //            dd($userAddress);
 

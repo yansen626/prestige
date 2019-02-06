@@ -28,6 +28,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property float $price
  * @property float $cost_price
  * @property string $colour
+ * @property int $is_primary
  * @property float $weight
  * @property float $width
  * @property float $height
@@ -63,6 +64,7 @@ class Product extends Eloquent
 		'track_stock' => 'int',
 		'qty' => 'float',
 		'is_taxable' => 'int',
+		'is_primary' => 'int',
 		'price' => 'float',
 		'cost_price' => 'float',
 		'weight' => 'float',
@@ -87,6 +89,7 @@ class Product extends Eloquent
 		'price',
 		'cost_price',
 		'colour',
+		'is_primary',
 		'weight',
 		'width',
 		'height',

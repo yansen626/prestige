@@ -20,10 +20,15 @@ class ProductController extends Controller
         if(!empty($category)){
             $filter = $category;
 
-            $items = Product::where('status', 1)->where('category_id', $filter)->orderBy('created_at', 'desc')->get();
+            $items = Product::where('is_primary', 1)
+                ->where('category_id', $filter)
+                ->orderBy('created_at', 'desc')
+                ->get();
         }
         else{
-            $items = Product::all();
+            $items = Product::where('is_primary', 1)
+                ->orderBy('created_at', 'desc')
+                ->get();
             $filter = 0;
         }
 //        dd($items);
@@ -39,10 +44,19 @@ class ProductController extends Controller
      *
      */
     public function show($product){
+        $slug = $product;
+        if (strpos($product, '--') !== false) {
+            $productArr = explode('--', $product);
+            $slug = $productArr[0];
+        }
         $productDB = Product::where('slug', $product)->first();
+        $otherProductColour = Product::where('slug','like', '%'.$slug.'%')->get();
+
         $data = [
-            'product'      => $productDB
+            'product'      => $productDB,
+            'otherProductColour'      => $otherProductColour
         ];
+//        dd($data);
         return view('frontend.products.show')->with($data);
     }
 

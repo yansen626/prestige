@@ -49,9 +49,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6 mb-3">
+                                                    <div class="col-md-3 mb-3">
                                                         <label for="category">Category</label>
                                                         <input type="text" class="form-control" id="sku" name="sku" value="{{$product->category->name}}" disabled>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label for="validationCustom04">Color</label>
+                                                        <input type="text" class="form-control" id="colour"  name="colour" value="{{$product->colour}}" disabled>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label for="validationCustom04">Price</label>
@@ -140,6 +144,7 @@
                                 </div>
                                 <hr>
                                 <div class="row center">
+                                    <a href="{{ route('admin.product.index') }}" class="btn btn-success">Back</a>
                                     <a href="{{ route('admin.product.edit', ['item' => $product->id]) }}" class="btn btn-danger">Edit</a>
                                 </div>
                             </div>

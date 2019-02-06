@@ -21,7 +21,7 @@
                             <div class="card-body b-b">
 
                                 <h3 class="my-3">
-                                    Step 2 (Customer Customize Option)
+                                    Step 2 (Customize Option)
                                 </h3>
                                 <h3 class="my-3">
                                     Product = {{$productPosition->product->name}}
@@ -100,8 +100,8 @@
             imageObj.onload = function(){
                 context.drawImage(imageObj, 10, 10);
                 context.textAlign = 'center';
-                context.font = "24pt sans-serif";
-                context.fillStyle = "#FFD700";
+                context.font = "20pt sans-serif";
+                context.fillStyle = "red";
                 context.fillText("TEST1234", posX, posY);
             };
 
@@ -118,8 +118,8 @@
             imageObj.onload = function(){
                 context.drawImage(imageObj, 10, 10);
                 context.textAlign = 'center';
-                context.font = "24pt sans-serif";
-                context.fillStyle = "#FFD700";
+                context.font = "20pt sans-serif";
+                context.fillStyle = "red";
                 context.fillText("TEST1234", posX, posY);
             };
 

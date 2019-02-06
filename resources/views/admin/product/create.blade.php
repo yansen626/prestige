@@ -63,14 +63,18 @@
                                                         </div>
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-6 mb-3">
-                                                            <label for="category">Category</label>
+                                                        <div class="col-md-3 mb-3">
+                                                            <label for="category">Product Category</label>
                                                             <select id="category" name="category" class="custom-select form-control">
-                                                                <option value="-1">Select Product Category</option>
+                                                                <option value="-1">Select Category</option>
                                                                 @foreach($categories as $category)
                                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                                                 @endforeach
                                                             </select>
+                                                        </div>
+                                                        <div class="col-md-3 mb-3">
+                                                            <label for="validationCustom04">Color</label>
+                                                            <input type="text" class="form-control" id="colour"  name="colour" value="{{old('colour')}}" required>
                                                         </div>
                                                         <div class="col-md-3 mb-3">
                                                             <label for="validationCustom04">Price</label>
@@ -83,19 +87,19 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-3 mb-3">
-                                                            <label>Weight</label>
+                                                            <label>Weight (Gram)</label>
                                                             <input type="number" class="form-control" id="weight" name="weight" value="{{old('weight')}}" required>
                                                         </div>
                                                         <div class="col-md-3 mb-3">
-                                                            <label>Width</label>
+                                                            <label>Width (cm)</label>
                                                             <input type="number" class="form-control" id="width" name="width" value="{{old('width')}}">
                                                         </div>
                                                         <div class="col-md-3 mb-3">
-                                                            <label>Height</label>
+                                                            <label>Height (cm)</label>
                                                             <input type="number" class="form-control" id="height" name="height" value="{{old('height')}}">
                                                         </div>
                                                         <div class="col-md-3 mb-3">
-                                                            <label>Length</label>
+                                                            <label>Length (cm)</label>
                                                             <input type="number" class="form-control" id="length" name="length" value="{{old('length')}}">
                                                         </div>
                                                     </div>

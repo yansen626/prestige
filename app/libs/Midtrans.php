@@ -95,7 +95,7 @@ class Midtrans
 
             $vt_web = array(
                 'credit_card_3d_secure' => true,
-                'enabled_payments' => $paymentList,
+//                'enabled_payments' => $paymentList,
                 'finish_redirect_url' => $finish_redirect_url,
                 'unfinish_redirect_url' => $unfinish_redirect_url,
                 'error_redirect_url' => $hostUrl. '/payment/error'
@@ -115,6 +115,7 @@ class Midtrans
                 'transaction_details' => $transaction_details,
                 'customer_details' => $customer_details,
                 'item_details' => $item_details,
+                'enabled_payments' => $paymentList,
                 'vtweb' => $vt_web,
             );
 

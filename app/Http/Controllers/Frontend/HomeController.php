@@ -35,7 +35,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::where('status', 1)->get();
+        $products = Product::where('is_primary', 1)->get();
         $data=([
            'products' => $products,
         ]);
@@ -126,7 +126,7 @@ class HomeController extends Controller
                 // Ewallet = telkomsel_cash, indosat_dompetku, mandiri_ecash,
                 // Over the counter = cstore
                 // Cardless Credit = akulaku
-                $paymentMethod = "credit_card";
+                $paymentMethod = "bank_transfer";
                 $order = Order::find(24);
                 $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 

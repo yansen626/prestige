@@ -75,7 +75,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6 mb-3">
+                                                    <div class="col-md-3 mb-3">
                                                         <label for="category">Category</label>
                                                         <select id="category" name="category" class="custom-select form-control">
                                                             <option value="-1">Select Product Category</option>
@@ -83,6 +83,10 @@
                                                                 <option value="{{ $category->id }}" @if($category->id == $product->category_id) selected @endif > {{ $category->name }}</option>
                                                             @endforeach
                                                         </select>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Color</label>
+                                                        <input type="text" class="form-control" id="colour-edit"  name="colour" value="{{$product->colour}}" required>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Price</label>

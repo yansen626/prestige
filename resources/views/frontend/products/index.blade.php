@@ -47,7 +47,7 @@
                         @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
-                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="height: 300px; width: auto"/>
                                 <div class="product--hover">
                                     <div class="product--action">
                                         <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
@@ -80,7 +80,7 @@
                         @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
-                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="height: 300px; width: auto"/>
                                 <div class="product--hover">
                                     <div class="product--action">
                                         <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
@@ -112,7 +112,7 @@
                         @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
-                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="height: 300px; width: auto"/>
                                 <div class="product--hover">
                                     <div class="product--action">
                                         <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
@@ -144,7 +144,7 @@
                         @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
-                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="height: 300px; width: auto"/>
                                 <div class="product--hover">
                                     <div class="product--action">
                                         <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
@@ -176,7 +176,7 @@
                         @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
-                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="height: 300px; width: auto"/>
                                 <div class="product--hover">
                                     <div class="product--action">
                                         <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
@@ -208,7 +208,7 @@
                         @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                         <div class="col-xs-12 col-sm-6 col-md-3 product-item">
                             <div class="product--img">
-                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="height: 300px; width: auto"/>
                                 <div class="product--hover">
                                     <div class="product--action">
                                         <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>

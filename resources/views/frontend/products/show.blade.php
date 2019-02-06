@@ -18,7 +18,7 @@
                                     {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
                                     {{--</div>--}}
                                     <div class="pos-vertical-center">
-                                        <div class="col-xs-12 col-sm-12 col-md-12 slider-home" style="background-image: url('{{ asset('storage/products/'.$images->path) }}')">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 slider-home" style="background-image: url('{{ asset('storage/products/'.$images->path) }}');background-size: contain !important;">
                                             {{--<div class="bg-section">--}}
                                             {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
                                             {{--</div>--}}
@@ -50,6 +50,23 @@
                             <input type="hidden" id="slug" name="slug" value="{{$product->slug}}">
                             <input type="hidden" id="position_x" value="{{$product->product_positions[0]->pos_x}}">
                             <input type="hidden" id="position_y" value="{{$product->product_positions[0]->pos_y}}">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 text--left">
+                                    <H4>COLOR</H4>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 text--right">
+                                    <select id="select-colour" class="minimal" data-width="auto"
+                                            onchange="ChangeColour()" style="width: 130px;">
+                                        @foreach($otherProductColour as $colour)
+                                            @if($product->colour == $colour->colour)
+                                                <option value="{{$colour->slug}}" selected>{{$colour->colour}}</option>
+                                            @else
+                                                <option value="{{$colour->slug}}">{{$colour->colour}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 text--left">
                                     <H4>Customization</H4>
@@ -631,6 +648,11 @@
 
 @section('scripts')
     <script>
+        function ChangeColour(){
+            var url = "/product-detail/" + $('#select-colour').val();
+
+            window.location = url;
+        }
         function ChangeSelectedPosition(){
             var selectedPosition = $('#custom-position').val();
             var positionArr = selectedPosition.split("-");
