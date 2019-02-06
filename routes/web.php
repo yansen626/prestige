@@ -147,6 +147,7 @@ Route::prefix('admin')->group(function(){
     // Orders
     Route::get('/orders', 'Admin\OrderController@index')->name('admin.orders.index');
     Route::get('/orders/detail/{item}', 'Admin\OrderController@show')->name('admin.orders.detail');
+    Route::post('/orders/tracking-code/', 'Admin\OrderController@storeTracking')->name('admin.orders.tracking');
 });
 
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');

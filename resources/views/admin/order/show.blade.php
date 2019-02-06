@@ -24,7 +24,7 @@
                         <div class="tab-pane animated fadeInUpShort show active" id="v-pills-1">
                             <!-- Input -->
                             <div class="body">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="created_at">Date</label>
@@ -34,7 +34,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="customer_name">Customer</label>
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="customer_email">Customer Email</label>
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="customer_address">Customer Address</label>
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="customer_country">Country</label>
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="customer_province">Province</label>
@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="customer_city">City</label>
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="shipping">Shipping</label>
@@ -104,7 +104,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="sub_total">Sub Total</label>
@@ -114,7 +114,17 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group form-float form-group-lg">
+                                        <div class="form-line">
+                                            <label class="form-label" for="tax_amount">Shipping Amount</label>
+                                            <input id="tax_amount" type="text" class="form-control"
+                                                   name="tax_amount" value="Rp{{ $order->shipping_charge }}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="tax_amount">Tax Amount</label>
@@ -124,7 +134,17 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group form-float form-group-lg">
+                                        <div class="form-line">
+                                            <label class="form-label" for="tax_amount">Service Amount</label>
+                                            <input id="tax_amount" type="text" class="form-control"
+                                                   name="tax_amount" value="Rp{{ $order->payment_charge }}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="grand_total">Grand Total</label>
@@ -134,7 +154,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
                                             <label class="form-label" for="status">Status</label>
@@ -168,7 +188,48 @@
                                         </tbody>
                                     </table>
                                 </div>
+
+                                @if($order->order_status_id == 3)
+                                    {{ Form::open(['route'=>['admin.orders.tracking'],'method' => 'post','id' => 'general-form', 'enctype' => 'multipart/form-data']) }}
+                                    <input type="hidden" name="order-id" value="{{$order->id}}">
+                                    <div class="col-md-6 text-center">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label" for="track_code">Tracking Code</label>
+                                                <input id="track_code" type="text" class="form-control"
+                                                       name="track_code" value="{{ $order->track_code }}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="form-group form-float form-group-lg">
+                                            <button class="btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+
+                                    {{ Form::close() }}
+                                @elseif ($order->order_status_id == 4)
+                                    {{ Form::open(['route'=>['admin.orders.tracking'],'method' => 'post','id' => 'general-form', 'enctype' => 'multipart/form-data']) }}
+                                    <input type="hidden" name="order-id" value="{{$order->id}}">
+                                    <div class="col-md-6 text-center">
+                                        <div class="form-group form-float form-group-lg">
+                                            <div class="form-line">
+                                                <label class="form-label" for="track_code">Tracking Code</label>
+                                                <input id="track_code" type="text" class="form-control"
+                                                       name="track_code" value="{{ $order->track_code }}" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 text-center">
+                                        <div class="form-group form-float form-group-lg">
+                                            <button class="btn btn-success">Change</button>
+                                        </div>
+                                    </div>
+
+                                    {{ Form::close() }}
+                                @endif
                             </div>
+                            <hr>
                             <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
                                 <a href="{{ route('admin.orders.index') }}" class="btn btn-danger">Exit</a>
                             </div>

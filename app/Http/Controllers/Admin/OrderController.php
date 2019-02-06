@@ -54,8 +54,15 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeTracking(Request $request)
     {
+        $orderid = $request->input('order-id');
+        $orderDB = Order::find($orderid);
+        $orderDB->track_code = $request->input('track_code');
+        $orderDB->order_status_id = 4;
+        $orderDB->save();
+
+        return redirect()->route('admin.orders.detail', ['id'=>$orderid]);
         //
     }
 

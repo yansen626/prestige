@@ -111,6 +111,10 @@ class CheckoutController extends Controller
 //    }
 
     public function checkoutSuccess(Order $order){
+        //change order status to pending payment
+        $orderDB = Order::find($order->id);
+        $orderDB->order_status_id = 3;
+        $orderDB->save();
 
         $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
