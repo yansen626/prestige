@@ -35,7 +35,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::where('is_primary', 1)->get();
+        $products = Product::where('is_primary', 1)->where('status', 1)->get();
         $data=([
            'products' => $products,
         ]);
@@ -76,7 +76,7 @@ class HomeController extends Controller
     }
 
     public function aboutUs(){
-        $products = Product::where('status', 1)->get();
+        $products = Product::where('status', 1)->where('is_primary', 1)->get();
         $data=([
             'products' => $products,
         ]);

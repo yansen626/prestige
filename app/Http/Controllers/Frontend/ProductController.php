@@ -21,12 +21,14 @@ class ProductController extends Controller
             $filter = $category;
 
             $items = Product::where('is_primary', 1)
+                ->where('status', 1)
                 ->where('category_id', $filter)
                 ->orderBy('created_at', 'desc')
                 ->get();
         }
         else{
             $items = Product::where('is_primary', 1)
+                ->where('status', 1)
                 ->orderBy('created_at', 'desc')
                 ->get();
             $filter = 0;
@@ -50,7 +52,8 @@ class ProductController extends Controller
             $slug = $productArr[0];
         }
         $productDB = Product::where('slug', $product)->first();
-        $otherProductColour = Product::where('slug','like', '%'.$slug.'%')->get();
+        $otherProductColour = Product::where('slug','like', '%'.$slug.'%')
+            ->where('status', 1)->get();
 
         $data = [
             'product'      => $productDB,
@@ -72,6 +75,7 @@ class ProductController extends Controller
 //                    ->orWhere('status_id', 10);
 //            })
         $productResult = Product::where('name','like','%'.$request->input('search-text').'%')
+            ->where('is_primary', 1)
             ->where('status', 1)
             ->get();
         $filter = -1;

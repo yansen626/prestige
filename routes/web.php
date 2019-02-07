@@ -143,6 +143,8 @@ Route::prefix('admin')->group(function(){
     Route::post('/product/update-customize/{item}', 'Admin\ProductController@updateCustomize')->name('admin.product.update.customize');
     Route::get('/product/edit/{item}', 'Admin\ProductController@edit')->name('admin.product.edit');
     Route::post('/product/update', 'Admin\ProductController@update')->name('admin.product.update');
+    Route::post('/product/delete', 'Admin\ProductController@destroy')->name('admin.product.destroy');
+
 
     // Orders
     Route::get('/orders', 'Admin\OrderController@index')->name('admin.orders.index');

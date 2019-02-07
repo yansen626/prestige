@@ -10,6 +10,7 @@ namespace App\Transformer;
 
 
 use App\Models\Product;
+use App\Models\Status;
 use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
 
@@ -25,6 +26,7 @@ class ProductTransformer extends TransformerAbstract
             $itemShowUrl = route('admin.product.show', ['item' => $product->id]);
             $itemEditUrl = route('admin.product.edit', ['item' => $product->id]);
 
+            $status = Status::find($product->status);
             $action = "<a class='btn btn-xs btn-primary' href='".$itemShowUrl."' data-toggle='tooltip' data-placement='top'><i class='icon-details'></i></a> ";
             $action .= "<a class='btn btn-xs btn-info' href='".$itemEditUrl."' data-toggle='tooltip' data-placement='top'><i class='icon-pencil'></i></a> ";
             $action .= "<a class='delete-modal btn btn-xs btn-danger' data-id='". $product->id ."' ><i class='icon-remove'></i></a>";
@@ -37,6 +39,7 @@ class ProductTransformer extends TransformerAbstract
                 'price'             => $product->price,
                 'created_at'        => $createdDate,
                 'update_at'         => $updatedDate,
+                'status'            => $status->description,
                 'action'            => $action
             ];
         }

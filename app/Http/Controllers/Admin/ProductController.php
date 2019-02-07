@@ -20,6 +20,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 use Yajra\DataTables\DataTables;
@@ -119,6 +121,7 @@ class ProductController extends Controller
                 'sku' => $request->input('sku'),
                 'category_id' => $request->input('category'),
                 'description' => $request->input('description'),
+                'style_notes' => $request->input('style_notes'),
                 'qty' => $request->input('qty'),
                 'price' => (double) $request->input('price'),
                 'colour' => $colourNew,
@@ -326,6 +329,7 @@ class ProductController extends Controller
             $product->slug = $slug."--".$colourNew;
             $product->sku = $request->input('sku');
             $product->description = $request->input('description');
+            $product->style_notes = $request->input('style_notes');
             $product->qty = $request->input('qty');
             $product->price = (double) $request->input('price');
             $product->weight = $request->input('weight');
@@ -435,5 +439,28 @@ class ProductController extends Controller
         }
 
         return \Response::json($formatted_tags);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Request $request)
+    {
+        try {
+            $product = Product::find($request->id);
+            $product->status = 2;
+            $product->save();
+
+            Session::flash('success', 'Success Deleting ');
+            return Response::json(array('success' => 'VALID'));
+        }
+        catch(\Exception $ex){
+            return Response::json(array('errors' => 'INVALID'));
+        }
+
+
     }
 }

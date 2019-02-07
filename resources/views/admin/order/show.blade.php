@@ -117,9 +117,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
-                                            <label class="form-label" for="tax_amount">Shipping Amount</label>
-                                            <input id="tax_amount" type="text" class="form-control"
-                                                   name="tax_amount" value="Rp{{ $order->shipping_charge }}" readonly>
+                                            <label class="form-label" for="shipping_charge">Shipping Amount</label>
+                                            <input id="shipping_charge" type="text" class="form-control"
+                                                   name="shipping_charge" value="Rp{{ $order->shipping_charge }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -137,9 +137,9 @@
                                 <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
-                                            <label class="form-label" for="tax_amount">Service Amount</label>
-                                            <input id="tax_amount" type="text" class="form-control"
-                                                   name="tax_amount" value="Rp{{ $order->payment_charge }}" readonly>
+                                            <label class="form-label" for="payment_charge">Service Amount</label>
+                                            <input id="payment_charge" type="text" class="form-control"
+                                                   name="payment_charge" value="Rp{{ $order->payment_charge }}" readonly>
                                         </div>
                                     </div>
                                 </div>

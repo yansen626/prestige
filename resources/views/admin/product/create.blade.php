@@ -104,14 +104,19 @@
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="productDetails">Product Details</label>
-                                                        <textarea class="form-control p-t-40" id="description" name="description"
-                                                                  placeholder="Write Something..." rows="7" required>{{old('description')}}</textarea>
-                                                    </div>
-                                                    <div class="form-group">
                                                         <label for="tags">Product Tags</label><br>
                                                         <input type="text" class="tags-input" id="tags" name="tags" placeholder="Add New"
                                                                value="{{old('tags')}}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="productDetails">Style Notes</label>
+                                                        <textarea class="form-control p-t-40" id="style_notes" name="style_notes"
+                                                                  placeholder="Write Something..." rows="7" required>{{old('style_notes')}}</textarea>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="productDetails">Product Details</label>
+                                                        <textarea class="form-control p-t-40" id="description" name="description"
+                                                                  placeholder="Write Something..." rows="7" required>{{old('description')}}</textarea>
                                                     </div>
                                                     {{--<div class="row">--}}
                                                         {{--<div class="col-md-12 mb-3">--}}

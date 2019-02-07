@@ -33,6 +33,7 @@
                         </tbody>
                     </table>
                     <div class="col-lg-12">
+                        @include('partials.admin._messages')
                         <table id="demoGrid" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
                             <thead>
                             <tr>
@@ -42,6 +43,7 @@
                                 <th>Price</th>
                                 <th>Created At</th>
                                 <th>Update At</th>
+                                <th>Status</th>
                                 <th>Option</th>
                             </tr>
                             </thead>
@@ -52,6 +54,7 @@
             </section>
         </div>
     </div>
+    @include('partials._delete')
 @endsection
 
 
@@ -64,6 +67,7 @@
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
         $('#demoGrid').DataTable({
+            responsive: false,
             processing: true,
             serverSide: true,
             pageLength: 25,
@@ -90,8 +94,19 @@
                         return data;
                     }
                 },
+                { data: 'status', name: 'status', class: 'text-center'},
                 { data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'}
             ],
         });
+
+        $(document).on('click', '.delete-modal', function(){
+            $('#deleteModal').modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+
+            $('#deleted-id').val($(this).data('id'));
+        });
     </script>
+    @include('partials._deletejs', ['routeUrl' => 'admin.product.destroy', 'redirectUrl' => 'admin.product.index'])
 @endsection
