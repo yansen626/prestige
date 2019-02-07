@@ -5,14 +5,17 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\libs\Midtrans;
 use App\libs\Utilities;
+use App\Mail\OrderConfirmation;
 use App\Models\ContactMessage;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Subscribe;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Cookie;
 
@@ -116,85 +119,115 @@ class HomeController extends Controller
         return $currency;
     }
     public function TestingPurpose(){
-        $type = 1;
-        switch ($type){
-            //testing midtrans
-            case 1:
-                // Credit card = credit_card
-                // Bank Transfer = bank_transfer, echannel,
-                // Internet Banking = bca_klikpay, bca_klikbca, mandiri_clickpay, bri_epay, cimb_clicks, danamon_online,
-                // Ewallet = telkomsel_cash, indosat_dompetku, mandiri_ecash,
-                // Over the counter = cstore
-                // Cardless Credit = akulaku
-                $paymentMethod = "bank_transfer";
-                $order = Order::find(24);
-                $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+        $type = 6;
+        try{
+            switch ($type){
+                //testing midtrans
+                case 1:
+                    // Credit card = credit_card
+                    // Bank Transfer = bank_transfer, echannel,
+                    // Internet Banking = bca_klikpay, bca_klikbca, mandiri_clickpay, bri_epay, cimb_clicks, danamon_online,
+                    // Ewallet = telkomsel_cash, indosat_dompetku, mandiri_ecash,
+                    // Over the counter = cstore
+                    // Cardless Credit = akulaku
+                    $paymentMethod = "bank_transfer";
+                    $order = Order::find(24);
+                    $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
-                //set data to request
-                $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
+                    //set data to request
+                    $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
 
 //                dd(json_encode($transactionDataArr));
-                //sending to midtrans
-                $redirectUrl = Midtrans::sendRequest($transactionDataArr);
-                dd($redirectUrl);
-                return redirect($redirectUrl);
+                    //sending to midtrans
+                    $redirectUrl = Midtrans::sendRequest($transactionDataArr);
+                    dd($redirectUrl);
+                    return redirect($redirectUrl);
 
-                break;
+                    break;
+
                 //testing utilities create order number
-            case 2:
-                // Order number generator
-                $today = Carbon::today();
-                $prepend = "INV/". $today->year. $today->month. $today->day;
+                case 2:
+                    // Order number generator
+                    $today = Carbon::today();
+                    $prepend = "INV/". $today->year. $today->month. $today->day;
 //                dd($prepend);
-                $nextNo = Utilities::GetNextOrderNumber($prepend);
-                $orderNumber = Utilities::GenerateOrderNumber($prepend, $nextNo);
-                return $orderNumber;
-                break;
+                    $nextNo = Utilities::GetNextOrderNumber($prepend);
+                    $orderNumber = Utilities::GenerateOrderNumber($prepend, $nextNo);
+                    return $orderNumber;
+                    break;
+
                 //testing main image
-            case 3:
-                // Order number generator
-                $productImage = Utilities::GetProductMainImage(1);
-                return $productImage->path;
-                break;
+                case 3:
+                    // Order number generator
+                    $productImage = Utilities::GetProductMainImage(1);
+                    return $productImage->path;
+                    break;
+
                 //testing rajaongkir
-            case 4:
-                $client = new \GuzzleHttp\Client();
-                $url = "https://api.rajaongkir.com/starter/cost";
+                case 4:
+                    $client = new \GuzzleHttp\Client();
+                    $url = "https://api.rajaongkir.com/starter/cost";
 //            $url = env('RAJAONGKIR_URL').'/cost';
-                $key = env('RAJAONGKIR_KEY');
+                    $key = env('RAJAONGKIR_KEY');
 
-                $response = $client->request('POST', $url, [
-                    'headers' => [
-                        'key' => $key
-                    ],
-                    'form_params' => [
-                        'origin' => 152,
-                        'originType' => 'city',
-                        'destination' => 455,
-                        'destinationType' => 'city',
-                        'weight' => 2500,
-                        'courier' => 'jne'
-                    ]
-                ]);
+                    $response = $client->request('POST', $url, [
+                        'headers' => [
+                            'key' => $key
+                        ],
+                        'form_params' => [
+                            'origin' => 152,
+                            'originType' => 'city',
+                            'destination' => 455,
+                            'destinationType' => 'city',
+                            'weight' => 2500,
+                            'courier' => 'jne'
+                        ]
+                    ]);
 //            dd($response);
-                $response = $response->getBody()->getContents();
-                $result = json_decode($response);
+                    $response = $response->getBody()->getContents();
+                    $result = json_decode($response);
 //            dd($result);
-                return $result;
-                break;
-            //testing SUCCESS PAGE
-            case 5:
-                // Order number generator
-                $order = Order::find(19);
-                $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+                    return $result;
+                    break;
 
-                $data=([
-                    'order' => $order,
-                    'orderProduct' => $orderProduct,
-                ]);
-                return view('frontend.transactions.checkout-success')->with($data);
-                break;
+                //testing SUCCESS PAGE
+                case 5:
+                    //testing SUCCESS PAGE
+                    $order = Order::find(19);
+                    $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+
+                    $data=([
+                        'order' => $order,
+                        'orderProduct' => $orderProduct,
+                    ]);
+                    return view('frontend.transactions.checkout-success')->with($data);
+                    break;
+
+                //testing SEND EMAIL ORDER CONFIRMATION
+                case 6:
+                    $order = Order::find(26);
+                    $user = User::find($order->user_id);
+                    $orderProducts = OrderProduct::where('order_id', $order->id)->get();
+
+                    $productIdArr = [];
+                    foreach ($orderProducts as $orderProduct){
+                        array_push($productIdArr, $orderProduct->product_id);
+                    }
+
+                    $productImages = ProductImage::whereIn('product_id',$productIdArr)->where('is_main_image', 1)->get();
+                    $productImageArr = [];
+                    foreach ($productImages as $productImage){
+                        $productImageArr[$productImage->product_id] = $productImage->path;
+                    }
+                    $orderConfirmation = new OrderConfirmation($user, $order, $orderProducts, $productImageArr);
+                    Mail::to($user->email)->send($orderConfirmation);
+                    break;
+            }
         }
+        catch (\Exception $ex){
+            dd($ex);
+        }
+
     }
     public function setCookie(){
 
