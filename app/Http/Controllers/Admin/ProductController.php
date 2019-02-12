@@ -124,7 +124,7 @@ class ProductController extends Controller
                 'style_notes' => $request->input('style_notes'),
                 'qty' => $request->input('qty'),
                 'price' => (double) $request->input('price'),
-                'colour' => $colourNew,
+                'colour' => $request->input('colour'),
                 'weight' => $request->input('weight'),
                 'width' => $request->input('width'),
                 'height' => $request->input('height'),

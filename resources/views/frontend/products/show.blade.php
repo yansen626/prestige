@@ -36,7 +36,7 @@
                         <div class="col-md-12">
                             <h2>{{$product->name}}</h2>
                             <h5 style="text-transform: capitalize;">Rp {{$product->price_string}}</h5>
-                            <p style="text-transform: none; text-align: justify">
+                            <p style="text-align: justify">
                                 {{$product->style_notes}}
                             </p>
                         </div>
@@ -135,7 +135,10 @@
                                             {{--</div>--}}
 
                                             <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-                                                <p style="margin-bottom: 0;margin-left: 11%;">Choose Color</p>
+                                                <p style="margin-bottom: 0;margin-left: 11%;">
+                                                    Choose Color <i class="fa fa-info-circle" data-toggle="modal" data-target="#colorInformation" style="cursor: pointer;"></i>
+                                                </p>
+
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-default dropdown-toggle btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                         <span class="fa fa-angle-down"></span>
@@ -147,6 +150,11 @@
                                                         <li style="height: 40px;width: 40px;cursor:pointer;">
                                                             <a onclick="ChangeCustom('Silver-C0C0C0', 2)">
                                                                 <img src="{{asset('images/icons/Silver.PNG')}}" style="width: 35px; height: 35px;">
+                                                            </a>
+                                                        </li>
+                                                        <li style="height: 40px;width: 40px;cursor:pointer;">
+                                                            <a onclick="ChangeCustom('Gold-FFD700', 2)">
+                                                                <img src="{{asset('images/icons/Gold.PNG')}}" style="width: 35px; height: 35px;">
                                                             </a>
                                                         </li>
                                                         <li style="height: 40px;width: 40px;cursor:pointer;">
@@ -297,6 +305,7 @@
     </section>
     <!-- #cover5 end -->
 @endsection
+@include('partials.frontend._color-information')
 
 @section('styles')
     <style>
@@ -748,7 +757,13 @@
     </style>
 @endsection
 
-@section('scripts')php
+@section('scripts')
+    <!-- JavaScript Section -->
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('a[data-toggle=tooltip]').tooltip();
+        });
+    </script>
     <script>
         function ChangeColour(){
             var url = "/product-detail/" + $('#select-colour').val();
@@ -811,7 +826,7 @@
                 context.textAlign = 'center';
                 context.font = font;
 
-                if(fillStyle == '#C0C0C0') {
+                if(fillStyle === '#C0C0C0' || fillStyle === '#FFD700') {
                     context.fillStyle = fillStyle;
                 }else{
                     context.strokeStyle = 'black';

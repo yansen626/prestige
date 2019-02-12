@@ -86,7 +86,8 @@
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Color</label>
-                                                        <input type="text" class="form-control" id="colour-edit"  name="colour" value="{{$product->colour}}" required>
+                                                        <input type="text" class="form-control" id="colour-edit"  name="colour" value="{{$product->colour}}"
+                                                               style="text-transform: capitalize;" required>
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Price</label>

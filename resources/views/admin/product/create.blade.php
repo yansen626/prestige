@@ -74,7 +74,8 @@
                                                         </div>
                                                         <div class="col-md-3 mb-3">
                                                             <label for="validationCustom04">Color</label>
-                                                            <input type="text" class="form-control" id="colour"  name="colour" value="{{old('colour')}}" required>
+                                                            <input type="text" class="form-control" id="colour"  name="colour" value="{{old('colour')}}"
+                                                                   style="text-transform: capitalize;" required>
                                                         </div>
                                                         <div class="col-md-3 mb-3">
                                                             <label for="validationCustom04">Price</label>
