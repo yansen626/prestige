@@ -49,6 +49,16 @@
     .mobile-center{
         text-align: center;
     }
+    .dropdown-menu > li > a,
+    .mega-menu > li > a {
+        color: #000000;
+    }
+    .open {
+        padding-left: 20%;
+    }
+    .bg-white{
+        height: 425px;
+    }
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
@@ -101,6 +111,17 @@
     }
     .mobile-center{
         text-align: center;
+    }
+    .dropdown-menu > li > a,
+    .mega-menu > li > a {
+        color: #000000;
+    }
+
+    .open {
+        padding-left: 20%;
+    }
+    .bg-white{
+        height: 425px;
     }
 }
 

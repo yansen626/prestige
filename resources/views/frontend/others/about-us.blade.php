@@ -9,11 +9,10 @@
         <div class="container-fluid">
             <div class="row comm-height">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-content bg-pastel center">
-                    <h3>Sustainable Practices</h3>
+                    <h3>Timeless essentials <br>with a twist of <br>refined luxury</h3>
                     <p>
-                        AT NAMA. WE BELIEVE IN THE BEAUTY OF SUSTAINABILITY AND ALWAYS AIM TO ARCHIVE THIS IN ALL WE DO.
+                        &nbsp;
                         <BR>
-                        YOU CAN FIND OUT MORE ABOUT OUR PROCESSES BELOW.
                     </p>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 pr-0 pl-0">
@@ -48,20 +47,20 @@
                         Nama’s designs are driven from minimalistic elements, with a twist of refined luxury. Our mission is to create timeless, elegant and functional pieces with exceptional quality that complements today’s demanding world.
                     </p>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div id="testimonial-carousel" class="carousel carousel-dots" data-slide="3" data-slide-rs="1" data-autoplay="false" data-nav="true" data-dots="false" data-space="0" data-loop="true" data-speed="800" data-center="true">
-                        <!-- Product -->
-                        @foreach($products as $product)
-                            @php($link = route('product.detail', ['product'=>$product->slug] ))
-                            @php($productImage = $product->product_images->where('is_main_image', 1)->first())
-                            <div class="testimonial-panel product-item">
-                                <div class="">
-                                    <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
-                                </div><!-- .product-img end -->
-                            </div>
-                        @endforeach
-                    </div>
-                </div><!-- .col-md-12 end -->
+                {{--<div class="col-xs-12 col-sm-12 col-md-12">--}}
+                    {{--<div id="testimonial-carousel" class="carousel carousel-dots" data-slide="3" data-slide-rs="1" data-autoplay="false" data-nav="true" data-dots="false" data-space="0" data-loop="true" data-speed="800" data-center="true">--}}
+                        {{--<!-- Product -->--}}
+                        {{--@foreach($products as $product)--}}
+                            {{--@php($link = route('product.detail', ['product'=>$product->slug] ))--}}
+                            {{--@php($productImage = $product->product_images->where('is_main_image', 1)->first())--}}
+                            {{--<div class="testimonial-panel product-item">--}}
+                                {{--<div class="">--}}
+                                    {{--<img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>--}}
+                                {{--</div><!-- .product-img end -->--}}
+                            {{--</div>--}}
+                        {{--@endforeach--}}
+                    {{--</div>--}}
+                {{--</div><!-- .col-md-12 end -->--}}
             </div><!-- .row end -->
         </div><!-- .container end -->
     </section>
@@ -83,9 +82,9 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-content bg-windrift-blue center">
                     <h3>Customized Monogramming</h3>
                     <p>
-                        AT NAMA. WE BELIEVE IN THE BEAUTY OF SUSTAINABILITY AND ALWAYS AIM TO ARCHIVE THIS IN ALL WE DO.
+                        At nama, we believe in the beauty of adding a personal touch that’s distinctively yours.
                         <BR>
-                        YOU CAN FIND OUT MORE ABOUT OUR PROCESSES BELOW.
+                        With our top of the line hot-stamp machine, we will beautifully embellish your products with your customization.
                     </p>
                 </div>
             </div>
@@ -125,7 +124,7 @@
                             @php($productImage = $product->product_images->where('is_main_image', 1)->first())
                             <div class="testimonial-panel product-item">
                                 <div class="product--img">
-                                    <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: auto"/>
+                                    <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: 100%"/>
                                 </div><!-- .product-img end -->
                             </div>
                         @endforeach

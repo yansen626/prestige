@@ -21,7 +21,7 @@
                             <div class="card-body b-b">
 
                                 <h3 class="my-3">
-                                    Step 2 (Customer Customize Option)
+                                    Step 2 (Customize Option)
                                 </h3>
                                 <h3 class="my-3">
                                     Product = {{$product->name}}
@@ -57,7 +57,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
-                                                    <a href="#" class="btn btn-danger">Exit</a>
+                                                    <a href="{{route('admin.product.show', ['item' => $product->id])}}" class="btn btn-danger">Back</a>
                                                     <input type="submit" class="btn btn-success" value="Save">
                                                 </div>
                                             </div>
@@ -97,7 +97,8 @@
             var imageObj = new Image();
             imageObj.onload = function(){
                 context.drawImage(imageObj, 10, 10);
-                context.font = "20pt Serif";
+                context.textAlign = 'center';
+                context.font = "20pt sans-serif";
                 context.fillStyle = "red";
                 context.fillText("TEST1234", 250, 300);
             };
@@ -114,7 +115,8 @@
             var imageObj = new Image();
             imageObj.onload = function(){
                 context.drawImage(imageObj, 10, 10);
-                context.font = "20pt Serif";
+                context.textAlign = 'center';
+                context.font = "20pt sans-serif";
                 context.fillStyle = "red";
                 context.fillText("TEST1234", posX, posY);
             };

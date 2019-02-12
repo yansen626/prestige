@@ -36,8 +36,8 @@
                         <div class="col-md-12">
                             <h2>{{$product->name}}</h2>
                             <h5 style="text-transform: capitalize;">Rp {{$product->price_string}}</h5>
-                            <p style="text-transform: uppercase;">
-                                {{$product->description}}
+                            <p style="text-transform: none; text-align: justify">
+                                {{$product->style_notes}}
                             </p>
                         </div>
                     </div>
@@ -81,21 +81,43 @@
                             <div id="customize-section" class="row customize-section">
                                 <div class="col-md-12">
                                     <div class="col-md-12 bg-white" style="padding-bottom: 25px;">
-                                        <p>Enter personalized text (max 8 characters)</p>
+                                        <p>Enter personalized text (max 3 characters)</p>
                                         <form>
                                             <input type="text" class="form-control auto-blur"
-                                                   name="custom-text" id="custom-text" placeholder="TEXT HERE" maxlength="8"
+                                                   name="custom-text" id="custom-text" placeholder="TEXT HERE" maxlength="3"
                                                    onfocusout="ChangePosition()" style="text-transform:uppercase" />
+
+                                            {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
+                                                {{--<p style="margin-bottom: 0;margin-left: 11%;">Choose Position</p>--}}
+                                                {{--<select class="minimal" data-width="auto"--}}
+                                                        {{--id="custom-position" name="custom-position"--}}
+                                                        {{--onchange="ChangeSelectedPosition()" style="width: 130px;">--}}
+                                                    {{--@foreach($product->product_positions as $position)--}}
+                                                        {{--@php($value=$position->pos_x."-".$position->pos_y)--}}
+                                                        {{--<option value="{{$value}}">{{$position->name}}</option>--}}
+                                                    {{--@endforeach--}}
+                                                {{--</select>--}}
+                                            {{--</div>--}}
                                             <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-                                                <p style="margin-bottom: 0;margin-left: 11%;">Position</p>
-                                                <select class="minimal" data-width="auto"
-                                                        id="custom-position" name="custom-position"
-                                                        onchange="ChangeSelectedPosition()" style="width: 130px;">
-                                                    @foreach($product->product_positions as $position)
-                                                        @php($value=$position->pos_x."-".$position->pos_y)
-                                                        <option value="{{$value}}">{{$position->name}}</option>
-                                                    @endforeach
-                                                </select>
+                                                <p style="margin-bottom: 0;margin-left: 11%;">Choose Position</p>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default dropdown-toggle btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span class="fa fa-angle-down"></span>
+                                                        <span id="custom-position-text">{{$product->product_positions[0]->name}}</span>
+                                                    </button>
+                                                    <input type="hidden" name="custom-position" id="custom-position" value="{{$product->product_positions[0]->pos_x}}-{{$product->product_positions[0]->pos_y}}">
+
+                                                    <ul class="dropdown-menu">
+                                                        @foreach($product->product_positions as $position)
+                                                            @php($value=$position->pos_x."-".$position->pos_y)
+                                                            <li style="height: 30px;width: 40px;cursor:pointer;">
+                                                                <a onclick="ChangeCustom('{{$position->name}}-{{$value}}', 1)">
+                                                                    {{$position->name}}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             </div>
                                             {{--<div class="col-xs-12 col-sm-12 col-md-3 text-center">--}}
                                                 {{--<p style="margin-bottom: 0;margin-left: 11%;">Font</p>--}}
@@ -104,19 +126,67 @@
                                                     {{--<option value="Sans-serif">SAN SERIF</option>--}}
                                                 {{--</select>--}}
                                             {{--</div>--}}
+                                            {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
+                                                {{--<p style="margin-bottom: 0;margin-left: 11%;">Choose Color</p>--}}
+                                                {{--<select class="selectpicker minimal" data-width="auto" id="custom-color" name="custom-color" onchange="ChangePosition()">--}}
+                                                    {{--<option value="Silver-C0C0C0">SILVER</option>--}}
+                                                    {{--<option value="Blind-ffffff">BLIND</option>--}}
+                                                {{--</select>--}}
+                                            {{--</div>--}}
+
                                             <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-                                                <p style="margin-bottom: 0;margin-left: 11%;">Color</p>
-                                                <select class="selectpicker minimal" data-width="auto" id="custom-color" name="custom-color" onchange="ChangePosition()">
-                                                    <option value="Silver-C0C0C0">SILVER</option>
-                                                    <option value="Blind-ffffff">BLIND</option>
-                                                </select>
+                                                <p style="margin-bottom: 0;margin-left: 11%;">Choose Color</p>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default dropdown-toggle btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span class="fa fa-angle-down"></span>
+                                                        <span id="custom-color-text">Silver</span>
+                                                    </button>
+                                                    <input type="hidden" name="custom-color" id="custom-color" value="Silver-C0C0C0">
+
+                                                    <ul class="dropdown-menu">
+                                                        <li style="height: 40px;width: 40px;cursor:pointer;">
+                                                            <a onclick="ChangeCustom('Silver-C0C0C0', 2)">
+                                                                <img src="{{asset('images/icons/Silver.PNG')}}" style="width: 35px; height: 35px;">
+                                                            </a>
+                                                        </li>
+                                                        <li style="height: 40px;width: 40px;cursor:pointer;">
+                                                            <a onclick="ChangeCustom('Blind-ffffff', 2)">
+                                                                <img src="{{asset('images/icons/Blind.PNG')}}" style="width: 35px; height: 35px;">
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
+                                            {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
+                                                {{--<p style="margin-bottom: 0;margin-left: 11%;">Choose Size</p>--}}
+                                                {{--<select class="selectpicker minimal" data-width="auto" id="custom-size" name="custom-size" onchange="ChangePosition()">--}}
+                                                    {{--<option value="24 pt-20">24 pt</option>--}}
+                                                    {{--<option value="36 pt-24">36 pt</option>--}}
+                                                {{--</select>--}}
+                                            {{--</div>--}}
+
                                             <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-                                                <p style="margin-bottom: 0;margin-left: 11%;">Size</p>
-                                                <select class="selectpicker minimal" data-width="auto" id="custom-size" name="custom-size" onchange="ChangePosition()">
-                                                    <option value="36 pt-24">36 pt</option>
-                                                    <option value="24 pt-20">24 pt</option>
-                                                </select>
+                                                <p style="margin-bottom: 0;margin-left: 11%;">Choose Size</p>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default dropdown-toggle btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span class="fa fa-angle-down"></span>
+                                                        <span id="custom-size-text">24 pt</span>
+                                                    </button>
+                                                    <input type="hidden" name="custom-size" id="custom-size" value="24 pt-20">
+
+                                                    <ul class="dropdown-menu text--center">
+                                                        <li style="height: 30px;width: 40px;cursor:pointer;">
+                                                            <a onclick="ChangeCustom('24 pt-20', 3)">
+                                                                24 pt
+                                                            </a>
+                                                        </li>
+                                                        <li style="height: 30px;width: 40px;cursor:pointer;">
+                                                            <a onclick="ChangeCustom('36 pt-24', 3)">
+                                                                36 pt
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
@@ -136,7 +206,8 @@
                                                     </a>
                                                 </div>
                                                 <div id="collapse01-1" class="panel--body panel-collapse collapse in">
-                                                {!! nl2br($product->style_notes) !!}
+                                                    <p>{!! nl2br($product->description) !!}</p>
+
                                                 </div>
                                             </div>
 
@@ -231,6 +302,14 @@
     <style>
         .customize-section{
             padding-bottom: 5%;
+        }
+        .btn-color-customize{
+            font-size: 14px;
+            border:none;
+        }
+        .btn-color-customize:hover{
+            background-color: #ffffff;
+            border:none;
         }
         body {
             font-family: "Montserrat", "Lato", "Open Sans", "Helvetica Neue", Helvetica, Calibri, Arial, sans-serif;
@@ -642,14 +721,58 @@
         }
 
     </style>
+    <style>
+        .btn-group img {
+            margin-right: 10px;
+        }
+        .dropdown-toggle {
+            padding-right: 50px;
+        }
+        .dropdown-toggle .glyphicon {
+            margin-left: 20px;
+            margin-right: -40px;
+        }
+        .dropdown-menu > li > a:hover {
+            background: #f1f9fd;
+        } /* $search-blue */
+        .dropdown-header {
+            background: #ccc;
+            font-size: 14px;
+            font-weight: 700;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
+
+    </style>
 @endsection
 
-@section('scripts')
+@section('scripts')php
     <script>
         function ChangeColour(){
             var url = "/product-detail/" + $('#select-colour').val();
 
             window.location = url;
+        }
+
+        function ChangeCustom(value, option){
+            var valueArr = value.split("-");
+            if(option === 1){
+                var valuePosition = valueArr[1] + "-" + valueArr[2];
+                $('#custom-position').val(valuePosition);
+                $('#custom-position-text').text(valueArr[0]);
+                ChangeSelectedPosition();
+            }
+            else if(option === 2){
+                $('#custom-color').val(value);
+                $('#custom-color-text').text(valueArr[0]);
+            }
+            else{
+                $('#custom-size').val(value);
+                $('#custom-size-text').text(valueArr[0]);
+            }
+            ChangePosition();
         }
         function ChangeSelectedPosition(){
             var selectedPosition = $('#custom-position').val();

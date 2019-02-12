@@ -76,7 +76,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 center">
-                    <h2>Spring Favorites</h2>
+                    {{--<h2>Spring Favorites</h2>--}}
                     <p>
                         REDEFINE SIMPLE EVERYDAY LUXURY WITH NAMA/S PRACTICAL,<BR>
                         TIMELESS AND HIGH DISTICTION PERSONALIZED LEATHER GOODS.<BR><BR>

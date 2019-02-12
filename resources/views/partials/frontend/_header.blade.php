@@ -112,36 +112,6 @@
                     {{--</div>--}}
                 {{--</div><!-- .module-Contact end -->--}}
 
-                <!-- Module Search -->
-                <div class="module module-search pull-left">
-                    <div class="module-icon search-icon color-black">
-                        {{--<i class="fa fa-search"></i>--}}
-                        {{--<span class="title">search</span>--}}
-                        <a class="pointer">SEARCH</a>
-                    </div>
-                    <div class="module-content module-fullscreen module--search-box">
-                        <div class="pos-vertical-center">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6 center">
-                                        <h4>Search</h4>
-
-                                        {!! Form::open(array('action' => 'Frontend\ProductController@search', 'id'=>'form-search', 'class'=>'form-search', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}
-
-                                        <input type="text" class="form-control" id="search-text" name="search-text">
-                                        <button class="btn search-button contact-button" type="button" onClick="empty()" >
-                                            <i class="fa fa-long-arrow-right"></i>
-                                        </button>
-
-                                        {!! Form::close() !!}
-                                    </div><!-- .col-md-8 end -->
-                                </div><!-- .row end -->
-                            </div><!-- .container end -->
-                        </div>
-                        <a class="module-cancel pointer"><i class="fa fa-close"></i></a>
-                    </div>
-                </div><!-- .module-search end -->
-
             </div>
             <!-- .navbar-collapse -->
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -189,6 +159,37 @@
                         </li>
                     @endif
                 </ul>
+
+
+                <!-- Module Search -->
+                <div class="module module-search pull-left">
+                    <div class="module-icon search-icon color-black">
+                        {{--<i class="fa fa-search"></i>--}}
+                        {{--<span class="title">search</span>--}}
+                        <a class="pointer">SEARCH</a>
+                    </div>
+                    <div class="module-content module-fullscreen module--search-box">
+                        <div class="pos-vertical-center">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 center">
+                                        <h4>Search</h4>
+
+                                        {!! Form::open(array('action' => 'Frontend\ProductController@search', 'id'=>'form-search', 'class'=>'form-search', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}
+
+                                        <input type="text" class="form-control" id="search-text" name="search-text">
+                                        <button class="btn search-button contact-button" type="button" onClick="empty()" >
+                                            <i class="fa fa-long-arrow-right"></i>
+                                        </button>
+
+                                        {!! Form::close() !!}
+                                    </div><!-- .col-md-8 end -->
+                                </div><!-- .row end -->
+                            </div><!-- .container end -->
+                        </div>
+                        <a class="module-cancel pointer"><i class="fa fa-close"></i></a>
+                    </div>
+                </div><!-- .module-search end -->
             </div>
             <!-- .navbar-collapse -->
         </div>
