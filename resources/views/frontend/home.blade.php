@@ -77,7 +77,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 center">
                     {{--<h2>Spring Favorites</h2>--}}
-                    <p>
+                    <p class="font-16" style="margin-top:40px; margin-bottom:40px;">
                         REDEFINE SIMPLE EVERYDAY LUXURY WITH NAMA/S PRACTICAL,<BR>
                         TIMELESS AND HIGH DISTICTION PERSONALIZED LEATHER GOODS.<BR><BR>
                         ENJOY CHIC AND BESPOKE ACCESORIES WITH THE KNOWLEDGE THAT THEY<BR>
@@ -95,12 +95,12 @@
                                     <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: 100%;"/>
                                     <div class="product--hover">
                                         <div class="product--action">
-                                            <a class="btn btn--secondary btn--bordered" href="{{$link}}">View</a>
+                                            <a class="btn btn--secondary btn--bordered" href="{{$link}}">VIEW</a>
                                         </div>
                                     </div><!-- .product-overlay end -->
                                 </div><!-- .product-img end -->
                                 <div class="product--content">
-                                    <div class="product--title">
+                                    <div class="product--title" style="height: 50px;">
                                         <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                     </div><!-- .product-title end -->
                                     <div class="product--price">

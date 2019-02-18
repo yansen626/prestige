@@ -9,10 +9,10 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="heading heading-2 mb-60">
-                        <p class="heading--subtitle">Feel Free</p>
-                        <h2 class="heading--title">Contact Us</h2>
-                        <div class="divider--line m-0">
-                        </div>
+                        <div class="family-sans font-20" style="padding-bottom:10px;">Feel Free</div>
+                        {{--<h2 class="heading--title">Contact Us</h2>--}}
+                        <h1>Contact Us</h1>
+                        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                     </div>
                     <div class=" clearfix"></div>
                     <div class="contact-form">
@@ -52,11 +52,10 @@
                 </div><!-- .col-md-6 end -->
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="heading heading-2 mb-60">
-                        <p class="heading--subtitle">Contact Us</p>
-                        <h2 class="heading--title">Get in Touch</h2>
-                        <div class="divider--line m-0">
-                        </div>
-                        <p class="heading--desc mt-20">Need help? Do you have a question about your order or just simply want to say hi? Please don’t hesitate to shoot us a message at hi@nama-official.com</p>
+                        <div class="family-sans font-20" style="padding-bottom:10px;">Contact Us</div>
+                        <h1>Get in Touch</h1>
+                        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+                        <p class="mt-20 font-16" style="text-align: justify;">Need help? Do you have a question about your order or just simply want to say hi? Please don’t hesitate to shoot us a message at hi@nama-official.com</p>
                     </div>
                     <div class=" clearfix"></div>
                     <div class="row mb-50">
@@ -110,7 +109,13 @@
         {{--</div>--}}
     {{--</section><!-- #contact end -->--}}
 @endsection
-
+@section('styles')
+    <style>
+        .contact--info p{
+            color:black;
+        }
+    </style>
+@endsection
 @section('scripts')
     {{--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&amp;key=AIzaSyCiRALrXFl5vovX0hAkccXXBFh7zP8AOW8"></script>--}}
     {{--<script type="text/javascript" src="assets/js/plugins/jquery.gmap.min.js"></script>--}}

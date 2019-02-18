@@ -24,7 +24,7 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <input type="email" class="form-control" name="email" id="email" placeholder="Email" required/>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL" required/>
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('email') }}</strong>
@@ -32,7 +32,7 @@
                             @endif
                         </div>
                         <div class="col-md-12">
-                            <input type="password" class="form-control" name="password" id="password" placeholder="Password" required/>
+                            <input type="password" class="form-control" name="password" id="password" placeholder="PASSWORD" required/>
                             @if ($errors->has('password'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('password') }}</strong>
@@ -45,7 +45,7 @@
                                     <input type="checkbox" name="remember" id="remember"/>
                                     <div class="check-indicator"></div>
                                 </label>
-                                <span>Remember Me</span>
+                                <span>REMEMBER ME</span>
                             </div>
                         </div>
                         <div class="col-md-12 text--center">

@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 footer--widget footer--widget-about centered">
                     <div class="footer--widget-title">
-                        <h2>nama.</h2>
+                        <h1>nama.</h1>
                     </div>
                     <div class="footer--widget-content">
 
@@ -21,8 +21,8 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6 footer--widget footer--widget-about">
                             <ul class="list-unstyled mb-0">
-                                <li>ABOUT</li>
-                                <li>CONTACT</li>
+                                <li><a href="{{route('about.us')}}">ABOUT</a></li>
+                                <li><a href="{{route('contact-form')}}">CONTACT</a></li>
                                 <li>
                                     <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-20">
                                     <img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-20">
@@ -33,15 +33,15 @@
                     </div>
                 </div><!-- .col-md-3 end -->
                 <div class="col-xs-12 col-sm-6 col-md-6 centered">
-                    <div>
-                        <h5>Join Our Newsletter</h5>
+                    <div style="margin-bottom: 4%;">
+                        <span class="family-abril" style="font-size: 22px;color:black;">Join Our Newsletter</span>
                     </div>
                     <div>
                         <form id="subscription_form">
                             <input type="hidden" id="csrf_token" name="_token" value="{{ csrf_token() }}">
 
-                            <input type="text" class="form-control" name="subscribe_name" id="subscribe_name" placeholder="Name" required/>
-                            <input type="email" class="form-control" name="subscribe_email" id="subscribe_email" placeholder="Email" required/>
+                            <input type="text" class="form-control" name="subscribe_name" id="subscribe_name" placeholder="NAME" required/>
+                            <input type="email" class="form-control" name="subscribe_email" id="subscribe_email" placeholder="EMAIL" required/>
                             <button type="submit" class="newsletter-button"><i class="fa fa-long-arrow-right"></i></button>
                         </form>
                         <div id="subscribe_success_message" class="row mb-3" style="display: none;">
@@ -51,7 +51,8 @@
                         </div>
                         <div class="clearfix"></div>
                         <p>
-                            COPYRIGHT 2019 NAMA LEATHER GOODS
+                            COPYRIGHT 2019 NAMA LEATHER GOODS <br>
+                            SITE DESIGNED BY <span style="font-weight: bold;">MADE SOMEWHARE</span>
                         </p>
                     </div>
                 </div><!-- .col-md-3 end -->

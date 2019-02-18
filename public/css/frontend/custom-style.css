@@ -194,6 +194,7 @@ h2,
 h3 {
 	color: #282828;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	margin: 0 0 28px;
 	line-height: 1;
 }
@@ -340,10 +341,12 @@ p {
 
 .font-heading {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 }
 
 .font-body {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 }
 
 .font-18 {
@@ -1119,6 +1122,7 @@ section {
 blockquot {
 	font-size: 20px;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #9b9b9b;
 	font-style: italic;
 	line-height: 28px;
@@ -1129,6 +1133,7 @@ blockquot {
 
 .quote-author {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	display: block;
 	font-size: 13px;
 	font-style: normal;
@@ -2307,6 +2312,7 @@ ul.dot-list li i {
 
 .tabs .nav-tabs > li > a {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #333333;
 	font-size: 13px;
 	font-weight: 800;
@@ -2463,6 +2469,7 @@ ul.dot-list li i {
 
 .accordion .panel .panel--heading a {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	color: #000000;
 	font-weight: 700;
@@ -2575,6 +2582,7 @@ ul.dot-list li i {
 .page-title .title--desc p {
 	color: #f9f9f9;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 17px;
 	line-height: 26px;
 	font-weight: 400;
@@ -2761,6 +2769,7 @@ ul.dot-list li i {
 
 .alerts .alert-content h4 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #000000;
 	font-size: 15px;
 	font-weight: 700;
@@ -3401,6 +3410,7 @@ table tbody tr td {
 .heading .heading--subtitle {
 	color: #616161;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 15px;
 	font-weight: 700;
 	line-height: 1;
@@ -3409,6 +3419,7 @@ table tbody tr td {
 
 .heading .heading--title {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #282828;
 	font-size: 35px;
 	font-weight: 900;
@@ -3871,6 +3882,7 @@ table tbody tr td {
 
 .cart-box .cart-overview h5 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #282828;
 	font-size: 14px;
 	text-transform: capitalize;
@@ -4040,6 +4052,7 @@ table tbody tr td {
 .header-8 .module-menu .module-icon {
 	color: #ffffff;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -5884,6 +5897,7 @@ li.dropdown-submenu > ul.dropdown-menu > li.has-dropdown > ul.dropdown-menu.left
 .slider .slide--subheadline {
 	color: #f9f9f9;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 17px;
 	font-weight: 700;
 	line-height: 45px;
@@ -5894,6 +5908,7 @@ li.dropdown-submenu > ul.dropdown-menu > li.has-dropdown > ul.dropdown-menu.left
 .slider .slide--headline {
 	color: #ffffff;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 85px;
 	font-weight: 900;
 	line-height: 85px;
@@ -5908,6 +5923,7 @@ li.dropdown-submenu > ul.dropdown-menu > li.has-dropdown > ul.dropdown-menu.left
 .slider .slide--bio {
 	color: #f9f9f9;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 17px;
 	font-weight: 700;
 	line-height: 27px;
@@ -5996,6 +6012,7 @@ li.dropdown-submenu > ul.dropdown-menu > li.has-dropdown > ul.dropdown-menu.left
 	font-size: 13px;
 	color: #9b9b9b;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 }
 
 .slider-portfolio .slide--headline {
@@ -6003,6 +6020,7 @@ li.dropdown-submenu > ul.dropdown-menu > li.has-dropdown > ul.dropdown-menu.left
 	color: #282828;
 	font-weight: 700;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	line-height: 30px;
 }
 
@@ -6227,7 +6245,7 @@ a.next-section:hover {
 
 .slider,
  .slider .slide--item {
-	height: 500px;
+	height: 640px;
 }
 
 .rs-arrows.tparrows.ares {
@@ -6372,6 +6390,7 @@ a.next-section:hover {
 
 .member .member-info h5 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #282828;
 	font-size: 20px;
 	font-weight: 600;
@@ -6382,6 +6401,7 @@ a.next-section:hover {
 
 .member .member-info h6 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #9b9b9b;
 	font-size: 13px;
 	font-weight: 400;
@@ -6547,6 +6567,7 @@ a.next-section:hover {
 .testimonial-panel .testimonial--body p {
 	color: #9b9b9b;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 14px;
 	font-weight: 500;
 	font-style: italic;
@@ -6562,6 +6583,7 @@ a.next-section:hover {
 .testimonial-panel .testimonial--meta h4 {
 	color: #282828;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 16px;
 	font-weight: 700;
 	line-height: 1;
@@ -6658,6 +6680,7 @@ a.next-section:hover {
 .testimonial-wide .testimonial-panel .testimonial--body p {
 	color: #373636;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 29px;
 	font-style: italic;
 	line-height: 44px;
@@ -6856,6 +6879,7 @@ a.next-section:hover {
 .portfolio-filter li a {
 	color: #333333;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 700;
 	line-height: 1;
@@ -6916,6 +6940,7 @@ a.next-section:hover {
 .portfolio-item .portfolio--title h4 {
 	color: #ffffff;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 18px;
 	font-weight: 700;
 	line-height: 28px;
@@ -6934,6 +6959,7 @@ a.next-section:hover {
 .portfolio-item .portfolio--cat a {
 	color: #000000;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 400;
 	line-height: 1;
@@ -7170,6 +7196,7 @@ a.next-section:hover {
 .portfolio--prev-next .portfolio--bio p {
 	color: #b8b8b8;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	line-height: 1;
 	font-weight: 500;
@@ -7361,6 +7388,7 @@ a.next-section:hover {
 	line-height: 36px;
 	font-weight: 700;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	margin-bottom: 16px;
 	text-transform: capitalize;
 }
@@ -7503,6 +7531,7 @@ a.next-section:hover {
 
 .feature-panel .feature--content h3 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #222222;
 	font-size: 20px;
 	font-weight: 600;
@@ -7547,6 +7576,7 @@ a.next-section:hover {
 .feature-heading .feature-panel h6 {
 	color: #9b9b9b;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 400;
 	line-height: 1;
@@ -7556,6 +7586,7 @@ a.next-section:hover {
 .feature-heading .feature-panel h3 {
 	color: #282828;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 26px;
 	font-weight: 900;
 	line-height: 29px;
@@ -7594,6 +7625,7 @@ a.next-section:hover {
 .feature-more .feature-panel .feature--content .read-more {
 	color: #333333;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 0;
 	font-weight: 700;
 	line-height: 1;
@@ -7626,6 +7658,7 @@ a.next-section:hover {
 .feature-left-circle .feature--content h6 {
 	color: #000000;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 400;
 	line-height: 1;
@@ -7635,6 +7668,7 @@ a.next-section:hover {
 .feature-left-circle .feature--content h3 {
 	font-size: 26px;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-weight: 700;
 	line-height: 29px;
 }
@@ -7642,6 +7676,7 @@ a.next-section:hover {
 .feature-left-circle .feature--content p {
 	color: #9b9b9b;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 23px;
@@ -7723,6 +7758,7 @@ a.next-section:hover {
 
 .cta h3 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 35px;
 	font-weight: 900;
 	font-style: italic;
@@ -7734,6 +7770,7 @@ a.next-section:hover {
 .cta p {
 	color: #f9f9f9;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 17px;
 	font-weight: 500;
 	line-height: 26px;
@@ -7998,6 +8035,7 @@ a.next-section:hover {
 
 .pricing-panel .pricing--heading p {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #000000;
 	font-size: 70px;
 	font-weight: 500;
@@ -8011,6 +8049,7 @@ a.next-section:hover {
 
 .pricing-panel .pricing--heading span.time {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	color: #616161;
 	font-weight: 500;
@@ -8025,6 +8064,7 @@ a.next-section:hover {
 
 .pricing-panel .pricing--body {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #9b9b9b;
 	font-size: 14px;
 	font-weight: 500;
@@ -8171,6 +8211,7 @@ a.next-section:hover {
 .blog-entry .entry--meta {
 	color: #616161;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 400;
 	text-transform: capitalize;
@@ -8189,6 +8230,7 @@ a.next-section:hover {
 .blog-entry .entry--title h4 {
 	color: #282828;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 18px;
 	font-weight: 700;
 	line-height: 28px;
@@ -8220,6 +8262,7 @@ a.next-section:hover {
 .blog-entry .entry--date {
 	color: #616161;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 400;
 	line-height: 1;
@@ -8469,6 +8512,7 @@ a.next-section:hover {
 
 .entry-prev-next p {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 500;
 	line-height: 1;
@@ -8494,6 +8538,7 @@ a.next-section:hover {
 
 .entry-widget .entry-widget-title h4 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #222222;
 	font-size: 14px;
 	font-weight: 800;
@@ -8575,6 +8620,7 @@ a.next-section:hover {
 	line-height: 25px;
 	color: #282828;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	margin-bottom: 10px;
 }
 
@@ -8589,6 +8635,7 @@ a.next-section:hover {
 .entry-related .entry--meta {
 	color: #616161;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 400;
 	line-height: 1;
@@ -8629,6 +8676,7 @@ ul.comments-list .comment-body .comment h6 {
 	font-size: 14px;
 	font-weight: 700;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	text-transform: capitalize;
 	margin-bottom: 0;
 	color: #282828;
@@ -8638,6 +8686,7 @@ ul.comments-list .comment-body .comment h6 {
 ul.comments-list .comment-body .comment .date {
 	color: #616161;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 12px;
 	font-weight: 600;
 	line-height: 24px;
@@ -8959,6 +9008,7 @@ td.cart-product-quantity {
 .cart-product-name h6 {
 	color: #282828;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 16px;
 	font-weight: 700;
 	line-height: 27px;
@@ -8994,6 +9044,7 @@ td.cart-product-quantity {
 .cart-total-amount h6 {
 	color: #282828;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 18px;
 	font-weight: 700;
 	margin-bottom: 25px;
@@ -9002,6 +9053,7 @@ td.cart-product-quantity {
 
 .cart-total-amount ul li {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #000000;
 	font-size: 13px;
 	font-weight: 700;
@@ -9154,6 +9206,7 @@ td.cart-product-quantity {
 	color: #282828;
 	font-size: 18px;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-weight: 700;
 	line-height: 1;
 	margin-bottom: 10px;
@@ -9279,6 +9332,7 @@ td.cart-product-quantity {
 /* Shop Single */
 .shop-product .product-title h3 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #282828;
 	font-size: 18px;
 	font-weight: 700;
@@ -9338,6 +9392,7 @@ td.cart-product-quantity {
 .shop-product .product-details h5 {
 	color: #282828;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 18px;
 	font-weight: 700;
 	line-height: 1;
@@ -9414,6 +9469,7 @@ td.cart-product-quantity {
 
 .shop-product .product-share h5 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #282828;
 	font-size: 18px;
 	font-weight: 700;
@@ -9486,6 +9542,7 @@ td.cart-product-quantity {
 	font-size: 15px;
 	font-weight: 700;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	text-transform: capitalize;
 	-moz-border-radius: 0;
 	-webkit-border-radius: 0;
@@ -9565,6 +9622,7 @@ td.cart-product-quantity {
 .shop-product .product-related-title h5 {
 	color: #222222;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 1;
@@ -9592,6 +9650,7 @@ td.cart-product-quantity {
 
 .product-num h2 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 15px;
 	font-weight: 700;
 	line-height: 35px;
@@ -9626,6 +9685,7 @@ td.cart-product-quantity {
 	border-radius: 1px;
 	color: #9b9b9b;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 400;
 	line-height: 35px;
@@ -9645,6 +9705,7 @@ td.cart-product-quantity {
 .shop-filter li a {
 	color: #333333;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 700;
 	line-height: 1;
@@ -9704,6 +9765,7 @@ td.cart-product-quantity {
 .shop-item .shop--price {
 	color: #9b9b9b;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 22px;
 	font-weight: 700;
 	line-height: 1;
@@ -9713,6 +9775,7 @@ td.cart-product-quantity {
 .shop-item .shop--title h4 {
 	color: #ffffff;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 24px;
 	font-weight: 700;
 	line-height: 1;
@@ -9760,6 +9823,7 @@ td.cart-product-quantity {
 .contact--info h3 {
 	color: #222222;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 18px;
 	font-weight: 700;
 	line-height: 1;
@@ -9792,7 +9856,7 @@ a.link--styled {
 	color: #9b9b9b;
 	font-family: 'Work Sans', sans-serif;
 	font-size: 13px;
-	font-weight: 800;
+	font-weight: 400;
 	line-height: 49px;
 	text-transform: uppercase;
 	border: none;
@@ -9849,6 +9913,7 @@ a.link--styled {
 .contact-panel h3 {
 	color: #222222;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 18px;
 	font-weight: 700;
 	line-height: 1;
@@ -9867,6 +9932,7 @@ a.link--styled {
 .contact-panel .contact-action {
 	color: #000000;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 700;
 	line-height: 1;
@@ -9943,6 +10009,7 @@ a.link--styled {
 
 .widget .widget--title h5 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #222222;
 	font-size: 13px;
 	font-weight: 700;
@@ -10073,6 +10140,7 @@ a.link--styled {
 
 .widget-recent-posts .entry .entry-title a {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #282828;
 	font-size: 14px;
 	font-weight: 700;
@@ -10086,6 +10154,7 @@ a.link--styled {
 
 .widget-recent-posts .entry .entry-desc .entry-meta a {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 400;
 	line-height: 20px;
@@ -10342,6 +10411,7 @@ a.link--styled {
 .widget-info .info--title {
 	color: #ffffff;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 16px;
 	font-weight: 700;
 	line-height: 1;
@@ -10514,6 +10584,7 @@ footer .widget-instagram .insta-hover i {
 .footer-widget .footer--widget-title h5 {
 	color: #000000;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 400;
 	line-height: 1;
@@ -10530,7 +10601,7 @@ footer .widget-instagram .insta-hover i {
 }
 
 .footer-widget .footer--widget-about ul li {
-	font-size: 13px;
+	font-size: 14px;
 	font-weight: 400;
 	line-height: 24px;
 	color: #9b9b9b;
@@ -10575,6 +10646,8 @@ footer .widget-instagram .insta-hover i {
 .footer--widget-recent .entry--meta {
 	color: #616161;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
+	letter-spacing: 1px;
 	font-size: 12px;
 	font-weight: 400;
 	line-height: 26px;
@@ -10766,6 +10839,7 @@ footer .widget-instagram .insta-hover i {
 .page-404 h3 {
 	color: #222222;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 280px;
 	font-weight: 700;
 	line-height: 1.1;
@@ -11110,6 +11184,7 @@ footer .widget-instagram .insta-hover i {
 	font-size: 50px;
 	font-weight: 700;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #ffffff;
 	background-color: rgba(34, 34, 34, 0.6);
 	border-radius: 50%;
@@ -11143,6 +11218,7 @@ footer .widget-instagram .insta-hover i {
 
 .process-panel .process-content h3 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 800;
 	line-height: 1;
@@ -11291,6 +11367,7 @@ footer .widget-instagram .insta-hover i {
 	line-height: 65px;
 	color: #ffffff;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 16px;
 	font-weight: 700;
 	text-align: center;
@@ -11925,6 +12002,7 @@ footer .widget-instagram .insta-hover i {
 .banner-more h6 {
 	color: #616161;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 45px;
@@ -11974,6 +12052,7 @@ footer .widget-instagram .insta-hover i {
 .info-box p {
 	color: #f4f4f4;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 16px;
 	font-weight: 400;
 	line-height: 26px;
@@ -11988,6 +12067,7 @@ footer .widget-instagram .insta-hover i {
 	background-color: rgba(34, 34, 34, 0.8);
 	color: #ffffff;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 16px;
 	font-weight: 700;
 	text-align: center;
@@ -12015,6 +12095,7 @@ footer .widget-instagram .insta-hover i {
 	height: 13px;
 	color: #f4f4f4;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 400;
 	line-height: 1;
@@ -12072,6 +12153,7 @@ footer .widget-instagram .insta-hover i {
 	left: 50px;
 	color: rgba(255, 255, 255, 0.3);
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 52px;
 	font-style: italic;
 	line-height: 29px;
@@ -12533,6 +12615,7 @@ footer .widget-instagram .insta-hover i {
 	font-size: 13px;
 	font-weight: 800;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	line-height: 39px;
 	text-transform: uppercase;
 	color: #333333;
@@ -12699,6 +12782,7 @@ footer .widget-instagram .insta-hover i {
 .service-panel h3 {
 	color: #222222;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 20px;
 	font-weight: 600;
 	line-height: 1;
@@ -12709,6 +12793,7 @@ footer .widget-instagram .insta-hover i {
 .service-panel p {
 	color: #9b9b9b;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 23px;
@@ -12719,6 +12804,7 @@ footer .widget-instagram .insta-hover i {
 .service-panel .link-more {
 	color: #333333;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 13px;
 	font-weight: 700;
 	line-height: 20px;
@@ -12758,6 +12844,7 @@ footer .widget-instagram .insta-hover i {
 .landing-hero h6 {
 	color: #f9f9f9;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 17px;
 	font-weight: 700;
 	margin-bottom: 10px;
@@ -12765,6 +12852,7 @@ footer .widget-instagram .insta-hover i {
 
 .landing-hero h1 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 85px;
 	font-weight: 900;
 	line-height: 90px;
@@ -12774,6 +12862,7 @@ footer .widget-instagram .insta-hover i {
 
 .landing-hero p {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #f9f9f9;
 	font-size: 17px;
 	font-weight: 700;
@@ -12792,6 +12881,7 @@ footer .widget-instagram .insta-hover i {
 
 .landing-demos .portfolio-title h4 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #282828;
 	text-align: center;
 	font-size: 16px;
@@ -13006,7 +13096,7 @@ footer .widget-instagram .insta-hover i {
 
 .cover-5 p {
 	font-size: 16px;
-	font-weight: 700;
+	font-weight: 400;
 	line-height: 27px;
 	margin-bottom: 40px;
 }
@@ -13118,6 +13208,7 @@ footer .widget-instagram .insta-hover i {
 
 .calendar .calendar--date h6 {
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	color: #ffffff;
 	font-size: 16px;
 	font-weight: 700;
@@ -13175,6 +13266,7 @@ footer .widget-instagram .insta-hover i {
 .rest-1 .resturant-specials .panel-dish p {
 	color: #9b9b9b;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 14px;
 	font-weight: 400;
 	line-height: 23px;
@@ -13218,6 +13310,7 @@ footer .widget-instagram .insta-hover i {
 .rest-2 .panel-dish .dish-details h6 {
 	color: #000000;
 	font-family: 'Abril Fatface', cursive;
+	letter-spacing: 1px;
 	font-size: 15px;
 	font-weight: 700;
 	line-height: 1;

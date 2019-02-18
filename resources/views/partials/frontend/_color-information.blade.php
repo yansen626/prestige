@@ -1,8 +1,7 @@
 <div id="colorInformation" class="modal fade" role="dialog" style="padding-top: 10%;">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal">×</button>
+            <div class="modal-body" style="padding: 50px;">
                 <h2 class="text-center">Customization Options</h2>
                 <br />
                 <p>

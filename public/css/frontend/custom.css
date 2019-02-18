@@ -1,4 +1,10 @@
-
+.family-abril{
+    font-family: 'Abril Fatface', cursive;
+    letter-spacing: 1px;
+}
+.family-sans{
+    font-family: 'Work Sans', sans-serif;
+}
 @media (max-width: 576px) {
     /* header */
     .container > .navbar-collapse {
@@ -56,8 +62,11 @@
     .open {
         padding-left: 20%;
     }
-    .bg-white{
+    .bg-white-mobile{
         height: 425px;
+    }
+    .customize-label{
+        margin-left: 0 !important;
     }
 }
 
@@ -120,8 +129,11 @@
     .open {
         padding-left: 20%;
     }
-    .bg-white{
+    .bg-white-mobile{
         height: 425px;
+    }
+    .customize-label{
+        margin-left: 0 !important;
     }
 }
 

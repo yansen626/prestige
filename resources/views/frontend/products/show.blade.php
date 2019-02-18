@@ -31,12 +31,12 @@
                         <canvas id="myCanvas" width="600" height="600"></canvas>
                     </div>
                 </div><!-- .col-md-8 end -->
-                <div class="col-xs-12 col-sm-12 col-md-6" style="padding-top: 5%;">
-                    <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6" style="padding: 3% 3% 0 7%;background-color: white;">
+                    <div class="row" style="margin-bottom: 28px;">
                         <div class="col-md-12">
-                            <h2>{{$product->name}}</h2>
+                            <h2 style="margin: 0 0 18px;">{{$product->name}}</h2>
                             <h5 style="text-transform: capitalize;">Rp {{$product->price_string}}</h5>
-                            <p style="text-align: justify">
+                            <p class="font-16" style="text-align: justify">
                                 {{$product->style_notes}}
                             </p>
                         </div>
@@ -44,9 +44,7 @@
                     {!! Form::open(array('action' => 'Frontend\CartController@addCart', 'id'=>'form-search', 'method' => 'POST', 'role' => 'form', 'onkeypress' => 'return event.keyCode != 13;', 'novalidate')) !!}
 
                     <div class="row">
-
                         <div class="col-md-12">
-
                             <input type="hidden" id="slug" name="slug" value="{{$product->slug}}">
                             <input type="hidden" id="position_x" value="{{$product->product_positions[0]->pos_x}}">
                             <input type="hidden" id="position_y" value="{{$product->product_positions[0]->pos_y}}">
@@ -80,7 +78,7 @@
                             </div>
                             <div id="customize-section" class="row customize-section">
                                 <div class="col-md-12">
-                                    <div class="col-md-12 bg-white" style="padding-bottom: 25px;">
+                                    <div class="col-md-12 bg-white bg-white-mobile" style="padding-bottom: 25px;">
                                         <p>Enter personalized text (max 3 characters)</p>
                                         <form>
                                             <input type="text" class="form-control auto-blur"
@@ -111,7 +109,7 @@
                                                         @foreach($product->product_positions as $position)
                                                             @php($value=$position->pos_x."-".$position->pos_y)
                                                             <li style="height: 30px;width: 40px;cursor:pointer;">
-                                                                <a onclick="ChangeCustom('{{$position->name}}-{{$value}}', 1)">
+                                                                <a onclick="ChangeCustom('{{$position->name}}-{{$value}}', 1)" style="text-transform: uppercase;">
                                                                     {{$position->name}}
                                                                 </a>
                                                             </li>
@@ -149,17 +147,17 @@
                                                     <ul class="dropdown-menu">
                                                         <li style="height: 40px;width: 40px;cursor:pointer;">
                                                             <a onclick="ChangeCustom('Silver-C0C0C0', 2)">
-                                                                <img src="{{asset('images/icons/Silver.PNG')}}" style="width: 35px; height: 35px;">
+                                                                <img src="{{asset('images/icons/Silver.PNG')}}" style="width: 35px; height: 35px;"> SILVER
                                                             </a>
                                                         </li>
                                                         <li style="height: 40px;width: 40px;cursor:pointer;">
                                                             <a onclick="ChangeCustom('Gold-FFD700', 2)">
-                                                                <img src="{{asset('images/icons/Gold.PNG')}}" style="width: 35px; height: 35px;">
+                                                                <img src="{{asset('images/icons/Gold.PNG')}}" style="width: 35px; height: 35px;"> GOLD
                                                             </a>
                                                         </li>
                                                         <li style="height: 40px;width: 40px;cursor:pointer;">
                                                             <a onclick="ChangeCustom('Blind-ffffff', 2)">
-                                                                <img src="{{asset('images/icons/Blind.PNG')}}" style="width: 35px; height: 35px;">
+                                                                <img src="{{asset('images/icons/Blind.PNG')}}" style="width: 35px; height: 35px;"> BLIND
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -185,12 +183,12 @@
                                                     <ul class="dropdown-menu text--center">
                                                         <li style="height: 30px;width: 40px;cursor:pointer;">
                                                             <a onclick="ChangeCustom('24 pt-20', 3)">
-                                                                24 pt
+                                                                24 PT
                                                             </a>
                                                         </li>
                                                         <li style="height: 30px;width: 40px;cursor:pointer;">
                                                             <a onclick="ChangeCustom('36 pt-24', 3)">
-                                                                36 pt
+                                                                36 PT
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -309,6 +307,10 @@
 
 @section('styles')
     <style>
+        .header-13 .navbar-header > .logo {
+            padding-top: 2%;
+
+        }
         .customize-section{
             padding-bottom: 5%;
         }

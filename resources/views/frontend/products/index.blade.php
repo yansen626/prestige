@@ -55,7 +55,7 @@
                                 </div><!-- .product-overlay end -->
                             </div><!-- .product-img end -->
                             <div class="product--content">
-                                <div class="product--title">
+                                <div class="product--title" style="height: 50px;">
                                     <h3><a href="{{$link}}">{{ $product->name }}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
@@ -88,7 +88,7 @@
                                 </div><!-- .product-overlay end -->
                             </div><!-- .product-img end -->
                             <div class="product--content">
-                                <div class="product--title">
+                                <div class="product--title" style="height: 50px;">
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
@@ -120,7 +120,7 @@
                                 </div><!-- .product-overlay end -->
                             </div><!-- .product-img end -->
                             <div class="product--content">
-                                <div class="product--title">
+                                <div class="product--title" style="height: 50px;">
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
@@ -152,7 +152,7 @@
                                 </div><!-- .product-overlay end -->
                             </div><!-- .product-img end -->
                             <div class="product--content">
-                                <div class="product--title">
+                                <div class="product--title" style="height: 50px;">
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
@@ -184,7 +184,7 @@
                                 </div><!-- .product-overlay end -->
                             </div><!-- .product-img end -->
                             <div class="product--content">
-                                <div class="product--title">
+                                <div class="product--title" style="height: 50px;">
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
@@ -216,7 +216,7 @@
                                 </div><!-- .product-overlay end -->
                             </div><!-- .product-img end -->
                             <div class="product--content">
-                                <div class="product--title">
+                                <div class="product--title" style="height: 50px;">
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">

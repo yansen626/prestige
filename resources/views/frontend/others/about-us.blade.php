@@ -32,18 +32,18 @@
 
     <!-- Product #1
     ============================================= -->
-    <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white pt-80 pb-80">
+    <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white pt-80 pb-80" style="padding-top: 50px;">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 center">
+                <div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 center">
                     <h2>OUR STORY</h2>
-                    <p>
+                    <p class="font-16">
                         nama is Indonesian for the word name; “a word or set of words by which a person, animal, place, or thing is known, addressed, or referred to.” We believe a name is not only a way to identify someone or something but it also what defines how others see us—our individuality.
                     </p>
-                    <p>
+                    <p class="font-16">
                         Nama was established by two best friends who are passionate about all things personalized. They met in Los Angeles and spent their days sipping coffee and brunching on Melrose Ave surrounded by the most coveted fashion in the world. They were not looking forward to return and leave this fashion heaven until they realized they could bring a slice of that heaven home. They are firm believers that everyone is special and their essential accessories should reflect that. Consequently, nama was born. They want to make a line of staple everyday accessories made with exceptional quality leather, with a touch of personal customization.
                     </p>
-                    <p>
+                    <p class="font-16">
                         Nama’s designs are driven from minimalistic elements, with a twist of refined luxury. Our mission is to create timeless, elegant and functional pieces with exceptional quality that complements today’s demanding world.
                     </p>
                 </div>
@@ -81,7 +81,7 @@
                 </div><!-- .col-md-6 end-->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-content bg-windrift-blue center">
                     <h3>Customized Monogramming</h3>
-                    <p>
+                    <p class="font-16">
                         At nama, we believe in the beauty of adding a personal touch that’s distinctively yours.
                         <BR>
                         With our top of the line hot-stamp machine, we will beautifully embellish your products with your customization.
@@ -96,24 +96,24 @@
 
     <!-- Product #1
     ============================================= -->
-    <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white pt-80 pb-80">
+    <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white pt-80 pb-80" style="padding-top: 50px;">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 center">
+                <div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 center" style="padding-bottom: 40px;">
                     <h2>Personalization</h2>
                     <h4>Monogramming</h4>
-                    <p>
-                        REDEFINE SIMPLE EVERYDAY LUXURY WITH NAMA/S PRACTICAL,<BR>
-                        TIMELESS AND HIGH DISTICTION PERSONALIZED LEATHER GOODS.<BR><BR>
-                        ENJOY CHIC AND BESPOKE ACCESORIES WITH THE KNOWLEDGE THAT THEY<BR>
-                        HAVE BEEN MADE WITH UTMOST CARE AND QUALITY.
+                    <p class="font-16">
+                        Redefine simple everyday luxury with nama/s practical,<BR>
+                        timeless and high distiction personalized leather goods.<BR><BR>
+                        Enjoy chic and bespoke accesories with the knowledge that they<BR>
+                        have been made with utmost cate and quality.
                     </p>
                     <h4>Techniques & Materials</h4>
-                    <p>
-                        REDEFINE SIMPLE EVERYDAY LUXURY WITH NAMA/S PRACTICAL,<BR>
-                        TIMELESS AND HIGH DISTICTION PERSONALIZED LEATHER GOODS.<BR><BR>
-                        ENJOY CHIC AND BESPOKE ACCESORIES WITH THE KNOWLEDGE THAT THEY<BR>
-                        HAVE BEEN MADE WITH UTMOST CARE AND QUALITY.
+                    <p class="font-16">
+                        Redefine simple everyday luxury with nama/s practical,<BR>
+                        timeless and high distiction personalized leather goods.<BR><BR>
+                        Enjoy chic and bespoke accesories with the knowledge that they<BR>
+                        have been made with utmost cate and quality.
                     </p>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
