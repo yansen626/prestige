@@ -46,7 +46,10 @@
                                                 </div>
                                             </td>
                                             <td class="cart-product-item">{!! $cart->description  !!} </td>
-                                            <td class="cart-product-total" id="total_price{{ $cart->id }}">{{ $cart->total_price }}</td>
+                                            <td class="cart-product-total">
+                                                Rp <span id="total_price{{ $cart->id }}">{{ number_format($cart->total_price, 0, ",", ".") }}</span>
+                                                <input id="total_price_span{{$cart->id}}" type="hidden" class="priceForTotal" value="{{$cart->total_price}}">
+                                            </td>
                                             <td>
                                                 <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart->id }}" data-target="#myModal"></i>
                                                 <input type="hidden" value="{{ $cart->price }}" id="price{{ $cart->id }}">
@@ -73,7 +76,11 @@
                                                 </div>
                                             </td>
                                             <td class="cart-product-item">{!! $cart['item']['description'] !!}</td>
-                                            <td class="cart-product-total" id="total_price{{ $cart['item']['product_id'] }}">{{ $cart['item']['price'] }}</td>
+                                            <td class="cart-product-total">
+                                                Rp <span id="total_price{{ $cart['item']['product_id'] }}">{{ number_format($cart['item']['price'], 0, ",", ".") }}</span>
+                                                <input id="total_price_span{{$cart['item']['product_id']}}" type="hidden" class="priceForTotal" value="{{$cart['item']['price']}}">
+                                            </td>
+                                            {{--<td class="cart-product-total" id="total_price{{ $cart['item']['product_id'] }}">{{ $cart['item']['price'] }}</td>--}}
                                             <td>
                                                 <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>
                                                 <input type="hidden" value="{{ $cart['item']['price'] }}" id="price{{ $cart['item']['product_id'] }}">
@@ -118,7 +125,7 @@
                             SUBTOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            Rp {{$totalPrice}}
+                            Rp <span id="subtotal_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
                             <input type="hidden" id="subtotal" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6">
@@ -135,7 +142,7 @@
                             TOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="font-size: 14px; text-align: right;" >
-                            Rp <span id="grand_total_span">{{$totalPrice}}</span>
+                            Rp <span id="grand_total_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
                             <input type="hidden" id="grand_total" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -3px;">
@@ -172,12 +179,12 @@
                     <h1>Your Cart</h1>
                         @if($carts != null && $flag == 1)
                             @foreach($carts as $cart)
-                                <div class="col-xs-12 col-sm-12 col-md-12 border-b">
+                                <div class="col-xs-12 col-sm-12 col-md-12 border-b" style="padding: 6% 0 6% 0;  ">
                                     <div class="col-xs-6 col-sm-6">
                                         <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product" style="width: 100%;"/>
 
-                                        <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart->id }}" data-target="#myModal"></i>
-                                        <input type="hidden" value="{{ $cart->price }}" id="price{{ $cart->id }}">
+                                        <i class="fa fa-close delete font-16 pt-20" data-toggle="modal" data-id="{{ $cart->id }}" data-target="#myModal"></i>
+                                        <input type="hidden" value="{{ $cart->price }}" id="price_mobile{{ $cart->id }}">
                                     </div>
                                     <div class="col-xs-6 col-sm-6">
                                         {{ $cart->product->name }}, {{ $cart->product->colour }}
@@ -187,12 +194,13 @@
 
                                         <br>
                                         TOTAL<br>
-                                        <span id="total_price{{ $cart->id }}">{{ $cart->total_price }} </span>
+                                        Rp <span id="total_price_mobile{{ $cart->id }}">{{ number_format($cart->total_price, 0, ",", ".") }} </span>
+                                        <input id="total_price_mobile_span{{$cart->id}}" type="hidden" class="priceForTotalMobile" value="{{$cart->total_price}}">
 
                                         <div class="product-quantity">
-                                            <a><i class="fa fa-minus" onclick="updateQty('{{ $cart->id }}', 'min')"></i></a>
-                                            <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart->id }}" name="qty[{{ $cart->id }}]" readonly>
-                                            <a><i class="fa fa-plus" onclick="updateQty('{{ $cart->id }}', 'plus')"></i></a>
+                                            <a><i class="fa fa-minus font-16 pb-10 pt-10" onclick="updateQty('{{ $cart->id }}', 'min')"></i></a>
+                                            <input type="text" value="{{ $cart->qty }}" id="qty_mobile{{ $cart->id }}" name="qty[{{ $cart->id }}]" readonly>
+                                            <a><i class="fa fa-plus font-16 pb-10 pt-10" onclick="updateQty('{{ $cart->id }}', 'plus')"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -203,8 +211,8 @@
                                     <div class="col-xs-6 col-sm-6" style="font-size: 20px; text-align: center;">
                                         <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product" style="width: 100%;"/>
                                         <br>
-                                        <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>
-                                        <input type="hidden" value="{{ $cart['item']['price'] }}" id="price{{ $cart['item']['product_id'] }}">
+                                        <i class="fa fa-close delete font-16" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>
+                                        <input type="hidden" value="{{ $cart['item']['price'] }}" id="price_mobile{{ $cart['item']['product_id'] }}">
                                     </div>
                                     <div class="col-xs-6 col-sm-6">
                                         {{ $cart['item']['product']['name'] }}, {{ $cart['item']['product']['colour'] }}
@@ -214,12 +222,13 @@
 
                                         <br>
                                         TOTAL<br>
-                                        <span id="total_price{{ $cart['item']['product_id'] }}">{{ $cart['item']['price'] }} </span>
+                                        Rp <span id="total_price_mobile{{ $cart['item']['product_id'] }}">{{ number_format($cart['item']['price'], 0, ",", ".") }} </span>
+                                        <input id="total_price_mobile_span{{ $cart['item']['product_id'] }}" type="hidden" class="priceForTotalMobile" value="{{$cart['item']['price']}}">
 
                                         <div class="product-quantity">
-                                            <a><i class="fa fa-minus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'min')"></i></a>
-                                            <input type="text" value="{{ $cart['qty'] }}" id="qty{{ $cart['item']['product_id'] }}" name="qty[{{ $cart['item']['product_id'] }}]" readonly>
-                                            <a><i class="fa fa-plus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'plus')"></i></a>
+                                            <a><i class="fa fa-minus font-16" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'min')"></i></a>
+                                            <input type="text" value="{{ $cart['qty'] }}" id="qty_mobile{{ $cart['item']['product_id'] }}" name="qty[{{ $cart['item']['product_id'] }}]" readonly>
+                                            <a><i class="fa fa-plus font-16" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'plus')"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -261,8 +270,8 @@
                             SUBTOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            Rp {{$totalPrice}}
-                            <input type="hidden" id="subtotal" value="{{$totalPrice}}" >
+                            Rp <span id="subtotal_mobile_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
+                            <input type="hidden" id="subtotal_mobile" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6">
                             VOUCHER
@@ -278,8 +287,8 @@
                             TOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="font-size: 14px; text-align: right;" >
-                            Rp <span id="grand_total_span">{{$totalPrice}}</span>
-                            <input type="hidden" id="grand_total" value="{{$totalPrice}}" >
+                            Rp <span id="grand_total_mobile_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
+                            <input type="hidden" id="grand_total_mobile" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -3px;">
                             <hr style="height:1px;border:none;color:black;background-color:#333;" />
@@ -288,7 +297,12 @@
                             <a href="{{ route('home') }}"><button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 130px;line-height: 0px; border: 1px solid #282828;">CONTINUE SHOPPING</button></a>
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">PROCEED</button>
+                            @if($totalPrice == 0)
+                                @php($disabled = 'disabled')
+                            @else
+                                @php($disabled = '')
+                            @endif
+                            <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;" {{$disabled}}>PROCEED</button>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 10px; text-align: justify;">
                             * Note: Shipping and taxes will be updated during checkout
@@ -335,22 +349,77 @@
                 tmpQty = parseInt($('#' + qty).val());
                 tmpQty++;
                 $('#' + qty).val(tmpQty);
+
+                var qtyMobile = 'qty_mobile' + identifier;
+                tmpQtyMobile = parseInt($('#' + qtyMobile).val());
+                tmpQtyMobile++;
+                $('#' + qtyMobile).val(tmpQtyMobile);
             }
             else if(state === 'min'){
                 var qty = 'qty' + identifier;
                 tmpQty = parseInt($('#' + qty).val());
                 tmpQty--;
-                if(tmpQty > 0){
+
+                var qtyMobile = 'qty_mobile' + identifier;
+                tmpQtyMobile = parseInt($('#' + qtyMobile).val());
+                tmpQtyMobile--;
+                if(tmpQty > 0 || tmpQtyMobile > 0){
                     $('#' + qty).val(tmpQty);
+                    $('#' + qtyMobile).val(tmpQtyMobile);
                 }
             }
+            if(tmpQty > 0){
 
-            //Update Price
-            var price = 'price' + identifier;
-            var totalPrice = 'total_price' + identifier;
-            var tmpPrice = parseFloat($('#' + price).val());
-            var tmpTotalPrice = tmpQty * tmpPrice;
-            $('#' + totalPrice).html(tmpTotalPrice);
+                //Update Price
+                var price = 'price' + identifier;
+                var priceMobile = 'price_mobile' + identifier;
+                var totalPrice = 'total_price' + identifier;
+                var totalPriceMobile = 'total_price_mobile' + identifier;
+                var tmpPrice = parseFloat($('#' + price).val());
+                var tmpPriceMobile = parseFloat($('#' + priceMobile).val());
+                var tmpTotalPrice = tmpQty * tmpPrice;
+                var tmpTotalPriceMobile = tmpQty * tmpPriceMobile;
+                var totalPriceSpan = 'total_price_span' + identifier;
+                var totalPriceMobileSpan = 'total_price_mobile_span' + identifier;
+                $('#' + totalPriceSpan).val(tmpTotalPrice);
+                $('#' + totalPriceMobileSpan).val(tmpTotalPriceMobile);
+
+                tmpTotalPrice = tmpTotalPrice.toLocaleString(
+                    "de-DE"
+                );
+                tmpTotalPriceMobile = tmpTotalPriceMobile.toLocaleString(
+                    "de-DE"
+                );
+                $('#' + totalPrice).html(tmpTotalPrice);
+                $('#' + totalPriceMobile).html(tmpTotalPriceMobile);
+
+                //Update Subtotal Price and grand total price
+                var grandTotalTmp = 0;
+                $(".priceForTotal").each(function () {
+                    var subtotalTmp = $(this).val();
+                    grandTotalTmp = parseFloat(grandTotalTmp) + parseFloat(subtotalTmp);
+                });
+                var grandTotalMobileTmp = 0;
+                $(".priceForTotalMobile").each(function () {
+                    var subtotalTmp = $(this).val();
+                    grandTotalMobileTmp = parseFloat(grandTotalMobileTmp) + parseFloat(subtotalTmp);
+                });
+
+                $('#subtotal').val(grandTotalTmp);
+                $('#subtotal_mobile').val(grandTotalMobileTmp);
+                $('#grand_total').val(grandTotalTmp);
+                $('#grand_total_mobile').val(grandTotalMobileTmp);
+                grandTotalTmp = grandTotalTmp.toLocaleString(
+                    "de-DE"
+                );
+                grandTotalMobileTmp = grandTotalMobileTmp.toLocaleString(
+                    "de-DE"
+                );
+                $('#subtotal_span').text(grandTotalTmp);
+                $('#subtotal_mobile_span').text(grandTotalMobileTmp);
+                $('#grand_total_span').text(grandTotalTmp);
+                $('#grand_total_mobile_span').text(grandTotalMobileTmp);
+            }
         }
 
         $(document).on("click", ".delete", function () {
