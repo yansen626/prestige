@@ -77,7 +77,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 center">
                     {{--<h2>Spring Favorites</h2>--}}
-                    <p class="font-16" style="margin-top:40px; margin-bottom:40px;">
+                    <p class="font-16" style="margin-top:8%; margin-bottom:8%;">
                         REDEFINE SIMPLE EVERYDAY LUXURY WITH NAMA/S PRACTICAL,<BR>
                         TIMELESS AND HIGH DISTICTION PERSONALIZED LEATHER GOODS.<BR><BR>
                         ENJOY CHIC AND BESPOKE ACCESORIES WITH THE KNOWLEDGE THAT THEY<BR>

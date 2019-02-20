@@ -8,12 +8,8 @@
     <section id="cover5" class="section cover-5 mtop-100 pt-0 pb-0">
         <div class="container-fluid">
             <div class="row comm-height">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-content bg-pastel center">
-                    <h3>Timeless essentials <br>with a twist of <br>refined luxury</h3>
-                    <p>
-                        &nbsp;
-                        <BR>
-                    </p>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-content-about-top bg-pastel center">
+                    <h3 class="">Timeless essentials <br>with a twist of <br>refined luxury</h3>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 pr-0 pl-0">
                     <div class="bg-overlay">
@@ -28,15 +24,17 @@
         <!-- .container end -->
     </section>
     <!-- #Info end -->
-    <a href="#testimonial1" class="down-button"><i class="fa fa-long-arrow-down"></i></a>
+    {{--<a href="#testimonial1" class="down-button"><i class="fa fa-long-arrow-down"></i></a>--}}
 
     <!-- Product #1
     ============================================= -->
-    <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white pt-80 pb-80" style="padding-top: 50px;">
+    <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white pt-0 pb-0">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 center">
-                    <h2>OUR STORY</h2>
+                <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8" style="padding-top: 10%;padding-bottom: 10%;text-align: justify;">
+                    <div class="center">
+                        <h2>OUR STORY</h2>
+                    </div>
                     <p class="font-16">
                         nama is Indonesian for the word name; “a word or set of words by which a person, animal, place, or thing is known, addressed, or referred to.” We believe a name is not only a way to identify someone or something but it also what defines how others see us—our individuality.
                     </p>
@@ -79,13 +77,8 @@
                         </div>
                     </div>
                 </div><!-- .col-md-6 end-->
-                <div class="col-xs-12 col-sm-12 col-md-6 col-content bg-windrift-blue center">
-                    <h3>Customized Monogramming</h3>
-                    <p class="font-16">
-                        At nama, we believe in the beauty of adding a personal touch that’s distinctively yours.
-                        <BR>
-                        With our top of the line hot-stamp machine, we will beautifully embellish your products with your customization.
-                    </p>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-content-about-bottom bg-windrift-blue center">
+                    <h3 class="">Customized Monogramming</h3>
                 </div>
             </div>
             <!-- .row end -->
@@ -96,24 +89,26 @@
 
     <!-- Product #1
     ============================================= -->
-    <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white pt-80 pb-80" style="padding-top: 50px;">
+    <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white pt-0 pb-0">
         <div class="container">
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 center" style="padding-bottom: 40px;">
-                    <h2>Personalization</h2>
-                    <h4>Monogramming</h4>
+                <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8" style="padding-top: 10%;padding-bottom: 10%;text-align: justify">
+                    <div class="center">
+                        <h4>Customized Monogramming</h4>
+                    </div>
                     <p class="font-16">
-                        Redefine simple everyday luxury with nama/s practical,<BR>
-                        timeless and high distiction personalized leather goods.<BR><BR>
-                        Enjoy chic and bespoke accesories with the knowledge that they<BR>
-                        have been made with utmost cate and quality.
+                        At nama, we believe in the beauty of adding a personal touch that's distinctively yours.
+                        <BR>
+                        With our top of the line hot-stamp machine, we will beautifully embellish your products with your customization.
                     </p>
-                    <h4>Techniques & Materials</h4>
+                    <div class="center">
+                        <h4>Techniques & Materials</h4>
+                    </div>
                     <p class="font-16">
-                        Redefine simple everyday luxury with nama/s practical,<BR>
-                        timeless and high distiction personalized leather goods.<BR><BR>
-                        Enjoy chic and bespoke accesories with the knowledge that they<BR>
-                        have been made with utmost cate and quality.
+                        Redefine simple everyday luxury with nama/s practical,
+                        timeless and high distiction personalized leather goods.<BR>
+                        Enjoy chic and bespoke accesories with the knowledge that they
+                        have been made with utmost care and quality.
                     </p>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">

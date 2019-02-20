@@ -52,7 +52,7 @@
                         <div class="clearfix"></div>
                         <p>
                             COPYRIGHT 2019 NAMA LEATHER GOODS <br>
-                            SITE DESIGNED BY <span style="font-weight: bold;">MADE SOMEWHARE</span>
+                            SITE DESIGNED BY <span style="font-weight: bold;">MADE SOMEWHERE</span>
                         </p>
                     </div>
                 </div><!-- .col-md-3 end -->
