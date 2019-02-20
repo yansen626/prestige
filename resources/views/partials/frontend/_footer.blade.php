@@ -46,12 +46,12 @@
                         </form>
                         <div id="subscribe_success_message" class="row mb-3" style="display: none;">
                             <div class="col-12">
-                                <h5 class="text-center">Thank You for Registering</h5>
+                                <h5 class="text-center">Thank you for registering</h5>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                         <p>
-                            COPYRIGHT 2019 NAMA LEATHER GOODS <br>
+                            COPYRIGHT 2019 NAMA-OFFICIAL <br>
                             SITE DESIGNED BY <span style="font-weight: bold;">MADE SOMEWHERE</span>
                         </p>
                     </div>

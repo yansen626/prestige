@@ -17,9 +17,9 @@
                                 <tr class="cart-product" style="background-color: white;border-top: 2px solid black;border-bottom: 2px solid black;">
                                     <th class="cart-product-item">Item</th>
                                     <th class="cart-product-item">Description</th>
-                                    <th class="cart-product-item">Colour</th>
+                                    <th class="cart-product-item">Color</th>
                                     <th class="cart-product-quantity">Quantity</th>
-                                    <th class="cart-product-item">Customized</th>
+                                    <th class="cart-product-item">Customization</th>
                                     <th class="cart-product-total">Total</th>
                                     <th></th>
                                 </tr>
@@ -89,7 +89,7 @@
                                     @endforeach
                                 @else
                                     <tr class="cart-product">
-                                        <td colspan="6">Sorry You haven't put anything in the cart yet!</td>
+                                        <td colspan="6">Sorry you haven't put anything in the cart yet!</td>
                                     </tr>
                                 @endif
                                 </tbody>
@@ -235,7 +235,7 @@
                             @endforeach
                         @else
                             <div class="col-xs-12 col-sm-12 col-md-12">
-                                <h3>Sorry You haven't put anything in the cart yet!</h3>
+                                <h3>Sorry you haven't put anything in the cart yet!</h3>
                             </div>
                             <tr class="cart-product">
                                 <td colspan="6"></td>

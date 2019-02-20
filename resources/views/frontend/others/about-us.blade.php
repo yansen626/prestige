@@ -94,22 +94,22 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8" style="padding-top: 10%;padding-bottom: 10%;text-align: justify">
                     <div class="center">
-                        <h4>Customized Monogramming</h4>
+                        <h4 style="margin: 0 0 20px;">Customized Monogramming</h4>
                     </div>
                     <p class="font-16">
                         At nama, we believe in the beauty of adding a personal touch that's distinctively yours.
-                        <BR>
+                        <BR><BR>
                         With our top of the line hot-stamp machine, we will beautifully embellish your products with your customization.
                     </p>
-                    <div class="center">
-                        <h4>Techniques & Materials</h4>
-                    </div>
-                    <p class="font-16">
-                        Redefine simple everyday luxury with nama/s practical,
-                        timeless and high distiction personalized leather goods.<BR>
-                        Enjoy chic and bespoke accesories with the knowledge that they
-                        have been made with utmost care and quality.
-                    </p>
+                    {{--<div class="center">--}}
+                        {{--<h4>Techniques & Materials</h4>--}}
+                    {{--</div>--}}
+                    {{--<p class="font-16">--}}
+                        {{--Redefine simple everyday luxury with nama/s practical,--}}
+                        {{--timeless and high distiction personalized leather goods.<BR>--}}
+                        {{--Enjoy chic and bespoke accesories with the knowledge that they--}}
+                        {{--have been made with utmost care and quality.--}}
+                    {{--</p>--}}
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div id="testimonial-carousel" class="carousel carousel-dots" data-slide="3" data-slide-rs="1" data-autoplay="false" data-nav="true" data-dots="false" data-space="0" data-loop="true" data-speed="800" data-center="true">

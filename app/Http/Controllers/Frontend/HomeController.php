@@ -54,7 +54,7 @@ class HomeController extends Controller
     {
         $dateTimeNow = Carbon::now('Asia/Jakarta');
         $newContact = ContactMessage::create([
-            'name' => $request->input('name'),
+            'name' => $request->input('first_name')." ".$request->input('last_name'),
             'email' => $request->input('email'),
             'message' => $request->input('message'),
             'created_at'        => $dateTimeNow->toDateTimeString(),

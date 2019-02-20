@@ -20,14 +20,17 @@
                         {!! Form::open(array('action' => 'Frontend\HomeController@contact', 'id'=>'mb-0', 'class'=>'form-search2', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}
 
                         <div class="row">
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" name="name" id="name" placeholder="NAME" required/>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="first_name" id="name" placeholder="FIRST NAME" required/>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="last_name" id="name" placeholder="LAST NAME" required/>
                             </div>
                             <div class="col-md-12">
                                 <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
                             </div>
                             <div class="col-md-12">
-                                <input type="text" class="form-control" name="order" id="order" placeholder="ORDER NUMBER (IF APPLICABLE)"/>
+                                <input type="text" class="form-control" name="order" id="order" placeholder="ORDER NO"/>
                             </div>
                             <div class="col-md-12">
                                 <textarea class="form-control" name="message" id="message" rows="2" placeholder="MESSAGE" required></textarea>
