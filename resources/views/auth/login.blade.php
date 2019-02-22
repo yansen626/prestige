@@ -6,7 +6,6 @@
             <div class="row">
                 <form method="POST" action="{{ route('signin') }}">
                     @csrf
-
                     <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
                         <div class="col-md-12">
                             <h1>Login</h1>
@@ -14,6 +13,13 @@
                             <br/>
                         </div>
                         <div class="col-md-12">
+                            @if(\Illuminate\Support\Facades\Session::has('message'))
+                                <div class="alert alert-success alert-dismissible" role="alert">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+                                    </button>
+                                    <strong>{{ \Illuminate\Support\Facades\Session::get('message') }}</strong>
+                                </div>
+                            @endif
                             @if($errors->count() > 0)
                                 @foreach($errors->all() as $error)
                                     <span class="form-message">
@@ -48,8 +54,12 @@
                                 <span>REMEMBER ME</span>
                             </div>
                         </div>
-                        <div class="col-md-12 text--center">
+                        <div class="col-md-12 text--center pb-30">
                             <button type="submit" class="btn btn--secondary btn--bordered">Login</button>
+                        </div>
+                        <div class="col-md-12 text--center">
+                            <h4>Or</h4>
+                            <a href="{{route('register-page')}}" style="font-size: 16px;"><span>Create new account</span></a>
                         </div>
                     </div><!-- .col-md-12 end -->
                 </form>

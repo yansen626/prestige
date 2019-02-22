@@ -58,6 +58,9 @@
     .module--search-box .form-control {
         width: 100%;
     }
+    .padding-top-mobile{
+        padding-top: 10%;
+    }
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
@@ -125,6 +128,9 @@
     .customize-label{
         margin-left: 0 !important;
     }
+    .padding-top-mobile{
+        padding-top: 10%;
+    }
 }
 
 @media (max-width: 576px) {
@@ -190,6 +196,9 @@
     .customize-label{
         margin-left: 0 !important;
     }
+    .padding-top-mobile{
+        padding-top: 10%;
+    }
 }
 
 p{
@@ -233,6 +242,7 @@ header style custom
 .module-active .module-fullscreen {
     width: 50%;
     background-color: #EDF3F6;
+    z-index: 999;
 }
 
 .color-black a{

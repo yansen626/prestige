@@ -196,8 +196,8 @@
 
     <!-- Menu section MOBILE
     ============================================= -->
-    <nav id="primary-menu" class="navbar navbar-fixed-top hidden-md hidden-lg">
-        <div class="container">
+    <nav id="primary-menu" class="navbar navbar-fixed-top hidden-md hidden-lg" style="height:auto;">
+        <div class="container" style="height:auto;">
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <!-- .navbar-collapse -->
@@ -233,9 +233,9 @@
                 </a>
             </div>
 
-            <div class="collapse navbar-collapse pull-left" id="navbar-collapse-3">
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse-3" style="height:auto;">
                 <!-- Module Shop -->
-                <div class="module module-search2 pull-left">
+                <div class="module module-search2 pull-left" style="height:auto;">
                     <div class="module-icon search-icon color-black">
                         {{--<i class="fa fa-search"></i>--}}
                         {{--<span class="title">search</span>--}}
@@ -272,34 +272,35 @@
                     <div class="module-icon search-icon color-black">
                         {{--<i class="fa fa-search"></i>--}}
                         {{--<span class="title">search</span>--}}
-                        <a class="pointer">CONTACT</a>
+                        <a href="{{route('contact-form')}}">CONTACT</a>
+                        {{--<a class="pointer">CONTACT</a>--}}
                     </div>
-                    <div class="module-content module-fullscreen module--search2-box">
-                        <div class="pos-vertical-center">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-12" style="padding: 0 1% 0 7%;">
-                                        <h2>Contact</h2>
-                                        <hr style="height:1px;border:none;color:#333;background-color:#333;" />
-                                        <br/>
-                                        {!! Form::open(array('action' => 'Frontend\HomeController@contact', 'id'=>'form-contact', 'class'=>'form-search2', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}
+                    {{--<div class="module-content module-fullscreen module--search2-box">--}}
+                        {{--<div class="pos-vertical-center">--}}
+                            {{--<div class="container">--}}
+                                {{--<div class="row">--}}
+                                    {{--<div class="col-xs-12 col-sm-12" style="padding: 0 1% 0 7%;">--}}
+                                        {{--<h2>Contact</h2>--}}
+                                        {{--<hr style="height:1px;border:none;color:#333;background-color:#333;" />--}}
+                                        {{--<br/>--}}
+                                        {{--{!! Form::open(array('action' => 'Frontend\HomeController@contact', 'id'=>'form-contact', 'class'=>'form-search2', 'method' => 'POST', 'role' => 'form', 'enctype' => 'multipart/form-data', 'novalidate')) !!}--}}
 
-                                        <input type="text" class="form-control" name="name" id="name" placeholder="NAME" required/>
-                                        <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
-                                        <input type="text" class="form-control" name="order" id="order" placeholder="ORDER NUMBER (IF APPLICABLE)"/>
-                                        <textarea class="form-control" name="message" id="message" rows="2" placeholder="MESSAGE" required></textarea>
+                                        {{--<input type="text" class="form-control" name="name" id="name" placeholder="NAME" required/>--}}
+                                        {{--<input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>--}}
+                                        {{--<input type="text" class="form-control" name="order" id="order" placeholder="ORDER NUMBER (IF APPLICABLE)"/>--}}
+                                        {{--<textarea class="form-control" name="message" id="message" rows="2" placeholder="MESSAGE" required></textarea>--}}
 
-                                        <div style="text-align: center;">
-                                            <button type="submit" class="btn btn--secondary btn--bordered">SEND</button>
-                                        </div>
+                                        {{--<div style="text-align: center;">--}}
+                                            {{--<button type="submit" class="btn btn--secondary btn--bordered">SEND</button>--}}
+                                        {{--</div>--}}
 
-                                        {!! Form::close() !!}
-                                    </div><!-- .col-md-8 end -->
-                                </div><!-- .row end -->
-                            </div><!-- .container end -->
-                        </div>
-                        <a class="module-cancel pointer"><i class="fa fa-close"></i></a>
-                    </div>
+                                        {{--{!! Form::close() !!}--}}
+                                    {{--</div><!-- .col-md-8 end -->--}}
+                                {{--</div><!-- .row end -->--}}
+                            {{--</div><!-- .container end -->--}}
+                        {{--</div>--}}
+                        {{--<a class="module-cancel pointer"><i class="fa fa-close"></i></a>--}}
+                    {{--</div>--}}
                 </div><!-- .module-Contact end -->
 
                 <!-- Module Search -->

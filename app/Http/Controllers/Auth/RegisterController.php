@@ -102,7 +102,7 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+            return back()->withErrors($validator)->withInput($request->all());
         }
 
         $user = $this->create($request->all());
@@ -118,7 +118,8 @@ class RegisterController extends Controller
             return redirect()->route('billing');
         }
         else{
-            return View("auth.login");
+            Session::flash('message', 'Registration succeed, please login');
+            return redirect()->route('login');
         }
     }
 

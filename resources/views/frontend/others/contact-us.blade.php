@@ -9,7 +9,6 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="heading heading-2 mb-60">
-                        <div class="family-sans font-20" style="padding-bottom:10px;">Feel Free</div>
                         {{--<h2 class="heading--title">Contact Us</h2>--}}
                         <h1>Contact Us</h1>
                         <hr style="height:1px;border:none;color:#333;background-color:#333;" />
@@ -53,46 +52,45 @@
                         {!! Form::close() !!}
                     </div>
                 </div><!-- .col-md-6 end -->
-                <div class="col-xs-12 col-sm-12 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-md-6 padding-top-mobile">
                     <div class="heading heading-2 mb-60">
-                        <div class="family-sans font-20" style="padding-bottom:10px;">Contact Us</div>
                         <h1>Get in Touch</h1>
                         <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                         <p class="mt-20 font-16" style="text-align: justify;">Need help? Do you have a question about your order or just simply want to say hi? Please don’t hesitate to shoot us a message at hi@nama-official.com</p>
                     </div>
                     <div class=" clearfix"></div>
-                    <div class="row mb-50">
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="contact--info center">
-                                <img src="{{asset('/images/icons/address.png')}}" style="width: 20%; height:100%;">
-                                <p><br>Alnahas Building, 2 AlBahr St, Tanta</p>
-                                <p>AlGharbia, Egypt.</p>
-                            </div>
-                        </div><!-- .col-md-6 end -->
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="contact--info center">
-                                <img src="{{asset('/images/icons/phone.png')}}" style="width: 20%; height:100%;">
-                                <p><br>Office Telephone : 002 01065370701</p>
-                                <p>Mobile : 002 01065370701</p>
-                            </div>
-                        </div><!-- .col-md-6 end -->
-                    </div><!-- .row end -->
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="contact--info center">
-                                <img src="{{asset('/images/icons/mail.png')}}" style="width: 20%; height:100%;">
-                                <p><br>Main Email : Main@nama-official.com</p>
-                                <p>Inquiries : Info@nama-official.com</p>
-                            </div>
-                        </div><!-- .col-md-6 end -->
-                        <div class="col-xs-12 col-sm-6 col-md-6">
-                            <div class="contact--info center">
-                                <img src="{{asset('/images/icons/support.png')}}" style="width: 20%; height:100%;">
-                                <p><br>Support : Support@nama-official.com</p>
-                                <p>Sales : Sales@nama-official.com</p>
-                            </div>
-                        </div><!-- .col-md-6 end -->
-                    </div>
+                    {{--<div class="row mb-50">--}}
+                        {{--<div class="col-xs-12 col-sm-6 col-md-6">--}}
+                            {{--<div class="contact--info center">--}}
+                                {{--<img src="{{asset('/images/icons/address.png')}}" style="width: 20%; height:100%;">--}}
+                                {{--<p><br>Alnahas Building, 2 AlBahr St, Tanta</p>--}}
+                                {{--<p>AlGharbia, Egypt.</p>--}}
+                            {{--</div>--}}
+                        {{--</div><!-- .col-md-6 end -->--}}
+                        {{--<div class="col-xs-12 col-sm-6 col-md-6">--}}
+                            {{--<div class="contact--info center">--}}
+                                {{--<img src="{{asset('/images/icons/phone.png')}}" style="width: 20%; height:100%;">--}}
+                                {{--<p><br>Office Telephone : 002 01065370701</p>--}}
+                                {{--<p>Mobile : 002 01065370701</p>--}}
+                            {{--</div>--}}
+                        {{--</div><!-- .col-md-6 end -->--}}
+                    {{--</div><!-- .row end -->--}}
+                    {{--<div class="row">--}}
+                        {{--<div class="col-xs-12 col-sm-6 col-md-6">--}}
+                            {{--<div class="contact--info center">--}}
+                                {{--<img src="{{asset('/images/icons/mail.png')}}" style="width: 20%; height:100%;">--}}
+                                {{--<p><br>Main Email : Main@nama-official.com</p>--}}
+                                {{--<p>Inquiries : Info@nama-official.com</p>--}}
+                            {{--</div>--}}
+                        {{--</div><!-- .col-md-6 end -->--}}
+                        {{--<div class="col-xs-12 col-sm-6 col-md-6">--}}
+                            {{--<div class="contact--info center">--}}
+                                {{--<img src="{{asset('/images/icons/support.png')}}" style="width: 20%; height:100%;">--}}
+                                {{--<p><br>Support : Support@nama-official.com</p>--}}
+                                {{--<p>Sales : Sales@nama-official.com</p>--}}
+                            {{--</div>--}}
+                        {{--</div><!-- .col-md-6 end -->--}}
+                    {{--</div>--}}
                 </div><!-- .col-md-6 end -->
             </div>
         </div>
