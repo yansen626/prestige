@@ -50,6 +50,23 @@
                             <input type="hidden" id="position_y" value="{{$product->product_positions[0]->pos_y}}">
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 text--left">
+                                    <H4>COLOR</H4>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 text--right">
+                                    <select id="select-colour" class="minimal family-sans" data-width="auto"
+                                            onchange="ChangeColour()" style="width: 75%;font-size: 14px !important;text-align: right;">
+                                        @foreach($otherProductColour as $colour)
+                                            @if($product->colour == $colour->colour)
+                                                <option class="family-sans" value="{{$colour->slug}}" selected style="font-size: 14px !important;">{{$colour->colour}}</option>
+                                            @else
+                                                <option class="family-sans" value="{{$colour->slug}}" style="font-size: 14px !important;">{{$colour->colour}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 text--left">
                                     <H4>Customization</H4>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 text--right">
@@ -57,23 +74,6 @@
                                         <div class="handle"></div>
                                     </button>
                                     <input type="hidden" id="customize-toggle" name="customize-toggle" value="true" />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 text--left">
-                                    <H4>COLOR</H4>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6 text--right">
-                                    <select id="select-colour" class="minimal" data-width="auto"
-                                            onchange="ChangeColour()" style="width: 130px;">
-                                        @foreach($otherProductColour as $colour)
-                                            @if($product->colour == $colour->colour)
-                                                <option value="{{$colour->slug}}" selected>{{$colour->colour}}</option>
-                                            @else
-                                                <option value="{{$colour->slug}}">{{$colour->colour}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
                             <div id="customize-section" class="row customize-section">

@@ -196,8 +196,8 @@
 
     <!-- Menu section MOBILE
     ============================================= -->
-    <nav id="primary-menu" class="navbar navbar-fixed-top hidden-md hidden-lg" style="height:auto;">
-        <div class="container" style="height:auto;">
+    <nav id="primary-menu" class="navbar navbar-fixed-top hidden-md hidden-lg" >
+        <div class="container">
             <!-- Collect the nav links, forms, and other content for toggling -->
 
             <!-- .navbar-collapse -->
@@ -233,15 +233,15 @@
                 </a>
             </div>
 
-            <div class="collapse navbar-collapse pull-left" id="navbar-collapse-3" style="height:auto;">
+            <div class="collapse navbar-collapse pull-left" id="navbar-collapse-3">
                 <!-- Module Shop -->
-                <div class="module module-search2 pull-left" style="height:auto;">
+                <div id="shop-search2" class="module module-search2 pull-left">
                     <div class="module-icon search-icon color-black">
                         {{--<i class="fa fa-search"></i>--}}
                         {{--<span class="title">search</span>--}}
-                        <a class="pointer">SHOP</a>
+                        <a id="shop-click" class="pointer">SHOP</a>
                     </div>
-                    <div class="module-content module-fullscreen module--search2-box">
+                    <div id="shop-fullscreen" class="module-content module-fullscreen module--search2-box">
                         <div class="pos-vertical-center">
                             <div class="container">
                                 <div class="row">
@@ -304,11 +304,11 @@
                 </div><!-- .module-Contact end -->
 
                 <!-- Module Search -->
-                <div class="module module-search pull-left">
+                <div id="search-search2" class="module module-search pull-left">
                     <div class="module-icon search-icon color-black">
                         {{--<i class="fa fa-search"></i>--}}
                         {{--<span class="title">search</span>--}}
-                        <a class="pointer">SEARCH</a>
+                        <a id="search-click" class="pointer">SEARCH</a>
                     </div>
                     <div class="module-content module-fullscreen module--search-box">
                         <div class="pos-vertical-center">
@@ -343,6 +343,22 @@
 
 @section('scripts-footer-header')
     <script>
+        $("#shop-click").on('click', (function() {
+            // var windowHeight = $(window).height();
+            var windowHeight = window.innerHeight ? window.innerHeight : $(window).height();
+            // alert(windowHeight);
+            $('#shop-search2').css('height', windowHeight);
+            // $('#shop-fullscreen').css('height', windowHeight);
+            // $('#navbar-collapse-2').height(windowHeight);
+        }));
+        $("#search-click").on('click', (function() {
+            var windowHeight = window.innerHeight ? window.innerHeight : $(window).height();
+            $('#search-search2').css('height', windowHeight);
+        }));
+        $(".module-cancel").on('click', (function() {
+            $('#shop-search2').removeAttr('style');
+            $('#search-search2').removeAttr('style');
+        }));
         function empty() {
             var x;
             x = document.getElementById("search-text").value;

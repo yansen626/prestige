@@ -20,6 +20,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
+                                {{--<textarea class="form-control" name="message" id="message" rows="0" placeholder="FIRST NAME" required></textarea>--}}
                                 <input type="text" class="form-control" name="first_name" id="name" placeholder="FIRST NAME" required/>
                             </div>
                             <div class="col-md-6">
@@ -32,7 +33,7 @@
                                 <input type="text" class="form-control" name="order" id="order" placeholder="ORDER NO"/>
                             </div>
                             <div class="col-md-12">
-                                <textarea class="form-control" name="message" id="message" rows="2" placeholder="MESSAGE" required></textarea>
+                                <textarea class="form-control" name="message" id="message" rows="2" placeholder="MESSAGE" required style="line-height: 25px !important;"></textarea>
                                 {{--<textarea class="form-control" name="contact-message" id="message" rows="2" placeholder="Message" required></textarea>--}}
                             </div>
                             <div class="col-md-12" style="text-align: center;">
