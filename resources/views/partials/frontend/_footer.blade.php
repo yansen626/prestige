@@ -6,8 +6,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6 footer--widget footer--widget-about centered">
-                    <div class="footer--widget-title">
-                        <h1>nama.</h1>
+                    <div class="footer--widget-title" style="padding-bottom:2%;">
+                        <img  src="{{ asset('images/icons/logo.jpg') }}" alt="Nama Logo" style="width: 25%;">
                     </div>
                     <div class="footer--widget-content">
 

@@ -8,17 +8,17 @@
     <section id="cover5" class="section cover-5 mtop-100 pt-0 pb-0">
         <div class="container-fluid">
             <div class="row comm-height">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-content center">
-                    <a href="{{route('product.list')}}"><H4 class="header-menu">SHOP ALL</H4></a>
-                    <a href="/product-list?category=1"><H4 class="header-menu">BAGS & TOTES</H4></a>
-                    <a href="/product-list?category=2"><H4 class="header-menu">WALLETS</H4></a>
-                    <a href="/product-list?category=3"><H4 class="header-menu">CARD HOLDERS</H4></a>
-                    <a href="/product-list?category=4"><H4 class="header-menu">POUCHES</H4></a>
-                    <a href="/product-list?category=5"><H4 class="header-menu">PHONE CASES</H4></a>
-                </div><!-- .col-md-8 end -->
-                <div class="col-xs-12 col-sm-12 col-md-6 pr-0 pl-0">
+                {{--<div class="col-xs-12 col-sm-12 col-md-6 col-content center">--}}
+                    {{--<a href="{{route('product.list')}}"><H4 class="header-menu">SHOP ALL</H4></a>--}}
+                    {{--<a href="/product-list?category=1"><H4 class="header-menu">BAGS & TOTES</H4></a>--}}
+                    {{--<a href="/product-list?category=2"><H4 class="header-menu">WALLETS</H4></a>--}}
+                    {{--<a href="/product-list?category=3"><H4 class="header-menu">CARD HOLDERS</H4></a>--}}
+                    {{--<a href="/product-list?category=4"><H4 class="header-menu">POUCHES</H4></a>--}}
+                    {{--<a href="/product-list?category=5"><H4 class="header-menu">PHONE CASES</H4></a>--}}
+                {{--</div><!-- .col-md-8 end -->--}}
+                <div class="col-xs-12 col-sm-12 col-md-12 pr-0 pl-0" style="height: 500px;">
                     <div class="bg-overlay">
-                        <div class="bg-section">
+                        <div class="bg-section" >
                             <img src="{{asset('/images/Links/product-list.jpg')}}" alt="Background"/>
                         </div>
                     </div>
