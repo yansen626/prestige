@@ -72,12 +72,12 @@
 
     <!-- Product #1
     ============================================= -->
-    <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white pt-80 pb-80">
+    <section id="testimonial1" class="testimonial testimonial-boxed testimonial-1 bg-white">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 center">
                     {{--<h2>Spring Favorites</h2>--}}
-                    <p class="font-16" style="margin-top:8%; margin-bottom:8%;">
+                    <p class="font-16" style="margin-top:8%; margin-bottom:10%;">
                         REDEFINE SIMPLE EVERYDAY LUXURY WITH NAMA/S PRACTICAL,<BR>
                         TIMELESS AND HIGH DISTICTION PERSONALIZED LEATHER GOODS.<BR><BR>
                         ENJOY CHIC AND BESPOKE ACCESORIES WITH THE KNOWLEDGE THAT THEY<BR>
@@ -90,9 +90,9 @@
                         @foreach($products as $product)
                             @php($link = route('product.detail', ['product'=>$product->slug] ))
                             @php($productImage = $product->product_images->where('is_main_image', 1)->first())
-                            <div class="testimonial-panel product-item">
+                            <div class="testimonial-panel product-item" style="padding:0 !important;">
                                 <div class="product--img">
-                                    <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: 100%;"/>
+                                    <img class="product-img-home" src="{{ asset('storage/products/'.$productImage->path) }}" alt="Product" style="max-height: 300px; width: 100%;"/>
                                     <div class="product--hover">
                                         <div class="product--action">
                                             <a class="btn btn--secondary btn--bordered" href="{{$link}}">VIEW</a>

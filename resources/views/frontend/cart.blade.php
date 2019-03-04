@@ -176,13 +176,14 @@
                 @csrf
 
                 <div class="row">
-                    <h1>Your Cart</h1>
+                    <h1 style="padding-left: 7%;">Your Cart</h1>
                         @if($carts != null && $flag == 1)
                             @foreach($carts as $cart)
-                                <div class="col-xs-12 col-sm-12 col-md-12 border-b" style="padding: 6% 0 6% 0;  ">
+                            <div class="col-xs-12 col-sm-12 col-md-12 border-b" style="padding-bottom: 6%;">
                                     <div class="col-xs-6 col-sm-6">
-                                        <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product" style="width: 100%;"/>
-
+                                        @php($productImage = \App\Models\ProductImage::where('product_id', $cart->product_id)->first())
+                                        <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
+                                        <br>
                                         <i class="fa fa-close delete font-16 pt-20" data-toggle="modal" data-id="{{ $cart->id }}" data-target="#myModal"></i>
                                         <input type="hidden" value="{{ $cart->price }}" id="price_mobile{{ $cart->id }}">
                                     </div>
@@ -198,18 +199,19 @@
                                         <input id="total_price_mobile_span{{$cart->id}}" type="hidden" class="priceForTotalMobile" value="{{$cart->total_price}}">
 
                                         <div class="product-quantity">
-                                            <a><i class="fa fa-minus font-16 pb-10 pt-10" onclick="updateQty('{{ $cart->id }}', 'min')"></i></a>
-                                            <input type="text" value="{{ $cart->qty }}" id="qty_mobile{{ $cart->id }}" name="qty[{{ $cart->id }}]" readonly>
-                                            <a><i class="fa fa-plus font-16 pb-10 pt-10" onclick="updateQty('{{ $cart->id }}', 'plus')"></i></a>
+                                            <a><i class="fa fa-minus font-12 pb-10 pt-10" onclick="updateQty('{{ $cart->id }}', 'min')"></i></a>
+                                            <input type="text" value="{{ $cart->qty }}" id="qty_mobile{{ $cart->id }}" name="qty[{{ $cart->id }}]" readonly style="margin:6% 0 6% 0">
+                                            <a><i class="fa fa-plus font-12 pb-10 pt-10" onclick="updateQty('{{ $cart->id }}', 'plus')"></i></a>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
                         @elseif($carts != null && $flag == 2)
                             @foreach($carts as $cart)
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-xs-12 col-sm-12 col-md-12 border-b" style="padding-bottom: 6%;">
                                     <div class="col-xs-6 col-sm-6" style="font-size: 20px; text-align: center;">
-                                        <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product" style="width: 100%;"/>
+                                        @php($productImage = \App\Models\ProductImage::where('product_id', $cart['item']['product_id'])->first())
+                                        <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                         <br>
                                         <i class="fa fa-close delete font-16" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>
                                         <input type="hidden" value="{{ $cart['item']['price'] }}" id="price_mobile{{ $cart['item']['product_id'] }}">
@@ -226,9 +228,9 @@
                                         <input id="total_price_mobile_span{{ $cart['item']['product_id'] }}" type="hidden" class="priceForTotalMobile" value="{{$cart['item']['price']}}">
 
                                         <div class="product-quantity">
-                                            <a><i class="fa fa-minus font-16" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'min')"></i></a>
-                                            <input type="text" value="{{ $cart['qty'] }}" id="qty_mobile{{ $cart['item']['product_id'] }}" name="qty[{{ $cart['item']['product_id'] }}]" readonly>
-                                            <a><i class="fa fa-plus font-16" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'plus')"></i></a>
+                                            <a><i class="fa fa-minus font-12" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'min')"></i></a>
+                                            <input type="text" value="{{ $cart['qty'] }}" id="qty_mobile{{ $cart['item']['product_id'] }}" name="qty[{{ $cart['item']['product_id'] }}]" readonly style="margin:6% 0 6% 0">
+                                            <a><i class="fa fa-plus font-12" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'plus')"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -256,7 +258,7 @@
                             <input type="text" class="form-control input-bordered" name="voucher" id="voucher" placeholder="TYPE CODE HERE" style="text-align: center"/>
                             <input type="hidden" id="voucher_applied" value=""/>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-4">
+                        <div class="col-xs-12 col-sm-12 col-md-4" style="padding-bottom: 4%;">
                             <button id="apply-voucher" type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 100%;line-height: 0px; border: 1px solid #282828;">APPLY CODE</button>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -5%;">
@@ -293,10 +295,10 @@
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -3px;">
                             <hr style="height:1px;border:none;color:black;background-color:#333;" />
                         </div>
-                        <div class="col-xs-6 col-sm-12 col-md-6">
+                        <div class="col-xs-6 col-sm-12 col-md-6" style="padding-top: 4%;">
                             <a href="{{ route('home') }}"><button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 130px;line-height: 0px; border: 1px solid #282828;">CONTINUE SHOPPING</button></a>
                         </div>
-                        <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
+                        <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;padding-top: 4%;">
                             @if($totalPrice == 0)
                                 @php($disabled = 'disabled')
                             @else
@@ -337,6 +339,14 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('styles')
+    <style>
+        .bg-white{
+            padding-bottom:0 !important;
+        }
+    </style>
 @endsection
 
 @section('scripts')

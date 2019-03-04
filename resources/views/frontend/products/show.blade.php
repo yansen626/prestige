@@ -31,7 +31,7 @@
                         <canvas id="myCanvas" width="600" height="600"></canvas>
                     </div>
                 </div><!-- .col-md-8 end -->
-                <div class="col-xs-12 col-sm-12 col-md-6" style="padding: 3% 3% 0 7%;background-color: white;">
+                <div class="col-xs-12 col-sm-12 col-md-6" style="padding: 8% 8% 0 8%;background-color: white;">
                     <div class="row" style="margin-bottom: 28px;">
                         <div class="col-md-12">
                             <h2 style="margin: 0 0 18px;">{{$product->name}}</h2>
@@ -77,125 +77,129 @@
                                 </div>
                             </div>
                             <div id="customize-section" class="row customize-section">
-                                <div class="col-md-12">
-                                    <div class="col-md-12 bg-white bg-white-mobile" style="padding-bottom: 25px;">
-                                        <p>Enter personalized text (max 3 characters)</p>
-                                        <form>
-                                            <input type="text" class="form-control auto-blur"
-                                                   name="custom-text" id="custom-text" placeholder="TEXT HERE" maxlength="3"
-                                                   onfocusout="ChangePosition()" style="text-transform:uppercase" />
+                                <div class="col-md-12 bg-white bg-white-mobile" style="padding-bottom: 25px;">
+                                    <p>Enter personalized text (max 3 characters)</p>
+                                    <form>
+                                        <input type="text" class="form-control auto-blur"
+                                               name="custom-text" id="custom-text" placeholder="TEXT HERE" maxlength="3"
+                                               onfocusout="ChangePosition()" style="text-transform:uppercase" />
 
-                                            {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
-                                                {{--<p style="margin-bottom: 0;margin-left: 11%;">Choose Position</p>--}}
-                                                {{--<select class="minimal" data-width="auto"--}}
-                                                        {{--id="custom-position" name="custom-position"--}}
-                                                        {{--onchange="ChangeSelectedPosition()" style="width: 130px;">--}}
-                                                    {{--@foreach($product->product_positions as $position)--}}
-                                                        {{--@php($value=$position->pos_x."-".$position->pos_y)--}}
-                                                        {{--<option value="{{$value}}">{{$position->name}}</option>--}}
-                                                    {{--@endforeach--}}
-                                                {{--</select>--}}
-                                            {{--</div>--}}
-                                            <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-                                                <p style="margin-bottom: 0;margin-left: 11%;">Choose Position</p>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <span class="fa fa-angle-down"></span>
-                                                        <span id="custom-position-text">{{$product->product_positions[0]->name}}</span>
-                                                    </button>
-                                                    <input type="hidden" name="custom-position" id="custom-position" value="{{$product->product_positions[0]->pos_x}}-{{$product->product_positions[0]->pos_y}}">
-
-                                                    <ul class="dropdown-menu">
-                                                        @foreach($product->product_positions as $position)
-                                                            @php($value=$position->pos_x."-".$position->pos_y)
-                                                            <li style="height: 30px;width: 40px;cursor:pointer;">
-                                                                <a onclick="ChangeCustom('{{$position->name}}-{{$value}}', 1)" style="text-transform: uppercase;">
-                                                                    {{$position->name}}
-                                                                </a>
-                                                            </li>
-                                                        @endforeach
-                                                    </ul>
-                                                </div>
+                                        {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
+                                        {{--<p style="margin-bottom: 0;margin-left: 11%;">Choose Position</p>--}}
+                                        {{--<select class="minimal" data-width="auto"--}}
+                                        {{--id="custom-position" name="custom-position"--}}
+                                        {{--onchange="ChangeSelectedPosition()" style="width: 130px;">--}}
+                                        {{--@foreach($product->product_positions as $position)--}}
+                                        {{--@php($value=$position->pos_x."-".$position->pos_y)--}}
+                                        {{--<option value="{{$value}}">{{$position->name}}</option>--}}
+                                        {{--@endforeach--}}
+                                        {{--</select>--}}
+                                        {{--</div>--}}
+                                        <div class="col-xs-12 col-sm-12 col-md-4 text-center">
+                                            <div style="width: 100%">
+                                                <p style="margin-bottom: 0;">Choose Position</p>
                                             </div>
-                                            {{--<div class="col-xs-12 col-sm-12 col-md-3 text-center">--}}
-                                                {{--<p style="margin-bottom: 0;margin-left: 11%;">Font</p>--}}
-                                                {{--<select class="minimal" data-width="auto" id="custom-font" name="custom-font" onchange="ChangePosition()">--}}
-                                                    {{--<option value="Serif">SERIF</option>--}}
-                                                    {{--<option value="Sans-serif">SAN SERIF</option>--}}
-                                                {{--</select>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
-                                                {{--<p style="margin-bottom: 0;margin-left: 11%;">Choose Color</p>--}}
-                                                {{--<select class="selectpicker minimal" data-width="auto" id="custom-color" name="custom-color" onchange="ChangePosition()">--}}
-                                                    {{--<option value="Silver-C0C0C0">SILVER</option>--}}
-                                                    {{--<option value="Blind-ffffff">BLIND</option>--}}
-                                                {{--</select>--}}
-                                            {{--</div>--}}
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="fa fa-angle-down"></span>
+                                                    <span id="custom-position-text">{{$product->product_positions[0]->name}}</span>
+                                                </button>
+                                                <input type="hidden" name="custom-position" id="custom-position" value="{{$product->product_positions[0]->pos_x}}-{{$product->product_positions[0]->pos_y}}">
 
-                                            <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-                                                <p style="margin-bottom: 0;margin-left: 11%;">
+                                                <ul class="dropdown-menu">
+                                                    @foreach($product->product_positions as $position)
+                                                        @php($value=$position->pos_x."-".$position->pos_y)
+                                                        <li style="height: 30px;width: 40px;cursor:pointer;">
+                                                            <a onclick="ChangeCustom('{{$position->name}}-{{$value}}', 1)" style="text-transform: uppercase;">
+                                                                {{$position->name}}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        {{--<div class="col-xs-12 col-sm-12 col-md-3 text-center">--}}
+                                        {{--<p style="margin-bottom: 0;margin-left: 11%;">Font</p>--}}
+                                        {{--<select class="minimal" data-width="auto" id="custom-font" name="custom-font" onchange="ChangePosition()">--}}
+                                        {{--<option value="Serif">SERIF</option>--}}
+                                        {{--<option value="Sans-serif">SAN SERIF</option>--}}
+                                        {{--</select>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
+                                        {{--<p style="margin-bottom: 0;margin-left: 11%;">Choose Color</p>--}}
+                                        {{--<select class="selectpicker minimal" data-width="auto" id="custom-color" name="custom-color" onchange="ChangePosition()">--}}
+                                        {{--<option value="Silver-C0C0C0">SILVER</option>--}}
+                                        {{--<option value="Blind-ffffff">BLIND</option>--}}
+                                        {{--</select>--}}
+                                        {{--</div>--}}
+
+                                        <div class="col-xs-12 col-sm-12 col-md-4 text-center">
+                                            <div style="width: 100%">
+                                                <p style="margin-bottom: 0;">
                                                     Choose Color <i class="fa fa-info-circle" data-toggle="modal" data-target="#colorInformation" style="cursor: pointer;"></i>
                                                 </p>
-
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <span class="fa fa-angle-down"></span>
-                                                        <span id="custom-color-text">Silver</span>
-                                                    </button>
-                                                    <input type="hidden" name="custom-color" id="custom-color" value="Silver-C0C0C0">
-
-                                                    <ul class="dropdown-menu">
-                                                        <li style="height: 40px;width: 40px;cursor:pointer;">
-                                                            <a onclick="ChangeCustom('Silver-C0C0C0', 2)">
-                                                                <img src="{{asset('images/icons/Silver.PNG')}}" style="width: 35px; height: 35px;"> SILVER
-                                                            </a>
-                                                        </li>
-                                                        <li style="height: 40px;width: 40px;cursor:pointer;">
-                                                            <a onclick="ChangeCustom('Gold-FFD700', 2)">
-                                                                <img src="{{asset('images/icons/Gold.PNG')}}" style="width: 35px; height: 35px;"> GOLD
-                                                            </a>
-                                                        </li>
-                                                        <li style="height: 40px;width: 40px;cursor:pointer;">
-                                                            <a onclick="ChangeCustom('Blind-ffffff', 2)">
-                                                                <img src="{{asset('images/icons/Blind.PNG')}}" style="width: 35px; height: 35px;"> BLIND
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
                                             </div>
-                                            {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
-                                                {{--<p style="margin-bottom: 0;margin-left: 11%;">Choose Size</p>--}}
-                                                {{--<select class="selectpicker minimal" data-width="auto" id="custom-size" name="custom-size" onchange="ChangePosition()">--}}
-                                                    {{--<option value="24 pt-20">24 pt</option>--}}
-                                                    {{--<option value="36 pt-24">36 pt</option>--}}
-                                                {{--</select>--}}
-                                            {{--</div>--}}
 
-                                            <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-                                                <p style="margin-bottom: 0;margin-left: 11%;">Choose Size</p>
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <span class="fa fa-angle-down"></span>
-                                                        <span id="custom-size-text">24 pt</span>
-                                                    </button>
-                                                    <input type="hidden" name="custom-size" id="custom-size" value="24 pt-20">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="fa fa-angle-down"></span>
+                                                    <span id="custom-color-text">Silver</span>
+                                                </button>
+                                                <input type="hidden" name="custom-color" id="custom-color" value="Silver-C0C0C0">
 
-                                                    <ul class="dropdown-menu text--center">
-                                                        <li style="height: 30px;width: 40px;cursor:pointer;">
-                                                            <a onclick="ChangeCustom('24 pt-20', 3)">
-                                                                24 PT
-                                                            </a>
-                                                        </li>
-                                                        <li style="height: 30px;width: 40px;cursor:pointer;">
-                                                            <a onclick="ChangeCustom('36 pt-24', 3)">
-                                                                36 PT
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
+                                                <ul class="dropdown-menu">
+                                                    <li style="height: 40px;width: 40px;cursor:pointer;">
+                                                        <a onclick="ChangeCustom('Silver-C0C0C0', 2)">
+                                                            <img src="{{asset('images/icons/Silver.PNG')}}" style="width: 35px; height: 35px;"> SILVER
+                                                        </a>
+                                                    </li>
+                                                    <li style="height: 40px;width: 40px;cursor:pointer;">
+                                                        <a onclick="ChangeCustom('Gold-FFD700', 2)">
+                                                            <img src="{{asset('images/icons/Gold.PNG')}}" style="width: 35px; height: 35px;"> GOLD
+                                                        </a>
+                                                    </li>
+                                                    <li style="height: 40px;width: 40px;cursor:pointer;">
+                                                        <a onclick="ChangeCustom('Blind-ffffff', 2)">
+                                                            <img src="{{asset('images/icons/Blind.PNG')}}" style="width: 35px; height: 35px;"> BLIND
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                        {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
+                                        {{--<p style="margin-bottom: 0;margin-left: 11%;">Choose Size</p>--}}
+                                        {{--<select class="selectpicker minimal" data-width="auto" id="custom-size" name="custom-size" onchange="ChangePosition()">--}}
+                                        {{--<option value="24 pt-20">24 pt</option>--}}
+                                        {{--<option value="36 pt-24">36 pt</option>--}}
+                                        {{--</select>--}}
+                                        {{--</div>--}}
+
+                                        <div class="col-xs-12 col-sm-12 col-md-4 text-center">
+                                            <div style="width: 100%">
+                                                <p style="margin-bottom: 0;">Choose Size</p>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <span class="fa fa-angle-down"></span>
+                                                    <span id="custom-size-text">24 pt</span>
+                                                </button>
+                                                <input type="hidden" name="custom-size" id="custom-size" value="24 pt-20">
+
+                                                <ul class="dropdown-menu text--center">
+                                                    <li style="height: 30px;width: 40px;cursor:pointer;">
+                                                        <a onclick="ChangeCustom('24 pt-20', 3)">
+                                                            24 PT
+                                                        </a>
+                                                    </li>
+                                                    <li style="height: 30px;width: 40px;cursor:pointer;">
+                                                        <a onclick="ChangeCustom('36 pt-24', 3)">
+                                                            36 PT
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="row">
