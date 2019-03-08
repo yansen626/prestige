@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <!-- DESKTOP -->
+    <!-- DESKTOP START-->
     <section id="shopcart" class="shop shop-cart bg-white hidden-sm hidden-xs">
         <div class="container" style="color: black;">
             <form method="POST" action="{{ route('submit.cart') }}">
@@ -28,29 +28,29 @@
                                 @if($carts != null && $flag == 1)
                                     @foreach($carts as $cart)
                                         <tr class="cart-product">
-                                            <td class="cart-product-item">
+                                            <td class="cart-product-item center pb-40 pt-40">
 {{--                                                @php($productImage = \App\libs\Utilities::GetProductMainImage($cart->product_id))--}}
                                                 @php($productImage = \App\Models\ProductImage::where('product_id', $cart->product_id)->first())
                                                 <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100px"/>
                                             </td>
-                                            <td class="cart-product-item">
+                                            <td class="cart-product-item center pb-40 pt-40">
                                                 {{ $cart->product->name }}
                                                 <input type="hidden" name="id[]" value="{{ $cart->id }}"/>
                                             </td>
-                                            <td class="cart-product-item">{{ $cart->product->colour }}</td>
-                                            <td class="cart-product-quantity">
+                                            <td class="cart-product-item center pb-40 pt-40">{{ $cart->product->colour }}</td>
+                                            <td class="cart-product-quantity pb-40 pt-40">
                                                 <div class="product-quantity">
                                                     <a><i class="fa fa-minus" onclick="updateQty('{{ $cart->id }}', 'min')"></i></a>
                                                     <input type="text" value="{{ $cart->qty }}" id="qty{{ $cart->id }}" name="qty[{{ $cart->id }}]" readonly>
                                                     <a><i class="fa fa-plus" onclick="updateQty('{{ $cart->id }}', 'plus')"></i></a>
                                                 </div>
                                             </td>
-                                            <td class="cart-product-item">{!! $cart->description  !!} </td>
-                                            <td class="cart-product-total">
+                                            <td class="cart-product-item pb-40 pt-40">{!! $cart->description  !!} </td>
+                                            <td class="cart-product-total pb-40 pt-40">
                                                 Rp <span id="total_price{{ $cart->id }}">{{ number_format($cart->total_price, 0, ",", ".") }}</span>
                                                 <input id="total_price_span{{$cart->id}}" type="hidden" class="priceForTotal" value="{{$cart->total_price}}">
                                             </td>
-                                            <td>
+                                            <td class="pb-40 pt-40">
                                                 <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart->id }}" data-target="#myModal"></i>
                                                 <input type="hidden" value="{{ $cart->price }}" id="price{{ $cart->id }}">
                                             </td>
@@ -59,29 +59,29 @@
                                 @elseif($carts != null && $flag == 2)
                                     @foreach($carts as $cart)
                                         <tr class="cart-product">
-                                            <td class="cart-product-item">
+                                            <td class="cart-product-item center pb-40 pt-40">
                                                 @php($productImage = \App\Models\ProductImage::where('product_id', $cart['item']['product_id'])->first())
                                                 <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100px"/>
                                             </td>
-                                            <td class="cart-product-item">
+                                            <td class="cart-product-item center pb-40 pt-40">
                                                 {{ $cart['item']['product']['name'] }}
                                                 <input type="hidden" name="id[]" value="{{ $cart['item']['product_id'] }}"/>
                                             </td>
-                                            <td class="cart-product-item">{{ $cart['item']['product']['colour'] }}</td>
-                                            <td class="cart-product-quantity">
+                                            <td class="cart-product-item center pb-40 pt-40">{{ $cart['item']['product']['colour'] }}</td>
+                                            <td class="cart-product-quantity pb-40 pt-40">
                                                 <div class="product-quantity">
                                                     <a><i class="fa fa-minus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'min')"></i></a>
                                                     <input type="text" value="{{ $cart['qty'] }}" id="qty{{ $cart['item']['product_id'] }}" name="qty[{{ $cart['item']['product_id'] }}]" readonly>
                                                     <a><i class="fa fa-plus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'plus')"></i></a>
                                                 </div>
                                             </td>
-                                            <td class="cart-product-item">{!! $cart['item']['description'] !!}</td>
-                                            <td class="cart-product-total">
+                                            <td class="cart-product-item pb-40 pt-40">{!! $cart['item']['description'] !!}</td>
+                                            <td class="cart-product-total pb-40 pt-40">
                                                 Rp <span id="total_price{{ $cart['item']['product_id'] }}">{{ number_format($cart['item']['price'], 0, ",", ".") }}</span>
                                                 <input id="total_price_span{{$cart['item']['product_id']}}" type="hidden" class="priceForTotal" value="{{$cart['item']['price']}}">
                                             </td>
                                             {{--<td class="cart-product-total" id="total_price{{ $cart['item']['product_id'] }}">{{ $cart['item']['price'] }}</td>--}}
-                                            <td>
+                                            <td class="pb-40 pt-40">
                                                 <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>
                                                 <input type="hidden" value="{{ $cart['item']['price'] }}" id="price{{ $cart['item']['product_id'] }}">
                                             </td>
@@ -168,8 +168,9 @@
             </form>
         </div><!-- .container end -->
     </section>
+    <!-- DESKTOP END-->
 
-    <!-- MOBILE -->
+    <!-- MOBILE START-->
     <section id="shopcart" class="shop shop-cart bg-white hidden-md hidden-lg">
         <div class="container" style="color: black;">
             <form method="POST" action="{{ route('submit.cart') }}">
@@ -315,6 +316,7 @@
             </form>
         </div><!-- .container end -->
     </section>
+    <!-- MOBILE END-->
 
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">

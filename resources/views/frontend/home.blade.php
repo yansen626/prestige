@@ -16,7 +16,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="slide--headline center">
                         Bespoke & <br> Personalized <br> Leather Goods<br><br>
-                        <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">SHOP COLLECTION</a>
+                        <a class="btn btn--secondary btn--bordered" href="{{route('product.list')}}" style="width: 220px;">SHOP COLLECTION</a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 slider-home" style="background-image: url('{{asset('images/Links/banner-1.jpg')}}')">
@@ -36,7 +36,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="slide--headline center">
                         Sustainable <br> Leather <br> Accessories<br>
-                        <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">SHOP COLLECTION</a>
+                        <a class="btn btn--secondary btn--bordered" href="{{route('product.list')}}" style="width: 220px;">SHOP COLLECTION</a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 slider-home" style="background-image: url('{{asset('images/Links/banner-2.jpg')}}')">
@@ -56,7 +56,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-6">
                     <div class="slide--headline center">
                         The Perfect Gift <br> or Everyday <br> Companion<br>
-                        <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">LET'S SHOP</a>
+                        <a class="btn btn--secondary btn--bordered" href="{{route('product.list')}}" style="width: 220px;">LET'S SHOP</a>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 slider-home" style="background-image: url('{{asset('images/Links/banner-3.jpg')}}')">
@@ -78,7 +78,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 center">
                     {{--<h2>Spring Favorites</h2>--}}
                     <p class="font-16" style="margin-top:8%; margin-bottom:10%;">
-                        REDEFINE SIMPLE EVERYDAY LUXURY WITH NAMA/S PRACTICAL,<BR>
+                        REDEFINE SIMPLE EVERYDAY LUXURY WITH NAMA'S PRACTICAL,<BR>
                         TIMELESS AND HIGH DISTICTION PERSONALIZED LEATHER GOODS.<BR><BR>
                         ENJOY CHIC AND BESPOKE ACCESORIES WITH THE KNOWLEDGE THAT THEY<BR>
                         HAVE BEEN MADE WITH UTMOST CARE AND QUALITY.
@@ -104,7 +104,7 @@
                                         <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                     </div><!-- .product-title end -->
                                     <div class="product--price">
-                                        <span>Rp {{$product->price_string}}</span>
+                                        <span class="family-sans">Rp {{$product->price_string}}</span>
                                     </div><!-- .product-price end -->
                                 </div><!-- .product-bio end -->
                             </div>
@@ -130,8 +130,8 @@
                     </div>
                 </div><!-- .col-md-6 end-->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-content bg-pastel center">
-                    <h3>Customize For A Tailored & Timeless Accessory</h3>
-                    <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;">LET'S GO SHOPPING</a>
+                    <h3 style="font-size: 32px;">Customize For A Tailored & Timeless Accessory</h3>
+                    <a class="btn btn--secondary btn--bordered" href="{{route('product.list')}}" style="width: 220px;">LET'S GO SHOPPING</a>
                 </div>
             </div>
             <!-- .row end -->

@@ -263,10 +263,11 @@ class BillingController extends Controller
                 }
                 else{
                     // Create Address
+                    $description = $request->input('address_detail').", ".$request->input('address_detail_2');
                     $userAddress = Address::create([
                         'user_id' => $user->id,
                         'primary' => 1,
-                        'description' => $request->input('address_detail'),
+                        'description' => $description,
                         'country_id' => $request->input('country'),
                         'province_id' => $request->input('province'),
                         'city_id' => $cityId,

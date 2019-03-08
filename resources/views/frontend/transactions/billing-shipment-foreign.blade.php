@@ -37,36 +37,6 @@
                                     </select>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="address_detail" id="address_detail"
-                                           placeholder="ADDRESS (LINE 1)" value="{{old('address_detail')}}" required/>
-                                    @if ($errors->has('address_detail'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('address_detail') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="address_detail_2" id="address_detail_2"
-                                           placeholder="ADDRESS (LINE 2)" value="{{old('address_detail_2')}}" />
-                                    @if ($errors->has('address_detail_2'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('address_detail_2') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" name="street" id="street"
-                                           placeholder="STREET" value="{{old('street')}}" required/>
-                                    @if ($errors->has('street'))
-                                        <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('street') }}</strong>
-                                </span>
-                                    @endif
-                                </div>
-
                                 <div class="col-md-12">
                                     <select name="province" id="province" class="form-control">
                                         <option value="-1" selected>PROVINCE</option>
@@ -85,17 +55,37 @@
                                     </select>
                                 </div>
 
-                                {{--<div class="col-md-12">--}}
-                                    {{--@if ($errors->has('suburb'))--}}
-                                        {{--<span class="invalid-feedback" role="alert">--}}
-                                            {{--<strong>{{ $errors->first('suburb') }}</strong>--}}
-                                        {{--</span>--}}
-                                    {{--@endif--}}
-                                {{--</div>--}}
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="address_detail" id="address_detail"
+                                           placeholder="HOUSE/APARTMENT/UNIT NUMBER" value="{{old('address_detail')}}" required/>
+                                    @if ($errors->has('address_detail'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('address_detail') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="street" id="street"
+                                           placeholder="STREET" value="{{old('street')}}" required/>
+                                    @if ($errors->has('street'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('street') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-12">
+                                    @if ($errors->has('suburb'))
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $errors->first('suburb') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
                                 <input type="hidden" class="form-control" name="suburb" id="suburb"
                                        placeholder="SUBURB" value="{{old('suburb')}}"/>
 
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <input type="text" class="form-control" name="post_code" id="post_code"
                                            placeholder="POST CODE" value="{{old('post_code')}}" required/>
                                     @if ($errors->has('post_code'))
@@ -105,17 +95,15 @@
                                     @endif
                                 </div>
 
-                                {{--<div class="col-md-6">--}}
-                                    {{--<input type="text" class="form-control" name="state" id="state"--}}
-                                           {{--placeholder="STATE" value="{{old('state')}}"/>--}}
-                                    {{--@if ($errors->has('state'))--}}
-                                        {{--<span class="invalid-feedback" role="alert">--}}
-                                    {{--<strong>{{ $errors->first('state') }}</strong>--}}
-                                {{--</span>--}}
-                                    {{--@endif--}}
-                                {{--</div>--}}
-                                <input type="hidden" class="form-control" name="state" id="state"
-                                       placeholder="STATE" value="{{old('suburb')}}"/>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="state" id="state"
+                                           placeholder="STATE" value="{{old('state')}}"/>
+                                    @if ($errors->has('state'))
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('state') }}</strong>
+                                </span>
+                                    @endif
+                                </div>
                             </div>
                         {{-- guset or user already have address --}}
                         @else
@@ -181,24 +169,6 @@
                         </select>
                     </div>
 
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" name="address_detail_secondary" id="address_detail" placeholder="ADDRESS (LINE 1)" />
-                    </div>
-
-                    <div class="col-md-6">
-                        <input type="text" class="form-control" name="address_detail_2_secondary" id="address_detail_2" placeholder="ADDRESS (LINE 2)" />
-                    </div>
-
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" name="street_secondary" id="street" placeholder="STREET" />
-                    </div>
-
-                    {{--<div class="col-md-12">--}}
-                        {{--<input type="text" class="form-control" name="suburb_secondary" id="suburb" placeholder="SUBURB" />--}}
-                    {{--</div>--}}
-
-                    <input type="hidden" class="form-control" name="suburb_secondary"/>
-
                     <div class="col-md-12">
                         <select name="province_secondary" id="province" class="form-control">
                             <option value="-1" selected>PROVINCE</option>
@@ -217,14 +187,25 @@
                         </select>
                     </div>
 
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="address_detail_secondary" id="address_detail" placeholder="HOUSE/APARTMENT/UNIT NUMBER" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="street_secondary" id="street" placeholder="STREET" />
+                    </div>
+
                     <div class="col-md-12">
+                        <input type="text" class="form-control" name="suburb_secondary" id="suburb" placeholder="SUBURB" />
+                    </div>
+
+                    <div class="col-md-6">
                         <input type="text" class="form-control" name="post_code_secondary" id="post_code" placeholder="POST CODE" />
                     </div>
 
-                    {{--<div class="col-md-6">--}}
-                        {{--<input type="text" class="form-control" name="state_secondary" id="state" placeholder="STATE" />--}}
-                    {{--</div>--}}
-                    <input type="hidden" class="form-control" name="state_secondary" id="state" placeholder="STATE" />
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="state_secondary" id="state" placeholder="STATE" />
+                    </div>
                 </div>
 
                 <div class="row padding-top-3">

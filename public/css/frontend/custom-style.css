@@ -728,6 +728,11 @@ section {
 	padding-bottom: 30px;
 }
 
+
+.pb-40 {
+	padding-bottom: 40px !important;
+}
+
 .pb-50 {
 	padding-bottom: 50px;
 }
