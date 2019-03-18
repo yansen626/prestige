@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\libs\Zoho;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -25,5 +26,11 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin.dashboard');
+    }
+
+    public function test()
+    {
+        $result = Zoho::getToken();
+        return $result;
     }
 }

@@ -157,6 +157,8 @@ Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 
 Route::view('/send-email', 'auth.send-email');
 
+Route::get('/zoho', 'Admin\AdminController@test');
+
 // Datatables
 Route::get('/datatables-admin-users', 'Admin\AdminUserController@getIndex')->name('datatables.admin_users');
 Route::get('/datatables-admin-products', 'Admin\ProductController@getIndex')->name('datatables.admin_products');

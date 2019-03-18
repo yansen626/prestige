@@ -23,6 +23,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $email_token
  * @property string $phone
  * @property int $status_id
+ * @property string $zoho_id
+ * @property string $zoho_primary_contact_id
  * @property string $tax_no
  * @property \Carbon\Carbon $email_verified_at
  * @property string $remember_token
@@ -64,6 +66,8 @@ class User extends Authenticatable
 		'email_token',
 		'phone',
 		'status_id',
+        'zoho_id',
+        'zoho_primary_contact_id',
 		'tax_no',
 		'email_verified_at',
 		'remember_token'

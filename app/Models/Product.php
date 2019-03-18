@@ -22,6 +22,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $description
  * @property string $style_notes
  * @property int $status
+ * @property string zoho_id
  * @property int $in_stock
  * @property int $track_stock
  * @property float $qty
@@ -97,7 +98,8 @@ class Product extends Eloquent
 		'height',
 		'length',
 		'meta_title',
-		'meta_description'
+		'meta_description',
+        'zoho_id'
 	];
 
 	protected $appends = [
