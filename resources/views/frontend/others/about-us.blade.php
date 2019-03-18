@@ -79,6 +79,11 @@
                 </div><!-- .col-md-6 end-->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-content-about-bottom bg-windrift-blue center">
                     <h3 class="">Customized Monogramming</h3>
+                    <p class="font-16">
+                        At nama, we believe in the beauty of adding a personal touch that’s distinctively yours.
+                        <BR>
+                        With our top of the line hot stamp machine and 100% imported genuine leather, we will beautifully embellish your products with one of a kind customization.
+                    </p>
                 </div>
             </div>
             <!-- .row end -->
@@ -94,13 +99,17 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8" style="padding-top: 10%;padding-bottom: 10%;text-align: justify">
                     <div class="center">
-                        <h4 style="margin: 0 0 20px;">Customized Monogramming</h4>
+                        <h2>Personalization</h2>
                     </div>
-                    <p class="font-16">
-                        At nama, we believe in the beauty of adding a personal touch that's distinctively yours.
-                        <BR><BR>
-                        With our top of the line hot-stamp machine, we will beautifully embellish your products with your customization.
-                    </p>
+                    <div class="center">
+                        <h4 style="margin: 0 0 20px;font-size: 20px;">Customized Monogramming</h4>
+                        {{--<p class="font-16">CUSTOMIZED MONOGRAMMING</p>--}}
+                        <p class="font-16">
+                            At nama, we believe in the beauty of adding a personal touch that's distinctively yours.
+                            <BR><BR>
+                            With our top of the line hot stamp machine and 100% imported genuine leather, we will beautifully embellish your products with one of a kind customization.
+                        </p>
+                    </div>
                     {{--<div class="center">--}}
                         {{--<h4>Techniques & Materials</h4>--}}
                     {{--</div>--}}

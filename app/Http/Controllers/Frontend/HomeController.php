@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\libs\Midtrans;
 use App\libs\Utilities;
 use App\Mail\OrderConfirmation;
+use App\Models\City;
 use App\Models\ContactMessage;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -18,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Cookie;
+use GuzzleHttp\Client;
 
 class HomeController extends Controller
 {
@@ -119,7 +121,7 @@ class HomeController extends Controller
         return $currency;
     }
     public function TestingPurpose(){
-        $type = 6;
+        $type = 1;
         try{
             switch ($type){
                 //testing midtrans
@@ -221,6 +223,24 @@ class HomeController extends Controller
                     }
                     $orderConfirmation = new OrderConfirmation($user, $order, $orderProducts, $productImageArr);
                     Mail::to($user->email)->send($orderConfirmation);
+                    break;
+
+                //testing get city rajaongkir
+                case 7:
+                    $uri = 'https://pro.rajaongkir.com/api/city';
+                    $client = new \GuzzleHttp\Client();
+                    $response = $client->request('GET', $uri,[
+                        'query' => ['key' => '49c2d8cab7d32fa5222c6355a07834d4']
+                    ]);
+                    $response = $response->getBody()->getContents();
+                    $collect = json_decode($response);
+
+                    foreach ($collect->rajaongkir->results as $data){
+                        $cityDb = City::find($data->city_id);
+                        $cityDb->name = $data->type." ".$data->city_name;
+                        $cityDb->save();
+                    }
+                    return $collect;
                     break;
             }
         }

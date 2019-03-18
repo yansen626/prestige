@@ -18,7 +18,7 @@
                 {{--</div><!-- .col-md-8 end -->--}}
                 <div class="col-xs-12 col-sm-12 col-md-12 pr-0 pl-0" style="height: 500px;">
                     <div class="bg-overlay">
-                        <div class="bg-section" >
+                        <div class="bg-section">
                             <img src="{{asset('/images/Links/product-list.jpg')}}" alt="Background"/>
                         </div>
                     </div>

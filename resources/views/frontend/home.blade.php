@@ -103,8 +103,8 @@
                                     <div class="product--title" style="height: 50px;">
                                         <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                     </div><!-- .product-title end -->
-                                    <div class="product--price">
-                                        <span class="family-sans">Rp {{$product->price_string}}</span>
+                                    <div class="product--price" style="padding-bottom:30px !important;">
+                                        <span class="family-sans" style="font-weight: 400;">Rp {{$product->price_string}}</span>
                                     </div><!-- .product-price end -->
                                 </div><!-- .product-bio end -->
                             </div>
