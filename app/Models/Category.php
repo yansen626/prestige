@@ -18,6 +18,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $slug
  * @property string $meta_title
  * @property string $meta_description
+ * @property string $zoho_item_group_id
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
@@ -37,7 +38,8 @@ class Category extends Eloquent
 		'name',
 		'slug',
 		'meta_title',
-		'meta_description'
+		'meta_description',
+        'zoho_item_group_id'
 	];
 
 	public function category_filters()

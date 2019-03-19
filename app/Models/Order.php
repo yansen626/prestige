@@ -31,6 +31,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property string $order_number
+ * @property string $zoho_sales_order_id
  * 
  * @property \App\Models\Address $address
  * @property \App\Models\OrderStatus $order_status
@@ -38,6 +39,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Illuminate\Database\Eloquent\Collection $order_histories
  * @property \Illuminate\Database\Eloquent\Collection $products
  * @property \Illuminate\Database\Eloquent\Collection $order_return_requests
+ * @property \Illuminate\Database\Eloquent\Collection $order_products
  *
  * @package App\Models
  */
@@ -70,7 +72,8 @@ class Order extends Eloquent
 		'track_code',
 		'currency_code',
 		'order_status_id',
-        'order_number'
+        'order_number',
+        'zoho_sales_order_id'
 	];
 
 	protected $appends = [
