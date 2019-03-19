@@ -260,6 +260,7 @@ class Zoho
      * Function to create product (item)
      *
      * @param Product $product
+     * @param $zohoGroupId
      * @return mixed|string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
@@ -274,20 +275,13 @@ class Zoho
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'items?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
             'json' => [
                 'group_id'              => $zohoGroupId,
-                'unit'                  => 'qty',
-                'item_type'             => 'inventory',
-                'product_type'          => 'goods',
-                'is_taxable'            => true,
-                'tax_id'                => 123,
+                'unit'                  => 'pcs',
+                'item_type'             => 'Inventory Items',
                 'description'           => $product->description,
-                'purchase_account_id'   => 1234,
-                'inventory_account_id'  => 123,
                 'attribute_name1'       => $product->colour,
                 'name'                  => $product->name . ' ' . $product->colour,
                 'rate'                  => $product->price,
-                'reorder_level'         => 5,
                 'initial_stock'         => 0,
-                'initial_stock_rate'    => 0,
                 'sku'                   => $product->sku
             ]
         ]);
@@ -311,10 +305,11 @@ class Zoho
      * Function to Update item.
      *
      * @param Product $product
+     * @param $zohoGroupId
      * @return mixed|string
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public static function updateProduct(Product $product)
+    public static function updateProduct(Product $product, $zohoGroupId)
     {
         $client = new Client([
             'base_uri' => env('ZOHO_BASE_URL')
@@ -324,22 +319,14 @@ class Zoho
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'items/'. $product->zoho_id .'?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
             'json' => [
-                'group_id'              => 021,
-                'group_name'            => 'asdf',
-                'unit'                  => 'qty',
-                'item_type'             => 'inventory',
-                'product_type'          => 'goods',
-                'is_taxable'            => true,
-                'tax_id'                => 123,
+                'group_id'              => $zohoGroupId,
+                'unit'                  => 'pcs',
+                'item_type'             => 'Inventory Items',
                 'description'           => $product->description,
-                'purchase_account_id'   => 1234,
-                'inventory_account_id'  => 123,
                 'attribute_name1'       => $product->colour,
                 'name'                  => $product->name . ' ' . $product->colour,
                 'rate'                  => $product->price,
-                'reorder_level'         => 5,
                 'initial_stock'         => 0,
-                'initial_stock_rate'    => 0,
                 'sku'                   => $product->sku
             ]
         ]);
