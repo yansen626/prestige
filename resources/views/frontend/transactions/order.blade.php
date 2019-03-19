@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+@section('pageTitle', 'Order | NAMA')
 @section('content')
     <section class="bg-white">
             <div class="container">

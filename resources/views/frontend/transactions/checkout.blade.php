@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+@section('pageTitle', 'Checkout | NAMA')
 @section('content')
     <section class="bg-white">
         {{--<form method="POST" action="{{ route('submit.checkout', ["order"=>$order->id]) }}">--}}

@@ -79,7 +79,7 @@ class CategoryController extends Controller
             'updated_at'        => Carbon::now('Asia/Jakarta')
         ]);
 
-        dd($request->input('parent'));
+//        dd($request->input('parent'));
 
         if($request->input('parent') != null){
             //case if parent

@@ -1,5 +1,26 @@
 @extends('layouts.frontend')
 
+@if($filter == 0)
+    @section('pageTitle', 'Shop All | NAMA')
+@endif
+@if($filter == -1)
+    @section('pageTitle', 'Search | NAMA')
+@endif
+@if($filter == 1)
+    @section('pageTitle', 'Bags & Totes | NAMA')
+@endif
+@if($filter == 2)
+    @section('pageTitle', 'Wallets | NAMA')
+@endif
+@if($filter == 3)
+    @section('pageTitle', 'Card Holders | NAMA')
+@endif
+@if($filter == 4)
+    @section('pageTitle', 'Pouches | NAMA')
+@endif
+@if($filter == 5)
+    @section('pageTitle', 'Phone Cases | NAMA')
+@endif
 @section('content')
 
     @if($filter != -1)

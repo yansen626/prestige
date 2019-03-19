@@ -78,14 +78,16 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="parent">Parent</label>
-                                            <select id="parent" name="parent" class="form-control">
-                                                <option value="0">-</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                    <input id="parent" type="hidden" class="form-control"
+                                           name="parent">
+                                    {{--<div class="col-md-12">--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<label for="parent">Parent</label>--}}
+                                            {{--<select id="parent" name="parent" class="form-control">--}}
+                                                {{--<option value="0">-</option>--}}
+                                            {{--</select>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
 
                                 </div>
                                 <div class="col-md-11 col-sm-11 col-xs-12" style="margin: 3% 0 3% 0;">
@@ -130,7 +132,7 @@
                 data: function (params) {
                     return {
                         q: $.trim(params.term),
-                        id: '{{ $category->id }}'
+                        id: '0'
                     };
                 },
                 processResults: function (data) {

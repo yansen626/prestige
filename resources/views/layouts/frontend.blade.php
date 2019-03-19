@@ -44,7 +44,7 @@
 
     <!-- Document Title
         ============================================= -->
-    <title>NAMA</title>
+    <title>@yield('pageTitle')</title>
     @yield('scripts-top')
 </head>
 <body>

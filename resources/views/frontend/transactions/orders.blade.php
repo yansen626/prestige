@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+@section('pageTitle', 'Order | NAMA')
 @section('content')
 
     <!-- DESKTOP -->

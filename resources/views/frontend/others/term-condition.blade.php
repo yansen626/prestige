@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+@section('pageTitle', 'Term and Condition | NAMA')
 @section('content')
 
     <!-- Cover #5

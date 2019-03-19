@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+@section('pageTitle', 'Shopping Cart | NAMA')
 @section('content')
 
     <!-- DESKTOP START-->

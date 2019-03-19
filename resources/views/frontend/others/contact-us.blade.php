@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+@section('pageTitle', 'Contact Us | NAMA')
 @section('content')
 
     <!-- Contact #3

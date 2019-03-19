@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+@section('pageTitle', 'FAQ | NAMA')
 @section('content')
 
     <!-- Cover #5

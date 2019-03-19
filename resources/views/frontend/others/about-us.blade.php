@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+@section('pageTitle', 'About Us | NAMA')
 @section('content')
 
 
@@ -79,10 +80,10 @@
                 </div><!-- .col-md-6 end-->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-content-about-bottom bg-windrift-blue center">
                     <h3 class="">Customized Monogramming</h3>
-                    <p class="font-16">
-                        At nama, we believe in the beauty of adding a personal touch that’s distinctively yours.
+                    <p class="font-16" style="text-transform: uppercase;">
+                        At nama. use the best equipment and techniques to personalize your leather goods.
                         <BR>
-                        With our top of the line hot stamp machine and 100% imported genuine leather, we will beautifully embellish your products with one of a kind customization.
+                        You can find out more about our processes, custom personalization,  monograming and colors below
                     </p>
                 </div>
             </div>

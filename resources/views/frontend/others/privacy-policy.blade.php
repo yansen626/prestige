@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+@section('pageTitle', 'Privacy Policy | NAMA')
 @section('content')
 
     <!-- Cover #5
