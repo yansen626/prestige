@@ -400,14 +400,35 @@ class Zoho
             $orderData->zoho_sales_order_id = $collect->sales_order->salesorder_id;
             $orderData->save();
 
-            //Automatically create Invoice from Sales Order Zoho Function.
-            $requestInvoice = $client->request('POST', env('ZOHO_BASE_URL') . 'invoices/fromsalesorder?organization_id=' .
-                env('ZOHO_ORGANIZATION_ID') . '&authtoken=' . $configuration->configuration_value . '&salesorder_id=' . $collect->sales_order->salesorder_id);
-
             return $collect;
         }
         else{
             return "Error!";
+        }
+    }
+
+    /**
+     * Function to create invoice from SalesOrder.
+     *
+     * @param $salesOrderId
+     * @return bool
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public static function createInvoice($salesOrderId)
+    {
+        $client = new Client([
+            'base_uri' => env('ZOHO_BASE_URL')
+        ]);
+
+        $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+        $request = $client->request('POST', env('ZOHO_BASE_URL') . 'invoices/fromsalesorder?organization_id=' .
+            env('ZOHO_ORGANIZATION_ID') . '&authtoken=' . $configuration->configuration_value . '&salesorder_id=' . $salesOrderId);
+
+        if($request->getStatusCode() == 200){
+            return true;
+        }
+        else{
+            return false;
         }
     }
     //Transaction Stuff Finish
