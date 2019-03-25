@@ -96,7 +96,6 @@ class Zoho
                 'is_primary_contact'    => true
             ]]
         ];
-        //dd(json_encode($testJson));
 
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'contacts?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
@@ -134,43 +133,45 @@ class Zoho
             'base_uri' => env('ZOHO_BASE_URL')
         ]);
 
+        $jsonData = [
+            'contact_name'  => $user->first_name . ' ' . $user->last_name,
+            'company_name'  => 'Nama-Official',
+            'payment_terms' => 1,
+            'currency_id'   => env('ZOHO_CURRENCY_ID'),
+            'website'       => 'www.nama-official.com',
+            'billing_address'   => [
+                'attention' => $user->first_name . ' ' . $user->last_name,
+                'address'   => $user->addresses[0]->description,
+                'street2'   => $user->addresses[0]->street,
+                'city'      => $user->addresses[0]->city->name,
+                'state'     => $user->addresses[0]->state,
+                'zip'       => $user->addresses[0]->postal_code,
+                'country'   => "Indonesia"
+            ],
+            'shipping_address'  => [
+                'attention' => $user->first_name . ' ' . $user->last_name,
+                'address'   => $user->addresses[0]->description,
+                'street2'   => $user->addresses[0]->street,
+                'city'      => $user->addresses[0]->city->name,
+                'state'     => $user->addresses[0]->state,
+                'zip'       => $user->addresses[0]->postal_code,
+                'country'   => "Indonesia"
+            ],
+            'contact_persons'   => [[
+                'salutation'    => 'Mr',
+                'first_name'    => $user->first_name,
+                'last_name'     => $user->last_name,
+                'email'         => $user->email,
+                'phone'         => $user->phone,
+                'mobile'        => $user->phone,
+                'is_primary_contact'    => true
+            ]]
+        ];
+
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'contacts/' . $user->zoho_id . '?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => [
-                'contact_name'  => $user->first_name . ' ' . $user->last_name,
-                'company_name'  => 'Nama-Official',
-                'payment_terms' => 1,
-                'currency_id'   => env('ZOHO_CURRENCY_ID'),
-                'website'       => 'www.nama-official.com',
-                'billing_address'   => [
-                    'attention' => $user->first_name . ' ' . $user->last_name,
-                    'address'   => $user->addresses[0]->description,
-                    'street2'   => $user->addresses[0]->street,
-                    'city'      => $user->addresses[0]->city->name,
-                    'state'     => $user->addresses[0]->state,
-                    'zip'       => $user->addresses[0]->postal_code,
-                    'country'   => "Indonesia"
-                ],
-                'shipping_address'  => [
-                    'attention' => $user->first_name . ' ' . $user->last_name,
-                    'address'   => $user->addresses[0]->description,
-                    'street2'   => $user->addresses[0]->street,
-                    'city'      => $user->addresses[0]->city->name,
-                    'state'     => $user->addresses[0]->state,
-                    'zip'       => $user->addresses[0]->postal_code,
-                    'country'   => "Indonesia"
-                ],
-                'contact_persons'   => [
-                    'salutation'    => 'Mr',
-                    'first_name'    => $user->first_name,
-                    'last_name'     => $user->last_name,
-                    'email'         => $user->email,
-                    'phone'         => $user->phone,
-                    'mobile'        => $user->phone,
-                    'is_primary_contact'    => true
-                ]
-            ]
+            'json' => json_encode($jsonData)
         ]);
 
         if($request->getStatusCode() == 200){
@@ -199,14 +200,15 @@ class Zoho
             'base_uri' => env('ZOHO_BASE_URL')
         ]);
 
+        $jsonData = [
+            'group_name'            => $category->name,
+            'unit'                  => 'pcs',
+            'description'           => $category->slug,
+        ];
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'itemgroups?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => [
-                'group_name'            => $category->name,
-                'unit'                  => 'pcs',
-                'description'           => $category->slug,
-            ]
+            'json' => json_encode($jsonData)
         ]);
 
         if($request->getStatusCode() == 200){
@@ -237,13 +239,14 @@ class Zoho
             'base_uri' => env('ZOHO_BASE_URL')
         ]);
 
+        $jsonData = [
+            'group_name'            => $category->name,
+            'description'           => $category->slug,
+        ];
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'itemgroups/' . $category->zoho_item_group_id . '?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => [
-                'group_name'            => $category->name,
-                'description'           => $category->slug,
-            ]
+            'json' => json_encode($jsonData)
         ]);
 
         if($request->getStatusCode() == 200){
@@ -272,20 +275,21 @@ class Zoho
             'base_uri' => env('ZOHO_BASE_URL')
         ]);
 
+        $jsonData = [
+            'group_id'              => $zohoGroupId,
+            'unit'                  => 'pcs',
+            'item_type'             => 'Inventory Items',
+            'description'           => $product->description,
+            'attribute_name1'       => $product->colour,
+            'name'                  => $product->name . ' ' . $product->colour,
+            'rate'                  => $product->price,
+            'initial_stock'         => 0,
+            'sku'                   => $product->sku
+        ];
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'items?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => [
-                'group_id'              => $zohoGroupId,
-                'unit'                  => 'pcs',
-                'item_type'             => 'Inventory Items',
-                'description'           => $product->description,
-                'attribute_name1'       => $product->colour,
-                'name'                  => $product->name . ' ' . $product->colour,
-                'rate'                  => $product->price,
-                'initial_stock'         => 0,
-                'sku'                   => $product->sku
-            ]
+            'json' => json_encode($jsonData)
         ]);
 
         if($request->getStatusCode() == 200){
@@ -317,20 +321,21 @@ class Zoho
             'base_uri' => env('ZOHO_BASE_URL')
         ]);
 
+        $jsonData = [
+            'group_id'              => $zohoGroupId,
+            'unit'                  => 'pcs',
+            'item_type'             => 'Inventory Items',
+            'description'           => $product->description,
+            'attribute_name1'       => $product->colour,
+            'name'                  => $product->name . ' ' . $product->colour,
+            'rate'                  => $product->price,
+            'initial_stock'         => 0,
+            'sku'                   => $product->sku
+        ];
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'items/'. $product->zoho_id .'?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => [
-                'group_id'              => $zohoGroupId,
-                'unit'                  => 'pcs',
-                'item_type'             => 'Inventory Items',
-                'description'           => $product->description,
-                'attribute_name1'       => $product->colour,
-                'name'                  => $product->name . ' ' . $product->colour,
-                'rate'                  => $product->price,
-                'initial_stock'         => 0,
-                'sku'                   => $product->sku
-            ]
+            'json' => json_encode($jsonData)
         ]);
 
         if($request->getStatusCode() == 200){
@@ -373,16 +378,18 @@ class Zoho
             $lineItems[] = $item;
         }
 
+        $jsonData = [
+            'customer_id'           => $order->user->zoho_id,
+            'salesorder_number'     => $order->order_number,
+            'date'                  => $order->created_at,
+            'line_items'            => [$lineItems],
+            'discount'              => $order->voucher_amount,
+            'shipping_charge'       => $order->shipping_charge,
+            'delivery_method'       => $order->shipping_option,
+        ];
+
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'salesorders?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => [
-                'customer_id'           => $order->user->zoho_id,
-                'salesorder_number'     => $order->order_number,
-                'date'                  => $order->created_at,
-                'line_items'            => $lineItems,
-                'discount'              => $order->voucher_amount,
-                'shipping_charge'       => $order->shipping_charge,
-                'delivery_method'       => $order->shipping_option,
-            ]
+            'json' => json_encode($jsonData)
         ]);
 
         if($request->getStatusCode() == 200){
