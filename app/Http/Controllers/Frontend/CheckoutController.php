@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\libs\Midtrans;
+use App\libs\Zoho;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
@@ -117,6 +118,9 @@ class CheckoutController extends Controller
         $orderDB->save();
 
         $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+
+        // Create ZOHO Invoice
+        Zoho::createInvoice($orderDB->zoho_sales_order_id);
 
         $data=([
             'order' => $order,

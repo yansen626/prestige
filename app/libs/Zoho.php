@@ -219,7 +219,7 @@ class Zoho
             $categoryData->zoho_item_group_id = $collect->group_id;
             $categoryData->save();
 
-            return $collect;
+            return $collect->group_id;
         }
         else{
             return "Error!";

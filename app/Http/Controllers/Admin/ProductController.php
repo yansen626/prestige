@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\libs\Utilities;
+use App\libs\Zoho;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\Product;
@@ -20,6 +21,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -164,6 +166,7 @@ class ProductController extends Controller
             else{
                 $img->save('../public_html/storage/products/'. $filename, 75);
             }
+
             $newProductImage = ProductImage::create([
                 'product_id' => $newProduct->id,
                 'path' => $filename,
@@ -189,12 +192,18 @@ class ProductController extends Controller
                     'is_main_image' => 0
                 ]);
             }
-//                dd($newProductCategory);
+
+            // Create ZOHO Product Category
+            $zohoCategoryId = Zoho::createCategory($newProductCategory);
+
+            // Create ZOHO Product
+            Zoho::createProduct($newProduct, $zohoCategoryId);
+
             return redirect()->route('admin.product.edit.customize',['item' => $newProductCategory->id]);
 
         }catch(\Exception $ex){
-//            dd($ex);
             error_log($ex);
+            Log::error("Admin/ProductController error: ". $ex->getMessage());
             return back()->withErrors("Something Went Wrong")->withInput();
         }
     }
@@ -376,6 +385,7 @@ class ProductController extends Controller
                     else{
                         $img->save('../public_html/storage/products/'. $filename, 75);
                     }
+
                     $newProductImage = ProductImage::create([
                         'product_id' => $product->id,
                         'path' => $filename,
@@ -414,6 +424,8 @@ class ProductController extends Controller
                 }
             }
 
+            // Update ZOHO Product
+            Zoho::updateProduct($product, $product->category->zoho_item_group_id);
 
             return redirect()->route('admin.product.show',['item' => $product->id]);
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\libs\Zoho;
 use App\Models\User;
 use App\Transformer\UserTransformer;
 use Illuminate\Http\Request;
@@ -119,6 +120,8 @@ class UserController extends Controller
         $user->name = $request->input('name');
         $user->phone = $request->input('phone');
         $user->save();
+
+        Zoho::updateUser($user);
 
         Session::flash('success', 'Success Updating User!');
         return redirect()->route('admin.users');
