@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\libs\Zoho;
 use App\Mail\EmailVerification;
 use App\Models\City;
 use App\Models\Country;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -125,13 +127,23 @@ class RegisterController extends Controller
 
     public function verify($token)
     {
-        $user = User::where('email_token',$token)->first();
-        $user->status_id = 1;
-        $user->save();
+        try{
+            //dd($token);
+            $user = User::where('email_token',$token)->first();
+            //dd($user->addresses);
+            $user->status_id = 1;
+            $user->save();
 
-        Session::put("user-data", $user);
-        Session::flash('success', 'Your Email Have been Verified, Please Login');
-        return Redirect::route('login');
+            Zoho::createUser($user);
+
+            Session::put("user-data", $user);
+            Session::flash('success', 'Your Email Have been Verified, Please Login');
+            return Redirect::route('login');
+        }
+        catch(\Exception $ex){
+            error_log($ex);
+            Log::error($ex);
+        }
     }
 
     public function RequestVerification($email){

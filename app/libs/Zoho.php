@@ -65,43 +65,43 @@ class Zoho
             'base_uri' => env('ZOHO_BASE_URL')
         ]);
 
+        $testJson = [
+            'contact_name'  => $user->first_name . ' ' . $user->last_name,
+            'website'       => 'www.nama-official.com',
+            'billing_address'   => [
+                'attention' => $user->first_name . ' ' . $user->last_name,
+                'address'   => $user->addresses[0]->description,
+                'street2'   => $user->addresses[0]->street,
+                'city'      => $user->addresses[0]->city->name,
+                'state'     => $user->addresses[0]->state,
+                'zip'       => $user->addresses[0]->postal_code,
+                'country'   => "Indonesia"
+            ],
+            'shipping_address'  => [
+                'attention' => $user->first_name . ' ' . $user->last_name,
+                'address'   => $user->addresses[0]->description,
+                'street2'   => $user->addresses[0]->street,
+                'city'      => $user->addresses[0]->city->name,
+                'state'     => $user->addresses[0]->state,
+                'zip'       => $user->addresses[0]->postal_code,
+                'country'   => "Indonesia"
+            ],
+            'contact_persons'   => [[
+                'salutation'    => 'Mr',
+                'first_name'    => $user->first_name,
+                'last_name'     => $user->last_name,
+                'email'         => $user->email,
+                'phone'         => $user->phone,
+                'mobile'        => $user->phone,
+                'is_primary_contact'    => true
+            ]]
+        ];
+        //dd(json_encode($testJson));
+
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'contacts?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
             'form_params' => [
-                'JSONString' => [
-                    'contact_name'  => $user->first_name . ' ' . $user->last_name,
-                    'company_name'  => 'Nama-Official',
-                    'payment_terms' => 1,
-                    'currency_id'   => env('ZOHO_CURRENCY_ID'),
-                    'website'       => 'www.nama-official.com',
-                    'billing_address'   => [
-                        'attention' => $user->first_name . ' ' . $user->last_name,
-                        'address'   => $user->addresses[0]->description,
-                        'street2'   => $user->addresses[0]->street,
-                        'city'      => $user->addresses[0]->city->name,
-                        'state'     => $user->addresses[0]->state,
-                        'zip'       => $user->addresses[0]->postal_code,
-                        'country'   => "Indonesia"
-                    ],
-                    'shipping_address'  => [
-                        'attention' => $user->first_name . ' ' . $user->last_name,
-                        'address'   => $user->addresses[0]->description,
-                        'street2'   => $user->addresses[0]->street,
-                        'city'      => $user->addresses[0]->city->name,
-                        'state'     => $user->addresses[0]->state,
-                        'zip'       => $user->addresses[0]->postal_code,
-                        'country'   => "Indonesia"
-                    ],
-                    'contact_persons'   => [
-                        'salutation'    => 'Mr',
-                        'first_name'    => $user->first_name,
-                        'last_name'     => $user->last_name,
-                        'email'         => $user->email,
-                        'phone'         => $user->phone,
-                        'mobile'        => $user->phone,
-                        'is_primary_contact'    => true
-                    ]
-                ]
+                'JSONString' => json_encode($testJson)
             ]
         ]);
 
