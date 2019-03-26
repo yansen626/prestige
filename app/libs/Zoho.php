@@ -171,7 +171,9 @@ class Zoho
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'contacts/' . $user->zoho_id . '?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => json_encode($jsonData)
+            'form_params' => [
+                'JSONString' => json_encode($jsonData)
+            ]
         ]);
 
         if($request->getStatusCode() == 200){
@@ -208,7 +210,9 @@ class Zoho
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'itemgroups?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => json_encode($jsonData)
+            'form_params' => [
+                'JSONString' => json_encode($jsonData)
+            ]
         ]);
 
         if($request->getStatusCode() == 200){
@@ -246,7 +250,9 @@ class Zoho
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'itemgroups/' . $category->zoho_item_group_id . '?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => json_encode($jsonData)
+            'form_params' => [
+                'JSONString' => json_encode($jsonData)
+            ]
         ]);
 
         if($request->getStatusCode() == 200){
@@ -289,7 +295,9 @@ class Zoho
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'items?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => json_encode($jsonData)
+            'form_params' => [
+                'JSONString' => json_encode($jsonData)
+            ]
         ]);
 
         if($request->getStatusCode() == 200){
@@ -335,7 +343,9 @@ class Zoho
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'items/'. $product->zoho_id .'?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => json_encode($jsonData)
+            'form_params' => [
+                'JSONString' => json_encode($jsonData)
+            ]
         ]);
 
         if($request->getStatusCode() == 200){
@@ -389,7 +399,9 @@ class Zoho
         ];
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'salesorders?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'json' => json_encode($jsonData)
+            'form_params' => [
+                'JSONString' => json_encode($jsonData)
+            ]
         ]);
 
         if($request->getStatusCode() == 200){
