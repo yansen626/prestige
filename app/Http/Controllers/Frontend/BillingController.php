@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\libs\Utilities;
+use App\libs\Zoho;
 use App\Models\Address;
 use App\Models\Cart;
 use App\Models\City;
@@ -475,6 +476,10 @@ class BillingController extends Controller
                 }
             }
 //dd($newOrder);
+
+            // Create ZOHO Sales Order
+            Zoho::createSalesOrder($newOrder);
+
             return $newOrder->id;
         }
         catch (\Exception $exception){
