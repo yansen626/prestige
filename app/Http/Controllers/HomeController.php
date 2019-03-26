@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\libs\Zoho;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,5 +26,16 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function test(){
+        try{
+            Zoho::createInvoice("1783013000000075027");
+
+            dd("SUCCESS!");
+        }
+        catch(\Exception $ex){
+            dd($ex);
+        }
     }
 }

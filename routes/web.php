@@ -16,6 +16,8 @@
 //});
 
 Auth::routes();
+
+Route::get('/dev/test', 'HomeController@test')->name('dev.test');
 Route::get('/login-register', 'Auth\RegisterController@loginRegister')->name('login.register');
 Route::get('/session', 'Auth\RegisterController@deleteSession');
 Route::get('/register-page', 'Auth\RegisterController@showRegistrationForm')->name('register-page');

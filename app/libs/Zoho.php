@@ -399,15 +399,17 @@ class Zoho
 
         $jsonData = [
             'customer_id'           => $order->user->zoho_id,
-            'salesorder_number'     => $order->order_number,
+            //'salesorder_number'     => $order->order_number,
             //'date'                  => $dateCarbon->format("Y-m-d\T00:00:00.000\Z"),
-            'line_items'            => [$lineItems],
-            //'discount'              => $order->voucher_amount,
-            //'shipping_charge'       => $order->shipping_charge,
-            //'delivery_method'       => $order->shipping_option,
+            'line_items'            => $lineItems,
+            'discount'              => $order->voucher_amount,
+            'shipping_charge'       => $order->shipping_charge,
+            'delivery_method'       => $order->shipping_option,
+            'ignore_auto_number_generation' => true
         ];
 
-        dd(json_encode($jsonData));
+
+        error_log(json_encode($jsonData));
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'salesorders?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
             'form_params' => [
@@ -418,9 +420,11 @@ class Zoho
         if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
             $collect = json_decode($request->getBody());
 
+            //dd($collect);
+
             //Save Contact Id
             $orderData = Order::find($order->id);
-            $orderData->zoho_sales_order_id = $collect->sales_order->salesorder_id;
+            $orderData->zoho_sales_order_id = $collect->salesorder->salesorder_id;
             $orderData->save();
 
             return $collect;
