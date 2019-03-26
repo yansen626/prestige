@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Models\OrderProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 
@@ -112,21 +113,27 @@ class CheckoutController extends Controller
 //    }
 
     public function checkoutSuccess(Order $order){
-        //change order status to pending payment
-        $orderDB = Order::find($order->id);
-        $orderDB->order_status_id = 3;
-        $orderDB->save();
+        try{
+            //change order status to pending payment
+            $orderDB = Order::find($order->id);
+            $orderDB->order_status_id = 3;
+            $orderDB->save();
 
-        $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+            $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
-        // Create ZOHO Invoice
-        Zoho::createInvoice($orderDB->zoho_sales_order_id);
+            // Create ZOHO Invoice
+            Zoho::createInvoice($orderDB->zoho_sales_order_id);
 
-        $data=([
-            'order' => $order,
-            'orderProduct' => $orderProduct,
-        ]);
-        return view('frontend.transactions.checkout-success')->with($data);
+            $data=([
+                'order' => $order,
+                'orderProduct' => $orderProduct,
+            ]);
+            return view('frontend.transactions.checkout-success')->with($data);
+        }
+        catch(\Exception $ex){
+            error_log($ex);
+            Log::error("CheckoutController Error: ". $ex->getMessage());
+        }
     }
     public function checkoutFailed(Order $order){
 

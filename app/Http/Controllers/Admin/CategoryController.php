@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use App\libs\Zoho;
 use App\Models\Category;
 use App\Transformer\CategoryTransformer;
 use Carbon\Carbon;
@@ -86,6 +87,8 @@ class CategoryController extends Controller
             $category->parent_id = $request->input('category');
             $category->save();
         }
+
+        $tmp = Zoho::createCategory($category);
 
         Session::flash('success', 'Success Creating new Category!');
         return redirect()->route('admin.categories.index');

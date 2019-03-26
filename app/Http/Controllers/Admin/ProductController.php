@@ -135,7 +135,8 @@ class ProductController extends Controller
                 'is_primary' => $is_primary,
                 'status' => 1,
                 'created_at'        => $dateTimeNow->toDateTimeString(),
-                'updated_at'        => $dateTimeNow->toDateTimeString()
+                'updated_at'        => $dateTimeNow->toDateTimeString(),
+                'zoho_id'           => 'TEMP'
             ]);
 
             // save product category
@@ -146,7 +147,7 @@ class ProductController extends Controller
 //                ]);
 
             // save product position
-        $newProductCategory = ProductPosition::create([
+        $newProductPosition = ProductPosition::create([
             'product_id' => $newProduct->id,
             'name' => "Top Middle",
             'pos_x' => 250,
@@ -193,13 +194,11 @@ class ProductController extends Controller
                 ]);
             }
 
-            // Create ZOHO Product Category
-            $zohoCategoryId = Zoho::createCategory($newProductCategory);
-
             // Create ZOHO Product
-            Zoho::createProduct($newProduct, $zohoCategoryId);
+            $tmp = Zoho::createProduct($newProduct, $newProduct->category->zoho_item_group_id);
+            //dd($tmp);
 
-            return redirect()->route('admin.product.edit.customize',['item' => $newProductCategory->id]);
+            return redirect()->route('admin.product.edit.customize',['item' => $newProductPosition->id]);
 
         }catch(\Exception $ex){
             error_log($ex);
@@ -425,7 +424,8 @@ class ProductController extends Controller
             }
 
             // Update ZOHO Product
-            Zoho::updateProduct($product, $product->category->zoho_item_group_id);
+            $tmp = Zoho::updateProduct($product, $product->category->zoho_item_group_id);
+            //dd($tmp);
 
             return redirect()->route('admin.product.show',['item' => $product->id]);
 

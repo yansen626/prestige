@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -407,6 +408,9 @@ class BillingController extends Controller
             $carts = Cart::where('user_id', $user->id)->get();
             $totalPrice = $carts->sum('total_price');
 
+            //$tmpDate = Carbon::now()->format("Y-m-d\TH:i:s\.000\Z");
+            //dd($tmpDate);
+
             // Order number generator
             $today = Carbon::today();
             $prepend = "INV/". $today->year. $today->month. $today->day;
@@ -484,6 +488,8 @@ class BillingController extends Controller
         }
         catch (\Exception $exception){
 //            dd($exception);
+            error_log($exception);
+            Log::error("BillingController - setTransaction Error: ". $exception->getMessage());
             return 0;
         }
     }

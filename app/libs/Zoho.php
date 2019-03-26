@@ -13,6 +13,7 @@ use App\Models\Configuration;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 
 class Zoho
@@ -284,7 +285,7 @@ class Zoho
         $jsonData = [
             'group_id'              => $zohoGroupId,
             'unit'                  => 'pcs',
-            'item_type'             => 'Inventory Items',
+            'item_type'             => 'inventory',
             'description'           => $product->description,
             'attribute_name1'       => $product->colour,
             'name'                  => $product->name . ' ' . $product->colour,
@@ -300,8 +301,12 @@ class Zoho
             ]
         ]);
 
-        if($request->getStatusCode() == 200){
+        //return $request;
+
+        if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
             $collect = json_decode($request->getBody());
+
+            //dd($collect, $collect->item->item_id);
 
             //Save Contact Id
             $productData = Product::find($product->id);
@@ -331,8 +336,6 @@ class Zoho
 
         $jsonData = [
             'group_id'              => $zohoGroupId,
-            'unit'                  => 'pcs',
-            'item_type'             => 'Inventory Items',
             'description'           => $product->description,
             'attribute_name1'       => $product->colour,
             'name'                  => $product->name . ' ' . $product->colour,
@@ -342,11 +345,13 @@ class Zoho
         ];
         $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
-        $request = $client->request('POST', env('ZOHO_BASE_URL') . 'items/'. $product->zoho_id .'?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
+        $request = $client->request('PUT', env('ZOHO_BASE_URL') . 'items/'. $product->zoho_id .'?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
             'form_params' => [
                 'JSONString' => json_encode($jsonData)
             ]
         ]);
+
+        //return $request;
 
         if($request->getStatusCode() == 200){
             $collect = json_decode($request->getBody());
@@ -388,15 +393,21 @@ class Zoho
             $lineItems[] = $item;
         }
 
+
+        $dateCarbon = Carbon::parse($order->created_at);
+        error_log($dateCarbon->format("Y-m-d\T00:00:00.000\Z"));
+
         $jsonData = [
             'customer_id'           => $order->user->zoho_id,
             'salesorder_number'     => $order->order_number,
-            'date'                  => $order->created_at,
+            //'date'                  => $dateCarbon->format("Y-m-d\T00:00:00.000\Z"),
             'line_items'            => [$lineItems],
-            'discount'              => $order->voucher_amount,
-            'shipping_charge'       => $order->shipping_charge,
-            'delivery_method'       => $order->shipping_option,
+            //'discount'              => $order->voucher_amount,
+            //'shipping_charge'       => $order->shipping_charge,
+            //'delivery_method'       => $order->shipping_option,
         ];
+
+        dd(json_encode($jsonData));
 
         $request = $client->request('POST', env('ZOHO_BASE_URL') . 'salesorders?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
             'form_params' => [
@@ -404,7 +415,7 @@ class Zoho
             ]
         ]);
 
-        if($request->getStatusCode() == 200){
+        if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
             $collect = json_decode($request->getBody());
 
             //Save Contact Id
