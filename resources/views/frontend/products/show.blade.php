@@ -11,6 +11,7 @@
                     <section id="slider-product" class="carousel slider slider-shop slider-dots" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="true" data-dots="true" data-space="0" data-loop="true" data-speed="800">
                         @php($productImages = $product->product_images)
                         @php($productMainImages = $product->product_images->where('is_main_image', 1)->first())
+                        @php($productThumbnailImage = $product->product_images->where('is_thumbnail', 1)->first())
                         @foreach($productImages as $images)
                             <!-- Slide -->
                                 <div class="slide--item">
@@ -53,16 +54,38 @@
                                     <H4>COLOR</H4>
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 text--right">
-                                    <select id="select-colour" class="minimal family-sans" data-width="auto"
-                                            onchange="ChangeColour()" style="width: 75%;font-size: 14px !important;text-align: right;">
+                                    {{--<select id="select-colour" class="minimal family-sans" data-width="auto"--}}
+                                            {{--onchange="ChangeColour()" style="width: 75%;font-size: 14px !important;text-align: right;">--}}
+                                        {{--@foreach($otherProductColour as $colour)--}}
+                                            {{--@php($colorThumbnailImages = $colour->product_images->where('is_thumbnail', 1)->first())--}}
+
+                                            {{--@if($productThumbnailImage->path == $colorThumbnailImages->path)--}}
+                                                {{--<option class="family-sans" value="{{$colour->slug}}" selected style="font-size: 14px !important;">{{$colour->colour}}</option>--}}
+                                            {{--@else--}}
+                                                {{--<option class="family-sans" value="{{$colour->slug}}" style="font-size: 14px !important;">{{$colour->colour}}</option>--}}
+                                            {{--@endif--}}
+                                        {{--@endforeach--}}
+                                    {{--</select>--}}
+
+                                    <div id="category_list" class="field radio_field">
                                         @foreach($otherProductColour as $colour)
-                                            @if($product->colour == $colour->colour)
-                                                <option class="family-sans" value="{{$colour->slug}}" selected style="font-size: 14px !important;">{{$colour->colour}}</option>
-                                            @else
-                                                <option class="family-sans" value="{{$colour->slug}}" style="font-size: 14px !important;">{{$colour->colour}}</option>
+                                            @php($colorThumbnailImages = $colour->product_images->where('is_thumbnail', 1)->first())
+                                            @if(!empty($colorThumbnailImages))
+                                                @if($productThumbnailImage->path == $colorThumbnailImages->path)
+                                                    <label style="padding-right: 3%;cursor: pointer;">
+                                                        <input type="radio" name="color-thumbnail" onchange="ChangeColourThumbnail(this)" value="{{$colour->slug}}" checked/>
+                                                        <img src="{{ asset('storage/products/'.$colorThumbnailImages->path) }}" style="width: 20px; height:20px">
+                                                    </label>
+                                                @else
+
+                                                    <label style="padding-right: 3%;cursor: pointer;">
+                                                        <input type="radio" name="color-thumbnail" onchange="ChangeColourThumbnail(this)" value="{{$colour->slug}}"/>
+                                                        <img src="{{ asset('storage/products/'.$colorThumbnailImages->path) }}" style="width: 20px; height:20px">
+                                                    </label>
+                                                @endif
                                             @endif
                                         @endforeach
-                                    </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -759,6 +782,23 @@
             margin-top: 10px;
             margin-bottom: 5px;
         }
+        /* HIDE RADIO */
+        [type=radio] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        /* IMAGE STYLES */
+        [type=radio] + img {
+            cursor: pointer;
+        }
+
+        /* CHECKED STYLES */
+        [type=radio]:checked + img {
+            outline: 2px solid #f00;
+        }
 
     </style>
 @endsection
@@ -773,6 +813,11 @@
     <script>
         function ChangeColour(){
             var url = "/product-detail/" + $('#select-colour').val();
+
+            window.location = url;
+        }
+        function ChangeColourThumbnail(myRadio){
+            var url = "/product-detail/" + myRadio.value;
 
             window.location = url;
         }

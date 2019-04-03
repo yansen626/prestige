@@ -16,6 +16,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $product_id
  * @property string $path
  * @property bool $is_main_image
+ * @property bool $is_thumbnail
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * 
@@ -27,12 +28,14 @@ class ProductImage extends Eloquent
 {
 	protected $casts = [
 		'product_id' => 'int',
-		'is_main_image' => 'bool'
+		'is_main_image' => 'bool',
+		'is_thumbnail' => 'bool'
 	];
 
 	protected $fillable = [
 		'product_id',
 		'path',
+		'is_thumbnail',
 		'is_main_image'
 	];
 

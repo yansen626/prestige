@@ -138,6 +138,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/product/', 'Admin\ProductController@index')->name('admin.product.index');
     Route::get('/product/show/{item}', 'Admin\ProductController@show')->name('admin.product.show');
     Route::get('/product/create', 'Admin\ProductController@create')->name('admin.product.create');
+    Route::get('/product/create-copy/{item}', 'Admin\ProductController@createCopyProduct')->name('admin.product.create-copy');
     Route::post('/product/store', 'Admin\ProductController@store')->name('admin.product.store');
 
     Route::get('/product/create-customize/{item}', 'Admin\ProductController@createCustomize')->name('admin.product.create.customize');

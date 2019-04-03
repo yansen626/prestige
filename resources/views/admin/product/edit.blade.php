@@ -54,6 +54,16 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
+                                                        <label class="form-label">Upload Thumbnail Image *</label>
+                                                        <img src="{{ asset('storage/products/'.$thumbnailImage->path) }}" style="width: 50px;height: auto;">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        {{--<input type="file" name="PhotoPosted" id="PhotoPosted" class="file-loading">--}}
+                                                        {!! Form::file('thumbnail_image', array('id' => 'thumbnail_image', 'class' => 'file-loading', 'accept' => 'image/*')) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
                                                         <label class="form-label">Upload Detail Image *</label>
                                                         <br>
                                                         @foreach($detailImage as $image)
@@ -172,6 +182,11 @@
 
         // FILEINPUT
         $("#main_image")
+            .fileinput({
+                allowedFileExtensions: ["jpg", "jpeg", "png"],
+                showUpload: false,
+            });
+        $("#thumbnail_image")
             .fileinput({
                 allowedFileExtensions: ["jpg", "jpeg", "png"],
                 showUpload: false,

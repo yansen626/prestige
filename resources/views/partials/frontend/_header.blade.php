@@ -37,7 +37,7 @@
                                     <a href="{{route('product.list')}}"><H4 class="header-menu">SHOP ALL</H4></a>
                                     <a href="/product-list?category=1"><H4 class="header-menu">BAGS & TOTES</H4></a>
                                     <a href="/product-list?category=2"><H4 class="header-menu">WALLETS</H4></a>
-                                    <a href="/product-list?category=3"><H4 class="header-menu">CARD HOLDERS</H4></a>
+                                    {{--<a href="/product-list?category=3"><H4 class="header-menu">CARD HOLDERS</H4></a>--}}
                                     <a href="/product-list?category=4"><H4 class="header-menu">POUCHES</H4></a>
                                     <a href="/product-list?category=5"><H4 class="header-menu">PHONE CASES</H4></a>
                                 </div><!-- .col-md-8 end -->
@@ -214,7 +214,7 @@
                                     <a href="{{route('product.list')}}"><H4 class="header-menu">SHOP ALL</H4></a>
                                     <a href="/product-list?category=1"><H4 class="header-menu">BAGS & TOTES</H4></a>
                                     <a href="/product-list?category=2"><H4 class="header-menu">WALLETS</H4></a>
-                                    <a href="/product-list?category=3"><H4 class="header-menu">CARD HOLDERS</H4></a>
+                                    {{--<a href="/product-list?category=3"><H4 class="header-menu">CARD HOLDERS</H4></a>--}}
                                     <a href="/product-list?category=4"><H4 class="header-menu">POUCHES</H4></a>
                                     <a href="/product-list?category=5"><H4 class="header-menu">PHONE CASES</H4></a>
                                 </div><!-- .col-md-8 end -->

@@ -15,6 +15,7 @@ use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class Zoho
 {
@@ -23,31 +24,37 @@ class Zoho
      */
     public static function getToken()
     {
-        $client = new Client([
-            'base_uri' => env('ZOHO_AUTH_BASE_URL')
-        ]);
+        try{
+            $client = new Client([
+                'base_uri' => env('ZOHO_AUTH_BASE_URL')
+            ]);
 
-        $request = $client->request('POST', env('ZOHO_AUTH_BASE_URL'), [
-            'form_params' => [
-                'SCOPE' => 'ZohoInventory/inventoryapi',
-                'EMAIL_ID' => env('ZOHO_EMAIL'),
-                'PASSWORD' => env('ZOHO_PASSWORD')
-            ]
-        ]);
+            $request = $client->request('POST', env('ZOHO_AUTH_BASE_URL'), [
+                'form_params' => [
+                    'SCOPE' => 'ZohoInventory/inventoryapi',
+                    'EMAIL_ID' => env('ZOHO_EMAIL'),
+                    'PASSWORD' => env('ZOHO_PASSWORD')
+                ]
+            ]);
 
 
-        if($request->getStatusCode() == 200){
-            $collect = $request->getBody();
-            //Should Split the Token
-            $temp = explode("=", $collect);
-            $result = explode(" ", $temp[1]);
-            $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
-            $configuration->zoho_token = $result[0];
-            $configuration->save();
+            if($request->getStatusCode() == 200){
+                $collect = $request->getBody();
+                //Should Split the Token
+                $temp = explode("=", $collect);
+                $result = explode(" ", $temp[1]);
+                $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+                $configuration->zoho_token = $result[0];
+                $configuration->save();
 
-            return true;
+                return true;
+            }
+            else{
+                return false;
+            }
         }
-        else{
+        catch(\Exception $ex){
+            Log::error("Zoho.php > createUser ".$ex);
             return false;
         }
     }
@@ -62,61 +69,67 @@ class Zoho
      */
     public static function createUser(User $user)
     {
-        $client = new Client([
-            'base_uri' => env('ZOHO_BASE_URL')
-        ]);
+        try{
+            $client = new Client([
+                'base_uri' => env('ZOHO_BASE_URL')
+            ]);
 
-        $testJson = [
-            'contact_name'  => $user->first_name . ' ' . $user->last_name,
-            'website'       => 'www.nama-official.com',
-            'billing_address'   => [
-                'attention' => $user->first_name . ' ' . $user->last_name,
-                'address'   => $user->addresses[0]->description,
-                'street2'   => $user->addresses[0]->street,
-                'city'      => $user->addresses[0]->city->name,
-                'state'     => $user->addresses[0]->state,
-                'zip'       => $user->addresses[0]->postal_code,
-                'country'   => "Indonesia"
-            ],
-            'shipping_address'  => [
-                'attention' => $user->first_name . ' ' . $user->last_name,
-                'address'   => $user->addresses[0]->description,
-                'street2'   => $user->addresses[0]->street,
-                'city'      => $user->addresses[0]->city->name,
-                'state'     => $user->addresses[0]->state,
-                'zip'       => $user->addresses[0]->postal_code,
-                'country'   => "Indonesia"
-            ],
-            'contact_persons'   => [[
-                'salutation'    => 'Mr',
-                'first_name'    => $user->first_name,
-                'last_name'     => $user->last_name,
-                'email'         => $user->email,
-                'phone'         => $user->phone,
-                'mobile'        => $user->phone,
-                'is_primary_contact'    => true
-            ]]
-        ];
+            $testJson = [
+                'contact_name'  => $user->first_name . ' ' . $user->last_name,
+                'website'       => 'www.nama-official.com',
+                'billing_address'   => [
+                    'attention' => $user->first_name . ' ' . $user->last_name,
+                    'address'   => $user->addresses[0]->description,
+                    'street2'   => $user->addresses[0]->street,
+                    'city'      => $user->addresses[0]->city->name,
+                    'state'     => $user->addresses[0]->state,
+                    'zip'       => $user->addresses[0]->postal_code,
+                    'country'   => "Indonesia"
+                ],
+                'shipping_address'  => [
+                    'attention' => $user->first_name . ' ' . $user->last_name,
+                    'address'   => $user->addresses[0]->description,
+                    'street2'   => $user->addresses[0]->street,
+                    'city'      => $user->addresses[0]->city->name,
+                    'state'     => $user->addresses[0]->state,
+                    'zip'       => $user->addresses[0]->postal_code,
+                    'country'   => "Indonesia"
+                ],
+                'contact_persons'   => [[
+                    'salutation'    => 'Mr',
+                    'first_name'    => $user->first_name,
+                    'last_name'     => $user->last_name,
+                    'email'         => $user->email,
+                    'phone'         => $user->phone,
+                    'mobile'        => $user->phone,
+                    'is_primary_contact'    => true
+                ]]
+            ];
 
-        $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
-        $request = $client->request('POST', env('ZOHO_BASE_URL') . 'contacts?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'form_params' => [
-                'JSONString' => json_encode($testJson)
-            ]
-        ]);
+            $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+            $request = $client->request('POST', env('ZOHO_BASE_URL') . 'contacts?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
+                'form_params' => [
+                    'JSONString' => json_encode($testJson)
+                ]
+            ]);
 
-        if($request->getStatusCode() == 200){
-            $collect = json_decode($request->getBody());
+            if($request->getStatusCode() == 200){
+                $collect = json_decode($request->getBody());
 
-            //Save Contact Id
-            $userData = User::find($user->id);
-            $userData->zoho_id = $collect->contact->contact_id;
-            $userData->zoho_primary_contact_id = $collect->contact->primary_contact_id;
-            $userData->save();
+                //Save Contact Id
+                $userData = User::find($user->id);
+                $userData->zoho_id = $collect->contact->contact_id;
+                $userData->zoho_primary_contact_id = $collect->contact->primary_contact_id;
+                $userData->save();
 
-            return $collect;
+                return $collect;
+            }
+            else{
+                return "Error!";
+            }
         }
-        else{
+        catch(\Exception $ex){
+            Log::error("Zoho.php > createUser ".$ex);
             return "Error!";
         }
     }
@@ -130,59 +143,65 @@ class Zoho
      */
     public static function updateUser(User $user)
     {
-        $client = new Client([
-            'base_uri' => env('ZOHO_BASE_URL')
-        ]);
+        try{
+            $client = new Client([
+                'base_uri' => env('ZOHO_BASE_URL')
+            ]);
 
-        $jsonData = [
-            'contact_name'  => $user->first_name . ' ' . $user->last_name,
-            'company_name'  => 'Nama-Official',
-            'payment_terms' => 1,
-            'currency_id'   => env('ZOHO_CURRENCY_ID'),
-            'website'       => 'www.nama-official.com',
-            'billing_address'   => [
-                'attention' => $user->first_name . ' ' . $user->last_name,
-                'address'   => $user->addresses[0]->description,
-                'street2'   => $user->addresses[0]->street,
-                'city'      => $user->addresses[0]->city->name,
-                'state'     => $user->addresses[0]->state,
-                'zip'       => $user->addresses[0]->postal_code,
-                'country'   => "Indonesia"
-            ],
-            'shipping_address'  => [
-                'attention' => $user->first_name . ' ' . $user->last_name,
-                'address'   => $user->addresses[0]->description,
-                'street2'   => $user->addresses[0]->street,
-                'city'      => $user->addresses[0]->city->name,
-                'state'     => $user->addresses[0]->state,
-                'zip'       => $user->addresses[0]->postal_code,
-                'country'   => "Indonesia"
-            ],
-            'contact_persons'   => [[
-                'salutation'    => 'Mr',
-                'first_name'    => $user->first_name,
-                'last_name'     => $user->last_name,
-                'email'         => $user->email,
-                'phone'         => $user->phone,
-                'mobile'        => $user->phone,
-                'is_primary_contact'    => true
-            ]]
-        ];
+            $jsonData = [
+                'contact_name'  => $user->first_name . ' ' . $user->last_name,
+                'company_name'  => 'Nama-Official',
+                'payment_terms' => 1,
+                'currency_id'   => env('ZOHO_CURRENCY_ID'),
+                'website'       => 'www.nama-official.com',
+                'billing_address'   => [
+                    'attention' => $user->first_name . ' ' . $user->last_name,
+                    'address'   => $user->addresses[0]->description,
+                    'street2'   => $user->addresses[0]->street,
+                    'city'      => $user->addresses[0]->city->name,
+                    'state'     => $user->addresses[0]->state,
+                    'zip'       => $user->addresses[0]->postal_code,
+                    'country'   => "Indonesia"
+                ],
+                'shipping_address'  => [
+                    'attention' => $user->first_name . ' ' . $user->last_name,
+                    'address'   => $user->addresses[0]->description,
+                    'street2'   => $user->addresses[0]->street,
+                    'city'      => $user->addresses[0]->city->name,
+                    'state'     => $user->addresses[0]->state,
+                    'zip'       => $user->addresses[0]->postal_code,
+                    'country'   => "Indonesia"
+                ],
+                'contact_persons'   => [[
+                    'salutation'    => 'Mr',
+                    'first_name'    => $user->first_name,
+                    'last_name'     => $user->last_name,
+                    'email'         => $user->email,
+                    'phone'         => $user->phone,
+                    'mobile'        => $user->phone,
+                    'is_primary_contact'    => true
+                ]]
+            ];
 
-        $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+            $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
-        $request = $client->request('POST', env('ZOHO_BASE_URL') . 'contacts/' . $user->zoho_id . '?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'form_params' => [
-                'JSONString' => json_encode($jsonData)
-            ]
-        ]);
+            $request = $client->request('POST', env('ZOHO_BASE_URL') . 'contacts/' . $user->zoho_id . '?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
+                'form_params' => [
+                    'JSONString' => json_encode($jsonData)
+                ]
+            ]);
 
-        if($request->getStatusCode() == 200){
-            $collect = json_decode($request->getBody());
+            if($request->getStatusCode() == 200){
+                $collect = json_decode($request->getBody());
 
-            return $collect;
+                return $collect;
+            }
+            else{
+                return "Error!";
+            }
         }
-        else{
+        catch(\Exception $ex){
+            Log::error("Zoho.php > updateUser ".$ex);
             return "Error!";
         }
     }
@@ -199,34 +218,50 @@ class Zoho
      */
     public static function createCategory(Category $category)
     {
-        $client = new Client([
-            'base_uri' => env('ZOHO_BASE_URL')
-        ]);
+        try{
+            $client = new Client([
+                'base_uri' => env('ZOHO_BASE_URL')
+            ]);
 
-        $jsonData = [
-            'group_name'            => $category->name,
-            'unit'                  => 'pcs',
-            'description'           => $category->slug,
-        ];
-        $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+            $productDefault = Product::find(1);
+            $items = [
+                'name' => $productDefault->name." ".$category->name,
+                'rate' => $productDefault->price,
+                'purchase_rate' => 0,
+            ];
+            $jsonData = [
+                'group_name'            => $category->name,
+                'unit'                  => 'pcs',
+                'description'           => $category->slug,
+                'items'                 => [
+                    $items
+                ]
+            ];
+            $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+//        dd(json_encode($jsonData));
+            $request = $client->request('POST', env('ZOHO_BASE_URL') . 'itemgroups?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
+                'form_params' => [
+                    'JSONString' => json_encode($jsonData)
+                ]
+            ]);
+//        dd($request);
+            if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
+                $collect = json_decode($request->getBody());
+//            dd($collect);
 
-        $request = $client->request('POST', env('ZOHO_BASE_URL') . 'itemgroups?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'form_params' => [
-                'JSONString' => json_encode($jsonData)
-            ]
-        ]);
+                //Save Zoho Category Id
+                $categoryData = Category::find($category->id);
+                $categoryData->zoho_item_group_id = $collect->item_group->group_id;
+                $categoryData->save();
 
-        if($request->getStatusCode() == 200){
-            $collect = json_decode($request->getBody());
-
-            //Save Zoho Category Id
-            $categoryData = Category::find($category->id);
-            $categoryData->zoho_item_group_id = $collect->group_id;
-            $categoryData->save();
-
-            return $collect->group_id;
+                return $collect->item_group->group_id;
+            }
+            else{
+                return "Error!";
+            }
         }
-        else{
+        catch(\Exception $ex){
+            Log::error("Zoho.php > createCategory ".$ex);
             return "Error!";
         }
     }
@@ -240,28 +275,34 @@ class Zoho
      */
     public static function updateCategory(Category $category)
     {
-        $client = new Client([
-            'base_uri' => env('ZOHO_BASE_URL')
-        ]);
+        try{
+            $client = new Client([
+                'base_uri' => env('ZOHO_BASE_URL')
+            ]);
 
-        $jsonData = [
-            'group_name'            => $category->name,
-            'description'           => $category->slug,
-        ];
-        $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+            $jsonData = [
+                'group_name'            => $category->name,
+                'description'           => $category->slug,
+            ];
+            $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
-        $request = $client->request('POST', env('ZOHO_BASE_URL') . 'itemgroups/' . $category->zoho_item_group_id . '?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'form_params' => [
-                'JSONString' => json_encode($jsonData)
-            ]
-        ]);
+            $request = $client->request('POST', env('ZOHO_BASE_URL') . 'itemgroups/' . $category->zoho_item_group_id . '?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
+                'form_params' => [
+                    'JSONString' => json_encode($jsonData)
+                ]
+            ]);
 
-        if($request->getStatusCode() == 200){
-            $collect = json_decode($request->getBody());
+            if($request->getStatusCode() == 200){
+                $collect = json_decode($request->getBody());
 
-            return $collect;
+                return $collect;
+            }
+            else{
+                return "Error!";
+            }
         }
-        else{
+        catch(\Exception $ex){
+            Log::error("Zoho.php > updateCategory ".$ex);
             return "Error!";
         }
     }
@@ -278,45 +319,53 @@ class Zoho
      */
     public static function createProduct(Product $product, $zohoGroupId)
     {
-        $client = new Client([
-            'base_uri' => env('ZOHO_BASE_URL')
-        ]);
+        try{
+            $client = new Client([
+                'base_uri' => env('ZOHO_BASE_URL')
+            ]);
 
-        $jsonData = [
-            'group_id'              => $zohoGroupId,
-            'unit'                  => 'pcs',
-            'item_type'             => 'inventory',
-            'description'           => $product->description,
-            'attribute_name1'       => $product->colour,
-            'name'                  => $product->name . ' ' . $product->colour,
-            'rate'                  => $product->price,
-            'initial_stock'         => 0,
-            'sku'                   => $product->sku
-        ];
-        $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+            $jsonData = [
+                'group_id'              => $zohoGroupId,
+                'unit'                  => 'pcs',
+                'item_type'             => 'inventory',
+                'description'           => $product->description,
+                'attribute_name1'       => $product->colour,
+                'name'                  => $product->name . ' ' . $product->colour,
+                'rate'                  => $product->price,
+                'initial_stock'         => (int)$product->qty,
+                'initial_stock_rate'    => (int)$product->qty,
+                'sku'                   => $product->sku
+            ];
+            $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+//            dd($jsonData);
+            $request = $client->request('POST', env('ZOHO_BASE_URL') . 'items?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
+                'form_params' => [
+                    'JSONString' => json_encode($jsonData)
+                ]
+            ]);
 
-        $request = $client->request('POST', env('ZOHO_BASE_URL') . 'items?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'form_params' => [
-                'JSONString' => json_encode($jsonData)
-            ]
-        ]);
+            //return $request;
+//            dd($request);
 
-        //return $request;
+            if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
+                $collect = json_decode($request->getBody());
 
-        if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
-            $collect = json_decode($request->getBody());
+                //dd($collect, $collect->item->item_id);
 
-            //dd($collect, $collect->item->item_id);
+                //Save Contact Id
+                $productData = Product::find($product->id);
+                $productData->zoho_id = $collect->item->item_id;
+                $productData->save();
 
-            //Save Contact Id
-            $productData = Product::find($product->id);
-            $productData->zoho_id = $collect->item->item_id;
-            $productData->save();
-
-            return $collect;
+                return $collect;
+            }
+            else{
+                return "Error!";
+            }
         }
-        else{
-            return "Error!";
+        catch(\Exception $ex){
+            Log::error("Zoho.php > createProduct ".$ex);
+            return $ex;
         }
     }
 
@@ -330,35 +379,41 @@ class Zoho
      */
     public static function updateProduct(Product $product, $zohoGroupId)
     {
-        $client = new Client([
-            'base_uri' => env('ZOHO_BASE_URL')
-        ]);
+        try{
+            $client = new Client([
+                'base_uri' => env('ZOHO_BASE_URL')
+            ]);
 
-        $jsonData = [
-            'group_id'              => $zohoGroupId,
-            'description'           => $product->description,
-            'attribute_name1'       => $product->colour,
-            'name'                  => $product->name . ' ' . $product->colour,
-            'rate'                  => $product->price,
-            'initial_stock'         => 0,
-            'sku'                   => $product->sku
-        ];
-        $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+            $jsonData = [
+                'group_id'              => $zohoGroupId,
+                'description'           => $product->description,
+                'attribute_name1'       => $product->colour,
+                'name'                  => $product->name . ' ' . $product->colour,
+                'rate'                  => $product->price,
+                'initial_stock'         => 0,
+                'sku'                   => $product->sku
+            ];
+            $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
-        $request = $client->request('PUT', env('ZOHO_BASE_URL') . 'items/'. $product->zoho_id .'?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'form_params' => [
-                'JSONString' => json_encode($jsonData)
-            ]
-        ]);
+            $request = $client->request('PUT', env('ZOHO_BASE_URL') . 'items/'. $product->zoho_id .'?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
+                'form_params' => [
+                    'JSONString' => json_encode($jsonData)
+                ]
+            ]);
 
-        //return $request;
+            //return $request;
 
-        if($request->getStatusCode() == 200){
-            $collect = json_decode($request->getBody());
+            if($request->getStatusCode() == 200){
+                $collect = json_decode($request->getBody());
 
-            return $collect;
+                return $collect;
+            }
+            else{
+                return "Error!";
+            }
         }
-        else{
+        catch(\Exception $ex){
+            Log::error("Zoho.php > updateProduct ".$ex);
             return "Error!";
         }
     }
@@ -375,61 +430,67 @@ class Zoho
      */
     public static function createSalesOrder(Order $order)
     {
-        $client = new Client([
-            'base_uri' => env('ZOHO_BASE_URL')
-        ]);
+        try{
+            $client = new Client([
+                'base_uri' => env('ZOHO_BASE_URL')
+            ]);
 
-        $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+            $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
-        //Create array for line items
-        $lineItems = [];
-        foreach ($order->order_products as $detail){
-            $item = [
-                'item_id'   => $detail->product->zoho_id,
-                'quantity'  => $detail->qty,
-                'rate'      => $detail->price
+            //Create array for line items
+            $lineItems = [];
+            foreach ($order->order_products as $detail){
+                $item = [
+                    'item_id'   => $detail->product->zoho_id,
+                    'quantity'  => $detail->qty,
+                    'rate'      => $detail->price
+                ];
+
+                $lineItems[] = $item;
+            }
+
+
+            $dateCarbon = Carbon::parse($order->created_at);
+            error_log($dateCarbon->format("Y-m-d\T00:00:00.000\Z"));
+
+            $jsonData = [
+                'customer_id'           => $order->user->zoho_id,
+                //'salesorder_number'     => $order->order_number,
+                //'date'                  => $dateCarbon->format("Y-m-d\T00:00:00.000\Z"),
+                'line_items'            => $lineItems,
+                'discount'              => $order->voucher_amount,
+                'shipping_charge'       => $order->shipping_charge,
+                'delivery_method'       => $order->shipping_option,
+                'ignore_auto_number_generation' => true
             ];
 
-            $lineItems[] = $item;
+
+            error_log(json_encode($jsonData));
+
+            $request = $client->request('POST', env('ZOHO_BASE_URL') . 'salesorders?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
+                'form_params' => [
+                    'JSONString' => json_encode($jsonData)
+                ]
+            ]);
+
+            if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
+                $collect = json_decode($request->getBody());
+
+                //dd($collect);
+
+                //Save Contact Id
+                $orderData = Order::find($order->id);
+                $orderData->zoho_sales_order_id = $collect->salesorder->salesorder_id;
+                $orderData->save();
+
+                return $collect;
+            }
+            else{
+                return "Error!";
+            }
         }
-
-
-        $dateCarbon = Carbon::parse($order->created_at);
-        error_log($dateCarbon->format("Y-m-d\T00:00:00.000\Z"));
-
-        $jsonData = [
-            'customer_id'           => $order->user->zoho_id,
-            //'salesorder_number'     => $order->order_number,
-            //'date'                  => $dateCarbon->format("Y-m-d\T00:00:00.000\Z"),
-            'line_items'            => $lineItems,
-            'discount'              => $order->voucher_amount,
-            'shipping_charge'       => $order->shipping_charge,
-            'delivery_method'       => $order->shipping_option,
-            'ignore_auto_number_generation' => true
-        ];
-
-
-        error_log(json_encode($jsonData));
-
-        $request = $client->request('POST', env('ZOHO_BASE_URL') . 'salesorders?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
-            'form_params' => [
-                'JSONString' => json_encode($jsonData)
-            ]
-        ]);
-
-        if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
-            $collect = json_decode($request->getBody());
-
-            //dd($collect);
-
-            //Save Contact Id
-            $orderData = Order::find($order->id);
-            $orderData->zoho_sales_order_id = $collect->salesorder->salesorder_id;
-            $orderData->save();
-
-            return $collect;
-        }
-        else{
+        catch(\Exception $ex){
+            Log::error("Zoho.php > createSalesOrder ".$ex);
             return "Error!";
         }
     }
@@ -443,19 +504,25 @@ class Zoho
      */
     public static function createInvoice($salesOrderId)
     {
-        $client = new Client([
-            'base_uri' => env('ZOHO_BASE_URL')
-        ]);
+        try{
+            $client = new Client([
+                'base_uri' => env('ZOHO_BASE_URL')
+            ]);
 
-        $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
-        $request = $client->request('POST', env('ZOHO_BASE_URL') . 'invoices/fromsalesorder?organization_id=' .
-            env('ZOHO_ORGANIZATION_ID') . '&authtoken=' . $configuration->configuration_value . '&salesorder_id=' . $salesOrderId);
+            $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+            $request = $client->request('POST', env('ZOHO_BASE_URL') . 'invoices/fromsalesorder?organization_id=' .
+                env('ZOHO_ORGANIZATION_ID') . '&authtoken=' . $configuration->configuration_value . '&salesorder_id=' . $salesOrderId);
 
-        if($request->getStatusCode() == 200){
-            return true;
+            if($request->getStatusCode() == 200){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
-        else{
-            return false;
+        catch(\Exception $ex){
+            Log::error("Zoho.php > createInvoice ".$ex);
+            return "Error!";
         }
     }
     //Transaction Stuff Finish

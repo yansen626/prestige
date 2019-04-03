@@ -4,7 +4,7 @@
 
     <!-- Soon
 ============================================= -->
-    <section class="fullscreen pt-0 pb-0">
+    <section class="fullscreen pt-0 pb-0" style="height: 100vh !important;">
         <div class="bg-section" >
             <img src="{{asset('/images/Links/teaser.jpg')}}" alt="Background"/>
         </div>

@@ -3,7 +3,7 @@
     <aside class="main-sidebar fixed offcanvas shadow">
         <section class="sidebar">
             <div class="w-80px mt-3 mb-3 ml-3">
-                <img src="{{ asset('img/basic/logo.png') }}" alt="">
+                <img  src="{{ asset('images/icons/logo.jpg') }}" alt="Nama Logo">
             </div>
             <div class="relative">
                 <a data-toggle="collapse" href="#userSettingsCollapse" role="button" aria-expanded="false"
@@ -85,13 +85,13 @@
                         </li>
                     </ul>
 
-                    <ul class="treeview-menu">
-                        <li>
-                            <a href="{{ route('admin.faqs.index') }}">
-                                <i class="icon icon-document text-green"></i>FAQ
-                            </a>
-                        </li>
-                    </ul>
+                    {{--<ul class="treeview-menu">--}}
+                        {{--<li>--}}
+                            {{--<a href="{{ route('admin.faqs.index') }}">--}}
+                                {{--<i class="icon icon-document text-green"></i>FAQ--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
                 </li>
                 <li class="treeview">
                     <a href="#">

@@ -76,6 +76,7 @@ class CategoryController extends Controller
             'slug'              => $request->input('slug'),
             'meta_title'        => $request->input('meta_title'),
             'meta_description'  => $request->input('meta_description'),
+            'zoho_item_group_id'  => "",
             'created_at'        => Carbon::now('Asia/Jakarta'),
             'updated_at'        => Carbon::now('Asia/Jakarta')
         ]);

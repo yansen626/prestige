@@ -85,7 +85,7 @@
         <div class="d-flex row">
             <div class="col-md-3 white">
                 <div class="p-5 mt-5">
-                    <img src="{{ asset('img/basic/logo.png') }}" alt=""/>
+                    <img  src="{{ asset('images/icons/logo.jpg') }}" alt="Nama Logo">
                 </div>
                 <div class="p-5">
                     @yield('content')

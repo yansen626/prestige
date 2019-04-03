@@ -42,12 +42,17 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="row">
-                                                        <div class="col-md-12 mb-3">
+                                                        <div class="col-md-4 mb-3">
                                                             <label class="form-label">Upload Main Image *</label>
                                                             {{--<input type="file" name="PhotoPosted" id="PhotoPosted" class="file-loading">--}}
                                                             {!! Form::file('main_image', array('id' => 'main_image', 'class' => 'file-loading', 'accept' => 'image/*,application/pdf')) !!}
                                                         </div>
-                                                        <div class="col-md-12 mb-3">
+                                                        <div class="col-md-4 mb-3">
+                                                            <label class="form-label">Upload Thumbnail Image *</label>
+                                                            {{--<input type="file" name="PhotoPosted" id="PhotoPosted" class="file-loading">--}}
+                                                            {!! Form::file('thumbnail_image', array('id' => 'thumbnail_image', 'class' => 'file-loading', 'accept' => 'image/*')) !!}
+                                                        </div>
+                                                        <div class="col-md-4 mb-3">
                                                             <label class="form-label">Upload Detail Image *</label>
                                                             {!! Form::file('detail_image[]', array('id' => 'detail_image', 'class' => 'file-loading', 'multiple' => 'multiple')) !!}
                                                         </div>
@@ -55,7 +60,7 @@
                                                     <div class="row">
                                                         <div class="col-md-6 mb-3">
                                                             <label for="validationCustom01">Product Name</label>
-                                                            <input type="text" name="name" class="form-control" value="{{old('name')}}" required>
+                                                            <input type="text" name="name" class="form-control" value="{{old('name', $product->name)}}" required>
                                                         </div>
                                                         <div class="col-md-6 mb-3">
                                                             <label for="sku">SKU</label>
@@ -68,7 +73,7 @@
                                                             <select id="category" name="category" class="custom-select form-control">
                                                                 <option value="-1">Select Category</option>
                                                                 @foreach($categories as $category)
-                                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                                    <option value="{{ $category->id }}" @if($category->id == old('category', $product->category_id)) selected @endif >{{ $category->name }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -79,45 +84,45 @@
                                                         </div>
                                                         <div class="col-md-3 mb-3">
                                                             <label for="validationCustom04">Price</label>
-                                                            <input type="number" class="form-control" id="price"  name="price" value="{{old('price')}}" required>
+                                                            <input type="number" class="form-control" id="price"  name="price" value="{{old('price', $product->price)}}" required>
                                                         </div>
                                                         <div class="col-md-3 mb-3">
                                                             <label for="sku">Quantity</label>
-                                                            <input type="number" class="form-control" id="qty" name="qty" value="{{old('qty')}}" required>
+                                                            <input type="number" class="form-control" id="qty" name="qty" value="{{old('qty', $product->qty)}}" required>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-3 mb-3">
                                                             <label>Weight (Gram)</label>
-                                                            <input type="number" class="form-control" id="weight" name="weight" value="{{old('weight')}}" required>
+                                                            <input type="number" class="form-control" id="weight" name="weight" value="{{old('weight', $product->weight)}}" required>
                                                         </div>
                                                         <div class="col-md-3 mb-3">
                                                             <label>Width (cm)</label>
-                                                            <input type="number" class="form-control" id="width" name="width" value="{{old('width')}}">
+                                                            <input type="number" class="form-control" id="width" name="width" value="{{old('width', $product->width)}}">
                                                         </div>
                                                         <div class="col-md-3 mb-3">
                                                             <label>Height (cm)</label>
-                                                            <input type="number" class="form-control" id="height" name="height" value="{{old('height')}}">
+                                                            <input type="number" class="form-control" id="height" name="height" value="{{old('height', $product->height)}}">
                                                         </div>
                                                         <div class="col-md-3 mb-3">
                                                             <label>Length (cm)</label>
-                                                            <input type="number" class="form-control" id="length" name="length" value="{{old('length')}}">
+                                                            <input type="number" class="form-control" id="length" name="length" value="{{old('length', $product->length)}}">
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="tags">Product Tags</label><br>
                                                         <input type="text" class="tags-input" id="tags" name="tags" placeholder="Add New"
-                                                               value="{{old('tags')}}">
+                                                               value="{{old('tags', $product->tag)}}">
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="productDetails">Style Notes</label>
                                                         <textarea class="form-control p-t-40" id="style_notes" name="style_notes"
-                                                                  placeholder="Write Something..." rows="7" required>{{old('style_notes')}}</textarea>
+                                                                  placeholder="Write Something..." rows="7" required>{{old('style_notes', $product->style_notes)}}</textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="productDetails">Product Details</label>
                                                         <textarea class="form-control p-t-40" id="description" name="description"
-                                                                  placeholder="Write Something..." rows="7" required>{{old('description')}}</textarea>
+                                                                  placeholder="Write Something..." rows="7" required>{{old('description', $product->description)}}</textarea>
                                                     </div>
                                                     {{--<div class="row">--}}
                                                         {{--<div class="col-md-12 mb-3">--}}
@@ -159,6 +164,11 @@
     <script>
         // FILEINPUT
         $("#main_image")
+            .fileinput({
+                allowedFileExtensions: ["jpg", "jpeg", "png"],
+                showUpload: false,
+            });
+        $("#thumbnail_image")
             .fileinput({
                 allowedFileExtensions: ["jpg", "jpeg", "png"],
                 showUpload: false,

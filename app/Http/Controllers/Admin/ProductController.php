@@ -70,10 +70,24 @@ class ProductController extends Controller
 
     public function create()
     {
+        $product = Product::find(1);
         $categories = Category::all();
 
         $data = [
             'categories'    => $categories,
+            'product'    => $product,
+        ];
+        return view('admin.product.create')->with($data);
+    }
+
+    public function createCopyProduct($item)
+    {
+        $product = Product::find($item);
+        $categories = Category::all();
+
+        $data = [
+            'categories'    => $categories,
+            'product'    => $product,
         ];
         return view('admin.product.create')->with($data);
     }
@@ -98,6 +112,7 @@ class ProductController extends Controller
 //            dd($request);
             $detailImages = $request->file('detail_image');
             $mainImages = $request->file('main_image');
+            $thumbnailImages = $request->file('thumbnail_image');
 
             if($detailImages == null){
                 return back()->withErrors("Detail Image required")->withInput($request->all());
@@ -154,25 +169,43 @@ class ProductController extends Controller
             'pos_y' => 300,
         ]);
 
-            // save product main image, and image detail
+            // save product main image, thumbnail and image detail
+            //main image
             $img = Image::make($mainImages);
             $extStr = $img->mime();
             $ext = explode('/', $extStr, 2);
-
             $filename = $newProduct->id.'_main_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
+
+            //thumbnail image
+            $imgThumbnail = Image::make($thumbnailImages);
+            $extStrThumbnail = $img->mime();
+            $extThumbnail = explode('/', $extStrThumbnail, 2);
+            $filenameThumbnail = $newProduct->id.'_thumbnail_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $extThumbnail[1];
 
             if(env('SERVER_HOST_URL') == 'http://localhost:8000/'){
                 $img->save(public_path('storage/products/'. $filename), 75);
+                $imgThumbnail->save(public_path('storage/products/'. $filenameThumbnail), 75);
             }
             else{
                 $img->save('../public_html/storage/products/'. $filename, 75);
+                $imgThumbnail->save('../public_html/storage/products/'. $filenameThumbnail, 75);
             }
 
             $newProductImage = ProductImage::create([
                 'product_id' => $newProduct->id,
                 'path' => $filename,
-                'is_main_image' => 1
+                'is_main_image' => 1,
+                'is_thumbnail' => 0,
             ]);
+
+            $newProductImageThumbnail = ProductImage::create([
+                'product_id' => $newProduct->id,
+                'path' => $filenameThumbnail,
+                'is_main_image' => 0,
+                'is_thumbnail' => 1,
+            ]);
+
+            //image detail
             for($i=0;$i<sizeof($detailImages);$i++){
                 $img = Image::make($detailImages[$i]);
                 $extStr = $img->mime();
@@ -190,13 +223,14 @@ class ProductController extends Controller
                 $newProductImage = ProductImage::create([
                     'product_id' => $newProduct->id,
                     'path' => $filename,
-                    'is_main_image' => 0
+                    'is_main_image' => 0,
+                    'is_thumbnail' => 0,
                 ]);
             }
 
             // Create ZOHO Product
             $tmp = Zoho::createProduct($newProduct, $newProduct->category->zoho_item_group_id);
-            //dd($tmp);
+            dd($tmp);
 
             return redirect()->route('admin.product.edit.customize',['item' => $newProductPosition->id]);
 
@@ -290,13 +324,17 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $mainImage = ProductImage::where('product_id', $item->id)->where('is_main_image', 1)->first();
-        $detailImage = ProductImage::where('product_id', $item->id)->where('is_main_image', 0)->get();
+        $thumbnailImage = ProductImage::where('product_id', $item->id)->where('is_thumbnail', 1)->first();
+        $detailImage = ProductImage::where('product_id', $item->id)
+            ->where('is_main_image', 0)
+            ->where('is_thumbnail', 0)->get();
         $selectedCategory = CategoryProduct::where('product_id', $item->id)->first();
         $data = [
             'product'    => $item,
             'categories'    => $categories,
             'selectedCategory'    => $selectedCategory,
             'mainImage'    => $mainImage,
+            'thumbnailImage'    => $thumbnailImage,
             'detailImage'    => $detailImage,
         ];
         return view('admin.product.edit')->with($data);
@@ -321,6 +359,7 @@ class ProductController extends Controller
 //            dd($request);
             $detailImages = $request->file('detail_image');
             $mainImages = $request->file('main_image');
+            $thumbnailImages = $request->file('thumbnail_image');
 
             if ($validator->fails())
                 return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
@@ -356,10 +395,10 @@ class ProductController extends Controller
 //            $selectedCategory->save();
 
 
-            // update product main image, and image detail
+            // update product main image, thumbnail and image detail
 
             if(!empty($mainImages)){
-
+//                dd($mainImages);
                 $mainImage = ProductImage::where('product_id', $product->id)->where('is_main_image', 1)->first();
                 if(!empty($mainImage)){
                     $path = $mainImage->path;
@@ -388,11 +427,45 @@ class ProductController extends Controller
                     $newProductImage = ProductImage::create([
                         'product_id' => $product->id,
                         'path' => $filename,
-                        'is_main_image' => 1
+                        'is_main_image' => 1,
+                        'is_thumbnail' => 0,
                     ]);
                 }
+            }
+            if(!empty($thumbnailImages)){
+//                dd($thumbnailImages);
+                $mainImage = ProductImage::where('product_id', $product->id)->where('is_thumbnail', 1)->first();
+                if(!empty($mainImage)){
+                    $path = $mainImage->path;
 
+                    $img = Image::make($mainImages);
+                    if(env('SERVER_HOST_URL') == 'http://localhost:8000/'){
+                        $img->save(public_path('storage/products/'. $path), 75);
+                    }
+                    else{
+                        $img->save('../public_html/storage/products/'. $path, 75);
+                    }
+                }
+                else{
+                    $img = Image::make($thumbnailImages);
+                    $extStr = $img->mime();
+                    $ext = explode('/', $extStr, 2);
+                    $filename = $product->id.'_thumbnail_'.$slug.'_'.Carbon::now('Asia/Jakarta')->format('Ymdhms'). '.'. $ext[1];
 
+                    if(env('SERVER_HOST_URL') == 'http://localhost:8000/'){
+                        $img->save(public_path('storage/products/'. $filename), 75);
+                    }
+                    else{
+                        $img->save('../public_html/storage/products/'. $filename, 75);
+                    }
+
+                    $newProductImage = ProductImage::create([
+                        'product_id' => $product->id,
+                        'path' => $filename,
+                        'is_main_image' => 0,
+                        'is_thumbnail' => 1,
+                    ]);
+                }
             }
             if(!empty($detailImages)){
                 $detailImage = ProductImage::where('product_id', $product->id)->where('is_main_image', 0)->get();
@@ -418,13 +491,14 @@ class ProductController extends Controller
                     $newProductImage = ProductImage::create([
                         'product_id' => $product->id,
                         'path' => $filename,
-                        'is_main_image' => 0
+                        'is_main_image' => 0,
+                        'is_thumbnail' => 0,
                     ]);
                 }
             }
 
             // Update ZOHO Product
-            $tmp = Zoho::updateProduct($product, $product->category->zoho_item_group_id);
+//            $tmp = Zoho::updateProduct($product, $product->category->zoho_item_group_id);
             //dd($tmp);
 
             return redirect()->route('admin.product.show',['item' => $product->id]);
