@@ -121,8 +121,6 @@ class UserController extends Controller
         $user->phone = $request->input('phone');
         $user->save();
 
-        Zoho::updateUser($user);
-
         Session::flash('success', 'Success Updating User!');
         return redirect()->route('admin.users');
     }

@@ -79,20 +79,20 @@ class Zoho
                 'website'       => 'www.nama-official.com',
                 'billing_address'   => [
                     'attention' => $user->first_name . ' ' . $user->last_name,
-                    'address'   => $user->addresses[0]->description,
-                    'street2'   => $user->addresses[0]->street,
-                    'city'      => $user->addresses[0]->city->name,
-                    'state'     => $user->addresses[0]->state,
-                    'zip'       => $user->addresses[0]->postal_code,
+                    'address'   => "default",
+                    'street2'   => "default",
+                    'city'      => "default",
+                    'state'     => "default",
+                    'zip'       => 111111,
                     'country'   => "Indonesia"
                 ],
                 'shipping_address'  => [
                     'attention' => $user->first_name . ' ' . $user->last_name,
-                    'address'   => $user->addresses[0]->description,
-                    'street2'   => $user->addresses[0]->street,
-                    'city'      => $user->addresses[0]->city->name,
-                    'state'     => $user->addresses[0]->state,
-                    'zip'       => $user->addresses[0]->postal_code,
+                    'address'   => "default",
+                    'street2'   => "default",
+                    'city'      => "default",
+                    'state'     => "default",
+                    'zip'       => 111111,
                     'country'   => "Indonesia"
                 ],
                 'contact_persons'   => [[
@@ -113,7 +113,7 @@ class Zoho
                 ]
             ]);
 
-            if($request->getStatusCode() == 200){
+            if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
                 $collect = json_decode($request->getBody());
 
                 //Save Contact Id

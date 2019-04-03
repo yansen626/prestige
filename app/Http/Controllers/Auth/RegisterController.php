@@ -80,6 +80,8 @@ class RegisterController extends Controller
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'zoho_id' => "",
+            'zoho_primary_contact_id' => $data['phone'],
             'password' => Hash::make($data['password']),
             'email_token' => base64_encode($data['email']),
             'status_id' => 1
@@ -113,6 +115,9 @@ class RegisterController extends Controller
 //        Mail::to($user->email)->send($emailVerify);
 
         //return View('auth.send-email', compact('user'));
+
+        Zoho::createUser($user);
+
         $shopping = Session::get('shopping');
         if($shopping != null){
             $test = Auth::attempt(['email' => $user->email, 'password' => $request->password]);
@@ -134,7 +139,7 @@ class RegisterController extends Controller
             $user->status_id = 1;
             $user->save();
 
-            Zoho::createUser($user);
+//            Zoho::createUser($user);
 
             Session::put("user-data", $user);
             Session::flash('success', 'Your Email Have been Verified, Please Login');

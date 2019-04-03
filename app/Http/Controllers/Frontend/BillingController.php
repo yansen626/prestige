@@ -278,6 +278,8 @@ class BillingController extends Controller
                         'state' => $request->input('state'),
                         'postal_code' => $request->input('post_code')
                     ]);
+
+                    Zoho::updateUser(User::find($user->id));
                 }
 
                 Session::forget('cartQty');
@@ -365,6 +367,7 @@ class BillingController extends Controller
         }
         catch (\Exception $exception){
 //            dd($exception);
+            Log::error("BillingController - submitBilling Error: ". $exception->getMessage());
             return redirect()->route('cart')->withErrors($exception);
 //            return redirect()->route('cart')->withErrors("Something Went Wrong");
         }
@@ -398,6 +401,7 @@ class BillingController extends Controller
             return $result;
         }
         catch (\Exception $exception){
+            Log::error("BillingController - getRajaongkirData Error: ". $exception->getMessage());
             //dd($exception);
             return $result;
         }

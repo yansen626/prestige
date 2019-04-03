@@ -129,7 +129,8 @@
                                         @foreach($orderProduct as $product)
                                             <div class="col-md-12 mb-10">
                                                 <div class="col-md-2">
-                                                    <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
+                                                    @php($productImage = \App\Models\ProductImage::where('product_id', $product->id)->first())
+                                                    <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     {{$product->product->name}}
