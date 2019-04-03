@@ -13,6 +13,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Voucher;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use League\Fractal\TransformerAbstract;
 
 class VoucherTransformer extends TransformerAbstract
@@ -61,6 +62,7 @@ class VoucherTransformer extends TransformerAbstract
         }
         catch (\Exception $exception){
             error_log($exception);
+            Log::error("VoucherTransformer/transform error: ". $exception);
         }
     }
 }

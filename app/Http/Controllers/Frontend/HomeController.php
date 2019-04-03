@@ -14,6 +14,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\Subscribe;
 use App\Models\User;
+use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -122,7 +123,7 @@ class HomeController extends Controller
         return $currency;
     }
     public function TestingPurpose(){
-        $type = 1;
+        $type = 8;
         try{
             switch ($type){
                 //testing midtrans
@@ -242,6 +243,21 @@ class HomeController extends Controller
                         $cityDb->save();
                     }
                     return $collect;
+                    break;
+
+                //testing get voucher information
+                case 8:
+                    $voucher = "DC121201-EXT";
+                    $voucherDB = Voucher::where('code', $voucher)->first();
+                    if(!empty($voucherDB)){
+                        $voucherAmount = $voucherDB->voucher_amount == null ? 0 : $voucherDB->voucher_amount;
+                        $voucherPercentage = $voucherDB->voucher_percentage == null ? 0 : $voucherDB->voucher_percentage;
+
+                        return $voucherAmount." | ".$voucherPercentage;
+                    }
+                    else{
+                        return "not found";
+                    }
                     break;
             }
         }

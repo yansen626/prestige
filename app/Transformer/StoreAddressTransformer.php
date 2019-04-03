@@ -11,6 +11,7 @@ namespace App\Transformer;
 
 use App\Models\StoreAddress;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use League\Fractal\TransformerAbstract;
 
 class StoreAddressTransformer extends TransformerAbstract
@@ -44,6 +45,7 @@ class StoreAddressTransformer extends TransformerAbstract
         }
         catch (\Exception $exception){
             error_log($exception);
+            Log::error("StoreAddressTransformer/transform error: ". $exception);
         }
     }
 }

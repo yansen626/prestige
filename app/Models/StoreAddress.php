@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 11 Dec 2018 08:54:16 +0000.
+ * Date: Wed, 03 Apr 2019 03:52:32 +0000.
  */
 
 namespace App\Models;
@@ -18,13 +18,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $primary
  * @property int $province_id
  * @property int $city_id
- * @property int $disctrict_id
+ * @property int $district_id
  * @property string $postal_code
  * @property \Carbon\Carbon $created_at
  * @property int $created_by
  * @property \Carbon\Carbon $updated_at
  * @property int $updated_by
- * 
+ *
  * @property \App\Models\AdminUser $createdBy
  * @property \App\Models\AdminUser $updatedBy
  * @property \App\Models\City $city
@@ -38,7 +38,7 @@ class StoreAddress extends Eloquent
 		'primary' => 'int',
 		'province_id' => 'int',
 		'city_id' => 'int',
-		'disctrict_id' => 'int',
+		'district_id' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int'
 	];
@@ -49,7 +49,7 @@ class StoreAddress extends Eloquent
 		'primary',
 		'province_id',
 		'city_id',
-		'disctrict_id',
+		'district_id',
 		'postal_code',
 		'created_by',
 		'updated_by'

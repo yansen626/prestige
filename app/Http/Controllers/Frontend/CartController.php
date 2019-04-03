@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cookie;
@@ -229,8 +230,8 @@ class CartController extends Controller
             $voucher = $request->input('voucher-code');
             $voucherDB = Voucher::where('code', $voucher)->first();
             if(!empty($voucherDB)){
-                $voucherAmount = $voucherDB->voucher_amount;
-                $voucherPercentage = $voucherDB->voucher_percentage;
+                $voucherAmount = $voucherDB->voucher_amount == null ? 0 : $voucherDB->voucher_amount;
+                $voucherPercentage = $voucherDB->voucher_percentage == null ? 0 : $voucherDB->voucher_percentage;
                 return Response::json(array('success' => $voucherAmount.'#'.$voucherPercentage));
             }
             else{
@@ -238,6 +239,7 @@ class CartController extends Controller
             }
         }
         catch (\Exception $exception){
+            Log::error("CartController/voucherValidation error: ". $exception);
             return Response::json(array('errors' => 'INVALID' . $request->input('id')));
         }
     }

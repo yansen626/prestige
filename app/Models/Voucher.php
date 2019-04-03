@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Wed, 09 Jan 2019 09:26:29 +0000.
+ * Date: Wed, 03 Apr 2019 03:38:59 +0000.
  */
 
 namespace App\Models;
@@ -63,17 +63,20 @@ class Voucher extends Eloquent
 		'status_id'
 	];
 
-	protected $appends = [
-	    'voucher_amount_string'
+    protected $appends = [
+        'voucher_amount_string'
     ];
 
     public function getVoucherAmountStringAttribute(){
         return number_format($this->attributes['voucher_amount'], 0, ",", ".");
     }
-
-	public function admin_user()
+	public function updatedBy()
 	{
 		return $this->belongsTo(\App\Models\AdminUser::class, 'updated_by');
+	}
+	public function createdBy()
+	{
+		return $this->belongsTo(\App\Models\AdminUser::class, 'created_by');
 	}
 
 	public function status()

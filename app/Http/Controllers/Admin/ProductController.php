@@ -230,7 +230,7 @@ class ProductController extends Controller
 
             // Create ZOHO Product
             $tmp = Zoho::createProduct($newProduct, $newProduct->category->zoho_item_group_id);
-            dd($tmp);
+//            dd($tmp);
 
             return redirect()->route('admin.product.edit.customize',['item' => $newProductPosition->id]);
 
