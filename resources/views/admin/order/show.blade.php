@@ -99,7 +99,7 @@
                                         <div class="form-line">
                                             <label class="form-label" for="shipping">Shipping</label>
                                             <input id="shipping" type="text" class="form-control"
-                                                   name="shipping" value="{{ $order->shipping_option }}" readonly>
+                                                   name="shipping" value="{{ $order->shipping_option }}" readonly style="text-transform: uppercase;">
                                         </div>
                                     </div>
                                 </div>

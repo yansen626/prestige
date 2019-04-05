@@ -45,6 +45,11 @@
 
 @section('styles')
     <link href="{{ asset('css/datatables.css') }}" rel="stylesheet">
+    <style>
+        .text-uppercase{
+            text-transform: uppercase;
+        }
+    </style>
 @endsection
 
 @section('scripts')
@@ -68,7 +73,7 @@
                 { data: 'order_number', name: 'order_number' },
                 { data: 'customer', name: 'customer' },
                 { data: 'email', name: 'email', class: 'text-center'},
-                { data: 'shipping', name: 'shipping', class: 'text-center'},
+                { data: 'shipping', name: 'shipping', class: 'text-center text-uppercase'},
                 { data: 'sub_total', name: 'sub_total', class: 'text-right'},
                 { data: 'tax_amount', name: 'tax_amount', class: 'text-right'},
                 { data: 'grand_total', name: 'grand_total', class: 'text-right'},

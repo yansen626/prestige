@@ -23,6 +23,9 @@
     .col-content-about-bottom {
         padding: 10% 5% 10% 5%;
     }
+    .text-customization-xl{
+        margin-left: -14% !important;
+    }
 }
 
 @media (min-width: 993px) and (max-width: 1024px){
@@ -34,6 +37,9 @@
     }
     .col-content-about-bottom {
         padding: 8% 5% 8% 5%;
+    }
+    .text-customization-xl{
+        margin-left: -23% !important;
     }
 }
 

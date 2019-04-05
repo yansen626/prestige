@@ -123,7 +123,7 @@
                                                 <p style="margin-bottom: 0;">Choose Position</p>
                                             </div>
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-default btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <button type="button" class="btn btn-default text-customization-xl btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <span class="fa fa-angle-down"></span>
                                                     <span id="custom-position-text">{{$product->product_positions[0]->name}}</span>
                                                 </button>
@@ -164,7 +164,7 @@
                                             </div>
 
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-default btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <button type="button" class="btn text-customization-xl btn-default btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <span class="fa fa-angle-down"></span>
                                                     <span id="custom-color-text">Silver</span>
                                                 </button>
@@ -202,7 +202,7 @@
                                                 <p style="margin-bottom: 0;">Choose Size</p>
                                             </div>
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-default btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <button type="button" class="btn btn-default text-customization-xl btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <span class="fa fa-angle-down"></span>
                                                     <span id="custom-size-text">24 pt</span>
                                                 </button>
