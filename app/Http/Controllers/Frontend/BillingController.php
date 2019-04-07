@@ -33,6 +33,7 @@ class BillingController extends Controller
         $user = null;
         $totalWeight = 0;
 
+        $userCity = -1;
         if (Auth::check())
         {
             //Read DB
@@ -40,6 +41,7 @@ class BillingController extends Controller
             $addressDB = Address::where('user_id', $user->id)->get();
             if(count($addressDB) != 0){
                 $address = Address::where('user_id', $user->id)->where('primary', 1)->first();
+                $userCity = $address->city_id;
                 $flag=1;
             }
         }
@@ -50,6 +52,7 @@ class BillingController extends Controller
                 $addressDB = Address::where('user_id', $user->id)->get();
                 if(count($addressDB) != 0){
                     $address = Address::where('user_id', $user->id)->where('primary', 1)->first();
+                    $userCity = $address->city_id;
                     $flag = 2;
                 }
             }
@@ -79,17 +82,22 @@ class BillingController extends Controller
         $countries = Country::all();
         $provinces = Province::all();
         $cities = City::all();
-
         $isIndonesian = true;
-        $data=([
-            'flag' => $flag,
-            'address' => $address,
-            'countries' => $countries,
-            'provinces' => $provinces,
-            'cities' => $cities,
-            'totalWeight' => $totalWeight,
-            'isIndonesian' => $isIndonesian,
-        ]);
+
+        // Get Rajaongkir API Key
+        $roApiKey = env('RAJAONGKIR_KEY');
+
+        $data = [
+            'flag'          => $flag,
+            'address'       => $address,
+            'countries'     => $countries,
+            'provinces'     => $provinces,
+            'cities'        => $cities,
+            'totalWeight'   => $totalWeight,
+            'isIndonesian'  => $isIndonesian,
+            'userCity'      => $userCity,
+            'roApiKey'      => $roApiKey
+        ];
 //        dd($data);
         return view('frontend.transactions.billing-shipment')->with($data);
     }

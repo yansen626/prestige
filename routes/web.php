@@ -185,3 +185,6 @@ Route::get('/update-currency', 'Admin\CurrencyController@getCurrenciesUpdate')->
 
 // Email Aauth
 Route::get('/request-verification/{email}', 'Auth\RegisterController@RequestVerification')->name('request-verification');
+
+// Rajaongkir AJAX
+Route::post('/ajax/rajaongkir/cost', 'Frontend\RajaOngkirController@getCost')->name('ajax.rajaongkir.cost');

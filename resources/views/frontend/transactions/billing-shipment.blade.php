@@ -308,6 +308,14 @@
                         @endif
                     </div>
                 </div>
+                <div class="row padding-top-3">
+                    <div class="col-xs-6 col-sm-6 col-md-10 text-right">
+                        <span class="text-black" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0;"> DELIVERY FEE : </span>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-2 text-center-xs" style="text-align: right;">
+                        <span id="delivery-fee" class="text-black font-weight-bold" style="font-size: 11px; height: 31.5px; width: 120px; line-height: 0;"></span>
+                    </div>
+                </div>
 
                 <div class="row padding-top-3">
                     <div class="col-xs-12 col-sm-12 col-md-6">
@@ -343,6 +351,77 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
+
+        var userCityId = parseInt("{{ $userCity }}");
+        var weightInt = parseInt('{{ $totalWeight }}');
+        var defaultCourier = 'jne-REG';
+
+        @if($userCity !== -1)
+            // Get default delivery fee for jne-REG
+            var defaultCourierSplitted = defaultCourier.split('-');
+            rajaongkirAjaxGetCost(userCityId, weightInt, defaultCourierSplitted);
+        @endif
+
+        // Get delivery fee for every courier selected
+        $("input:radio[name=courier]").click(function() {
+            let value = $(this).val();
+            let splittedValue = value.split('-');
+
+            if(userCityId !== -1){
+                rajaongkirAjaxGetCost(userCityId, weightInt, splittedValue);
+            }
+        });
+
+        // Get delivery fee for every city selected
+        $('#city').on('change', function() {
+            //alert( this.value );
+            let cityId = -1;
+            if (this.value.indexOf('-') > -1)
+            {
+                let splittedValue = this.value.split('-');
+                cityId = parseInt(splittedValue[1]);
+            }
+            else{
+                cityId = parseInt(this.value);
+            }
+
+            userCityId = cityId;
+
+            if(userCityId !== -1){
+                // Get selected courier
+                let courierValue = $('input[name=courier]:checked').val();
+                let courierValueSplitted = courierValue.split('-');
+
+                rajaongkirAjaxGetCost(userCityId, weightInt, courierValueSplitted);
+            }
+        });
+
+        // Ajax function to get rajaongkir delivery fee
+        function rajaongkirAjaxGetCost(tmpCityId, tmpWeight, tmpCourier){
+            $.ajax({
+                url: '{{ route('ajax.rajaongkir.cost') }}',
+                type: 'POST',
+                data: {
+                    'destination_city_id': tmpCityId,
+                    'weight': tmpWeight,
+                    'courier': tmpCourier
+                },
+                success: function(data) {
+                    //console.log(data);
+                    if(data.code === 200){
+                        let feeStr = rupiahFormat(data.fee);
+                        $('#delivery-fee').html("Rp " + feeStr);
+                    }
+                    else{
+                        $('#delivery-fee').html("Shipping Service Not Available");
+                    }
+                },
+                error: function(response){
+                    console.log(response);
+                }
+            });
+        }
+
         $("#another_shipment").change(function() {
             if(this.checked) {
                 $('#new-address').show();
@@ -369,6 +448,7 @@
                 }).appendTo(city);
                 //clear out the value so it doesn't default to one it should not
                 city.val('-1');
+                $('#delivery-fee').html('');
             });
         }(jQuery));
 
@@ -389,7 +469,20 @@
                 }).appendTo(city);
                 //clear out the value so it doesn't default to one it should not
                 city.val('-1');
+                $('#delivery-fee').html('');
             });
         }(jQuery));
+
+        function rupiahFormat(nStr) {
+            nStr += '';
+            x = nStr.split(',');
+            x1 = x[0];
+            x2 = x.length > 1 ? ',' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + '.' + '$2');
+            }
+            return x1 + x2;
+        }
     </script>
 @endsection
