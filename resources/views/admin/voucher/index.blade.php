@@ -21,7 +21,12 @@
                         <tr class="no-b">
                             <td>
                                 <a href="{{ route('admin.vouchers.create') }}" class="btn btn-outline-primary btn-lg btn-block">
-                                <i class="icon icon-plus"></i> Add
+                                <i class="icon icon-plus"></i> Add Category Voucher
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.vouchers.create-product') }}" class="btn btn-outline-primary btn-lg btn-block">
+                                    <i class="icon icon-plus"></i> Add Product Voucher
                                 </a>
                             </td>
                         </tr>

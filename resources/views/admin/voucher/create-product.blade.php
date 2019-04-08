@@ -8,7 +8,7 @@
             <div class="col">
                 <h4>
                     <i class="icon-package"></i>
-                    Create New Category Voucher
+                    Create New Product Voucher
                 </h4>
             </div>
         </div>
@@ -40,24 +40,24 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="hidden" name="type" value="categories"/>
+                                                <input type="hidden" name="type" value="products"/>
                                                 @php($idx = 0)
                                                 <table class="table">
                                                     <thead>
                                                     <tr>
                                                         <th colspan="3">
-                                                            Categories
+                                                            Products
                                                         </th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
                                                     <tr>
-                                                        @foreach($categories as $category)
+                                                        @foreach($products as $product)
                                                             @php($idx++)
                                                             <td>
                                                                 <label>
-                                                                    <input type="checkbox" class="group1 flat" id="chk{{$category->id}}" name="chk[]" onclick="changeInput('{{ $category->id }}')" /> {{ $category->name }}
-                                                                    <input type="hidden" class="group2" value="{{ $category->id }}" id="{{ $category->id }}" name="ids[]" disabled/>
+                                                                    <input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" /> {{ $product->name }}
+                                                                    <input type="hidden" class="group2" value="{{ $product->id }}" id="{{ $product->id }}" name="ids[]" disabled/>
                                                                 </label>
                                                             </td>
                                                     @if($idx == 3)

@@ -53,7 +53,16 @@ class VoucherController extends Controller
      */
     public function create()
     {
-        return view('admin.voucher.create');
+        $categories = Category::all();
+        return view('admin.voucher.create', compact('categories'));
+    }
+
+    /**
+     * Show the form for creating a new Voucher for Products.
+    */
+    public function createProduct(){
+        $products = Product::where('id' , '!=', 1)->get();
+        return view('admin.voucher.create-product', compact('products'));
     }
 
     /**
@@ -72,6 +81,21 @@ class VoucherController extends Controller
             'finish_date'   => 'required'
         ]);
 
+        //Check Category
+        if($request->input('type') == 'categories'){
+            $categories = $request->input('ids');
+            if($categories == null){
+                return redirect()->back()->withErrors("Categories Needed!")->withInput($request->all());
+            }
+        }
+
+        if($request->input('type') == 'products'){
+            $products = $request->input('ids');
+            if($products == null){
+                return redirect()->back()->withErrors("Products Needed!")->withInput($request->all());
+            }
+        }
+
         if ($validator->fails()) return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
 
         if(empty($request->input('voucher_amount')) && empty($request->input('voucher_percentage'))){
@@ -88,21 +112,66 @@ class VoucherController extends Controller
         }
 
         $user = Auth::guard('admin')->user();
-        $voucher = Voucher::create([
-            'code'  => $request->input('code'),
-            'description'   => $request->input('description'),
-            'voucher_amount'   => $request->input('voucher_amount'),
-            'voucher_percentage'   => $request->input('voucher_percentage'),
-            'start_date'    => $startDate,
-            'finish_date'   => $finishDate,
-            'category_id'   => $request->input('category'),
-            'product_id'    => $request->input('product'),
-            'created_at'    => Carbon::now('Asia/Jakarta'),
-            'created_by'    => $user->id,
-            'updated_at'    => Carbon::now('Asia/Jakarta'),
-            'updated_by'    => $user->id,
-            'status_id'     => $request->input('status')
-        ]);
+        if($request->input('type') == 'categories'){
+            //Categories
+            $cats = '';
+            $idx = 1;
+            $categories = $request->input('ids');
+            foreach ($categories as $category){
+                if($idx == count($categories)){
+                    $cats .= $category;
+                }
+                else{
+                    $cats .= $category . '#';
+                }
+                $idx++;
+            }
+
+            Voucher::create([
+                'code'  => $request->input('code'),
+                'description'   => $request->input('description'),
+                'category_id'   => $cats,
+                'voucher_amount'   => $request->input('voucher_amount'),
+                'voucher_percentage'   => $request->input('voucher_percentage'),
+                'start_date'    => $startDate,
+                'finish_date'   => $finishDate,
+                'created_at'    => Carbon::now('Asia/Jakarta'),
+                'created_by'    => $user->id,
+                'updated_at'    => Carbon::now('Asia/Jakarta'),
+                'updated_by'    => $user->id,
+                'status_id'     => $request->input('status')
+            ]);
+        }
+        else if($request->input('type') == 'products'){
+            //Categories
+            $prods = '';
+            $idx = 1;
+            $products = $request->input('ids');
+            foreach ($products as $product){
+                if($idx == count($products)){
+                    $prods .= $product;
+                }
+                else{
+                    $prods .= $product . '#';
+                }
+                $idx++;
+            }
+
+            Voucher::create([
+                'code'  => $request->input('code'),
+                'description'   => $request->input('description'),
+                'product_id'   => $prods,
+                'voucher_amount'   => $request->input('voucher_amount'),
+                'voucher_percentage'   => $request->input('voucher_percentage'),
+                'start_date'    => $startDate,
+                'finish_date'   => $finishDate,
+                'created_at'    => Carbon::now('Asia/Jakarta'),
+                'created_by'    => $user->id,
+                'updated_at'    => Carbon::now('Asia/Jakarta'),
+                'updated_by'    => $user->id,
+                'status_id'     => $request->input('status')
+            ]);
+        }
 
         Session::flash('success', 'Success Creating new Voucher!');
         return redirect()->route('admin.vouchers.index');

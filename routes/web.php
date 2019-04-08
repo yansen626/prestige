@@ -126,6 +126,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/vouchers/', 'Admin\VoucherController@index')->name('admin.vouchers.index');
     Route::get('/vouchers/show/{item}', 'Admin\VoucherController@show')->name('admin.vouchers.show');
     Route::get('/vouchers/create', 'Admin\VoucherController@create')->name('admin.vouchers.create');
+    Route::get('/vouchers/create/product', 'Admin\VoucherController@createProduct')->name('admin.vouchers.create-product');
     Route::post('/vouchers/store', 'Admin\VoucherController@store')->name('admin.vouchers.store');
     Route::get('/vouchers/edit/{item}', 'Admin\VoucherController@edit')->name('admin.vouchers.edit');
     Route::post('/vouchers/update', 'Admin\VoucherController@update')->name('admin.vouchers.update');
