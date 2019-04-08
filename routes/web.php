@@ -52,6 +52,7 @@ Route::post('/submit-billing-shipment', 'Frontend\BillingController@submitBillin
 Route::get('/checkout/{order}', 'Frontend\CheckoutController@getCheckout')->name('checkout');
 Route::post('/submit-checkout', 'Frontend\CheckoutController@submitCheckout')->name('submit.checkout');
 
+Route::get('/checkout-bank-information/{order}', 'Frontend\CheckoutController@TransferInformation')->name('checkout-transfer-information');
 Route::get('/checkout-success/{order}', 'Frontend\CheckoutController@checkoutSuccess')->name('checkout-success');
 Route::get('/checkout-failed/{order}', 'Frontend\CheckoutController@checkoutFailed')->name('checkout-failed');
 
@@ -64,6 +65,7 @@ Route::prefix('payment')->group(function(){
 
 Route::get('/orders', 'Frontend\OrderController@Index')->name('orders');
 Route::get('/order/{order}', 'Frontend\OrderController@Show')->name('order.detail');
+Route::get('/order/transfer_confirmation/{order}', 'Frontend\OrderController@ConfirmBankTransfer')->name('order.bank_confirmation');
 
 // miscellaneous
 Route::get('/test-location', 'Frontend\HomeController@getLocation')->name('getLocation');
@@ -160,7 +162,6 @@ Route::prefix('admin')->group(function(){
     Route::get('/orders', 'Admin\OrderController@index')->name('admin.orders.index');
     Route::get('/orders/detail/{item}', 'Admin\OrderController@show')->name('admin.orders.detail');
     Route::post('/orders/tracking-code/', 'Admin\OrderController@storeTracking')->name('admin.orders.tracking');
-    Route::get('/orders/transfer_confirmation/{item}', 'Admin\OrderController@ConfirmBankTransfer')->name('admin.orders.bank_confirmation');
 });
 
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');

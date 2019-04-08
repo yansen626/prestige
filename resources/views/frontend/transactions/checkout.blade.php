@@ -84,7 +84,7 @@
                                                     {{$product->qty}}
                                                 </div>
                                                 <div class="col-md-4 right">
-                                                    Rp {{$product->grand_total_string}}
+                                                    {{env('KURS_IDR')}} {{$product->grand_total_string}}
                                                 </div>
                                             </div>
                                         @endforeach
@@ -100,29 +100,29 @@
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SUBTOTAL</div>
-                                            <div class="col-md-6 right">Rp {{$order->sub_total_string}}</div>
+                                            <div class="col-md-6 right">{{env('KURS_IDR')}} {{$order->sub_total_string}}</div>
                                             <input type="hidden" id="subtotal" value="{{$order->sub_total}}">
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SERVICE</div>
-                                            <div class="col-md-6 right">Rp {{$order->payment_charge_string}}</div>
+                                            <div class="col-md-6 right">{{env('KURS_IDR')}} {{$order->payment_charge_string}}</div>
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SHIPPING</div>
-                                            <div class="col-md-6 right">Rp {{$order->shipping_charge_string}}</div>
+                                            <div class="col-md-6 right">{{env('KURS_IDR')}} {{$order->shipping_charge_string}}</div>
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">TAX</div>
-                                            <div class="col-md-6 right">Rp {{$order->tax_amount_string}}</div>
+                                            <div class="col-md-6 right">{{env('KURS_IDR')}} {{$order->tax_amount_string}}</div>
                                         </div>
                                         <div class="col-md-12 border-bottom-black mb-20">
                                             <div class="col-md-6 bold">VOUCHER</div>
-                                            <div class="col-md-6 right">Rp <span id="voucher_amount_span">0</span></div>
+                                            <div class="col-md-6 right">{{env('KURS_IDR')}} <span id="voucher_amount_span">0</span></div>
                                             <input type="hidden" name="voucher_amount" id="voucher_amount" value="0">
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold"><h5>TOTAL</h5></div>
-                                            <div class="col-md-6 right bold"><h5>Rp <span id="grand_total_span">{{$order->grand_total_string}}</span></h5></div>
+                                            <div class="col-md-6 right bold"><h5>{{env('KURS_IDR')}} <span id="grand_total_span">{{$order->grand_total_string}}</span></h5></div>
                                             <input type="hidden" name="grand_total" id="grand_total" value="{{$order->grand_total}}">
                                         </div>
                                     </div>
@@ -137,7 +137,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="col-md-12">
                             @if($isIndonesian)
-                                <input type="radio" name="payment_method" id="payment_method" value="credit_card" checked/>
+                                <input type="radio" name="payment_method" class="payment_method" value="credit_card" checked/>
                                 <span style="font-size: 16px;">Card Payment</span>
                                 <img src="{{ asset('images/icons/checkout-visa.png') }}" class="width-50">
                                 <img src="{{ asset('images/icons/checkout-mastercard.png') }}" class="width-50">
@@ -145,7 +145,7 @@
                                 <img src="{{ asset('images/icons/checkout-american.png') }}" class="width-50">
                                 {{--Pay with Credit Card--}}
                                 &nbsp;<br>
-                                <input type="radio" name="payment_method" id="payment_method" value="bank_transfer"/>
+                                <input type="radio" name="payment_method" class="payment_method" value="bank_transfer"/>
                                 <span style="font-size: 16px;">Bank Transfer</span>
                                 <img src="{{ asset('images/icons/checkout-banktransfer.png') }}" class="width-50">
                                 {{--Pay with Virtual Account--}}
@@ -211,37 +211,63 @@
 
         $(document).on('click', '#pay-button', function (e) {
             var orderId = "{{$order->id}}";
-            var paymentMethod = $('#payment_method').val();
+            // var paymentMethod = $('.payment_method').val();
+            var paymentMethod = $("input[name='payment_method']:checked").val();
             var voucher = $('#voucher_applied').val();
             var voucherAmount = $('#voucher_amount').val();
             var grandTotal = $('#grand_total').val();
             var snapToken;
             // Request get token to your server & save result to snapToken variable
-
-            snap.show();
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('submit.checkout') }}',
-                datatype : "application/json",
-                data: {
-                    '_token': '{{ csrf_token() }}',
-                    'order': orderId,
-                    'payment_method': paymentMethod,
-                    'voucher' : voucher,
-                    'voucher_amount' : voucherAmount,
-                    'grand_total' : grandTotal
-                }, // no need to stringify
-                success: function (result) {
-                    if (typeof result == "string")
-                        result = JSON.parse(result);
-                    if (result.success) {
-                        snapToken = result.success;
-                        snap.pay(snapToken);
-                    } else {
-                        snap.hide();
+            alert(paymentMethod);
+            if(paymentMethod==="credit_card"){
+                snap.show();
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('submit.checkout') }}',
+                    datatype : "application/json",
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'order': orderId,
+                        'payment_method': paymentMethod,
+                        'voucher' : voucher,
+                        'voucher_amount' : voucherAmount,
+                        'grand_total' : grandTotal
+                    }, // no need to stringify
+                    success: function (result) {
+                        if (typeof result == "string")
+                            result = JSON.parse(result);
+                        if (result.success) {
+                            snapToken = result.success;
+                            snap.pay(snapToken);
+                        } else {
+                            snap.hide();
+                        }
                     }
-                }
-            });
+                });
+            }
+            else{
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('submit.checkout') }}',
+                    datatype : "application/json",
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'order': orderId,
+                        'payment_method': paymentMethod,
+                        'voucher' : voucher,
+                        'voucher_amount' : voucherAmount,
+                        'grand_total' : grandTotal
+                    }, // no need to stringify
+                    success: function (result) {
+                        if (typeof result == "string")
+                            result = JSON.parse(result);
+                        if (result.success) {
+                            snapToken = result.success;
+                            window.location = snapToken;
+                        }
+                    }
+                });
+            }
         });
 
     </script>

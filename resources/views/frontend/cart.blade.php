@@ -48,7 +48,7 @@
                                             </td>
                                             <td class="cart-product-item pb-40 pt-40">{!! $cart->description  !!} </td>
                                             <td class="cart-product-total pb-40 pt-40">
-                                                Rp <span id="total_price{{ $cart->id }}">{{ number_format($cart->total_price, 0, ",", ".") }}</span>
+                                                {{env('KURS_IDR')}} <span id="total_price{{ $cart->id }}">{{ number_format($cart->total_price, 0, ",", ".") }}</span>
                                                 <input id="total_price_span{{$cart->id}}" type="hidden" class="priceForTotal" value="{{$cart->total_price}}">
                                             </td>
                                             <td class="pb-40 pt-40">
@@ -78,7 +78,7 @@
                                             </td>
                                             <td class="cart-product-item pb-40 pt-40">{!! $cart['item']['description'] !!}</td>
                                             <td class="cart-product-total pb-40 pt-40">
-                                                Rp <span id="total_price{{ $cart['item']['product_id'] }}">{{ number_format($cart['item']['price'], 0, ",", ".") }}</span>
+                                                {{env('KURS_IDR')}} <span id="total_price{{ $cart['item']['product_id'] }}">{{ number_format($cart['item']['price'], 0, ",", ".") }}</span>
                                                 <input id="total_price_span{{$cart['item']['product_id']}}" type="hidden" class="priceForTotal" value="{{$cart['item']['price']}}">
                                             </td>
                                             {{--<td class="cart-product-total" id="total_price{{ $cart['item']['product_id'] }}">{{ $cart['item']['price'] }}</td>--}}
@@ -110,14 +110,14 @@
                             SUBTOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            Rp <span id="subtotal_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
+                            {{env('KURS_IDR')}} <span id="subtotal_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
                             <input type="hidden" id="subtotal" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6">
                             VOUCHER
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            Rp <span id="voucher_amount_span">0</span>
+                            {{env('KURS_IDR')}} <span id="voucher_amount_span">0</span>
                             <input type="hidden" name="subtotal" id="voucher_amount" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -1%;">
@@ -127,7 +127,7 @@
                             TOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="font-size: 14px; text-align: right;" >
-                            Rp <span id="grand_total_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
+                            {{env('KURS_IDR')}} <span id="grand_total_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
                             <input type="hidden" id="grand_total" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -3px;">
@@ -181,7 +181,7 @@
 
                                         <br>
                                         TOTAL<br>
-                                        Rp <span id="total_price_mobile{{ $cart->id }}">{{ number_format($cart->total_price, 0, ",", ".") }} </span>
+                                        {{env('KURS_IDR')}} <span id="total_price_mobile{{ $cart->id }}">{{ number_format($cart->total_price, 0, ",", ".") }} </span>
                                         <input id="total_price_mobile_span{{$cart->id}}" type="hidden" class="priceForTotalMobile" value="{{$cart->total_price}}">
 
                                         <div class="product-quantity">
@@ -210,7 +210,7 @@
 
                                         <br>
                                         TOTAL<br>
-                                        Rp <span id="total_price_mobile{{ $cart['item']['product_id'] }}">{{ number_format($cart['item']['price'], 0, ",", ".") }} </span>
+                                        {{env('KURS_IDR')}} <span id="total_price_mobile{{ $cart['item']['product_id'] }}">{{ number_format($cart['item']['price'], 0, ",", ".") }} </span>
                                         <input id="total_price_mobile_span{{ $cart['item']['product_id'] }}" type="hidden" class="priceForTotalMobile" value="{{$cart['item']['price']}}">
 
                                         <div class="product-quantity">
@@ -242,14 +242,14 @@
                             SUBTOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            Rp <span id="subtotal_mobile_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
+                            {{env('KURS_IDR')}} <span id="subtotal_mobile_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
                             <input type="hidden" id="subtotal_mobile" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6">
                             VOUCHER
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="text-align: right;">
-                            Rp <span id="voucher_amount_span">0</span>
+                            {{env('KURS_IDR')}} <span id="voucher_amount_span">0</span>
                             <input type="hidden" name="subtotal" id="voucher_amount" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -1%;">
@@ -259,7 +259,7 @@
                             TOTAL
                         </div>
                         <div class="col-xs-6 col-sm-12 col-md-6" style="font-size: 14px; text-align: right;" >
-                            Rp <span id="grand_total_mobile_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
+                            {{env('KURS_IDR')}} <span id="grand_total_mobile_span">{{number_format($totalPrice, 0, ",", ".") }}</span>
                             <input type="hidden" id="grand_total_mobile" value="{{$totalPrice}}" >
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -3px;">

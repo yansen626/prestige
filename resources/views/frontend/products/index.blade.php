@@ -80,7 +80,7 @@
                                     <h3><a href="{{$link}}">{{ $product->name }}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>Rp {{ $product->price_string }}</span>
+                                    <span>{{env('KURS_IDR')}} {{ $product->price_string }}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
@@ -113,7 +113,7 @@
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>Rp {{$product->price_string}}</span>
+                                    <span>{{env('KURS_IDR')}} {{$product->price_string}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
@@ -145,7 +145,7 @@
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>Rp {{$product->price_string}}</span>
+                                    <span>{{env('KURS_IDR')}} {{$product->price_string}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
@@ -177,7 +177,7 @@
                                     {{--<h3><a href="{{$link}}">{{$product->name}}</a></h3>--}}
                                 {{--</div><!-- .product-title end -->--}}
                                 {{--<div class="product--price">--}}
-                                    {{--<span>Rp {{$product->price_string}}</span>--}}
+                                    {{--<span>{{env('KURS_IDR')}} {{$product->price_string}}</span>--}}
                                 {{--</div><!-- .product-price end -->--}}
                             {{--</div><!-- .product-bio end -->--}}
                         {{--</div>--}}
@@ -209,7 +209,7 @@
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>Rp {{$product->price_string}}</span>
+                                    <span>{{env('KURS_IDR')}} {{$product->price_string}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>
@@ -241,7 +241,7 @@
                                     <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                 </div><!-- .product-title end -->
                                 <div class="product--price">
-                                    <span>Rp {{$product->price_string}}</span>
+                                    <span>{{env('KURS_IDR')}} {{$product->price_string}}</span>
                                 </div><!-- .product-price end -->
                             </div><!-- .product-bio end -->
                         </div>

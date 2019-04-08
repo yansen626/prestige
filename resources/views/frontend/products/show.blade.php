@@ -36,7 +36,7 @@
                     <div class="row" style="margin-bottom: 28px;">
                         <div class="col-md-12">
                             <h2 style="margin: 0 0 18px;">{{$product->name}}</h2>
-                            <h5 style="text-transform: capitalize;">Rp {{$product->price_string}}</h5>
+                            <h5 style="text-transform: capitalize;">{{env('KURS_IDR')}} {{$product->price_string}}</h5>
                             <p class="font-16" style="text-align: justify">
                                 {{$product->style_notes}}
                             </p>

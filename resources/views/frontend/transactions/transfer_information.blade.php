@@ -1,29 +1,26 @@
 @extends('layouts.frontend')
 
-@section('pageTitle', 'Checkout | NAMA')
+@section('pageTitle', 'Transfer Information | NAMA')
 @section('content')
     <section class="bg-white">
-        <form method="POST" action="{{ route('submit.checkout', ["order"=>$order->id]) }}">
-            @csrf
-            <div class="container">
+        <div class="container">
                 <div class="row" style="margin-bottom:5%;">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="col-md-12">
-                            <h1>Success!</h1>
+                            <h1>Transfer Information!</h1>
                             <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                             <br/>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-12 text--center">
                             <p>
-                                we are pleased to tell you your order has been confirmed and is underway.<br>
-                                please allow for 10 business days before dispatch while we personalize your order.<br>
-                                we will send an email when your items are ready for dispatch.
+                                We are pleased to tell you your order has been received.<br>
+                                Please make the payment to the account stated below.<br>
                             </p>
-                        </div>
-                        <div class="col-md-4">
-                            <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;margin-bottom:2%;">DOWNLOAD INVOICE</a>
-                            <br>
-                            <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;margin-bottom:2%;">TRACK ORDER</a>
+                            <h4>
+                                Bank Central Asia<br>
+                                123 456 7890 a.n Nama-official
+                            </h4>
+                            <p>TOTAL PAYMENT = {{env('KURS_IDR')}} {{$order->grand_total_string}}</p>
                         </div>
                     </div>
                 </div>
@@ -103,7 +100,6 @@
                     </table>
                 </div>
             </div>
-        </form>
     </section>
 @endsection
 

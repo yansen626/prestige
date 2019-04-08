@@ -61,7 +61,7 @@
                                                     {{$product->qty}}
                                                 </div>
                                                 <div class="col-md-4 right">
-                                                    Rp {{$product->grand_total_string}}
+                                                    {{env('KURS_IDR')}} {{$product->grand_total_string}}
                                                 </div>
                                             </div>
                                         @endforeach
@@ -76,23 +76,23 @@
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SUBTOTAL</div>
-                                            <div class="col-md-6 right">Rp {{$order->sub_total_string}}</div>
+                                            <div class="col-md-6 right">{{env('KURS_IDR')}} {{$order->sub_total_string}}</div>
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SERVICE</div>
-                                            <div class="col-md-6 right">Rp {{$order->payment_charge_string}}</div>
+                                            <div class="col-md-6 right">{{env('KURS_IDR')}} {{$order->payment_charge_string}}</div>
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SHIPPING</div>
-                                            <div class="col-md-6 right">Rp {{$order->shipping_charge_string}}</div>
+                                            <div class="col-md-6 right">{{env('KURS_IDR')}} {{$order->shipping_charge_string}}</div>
                                         </div>
                                         <div class="col-md-12 border-bottom-black mb-20">
                                             <div class="col-md-6 bold">TAX</div>
-                                            <div class="col-md-6 right">Rp {{$order->tax_amount_string}}</div>
+                                            <div class="col-md-6 right">{{env('KURS_IDR')}} {{$order->tax_amount_string}}</div>
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold"><h5>TOTAL</h5></div>
-                                            <div class="col-md-6 right bold"><h5>Rp {{$order->grand_total_string}}</h5></div>
+                                            <div class="col-md-6 right bold"><h5>{{env('KURS_IDR')}} {{$order->grand_total_string}}</h5></div>
                                         </div>
                                     </div>
                                 </div>

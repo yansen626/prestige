@@ -38,13 +38,13 @@
                                                 {{$order->shipping_option}}
                                             </td>
                                             <td class="cart-product-item">
-                                                Rp {{$order->sub_total_string}}
+                                                {{env('KURS_IDR')}} {{$order->sub_total_string}}
                                             </td>
                                             <td class="cart-product-item">
-                                                Rp {{$order->tax_amount_string}}
+                                                {{env('KURS_IDR')}} {{$order->tax_amount_string}}
                                             </td>
                                             <td class="cart-product-item">
-                                                Rp {{$order->grand_total_string}}
+                                                {{env('KURS_IDR')}} {{$order->grand_total_string}}
                                             </td>
                                             <td class="cart-product-item">
                                                 {{$order->order_status->name}}

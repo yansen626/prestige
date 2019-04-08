@@ -79,16 +79,28 @@ class CheckoutController extends Controller
                 $order->save();
             }
 
-            //set data to request
-            $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
+            if($paymentMethod == "credit_card"){
+                //set data to request
+                $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
 //            dd($transactionDataArr);
 //            error_log($transactionDataArr);
 
-            //sending to midtrans
-            $redirectUrl = Midtrans::sendRequest($transactionDataArr);
-            //dd($exception);
+                //sending to midtrans
+                $redirectUrl = Midtrans::sendRequest($transactionDataArr);
+                //dd($exception);
 
-            return Response::json(array('success' => $redirectUrl));
+                return Response::json(array('success' => $redirectUrl));
+            }
+            else{
+                $redirectUrl = route('checkout-transfer-information', ['order'=>$order]);
+                //dd($exception);
+                //Pending bank transfer payment
+                //Apply Voucher
+                $order->order_status_id = $request->input('voucher');
+                $order->save();
+
+                return Response::json(array('success' => $redirectUrl));
+            }
         }
         catch (\Exception $ex){
 //            dd($ex);
@@ -161,6 +173,15 @@ class CheckoutController extends Controller
             error_log($ex);
             Log::error("CheckoutController Error: ". $ex->getMessage());
         }
+    }
+    public function TransferInformation(Order $order){
+        $orderProducts = OrderProduct::where('order_id', $order->id)->get();
+
+        $data=([
+            'order' => $order,
+            'orderProduct' => $orderProducts,
+        ]);
+        return view('frontend.transactions.transfer_information')->with($data);
     }
     public function checkoutFailed(Order $order){
 
