@@ -160,6 +160,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/orders', 'Admin\OrderController@index')->name('admin.orders.index');
     Route::get('/orders/detail/{item}', 'Admin\OrderController@show')->name('admin.orders.detail');
     Route::post('/orders/tracking-code/', 'Admin\OrderController@storeTracking')->name('admin.orders.tracking');
+    Route::get('/orders/transfer_confirmation/{item}', 'Admin\OrderController@ConfirmBankTransfer')->name('admin.orders.bank_confirmation');
 });
 
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
