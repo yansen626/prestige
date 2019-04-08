@@ -224,8 +224,6 @@ class CartController extends Controller
     }
 
     public function voucherValidation(Request $request){
-        //dd($request->input('cartId'));
-
         try{
             $voucher = $request->input('voucher-code');
             $voucherDB = Voucher::where('code', $voucher)->first();

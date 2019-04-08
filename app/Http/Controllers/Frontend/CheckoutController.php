@@ -71,6 +71,13 @@ class CheckoutController extends Controller
             $order = Order::find($request->input('order'));
             $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
+            if($request->input('voucher') != ''){
+                //Apply Voucher
+                $order->voucher_code = $request->input('voucher');
+                $order->voucher_amount = $request->input('voucher_amount');
+                $order->save();
+            }
+
             //set data to request
             $transactionDataArr = Midtrans::setRequestData($order, $orderProduct, $paymentMethod);
 //            dd($transactionDataArr);
