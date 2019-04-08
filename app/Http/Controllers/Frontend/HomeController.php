@@ -229,7 +229,7 @@ class HomeController extends Controller
 
                 //testing SEND EMAIL ORDER CONFIRMATION
                 case 6:
-                    $order = Order::find(26);
+                    $order = Order::find(1);
                     $user = User::find($order->user_id);
                     $orderProducts = OrderProduct::where('order_id', $order->id)->get();
 

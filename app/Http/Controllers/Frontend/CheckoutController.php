@@ -9,6 +9,7 @@ use App\Mail\OrderConfirmation;
 use App\Models\Order;
 use App\Models\OrderProduct;
 use App\Models\ProductImage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -148,9 +149,7 @@ class CheckoutController extends Controller
                 $productImageArr[$productImage->product_id] = $productImage->path;
             }
             $orderConfirmation = new OrderConfirmation($user, $orderDB, $orderProducts, $productImageArr);
-            Mail::to($user->email)
-                ->bcc("yansen626@gmail.com")
-                ->send($orderConfirmation);
+            Mail::to($user->email)->bcc("yansen626@gmail.com")->send($orderConfirmation);
 
             $data=([
                 'order' => $order,
