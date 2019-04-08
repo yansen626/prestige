@@ -16,6 +16,17 @@
         <div class="container">
             <section class="paper-card">
                 <div class="row">
+                    <table class="table cell-vertical-align-middle  table-responsive mb-4">
+                        <tbody>
+                        <tr class="no-b">
+                            <td>
+                                <a href="{{ route('admin.waitinglists.download') }}" class="btn btn-outline-primary btn-lg btn-block">
+                                    <i class="icon-file-excel-o"></i> Download To Excel
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                     <div class="col-lg-12">
                         @include('partials.admin._messages')
                         <table id="category" class="table table-striped table-bordered dt-responsive" width="100%" cellspacing="0">

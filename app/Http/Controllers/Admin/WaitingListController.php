@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use App\libs\ExportExcel;
 use App\Models\Subscribe;
 use App\Models\WaitingList;
 use App\Transformer\SubscribeTransformer;
 use App\Transformer\WaitingListTransformer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Excel;
 use Yajra\DataTables\DataTables;
 
 class WaitingListController extends Controller
@@ -29,6 +32,15 @@ class WaitingListController extends Controller
             ->setTransformer(new WaitingListTransformer())
             ->addIndexColumn()
             ->make(true);
+    }
+
+    public function downloadList(){
+        $createdDate = Carbon::now('Asia/Jakarta')->format('d M Y');
+
+//        return Excel::download(new ExcelExport, 'Waiting List - '.$createdDate.'.xlsx');
+
+        return (new ExportExcel())->download('Waiting List - '.$createdDate.'.xlsx');
+
     }
 
     /**

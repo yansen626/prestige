@@ -115,6 +115,7 @@ Route::prefix('admin')->group(function(){
 
     // Waiting Lists
     Route::get('/waitinglists', 'Admin\WaitingListController@index')->name('admin.waitinglists.index');
+    Route::get('/waitinglist/export', 'Admin\WaitingListController@downloadList')->name('admin.waitinglists.download');
 
     // Store Address
     Route::get('/store-address', 'Admin\StoreAddressController@index')->name('admin.store-address.index');
