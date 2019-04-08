@@ -273,6 +273,7 @@
         });
 
         $('#apply-voucher').on("click", function () {
+            var orderId = "{{$order->id}}";
             var voucherCode = $('#voucher').val();
             var voucherCodeApplied = $('#voucher_applied').val();
             // alert(name);
@@ -288,6 +289,7 @@
                         data: {
                             '_token': '{{ csrf_token() }}',
                             'voucher-code': voucherCode,
+                            'order_id': orderId
                         }, // no need to stringify
                         success: function (result) {
                             if (typeof result == "string")
@@ -319,7 +321,7 @@
                             } else {
                                 $('#voucher_response').show();
                                 $('#voucher_response').css('color', 'red');
-                                $('#voucher_response').text("Voucher is not valid");
+                                $('#voucher_response').text(result.errors);
                             }
                         }
                     });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Voucher;
 use Carbon\Carbon;
@@ -226,16 +227,68 @@ class CartController extends Controller
 
     public function voucherValidation(Request $request){
         try{
+            $user = Auth::user();
             $voucher = $request->input('voucher-code');
-            $voucherDB = Voucher::where('code', $voucher)->first();
+
+            //Check if User already used the Voucher
+            $order = Order::where('user_id', $user->id)->where('voucher_code', $voucher)->get();
+            if($order != null){
+                return Response::json(array('errors' => 'Voucher Already Used!'));
+            }
+
+            //Check Voucher
+            $now = Carbon::now('Asia/Jakarta');
+            $voucherDB = Voucher::where('code', $voucher)
+                ->where('start_date', '<=', $now)
+                ->where('finish_date', '>=', $now)->first();
+            $trx = Order::find($request->input('order_id'));
+
             if(!empty($voucherDB)){
-                $voucherAmount = $voucherDB->voucher_amount == null ? 0 : $voucherDB->voucher_amount;
-                $voucherPercentage = $voucherDB->voucher_percentage == null ? 0 : $voucherDB->voucher_percentage;
-                return Response::json(array('success' => $voucherAmount.'#'.$voucherPercentage));
+                //Check the Voucher Categories or Products
+                if($voucherDB->category_id != null){
+                    $cats = explode('#', $voucherDB->category_id);
+                    $flag = false;
+                    foreach ($trx->order_products as $details){
+                        foreach ($cats as $cat){
+                            if($cat == $details->product->category_id){
+                                $flag = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if($flag){
+                        $voucherAmount = $voucherDB->voucher_amount == null ? 0 : $voucherDB->voucher_amount;
+                        $voucherPercentage = $voucherDB->voucher_percentage == null ? 0 : $voucherDB->voucher_percentage;
+                        return Response::json(array('success' => $voucherAmount.'#'.$voucherPercentage));
+                    }
+                }
+                else if($voucherDB->product_id != null){
+                    $prods = explode('#', $voucherDB->product_id);
+                    $flag = false;
+                    foreach ($trx->order_products as $details){
+                        foreach ($prods as $prod){
+                            if($prod == $details->product_id){
+                                $flag = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    if($flag){
+                        $voucherAmount = $voucherDB->voucher_amount == null ? 0 : $voucherDB->voucher_amount;
+                        $voucherPercentage = $voucherDB->voucher_percentage == null ? 0 : $voucherDB->voucher_percentage;
+                        return Response::json(array('success' => $voucherAmount.'#'.$voucherPercentage));
+                    }
+                }
+                else{
+                    return Response::json(array('errors' => 'Voucher Not Found!'));
+                }
             }
             else{
-                return Response::json(array('errors' => 'INVALID'));
+                return Response::json(array('errors' => 'Voucher Not Found!'));
             }
+
         }
         catch (\Exception $exception){
             Log::error("CartController/voucherValidation error: ". $exception);
