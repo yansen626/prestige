@@ -31,7 +31,7 @@ class CartController extends Controller
                 }
                 else{
                     $description = "Text: ".strtoupper($request->input('custom-text'))."<br>".
-                        "Font: ".$request->input('custom-font')."<br>".
+//                        "Font: ".$request->input('custom-font')."<br>".
                         "Color: ".$color[0]."<br>".
                         "Size: ".$size[0]."<br>";
                 }

@@ -5,13 +5,16 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\libs\Midtrans;
 use App\libs\Zoho;
+use App\Mail\OrderConfirmation;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -119,14 +122,32 @@ class CheckoutController extends Controller
             $orderDB->order_status_id = 3;
             $orderDB->save();
 
-            $orderProduct = OrderProduct::where('order_id', $order->id)->get();
+            $orderProducts = OrderProduct::where('order_id', $order->id)->get();
 
             // Create ZOHO Invoice
             Zoho::createInvoice($orderDB->zoho_sales_order_id);
 
+            //send email confirmation
+            $user = User::find($order->user_id);
+
+            $productIdArr = [];
+            foreach ($orderProducts as $orderProduct){
+                array_push($productIdArr, $orderProduct->product_id);
+            }
+
+            $productImages = ProductImage::whereIn('product_id',$productIdArr)->where('is_main_image', 1)->get();
+            $productImageArr = [];
+            foreach ($productImages as $productImage){
+                $productImageArr[$productImage->product_id] = $productImage->path;
+            }
+            $orderConfirmation = new OrderConfirmation($user, $orderDB, $orderProducts, $productImageArr);
+            Mail::to($user->email)
+                ->bcc("yansen626@gmail.com")
+                ->send($orderConfirmation);
+
             $data=([
                 'order' => $order,
-                'orderProduct' => $orderProduct,
+                'orderProduct' => $orderProducts,
             ]);
             return view('frontend.transactions.checkout-success')->with($data);
         }

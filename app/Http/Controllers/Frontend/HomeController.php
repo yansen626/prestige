@@ -143,7 +143,7 @@ class HomeController extends Controller
         return $currency;
     }
     public function TestingPurpose(){
-        $type = 8;
+        $type = 6;
         try{
             switch ($type){
                 //testing midtrans
@@ -244,7 +244,9 @@ class HomeController extends Controller
                         $productImageArr[$productImage->product_id] = $productImage->path;
                     }
                     $orderConfirmation = new OrderConfirmation($user, $order, $orderProducts, $productImageArr);
-                    Mail::to($user->email)->send($orderConfirmation);
+                    Mail::to($user->email)
+                        ->bcc("yansen@student.umn.ac.id")
+                        ->send($orderConfirmation);
                     break;
 
                 //testing get city rajaongkir
