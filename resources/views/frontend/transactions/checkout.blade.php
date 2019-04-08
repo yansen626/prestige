@@ -25,82 +25,25 @@
                         @if(\Illuminate\Support\Facades\Auth::guard('web')->check())
                             {{--Check if logged in and there's payment Info--}}
                         @endif
-
-                        <div class="col-md-6">
-                            @if($isIndonesian)
-                                <input type="radio" name="payment_method" id="payment_method" value="credit_card" checked/>
-                                <span style="font-size: 16px;">Card Payment</span>
-                                <img src="{{ asset('images/icons/checkout-visa.png') }}" class="width-50">
-                                <img src="{{ asset('images/icons/checkout-mastercard.png') }}" class="width-50">
-                                <img src="{{ asset('images/icons/checkout-jcb.png') }}" class="width-50">
-                                <img src="{{ asset('images/icons/checkout-american.png') }}" class="width-50">
-                                {{--Pay with Credit Card--}}
-                                &nbsp;<br>
-                                <input type="radio" name="payment_method" id="payment_method" value="bank_transfer"/>
-                                <span style="font-size: 16px;">Bank Transfer</span>
-                                <img src="{{ asset('images/icons/checkout-banktransfer.png') }}" class="width-50">
-                                {{--Pay with Virtual Account--}}
-                            @endif
-                        </div>
-                        {{--<div class="col-md-12">--}}
-                            {{--<select name="card_type" id="card_type" class="form-control">--}}
-                                {{--<option value="-1" selected>CARD TYPE</option>--}}
-                            {{--</select>--}}
-                        {{--</div>--}}
-
-                        {{--<div class="col-md-12">--}}
-                            {{--<input type="text" class="form-control" name="holder_name" id="holder_name" placeholder="CARD HOLDER NAME" required/>--}}
-                            {{--@if ($errors->has('holder_name'))--}}
-                                {{--<span class="invalid-feedback" role="alert">--}}
-                                    {{--<strong>{{ $errors->first('holder_name') }}</strong>--}}
-                                {{--</span>--}}
-                            {{--@endif--}}
-                        {{--</div>--}}
-
-                        {{--<div class="col-md-12">--}}
-                            {{--<input type="text" class="form-control" name="card_number" id="card_number" placeholder="CARD NUMBER" required/>--}}
-                            {{--@if ($errors->has('card_number'))--}}
-                                {{--<span class="invalid-feedback" role="alert">--}}
-                                    {{--<strong>{{ $errors->first('card_number') }}</strong>--}}
-                                {{--</span>--}}
-                            {{--@endif--}}
-                        {{--</div>--}}
-
-                        {{--<div class="col-md-6">--}}
-                            {{--<input type="text" class="form-control" name="card_date" id="card_date" placeholder="MM/YY" maxlength="5" required />--}}
-                            {{--@if ($errors->has('card_date'))--}}
-                                {{--<span class="invalid-feedback" role="alert">--}}
-                                    {{--<strong>{{ $errors->first('card_date') }}</strong>--}}
-                                {{--</span>--}}
-                            {{--@endif--}}
-                        {{--</div>--}}
-
-                        {{--<div class="col-md-6">--}}
-                            {{--<input type="number" class="form-control" name="card_cvv" id="card_cvv" placeholder="CVV" maxlength="3"  pattern="\d{4}" required/>--}}
-                            {{--@if ($errors->has('card_cvv'))--}}
-                                {{--<span class="invalid-feedback" role="alert">--}}
-                                    {{--<strong>{{ $errors->first('card_cvv') }}</strong>--}}
-                                {{--</span>--}}
-                            {{--@endif--}}
-                        {{--</div>--}}
                     </div>
                 </div>
 
-                <div class="row border">
-                    {{--<div class="col-xs-6 col-sm-12 col-md-6">--}}
-                        {{--<div class="col-xs-6 col-sm-12 col-md-6">--}}
-                            {{--<input type="checkbox" name="TC_Aggrement" value="ship" class=""/> I've read and accept the T&C's--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    <div class="col-lg-offset-6 col-xs-6 col-sm-12 col-md-6">
-                        <div class="col-xs-12 col-sm-12 col-md-12" style="text-align: right;">
-                            <a href="{{ route('orders') }}">
-                               <button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">
-                                   CANCEL
-                               </button>
-                            </a>
-                            <button type="button" id="pay-button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">PAY NOW</button>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <span>Have a coupon code?</span>
                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <span id="voucher_response" style="display:none;color:red;"></span>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8">
+                            <input type="text" class="form-control input-bordered" name="voucher" id="voucher" value="" placeholder="TYPE CODE HERE" style="text-align: center"/>
+                            <input type="hidden" id="voucher_applied" value=""/>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-4">
+                            <button id="apply-voucher" type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 100%;line-height: 0px; border: 1px solid #282828;">APPLY CODE</button>
+                        </div>
+
                     </div>
                 </div>
 
@@ -158,6 +101,7 @@
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SUBTOTAL</div>
                                             <div class="col-md-6 right">Rp {{$order->sub_total_string}}</div>
+                                            <input type="hidden" id="subtotal" value="{{$order->sub_total}}">
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">SERVICE</div>
@@ -167,13 +111,19 @@
                                             <div class="col-md-6 bold">SHIPPING</div>
                                             <div class="col-md-6 right">Rp {{$order->shipping_charge_string}}</div>
                                         </div>
-                                        <div class="col-md-12 border-bottom-black mb-20">
+                                        <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">TAX</div>
                                             <div class="col-md-6 right">Rp {{$order->tax_amount_string}}</div>
                                         </div>
+                                        <div class="col-md-12 border-bottom-black mb-20">
+                                            <div class="col-md-6 bold">VOUCHER</div>
+                                            <div class="col-md-6 right">Rp <span id="voucher_amount_span">0</span></div>
+                                            <input type="hidden" name="voucher_amount" id="voucher_amount" value="0">
+                                        </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold"><h5>TOTAL</h5></div>
-                                            <div class="col-md-6 right bold"><h5>Rp {{$order->grand_total_string}}</h5></div>
+                                            <div class="col-md-6 right bold"><h5>Rp <span id="grand_total_span">{{$order->grand_total_string}}</span></h5></div>
+                                            <input type="hidden" name="grand_total" id="grand_total" value="{{$order->grand_total}}">
                                         </div>
                                     </div>
                                 </div>
@@ -181,6 +131,44 @@
                         </tr>
 
                     </table>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="col-md-12">
+                            @if($isIndonesian)
+                                <input type="radio" name="payment_method" id="payment_method" value="credit_card" checked/>
+                                <span style="font-size: 16px;">Card Payment</span>
+                                <img src="{{ asset('images/icons/checkout-visa.png') }}" class="width-50">
+                                <img src="{{ asset('images/icons/checkout-mastercard.png') }}" class="width-50">
+                                <img src="{{ asset('images/icons/checkout-jcb.png') }}" class="width-50">
+                                <img src="{{ asset('images/icons/checkout-american.png') }}" class="width-50">
+                                {{--Pay with Credit Card--}}
+                                &nbsp;<br>
+                                <input type="radio" name="payment_method" id="payment_method" value="bank_transfer"/>
+                                <span style="font-size: 16px;">Bank Transfer</span>
+                                <img src="{{ asset('images/icons/checkout-banktransfer.png') }}" class="width-50">
+                                {{--Pay with Virtual Account--}}
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="row border">
+                    {{--<div class="col-xs-6 col-sm-12 col-md-6">--}}
+                    {{--<div class="col-xs-6 col-sm-12 col-md-6">--}}
+                    {{--<input type="checkbox" name="TC_Aggrement" value="ship" class=""/> I've read and accept the T&C's--}}
+                    {{--</div>--}}
+                    {{--</div>--}}
+                    <div class="col-lg-offset-6 col-xs-6 col-sm-12 col-md-6">
+                        <div class="col-xs-12 col-sm-12 col-md-12" style="text-align: right;">
+                            <a href="{{ route('orders') }}">
+                                <button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">
+                                    CANCEL
+                                </button>
+                            </a>
+                            <button type="button" id="pay-button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">PAY NOW</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         {{--</form>--}}
@@ -205,6 +193,17 @@
 @endsection
 @section('scripts')
     <script type="text/javascript">
+        function rupiahFormat(nStr) {
+            nStr += '';
+            x = nStr.split(',');
+            x1 = x[0];
+            x2 = x.length > 1 ? ',' + x[1] : '';
+            var rgx = /(\d+)(\d{3})/;
+            while (rgx.test(x1)) {
+                x1 = x1.replace(rgx, '$1' + '.' + '$2');
+            }
+            return x1 + x2;
+        }
         // var payButton = document.getElementById('pay-button');
         // payButton.addEventListener('click', function () {
         //     snap.pay('<SNAP_TOKEN>');
@@ -213,6 +212,9 @@
         $(document).on('click', '#pay-button', function (e) {
             var orderId = "{{$order->id}}";
             var paymentMethod = $('#payment_method').val();
+            var voucher = $('#voucher_applied').val();
+            var voucherAmount = $('#voucher_amount').val();
+            var grandTotal = $('#grand_total').val();
             var snapToken;
             // Request get token to your server & save result to snapToken variable
 
@@ -225,6 +227,9 @@
                     '_token': '{{ csrf_token() }}',
                     'order': orderId,
                     'payment_method': paymentMethod,
+                    'voucher' : voucher,
+                    'voucher_amount' : voucherAmount,
+                    'grand_total' : grandTotal
                 }, // no need to stringify
                 success: function (result) {
                     if (typeof result == "string")
@@ -242,28 +247,83 @@
     </script>
     <script type="text/javascript">
         //Set input Restriction
-        function setInputFilter(textbox, inputFilter) {
-            ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
-                textbox.addEventListener(event, function() {
-                    if (inputFilter(this.value)) {
-                        this.oldValue = this.value;
-                        this.oldSelectionStart = this.selectionStart;
-                        this.oldSelectionEnd = this.selectionEnd;
-                    } else if (this.hasOwnProperty("oldValue")) {
-                        this.value = this.oldValue;
-                        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
-                    }
-                });
-            });
-        }
+        // function setInputFilter(textbox, inputFilter) {
+        //     ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+        //         textbox.addEventListener(event, function() {
+        //             if (inputFilter(this.value)) {
+        //                 this.oldValue = this.value;
+        //                 this.oldSelectionStart = this.selectionStart;
+        //                 this.oldSelectionEnd = this.selectionEnd;
+        //             } else if (this.hasOwnProperty("oldValue")) {
+        //                 this.value = this.oldValue;
+        //                 this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        //             }
+        //         });
+        //     });
+        // }
 
-        setInputFilter(document.getElementById("card_date"), function(value) {
-            return /^-?\d*[/,]?\d*$/.test(value); });
+        // setInputFilter(document.getElementById("card_date"), function(value) {
+        //     return /^-?\d*[/,]?\d*$/.test(value); });
 
         $('#card_date').on('input', function() {
             var tmp = $(this).val();
             if(tmp.length === 2){
                 $(this).val(tmp + '/');
+            }
+        });
+
+        $('#apply-voucher').on("click", function () {
+            var voucherCode = $('#voucher').val();
+            var voucherCodeApplied = $('#voucher_applied').val();
+            // alert(name);
+            if(voucherCode != ""){
+                if(voucherCodeApplied == voucherCode){
+                    $('#voucher_response').text("Voucher already applied");
+                }
+                else{
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('check.voucher') }}',
+                        datatype : "application/json",
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'voucher-code': voucherCode,
+                        }, // no need to stringify
+                        success: function (result) {
+                            if (typeof result == "string")
+                                result = JSON.parse(result);
+                            if (result.success) {
+                                $('#voucher_response').show();
+                                $('#voucher_response').css('color', 'green');
+                                $('#voucher_response').text("Voucher is applied");
+                                var voucherData = result.success.split('#');
+                                var subtotal = $('#subtotal').val();
+                                var grandTotal = $('#grand_total').val();
+                                // alert(grandTotal);
+                                if(voucherData[0] != 0){
+                                    var newTotal = grandTotal - voucherData[0];
+                                    $('#grand_total').val(newTotal);
+                                    $('#grand_total_span').text(rupiahFormat(newTotal));
+                                    $('#voucher_amount').val(voucherData[0]);
+                                    $('#voucher_amount_span').text(rupiahFormat(voucherData[0]));
+                                }
+                                if(voucherData[1] != 0){
+                                    var voucherAmount = (subtotal * voucherData[1])/100;
+                                    var newTotal = grandTotal - voucherAmount;
+                                    $('#grand_total').val(newTotal);
+                                    $('#grand_total_span').text(rupiahFormat(newTotal));
+                                    $('#voucher_amount').val(voucherAmount);
+                                    $('#voucher_amount_span').text(rupiahFormat(voucherAmount));
+                                }
+                                $('#voucher_applied').val(voucherCode);
+                            } else {
+                                $('#voucher_response').show();
+                                $('#voucher_response').css('color', 'red');
+                                $('#voucher_response').text("Voucher is not valid");
+                            }
+                        }
+                    });
+                }
             }
         });
     </script>

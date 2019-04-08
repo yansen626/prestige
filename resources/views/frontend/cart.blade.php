@@ -102,22 +102,6 @@
                 <div class="row">
                     <!-- Coupon Side -->
                     <div class="col-xs-12 col-sm-12 col-md-8">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <span>Have a coupon code?</span>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <span id="voucher_response" style="display:none;color:red;"></span>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-8">
-                            <input type="text" class="form-control input-bordered" name="voucher" id="voucher" placeholder="TYPE CODE HERE" style="text-align: center"/>
-                            <input type="hidden" id="voucher_applied" value=""/>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-4">
-                            <button id="apply-voucher" type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 100%;line-height: 0px; border: 1px solid #282828;">APPLY CODE</button>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -5%;">
-                            <hr style="height:1px;border:none;color:#eee;background-color:#eee;" />
-                        </div>
                     </div>
 
                     <!-- Subtotal Side -->
@@ -250,22 +234,6 @@
                 <div class="row">
                     <!-- Coupon Side -->
                     <div class="col-xs-12 col-sm-12 col-md-8">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <span>Have a coupon code?</span>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <span id="voucher_response" style="display:none;color:red;"></span>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-8">
-                            <input type="text" class="form-control input-bordered" name="voucher" id="voucher" placeholder="TYPE CODE HERE" style="text-align: center"/>
-                            <input type="hidden" id="voucher_applied" value=""/>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-4" style="padding-bottom: 4%;">
-                            <button id="apply-voucher" type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 100%;line-height: 0px; border: 1px solid #282828;">APPLY CODE</button>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs" style="margin-top: -5%;">
-                            <hr style="height:1px;border:none;color:#eee;background-color:#eee;" />
-                        </div>
                     </div>
 
                     <!-- Subtotal Side -->

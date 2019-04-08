@@ -72,6 +72,19 @@ class Midtrans
                 array_push($item_details, $item_tax);
             }
 
+            //add Voucher
+            if(!empty($order->voucher_amount)){
+                $voucherAmount = (int)$order->voucher_amount;
+                $voucher = array(
+                    'id'        => $order->id."-Voucher",
+                    'price'     => -$voucherAmount,
+                    'quantity'  => 1,
+                    'name'      => 'Voucher'
+                );
+                $grandTotal -= $voucherAmount;
+                array_push($item_details, $voucher);
+            }
+
             //vtweb
 
             // credit card = credit_card
