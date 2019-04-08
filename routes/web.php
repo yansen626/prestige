@@ -34,6 +34,7 @@ Route::post('/contact-us/', 'Frontend\HomeController@contact')->name('contact');
 Route::post('/newsletter/', 'Frontend\HomeController@newsletter')->name('newsletter');
 Route::get('others/about-us/', 'Frontend\HomeController@aboutUs')->name('about.us');
 Route::get('others/{type}', 'Frontend\HomeController@Others')->name('others');
+Route::post('/waiting-list/', 'Frontend\HomeController@waitingList')->name('waiting-list');
 
 // product
 Route::get('/product-list', 'Frontend\ProductController@index')->name('product.list');
@@ -112,6 +113,9 @@ Route::prefix('admin')->group(function(){
     // Subscribes
     Route::get('/subscribes', 'Admin\SubscribeController@index')->name('admin.subscribes.index');
 
+    // Waiting Lists
+    Route::get('/waitinglists', 'Admin\WaitingListController@index')->name('admin.waitinglists.index');
+
     // Store Address
     Route::get('/store-address', 'Admin\StoreAddressController@index')->name('admin.store-address.index');
     Route::get('/store-address/create', 'Admin\StoreAddressController@create')->name('admin.store-address.create');
@@ -171,6 +175,7 @@ Route::get('/datatables-currencies', 'Admin\CurrencyController@getIndex')->name(
 Route::get('/datatables-store-addresses', 'Admin\StoreAddressController@getIndex')->name('datatables.store-addresses');
 Route::get('/datatables-contact-message', 'Admin\ContactMessageController@getIndex')->name('datatables.contact-message');
 Route::get('/datatables-subscribes', 'Admin\SubscribeController@getIndex')->name('datatables.subscribes');
+Route::get('/datatables-waitinglists', 'Admin\WaitingListController@getIndex')->name('datatables.waitinglists');
 Route::get('/datatables-vouchers', 'Admin\VoucherController@getIndex')->name('datatables.vouchers');
 Route::get('/datatables-faqs', 'Admin\FaqController@getIndex')->name('datatables.faqs');
 Route::get('/datatables-orders', 'Admin\OrderController@getIndex')->name('datatables.orders');

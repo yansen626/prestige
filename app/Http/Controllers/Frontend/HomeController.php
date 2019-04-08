@@ -15,6 +15,7 @@ use App\Models\ProductImage;
 use App\Models\Subscribe;
 use App\Models\User;
 use App\Models\Voucher;
+use App\Models\WaitingList;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -79,6 +80,25 @@ class HomeController extends Controller
         }
         catch(\Exception $ex){
             return Response::json(array('errors' => 'INVALID' . $request->input('id')));
+        }
+    }
+
+    public function waitingList(Request $request)
+    {
+        try{
+            $productDB = Product::where('slug', $request->input('slug'))->first();
+            $dateTimeNow = Carbon::now('Asia/Jakarta');
+
+            $newSubscriber = WaitingList::create([
+                'email' => $request->input('email'),
+                'name' => $request->input('name'),
+                'product_id' => $productDB->id,
+                'created_at'        => $dateTimeNow->toDateTimeString(),
+            ]);
+            return Response::json(array('success' => 'VALID'));
+        }
+        catch(\Exception $ex){
+            return Response::json(array('errors' => 'INVALID' . $request->input('slug')));
         }
     }
 

@@ -311,7 +311,20 @@
                                         <!-- End .Accordion-->
 
                                         <div class="mobile-center" style="padding: 5% 0 5% 0">
-                                            <button class="btn btn--secondary btn--bordered" type="submit">Add to Cart</button>
+                                            @if($product->qty <= 0)
+                                                <p>This product is sold Out, drop your email for next information</p>
+                                                <input type="text" class="form-control" id="waiting_list_name" placeholder="NAME"/>
+                                                <input type="email" class="form-control" id="waiting_list_email" placeholder="EMAIL"/>
+                                                <a class="btn btn--secondary btn--bordered" id="waiting_list_button">Submit</a>
+
+                                                <div id="waiting_list_success_message" class="row mb-3" style="display: none;padding-top:5%;">
+                                                    <div class="col-12">
+                                                        <h5 class="text--left">Thank you for registering</h5>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <button class="btn btn--secondary btn--bordered" type="submit">Add to Cart</button>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -908,6 +921,28 @@
                 $('#customize-section').show();
             }
         }
+
+        $('#waiting_list_button').click(function(e){
+            e.preventDefault();
+            var email = $('#waiting_list_email').val();
+            var name = $('#waiting_list_name').val();
+            var slug = $('#slug').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('waiting-list') }}',
+                datatype : "application/json",
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'email': email,
+                    'name': name,
+                    'slug': slug,
+                }, // no need to stringify
+                success: function (result) {
+                    $('#waiting_list_success_message').slideDown(500);
+                }
+            });
+        });
     </script>
 
 @endsection

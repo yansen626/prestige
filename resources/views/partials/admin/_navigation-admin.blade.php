@@ -79,6 +79,14 @@
 
                     <ul class="treeview-menu">
                         <li>
+                            <a href="{{ route('admin.waitinglists.index') }}">
+                                <i class="icon icon-user-circle text-green"></i>Waiting Lists
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="treeview-menu">
+                        <li>
                             <a href="{{ route('admin.vouchers.index') }}">
                                 <i class="icon icon-vcard text-green"></i>Vouchers
                             </a>

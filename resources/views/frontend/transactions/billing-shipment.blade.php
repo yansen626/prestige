@@ -253,7 +253,7 @@
                                     <img src="{{ asset('images/icons/jne.jpg') }}" class="width-100">
                                     <br>
                                     <input type="radio" name="courier" id="jne" value="jne-REG" checked/> REG <br>
-                                    <input type="radio" name="courier" id="jne" value="jne-OKE"/> OKE <br>
+                                    {{--<input type="radio" name="courier" id="jne" value="jne-OKE"/> OKE <br>--}}
                                     <input type="radio" name="courier" id="jne" value="jne-YES"/> YES <br>
                                 </div>
                                 <div class="col-md-4">
@@ -263,27 +263,27 @@
                                     <input type="radio" name="courier" id="jne" value="tiki-ONS" /> ONS (OVER NIGHT SERVICE) <br>
                                     <input type="radio" name="courier" id="jne" value="tiki-SDS" /> SDS (SAME DAY SERVICE) <br>
                                 </div>
-                                <div class="col-md-4">
-                                    <img src="{{ asset('images/icons/pos.png') }}" class="width-100">
-                                    <br>
-                                    <input type="radio" name="courier" id="jne" value="pos-Paket Kilat Khusus" /> Paket Kilat Khusus <br>
-                                </div>
+                                {{--<div class="col-md-4">--}}
+                                    {{--<img src="{{ asset('images/icons/pos.png') }}" class="width-100">--}}
+                                    {{--<br>--}}
+                                    {{--<input type="radio" name="courier" id="jne" value="pos-Paket Kilat Khusus" /> Paket Kilat Khusus <br>--}}
+                                {{--</div>--}}
                             </div>
-                            <div class="col-md-12">
-                                <div class="col-md-4">
-                                    <img src="{{ asset('images/icons/sicepat.jpg') }}" class="width-100">
-                                    <br>
-                                    <input type="radio" name="courier" id="jne" value="sicepat-REG"/> REG (Layanan Reguler) <br>
-                                    <input type="radio" name="courier" id="jne" value="sicepat-OKE"/> BEST (Besok Sampai Tujuan) <br>
-                                </div>
-                                <div class="col-md-4">
-                                    <img src="{{ asset('images/icons/JNT.png') }}" class="width-100">
+                            {{--<div class="col-md-12">--}}
+                                {{--<div class="col-md-4">--}}
+                                    {{--<img src="{{ asset('images/icons/sicepat.jpg') }}" class="width-100">--}}
+                                    {{--<br>--}}
+                                    {{--<input type="radio" name="courier" id="jne" value="sicepat-REG"/> REG (Layanan Reguler) <br>--}}
+                                    {{--<input type="radio" name="courier" id="jne" value="sicepat-OKE"/> BEST (Besok Sampai Tujuan) <br>--}}
+                                {{--</div>--}}
+                                {{--<div class="col-md-4">--}}
+                                    {{--<img src="{{ asset('images/icons/JNT.png') }}" class="width-100">--}}
                                     {{--<img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">--}}
-                                    <br>
-                                    <input type="radio" name="courier" id="jne" value="J&T-EZ" /> EZ (Regular Service) <br>
-                                    <input type="radio" name="courier" id="jne" value="J&T-JSD" /> JSD (Same Day Service) <br>
-                                </div>
-                            </div>
+                                    {{--<br>--}}
+                                    {{--<input type="radio" name="courier" id="jne" value="J&T-EZ" /> EZ (Regular Service) <br>--}}
+                                    {{--<input type="radio" name="courier" id="jne" value="J&T-JSD" /> JSD (Same Day Service) <br>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                             {{--jne, pos, tiki, rpx, esl, pcp, pandu, wahana, sicepat, jnt, pahala, cahaya, sap, jet, indah, dse, slis, first, ncs, star, ninja, lion, idl--}}
                             {{--<input type="radio" name="courier" id="jne" value="jne" />--}}
                             {{--<img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-50">--}}

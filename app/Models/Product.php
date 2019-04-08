@@ -54,6 +54,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Illuminate\Database\Eloquent\Collection $product_variations
  * @property \Illuminate\Database\Eloquent\Collection $related_products
  * @property \Illuminate\Database\Eloquent\Collection $wishlists
+ * @property \Illuminate\Database\Eloquent\Collection $waiting_lists
  *
  * @package App\Models
  */
@@ -191,5 +192,10 @@ class Product extends Eloquent
 	public function wishlists()
 	{
 		return $this->hasMany(\App\Models\Wishlist::class);
+	}
+
+	public function waiting_lists()
+	{
+		return $this->hasMany(\App\Models\WaitingList::class);
 	}
 }
