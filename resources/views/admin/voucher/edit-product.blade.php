@@ -8,7 +8,7 @@
                 <div class="col">
                     <h4>
                         <i class="icon-package"></i>
-                        Edit Voucher
+                        Edit Voucher Product
                     </h4>
                 </div>
             </div>
@@ -37,6 +37,60 @@
                             @endforeach
                             <!-- Input -->
                                 <div class="body">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <input type="hidden" name="type" value="products"/>
+                                                @php($idx = 0)
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th colspan="3">
+                                                            Products
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            @foreach($products as $product)
+                                                                @php($idx++)
+                                                                @foreach($choosenProducts as $choosen)
+                                                                    @if($choosen->id == $product->id)
+                                                                        <td>
+                                                                            <label>
+                                                                                <input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" checked/> {{ $product->name }}
+                                                                                <input type="hidden" class="group2" value="{{ $product->id }}" id="{{ $product->id }}" name="ids[]"/>
+                                                                            </label>
+                                                                        </td>
+                                                                    @else
+                                                                        <td>
+                                                                            <label>
+                                                                                <input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" /> {{ $product->name }}
+                                                                                <input type="hidden" class="group2" value="{{ $product->id }}" id="{{ $product->id }}" name="ids[]" disabled/>
+                                                                            </label>
+                                                                        </td>
+                                                                    @endif
+                                                                @endforeach
+
+                                                                @if($idx == 3)
+                                                                    <tr/><tr>
+                                                                    @php($idx = 0)
+                                                                @endif
+                                                            @endforeach
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="3">
+                                                                <label>
+                                                                    <input type="checkbox" class="flat" id="selectAll"/> Select All
+                                                                </label>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="status">Status *</label>
@@ -72,39 +126,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mb-6">
-                                            <label class="form-label" for="voucher_amount">Voucher Amount </label>
-                                            <input id="voucher_amount" type="number" class="form-control"
-                                                   name="voucher_amount" value="{{ $voucher->voucher_amount }}">
-                                        </div>
-                                        <div class="col-md-6 mb-6">
-                                            <label class="form-label" for="voucher_percentage">Voucher Percentage </label>
-                                            <input id="voucher_percentage" type="number" class="form-control"
-                                                   name="voucher_percentage" value="{{ $voucher->voucher_percentage }}">
-                                        </div>
-                                    </div>
-
                                     <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="category">Category *</label>
-                                            <select id="category" name="category" class="form-control">
-                                                @if($category != null)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                @endif
-                                            </select>
-                                        </div>
+                                        <label class="form-label" for="voucher_amount">Voucher Amount </label>
+                                        <input id="voucher_amount" type="number" class="form-control"
+                                               name="voucher_amount" value="{{ $voucher->voucher_amount }}">
                                     </div>
-
                                     <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="product">Product *</label>
-                                            <select id="product" name="product" class="form-control">
-                                                @if($product != null)
-                                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
-                                                @endif
-                                            </select>
-                                        </div>
+                                        <label class="form-label" for="voucher_percentage">Voucher Percentage </label>
+                                        <input id="voucher_percentage" type="number" class="form-control"
+                                               name="voucher_percentage" value="{{ $voucher->voucher_percentage }}">
                                     </div>
 
                                     <div class="col-md-12">
@@ -199,5 +229,26 @@
                 }
             }
         });
+
+        $("#selectAll").click(function(){
+            $('input:checkbox').not(this).prop('checked', this.checked);
+            if(this.checked){
+                $('input.group1').prop("disabled", false);
+                $('input.group2').prop("disabled", false);
+            }
+            else{
+                $('input.group1').prop("disabled", true);
+                $('input.group2').prop("disabled", true);
+            }
+        });
+
+        function changeInput(id){
+            if(document.getElementById("chk"+id).checked == true){
+                document.getElementById(id).disabled = false;
+            }
+            else{
+                document.getElementById(id).disabled = true;
+            }
+        }
     </script>
 @endsection

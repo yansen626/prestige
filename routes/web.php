@@ -131,7 +131,8 @@ Route::prefix('admin')->group(function(){
     Route::get('/vouchers/create', 'Admin\VoucherController@create')->name('admin.vouchers.create');
     Route::get('/vouchers/create/product', 'Admin\VoucherController@createProduct')->name('admin.vouchers.create-product');
     Route::post('/vouchers/store', 'Admin\VoucherController@store')->name('admin.vouchers.store');
-    Route::get('/vouchers/edit/{item}', 'Admin\VoucherController@edit')->name('admin.vouchers.edit');
+    Route::get('/vouchers/edit/category/{item}', 'Admin\VoucherController@editCategory')->name('admin.vouchers.edit-category');
+    Route::get('/vouchers/edit/product/{item}', 'Admin\VoucherController@editProduct')->name('admin.vouchers.edit-product');
     Route::post('/vouchers/update', 'Admin\VoucherController@update')->name('admin.vouchers.update');
     Route::post('/vouchers/delete', 'Admin\VoucherController@destroy')->name('admin.vouchers.destroy');
 

@@ -26,7 +26,12 @@ class VoucherTransformer extends TransformerAbstract
             $startDate = Carbon::parse($data->start_date)->format('d M Y');
             $finishDate = Carbon::parse($data->finish_date)->format('d M Y');
 
-            $action = "<a class='btn btn-xs btn-info' href='vouchers/edit/".$data->id."' data-toggle='tooltip' data-placement='top'><i class='icon-mode_edit'></i></a>";
+            if($data->category_id != null || $data->category_id != 0){
+                $action = "<a class='btn btn-xs btn-info' href='vouchers/edit/category/".$data->id."' data-toggle='tooltip' data-placement='top'><i class='icon-mode_edit'></i></a>";
+            }
+            else{
+                $action = "<a class='btn btn-xs btn-info' href='vouchers/edit/product/".$data->id."' data-toggle='tooltip' data-placement='top'><i class='icon-mode_edit'></i></a>";
+            }
             $action .= "<a class='delete-modal btn btn-xs btn-danger' data-id='". $data->id ."' ><i class='icon-delete'></i></a>";
 
             if($data->category_id != null || $data->category_id != 0){

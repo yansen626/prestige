@@ -194,33 +194,51 @@ class VoucherController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function editCategory($id)
     {
         $voucher = Voucher::find($id);
 
         //More Data to Show
         if($voucher->category_id != null || $voucher->category_id != 0){
-            $category = Category::find($voucher->category_id);
+            $cats = explode('#', $voucher->category_id);
+            $choosenCategories = Category::whereIn('id', $cats)->get();
+            $categories = Category::all();
         }
         else{
-            $category = null;
+            $categories = null;
+            $choosenCategories = null;
         }
+
+        return view('admin.voucher.edit-category', compact('voucher', 'categories', 'choosenCategories'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editProduct($id)
+    {
+        $voucher = Voucher::find($id);
 
         if($voucher->product_id != null || $voucher->product_id != 0){
-            $product = Product::find($voucher->product_id);
+            $prods = explode('#', $voucher->product_id);
+            $choosenProducts = Product::whereIn('id', $prods)->get();
+            $products = Product::where('id', '!=', 1)->get();
         }
         else{
-            $product = null;
+            $products = null;
+            $choosenProducts = null;
         }
 
-        return view('admin.voucher.edit', compact('voucher', 'category', 'product'));
+        return view('admin.voucher.edit-product', compact('voucher', 'products', 'choosenProducts'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
