@@ -117,6 +117,11 @@
                                 </span>
                                 <h2>ORDER DETAILS</h2>
                                 <h4>Order {{$order->order_number}}</h4>
+                                @if($order->payment_option == "credit_card")
+                                    <h4>Payment with Credit Card</h4>
+                                @else
+                                    <h4>Payment with Bank Transfer</h4>
+                                @endif
                                 <span>
                                     {{ \Carbon\Carbon::parse($order->created_at)->format('F j, Y')}}
                                 </span>

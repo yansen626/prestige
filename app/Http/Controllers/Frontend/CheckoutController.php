@@ -154,6 +154,12 @@ class CheckoutController extends Controller
             $productIdArr = [];
             foreach ($orderProducts as $orderProduct){
                 array_push($productIdArr, $orderProduct->product_id);
+
+                //minus item quantity
+                $product = $orderProduct->product;
+                $qty = $product->qty;
+                $product->qty = $qty-1;
+                $product->save();
             }
 
             $productImages = ProductImage::whereIn('product_id',$productIdArr)->where('is_main_image', 1)->get();
@@ -162,7 +168,7 @@ class CheckoutController extends Controller
                 $productImageArr[$productImage->product_id] = $productImage->path;
             }
             $orderConfirmation = new OrderConfirmation($user, $orderDB, $orderProducts, $productImageArr);
-            Mail::to($user->email)->bcc("yansen626@gmail.com")->send($orderConfirmation);
+            Mail::to($user->email)->bcc("sales@nama-official.com")->send($orderConfirmation);
 
             $data=([
                 'order' => $order,

@@ -17,8 +17,8 @@
                                 Please make the payment to the account stated below.<br>
                             </p>
                             <h4>
-                                Bank Central Asia<br>
-                                123 456 7890 a.n Nama-official
+                                Bank Central Asia (BCA)<br>
+                                006 612 1555  a.n Caroline
                             </h4>
                             <p>TOTAL PAYMENT = {{env('KURS_IDR')}} {{$order->grand_total_string}}</p>
                         </div>

@@ -131,6 +131,13 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('admin.orders.bank_transfer') }}">
+                                <i class="icon icon-user-circle text-green"></i>List Bank Transfer
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">

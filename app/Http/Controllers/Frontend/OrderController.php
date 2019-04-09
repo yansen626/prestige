@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NewTransferBank;
+use App\Mail\OrderConfirmation;
 use App\Models\Cart;
 use App\Models\Order;
+use App\Models\OrderBankTransfer;
 use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\Voucher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -57,9 +62,29 @@ class OrderController extends Controller
     public function SubmitBankTransfer(Request $request){
         if (Auth::check())
         {
+            $orderDB = Order::where('order_number', $request->input('order_number'))->first();
+            $user = $orderDB->user;
+            $dateTimeNow = Carbon::now('Asia/Jakarta');
 
+            //create order transfer bank database
+            $newOrderBankTransfer = OrderBankTransfer::create([
+                'user_id' => $orderDB->user_id,
+                'order_id' => $orderDB->id,
+                'bank_acc_no' => $request->input('bank_acc_no'),
+                'bank_acc_name' => $request->input('bank_acc_name'),
+                'bank_name' => $request->input('bank_name'),
+                'amount' => $request->input('amount'),
+                'status' => 0,
+                'created_at'        => $dateTimeNow->toDateTimeString(),
+            ]);
+            $orderDB->order_status_id = 8;
+            $orderDB->save();
 
-            return view('frontend.transactions.order', compact('order', 'orderProduct'));
+            //send email to admin
+            $newTransferBank = new NewTransferBank($user, $orderDB);
+            Mail::to("sales@nama-official.com")
+                ->send($newTransferBank);
+            return Redirect::route('orders');
         }
         return Redirect::route('home');
         //dd($carts);
