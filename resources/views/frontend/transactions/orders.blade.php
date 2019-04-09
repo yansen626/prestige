@@ -50,8 +50,13 @@
                                                 {{$order->order_status->name}}
                                             </td>
                                             <td>
+
                                                 @if($order->order_status_id == 2)
                                                     <a href="{{route('checkout', ['order'=>$order->id])}}">
+                                                        <button type="button" class="btn btn--primary btn--bordered custom-btn">Pay</button>
+                                                    </a>
+                                                @elseif($order->order_status_id == 7)
+                                                    <a href="{{route('order.bank_confirmation', ['order'=>$order->id])}}">
                                                         <button type="button" class="btn btn--primary btn--bordered custom-btn">Pay</button>
                                                     </a>
                                                 @else

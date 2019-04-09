@@ -16,6 +16,17 @@
                             @csrf
 
                             <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+                                <div class="col-md-12 text--center">
+                                    <p>
+                                        We are pleased to tell you your order has been received.<br>
+                                        Please make the payment to the account stated below.<br>
+                                    </p>
+                                    <h4>
+                                        Bank Central Asia<br>
+                                        123 456 7890 a.n Nama-official
+                                    </h4>
+                                    <p>TOTAL PAYMENT = {{env('KURS_IDR')}} {{$order->grand_total_string}}</p>
+                                </div>
                                 <div class="col-md-12">
                                     <h1>Confirm Payment</h1>
                                     <hr style="height:1px;border:none;color:#333;background-color:#333;" />
@@ -24,38 +35,26 @@
                                 <div class="col-md-12">
                                     @foreach($errors->all() as $error)
                                         <span class="form-message">
-                                    <strong> {{ $error }} </strong>
-                                    <br/>
-                                </span>
+                                            <strong> {{ $error }} </strong>
+                                            <br/>
+                                        </span>
                                     @endforeach
                                 </div>
 
                                 <div class="col-md-12">
-                                    <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}" placeholder="EMAIL ADDRESS" required/>
+                                    <input type="text" class="form-control" name="account_no" id="account_no" value="{{old('account_no')}}" placeholder="ACCOUNT NUMBER" required/>
                                 </div>
 
                                 <div class="col-md-12">
-                                    <input type="text" class="form-control" name="phone" id="phone" value="{{old('phone')}}" placeholder="PHONE NUMBER" required/>
+                                    <input type="text" class="form-control" name="account_name" id="account_name" value="{{old('account_name')}}" placeholder="ACCOUNT NAME" required/>
                                 </div>
 
                                 <div class="col-md-12">
                                     <input type="password" class="form-control" name="password" id="password" value="{{old('password')}}" placeholder="PASSWORD" required/>
                                 </div>
 
-                                <div class="col-md-12">
-                                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" value="{{old('password_confirmation')}}" placeholder="PASSWORD CONFIRMATION" required/>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="FIRST NAME" value="{{old('first_name')}}" required/>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="LAST NAME" value="{{old('last_name')}}" required/>
-                                </div>
-
                                 <div class="col-md-12 center">
-                                    <button type="submit" class="btn btn--secondary btn--bordered">Register</button>
+                                    <button type="submit" class="btn btn--secondary btn--bordered">Submit</button>
                                 </div>
                             </div>
                         </form>

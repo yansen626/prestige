@@ -385,8 +385,8 @@ class BillingController extends Controller
         $result = array();
         try{
             $client = new \GuzzleHttp\Client();
-            $url = "https://api.rajaongkir.com/starter/cost";
-//            $url = env('RAJAONGKIR_URL').'/cost';
+//            $url = "https://api.rajaongkir.com/starter/cost";
+            $url = env('RAJAONGKIR_URL').'/cost';
             $key = env('RAJAONGKIR_KEY');
 
             $response = $client->request('POST', $url, [

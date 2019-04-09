@@ -94,9 +94,10 @@ class CheckoutController extends Controller
             else{
                 $redirectUrl = route('checkout-transfer-information', ['order'=>$order]);
                 //dd($exception);
+
                 //Pending bank transfer payment
-                //Apply Voucher
-                $order->order_status_id = $request->input('voucher');
+                //change status
+                $order->order_status_id = 7;
                 $order->save();
 
                 return Response::json(array('success' => $redirectUrl));

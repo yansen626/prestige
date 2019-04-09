@@ -66,6 +66,7 @@ Route::prefix('payment')->group(function(){
 Route::get('/orders', 'Frontend\OrderController@Index')->name('orders');
 Route::get('/order/{order}', 'Frontend\OrderController@Show')->name('order.detail');
 Route::get('/order/transfer_confirmation/{order}', 'Frontend\OrderController@ConfirmBankTransfer')->name('order.bank_confirmation');
+Route::post('/order/transfer_confirmation', 'Frontend\OrderController@SubmitBankTransfer')->name('order.bank_submit');
 
 // miscellaneous
 Route::get('/test-location', 'Frontend\HomeController@getLocation')->name('getLocation');

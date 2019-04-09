@@ -48,6 +48,17 @@ class OrderController extends Controller
         {
             $orderProduct = OrderProduct::where('order_id', $order->id)->get();
 
+            return view('frontend.transactions.transfer_confirmation', compact('order', 'orderProduct'));
+        }
+        return Redirect::route('home');
+        //dd($carts);
+    }
+
+    public function SubmitBankTransfer(Request $request){
+        if (Auth::check())
+        {
+
+
             return view('frontend.transactions.order', compact('order', 'orderProduct'));
         }
         return Redirect::route('home');
