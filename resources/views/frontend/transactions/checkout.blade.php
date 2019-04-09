@@ -323,25 +323,17 @@
                             if (result.success) {
                                 $('#voucher_response').show();
                                 $('#voucher_response').css('color', 'green');
-                                $('#voucher_response').text("Voucher is applied");
-                                var voucherData = result.success.split('#');
+                                $('#voucher_response').text("Enjoy Your Voucher!");
+                                var voucherData = result.success;
                                 var subtotal = $('#subtotal').val();
                                 var grandTotal = $('#grand_total').val();
                                 // alert(grandTotal);
-                                if(voucherData[0] != 0){
-                                    var newTotal = grandTotal - voucherData[0];
+                                if(voucherData != 0){
+                                    var newTotal = grandTotal - voucherData;
                                     $('#grand_total').val(newTotal);
                                     $('#grand_total_span').text(rupiahFormat(newTotal));
-                                    $('#voucher_amount').val(voucherData[0]);
-                                    $('#voucher_amount_span').text(rupiahFormat(voucherData[0]));
-                                }
-                                if(voucherData[1] != 0){
-                                    var voucherAmount = (subtotal * voucherData[1])/100;
-                                    var newTotal = grandTotal - voucherAmount;
-                                    $('#grand_total').val(newTotal);
-                                    $('#grand_total_span').text(rupiahFormat(newTotal));
-                                    $('#voucher_amount').val(voucherAmount);
-                                    $('#voucher_amount_span').text(rupiahFormat(voucherAmount));
+                                    $('#voucher_amount').val(voucherData);
+                                    $('#voucher_amount_span').text(rupiahFormat(voucherData));
                                 }
                                 $('#voucher_applied').val(voucherCode);
                             } else {
