@@ -264,6 +264,7 @@ class CartController extends Controller
                                 else{
                                     $totalVoucher += $details->product->price * $voucherPercentage / 100;
                                 }
+                                break;
                             }
                         }
                     }
@@ -286,6 +287,7 @@ class CartController extends Controller
                         foreach ($prods as $prod){
                             if($prod == $details->product_id){
                                 $flag = true;
+
                                 //Count the Voucher Total Price
                                 if($voucherAmount != 0){
                                     $totalVoucher += $voucherAmount;
