@@ -124,6 +124,12 @@
                                                         <textarea class="form-control p-t-40" id="style_notes" name="style_notes"
                                                                   placeholder="Write Something..." rows="7" required>{{old('style_notes', $product->style_notes)}}</textarea>
                                                     </div>
+                                                    <div class="form-group">
+                                                        <input type="checkbox" id="is_customize" name="is_customize" class="form-check-input" checked/>
+                                                        <label class="form-check-label" for="is_customize">
+                                                            Customize
+                                                        </label>
+                                                    </div>
                                                     {{--<div class="row">--}}
                                                         {{--<div class="col-md-12 mb-3">--}}
                                                             {{--<label>Meta Title</label>--}}

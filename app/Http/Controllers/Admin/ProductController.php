@@ -106,6 +106,7 @@ class ProductController extends Controller
                 'tags'             => 'required',
             ]);
 
+
             if ($request->input('category') == "-1") {
                 return back()->withErrors("Category is required")->withInput($request->all());
             }
@@ -131,6 +132,12 @@ class ProductController extends Controller
             if(!empty($is_exist)){
                 $is_primary = 0;
             }
+            if($request->input('is_customize') == 'on'){
+                $customize = 1;
+            }
+            else{
+                $customize = 0;
+            }
 //            dd($colourNew);
             $newProduct = Product::create([
                 'name' => $request->input('name'),
@@ -148,6 +155,7 @@ class ProductController extends Controller
                 'length' => $request->input('length'),
                 'tag' => $request->input('tags'),
                 'is_primary' => $is_primary,
+                'is_customize' => $customize,
                 'status' => 1,
                 'created_at'        => $dateTimeNow->toDateTimeString(),
                 'updated_at'        => $dateTimeNow->toDateTimeString(),
@@ -232,7 +240,12 @@ class ProductController extends Controller
             $tmp = Zoho::createProduct($newProduct, $newProduct->category->zoho_item_group_id);
 //            dd($tmp);
 
-            return redirect()->route('admin.product.edit.customize',['item' => $newProductPosition->id]);
+            if($customize == 1){
+                return redirect()->route('admin.product.edit.customize',['item' => $newProductPosition->id]);
+            }
+            else{
+                return redirect()->route('admin.product.show',['item' => $newProduct->id]);
+            }
 
         }catch(\Exception $ex){
             error_log($ex);
@@ -369,8 +382,15 @@ class ProductController extends Controller
 
             $colourNew = Utilities::CreateProductSlug($request->input('colour'));
 
+            if($request->input('is_customize') == 'on'){
+                $customize = 1;
+            }
+            else{
+                $customize = 0;
+            }
 //            dd($slug);
             // update product
+            $product->is_customize = $customize;
             $product->category_id = $request->input('category');
             $product->name = $request->input('name');
             $product->slug = $slug."--".$colourNew;

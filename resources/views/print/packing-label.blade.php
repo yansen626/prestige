@@ -43,7 +43,7 @@
         <p>
             {{$namaAddress->description}}, {{$namaAddress->city->name}}<br>
             {{$namaAddress->province->name}}, {{$namaAddress->postal_code}}<br>
-            Phone : 081517422263
+            Phone : 0813 7007 0017
         </p>
         <h4>To : {{$custDB->first_name}} {{$custDB->last_name}}</h4>
         <p>

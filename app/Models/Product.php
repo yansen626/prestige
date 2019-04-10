@@ -31,6 +31,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property float $cost_price
  * @property string $colour
  * @property int $is_primary
+ * @property int $is_customize
  * @property float $weight
  * @property float $width
  * @property float $height
@@ -68,6 +69,7 @@ class Product extends Eloquent
 		'qty' => 'float',
 		'is_taxable' => 'int',
 		'is_primary' => 'int',
+		'is_customize' => 'int',
 		'price' => 'float',
 		'cost_price' => 'float',
 		'weight' => 'float',
@@ -94,6 +96,7 @@ class Product extends Eloquent
 		'cost_price',
 		'colour',
 		'is_primary',
+		'is_customize',
 		'weight',
 		'width',
 		'height',

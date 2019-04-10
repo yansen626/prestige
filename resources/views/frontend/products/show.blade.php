@@ -6,8 +6,8 @@
     ============================================= -->
     <section id="cover5" class="section mtop-100 pt-0 pb-0">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-content bg-windrift-blue center" >
+            <div class="row" style="background-color: white;">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-content center" >
                     <section id="slider-product" class="carousel slider slider-shop slider-dots" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="true" data-dots="true" data-space="0" data-loop="true" data-speed="800">
                         @php($productImages = $product->product_images->where('is_thumbnail', 0))
                         @php($productMainImages = $product->product_images->where('is_main_image', 1)->first())
@@ -32,7 +32,7 @@
                         <canvas id="myCanvas" width="600" height="600"></canvas>
                     </div>
                 </div><!-- .col-md-8 end -->
-                <div class="col-xs-12 col-sm-12 col-md-6" style="padding: 8% 8% 0 8%;background-color: white;">
+                <div class="col-xs-12 col-sm-12 col-md-6" style="padding: 8% 8% 0 8%;">
                     <div class="row" style="margin-bottom: 28px;">
                         <div class="col-md-12">
                             <h2 style="margin: 0 0 18px;">{{$product->name}}</h2>
@@ -74,13 +74,13 @@
                                                 @if($productThumbnailImage->path == $colorThumbnailImages->path)
                                                     <label style="padding-right: 3%;cursor: pointer;">
                                                         <input type="radio" name="color-thumbnail" onchange="ChangeColourThumbnail(this)" value="{{$colour->slug}}" checked/>
-                                                        <img src="{{ asset('storage/products/'.$colorThumbnailImages->path) }}" style="width: 20px; height:20px">
+                                                        <img src="{{ asset('storage/products/'.$colorThumbnailImages->path) }}" style="width: 40px; height:40px">
                                                     </label>
                                                 @else
 
                                                     <label style="padding-right: 3%;cursor: pointer;">
                                                         <input type="radio" name="color-thumbnail" onchange="ChangeColourThumbnail(this)" value="{{$colour->slug}}"/>
-                                                        <img src="{{ asset('storage/products/'.$colorThumbnailImages->path) }}" style="width: 20px; height:20px">
+                                                        <img src="{{ asset('storage/products/'.$colorThumbnailImages->path) }}" style="width: 40px; height:40px">
                                                     </label>
                                                 @endif
                                             @endif
@@ -88,18 +88,23 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 text--left">
-                                    <H4>Customization</H4>
+                            @php($display='none')
+                            @if($product->is_customize == 1)
+                                @php($display='block')
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 text--left">
+                                        <H4>Customization</H4>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 text--right">
+                                        <button type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="true" onclick="onToggleCustomize();">
+                                            <div class="handle"></div>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6 text--right">
-                                    <button type="button" class="btn btn-toggle active" data-toggle="button" aria-pressed="true" onclick="onToggleCustomize();">
-                                        <div class="handle"></div>
-                                    </button>
-                                    <input type="hidden" id="customize-toggle" name="customize-toggle" value="true" />
-                                </div>
-                            </div>
-                            <div id="customize-section" class="row customize-section">
+                            @endif
+                            <input type="hidden" id="customize-toggle" name="customize-toggle" value="true" />
+
+                            <div id="customize-section" class="row customize-section" style="display:{{$display}}">
                                 <div class="col-md-12 bg-white bg-white-mobile" style="padding-bottom: 25px;">
                                     <p>Enter personalized text (max 3 characters)</p>
                                     <form>
@@ -810,7 +815,7 @@
 
         /* CHECKED STYLES */
         [type=radio]:checked + img {
-            outline: 2px solid #f00;
+            outline: 2px solid #ffffff;
         }
 
     </style>
