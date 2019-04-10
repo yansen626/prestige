@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\ProductImage;
@@ -19,6 +20,8 @@ class ProductController extends Controller
         $category = request()->category;
         if(!empty($category)){
             $filter = $category;
+            $categoryDB = Category::find($category);
+            $filterName = $categoryDB->name;
 
             $items = Product::where('is_primary', 1)
                 ->where('status', 1)
@@ -27,15 +30,19 @@ class ProductController extends Controller
                 ->get();
         }
         else{
+            $categoryDB = Category::all();
             $items = Product::where('is_primary', 1)
                 ->where('status', 1)
                 ->orderBy('created_at', 'desc')
                 ->get();
             $filter = 0;
+            $filterName = "";
         }
 //        dd($items);
         $data = [
             'productResult'      => $items,
+            'categoryDB'      => $categoryDB,
+            'filterName'      => $filterName,
             'filter'      => $filter
         ];
         return view('frontend.products.index')->with($data);

@@ -45,7 +45,9 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Upload Main Image *</label>
-                                                        <img src="{{ asset('storage/products/'.$mainImage->path) }}" style="width: 200px;height: auto;">
+                                                        @if(!empty($mainImage))
+                                                            <img src="{{ asset('storage/products/'.$mainImage->path) }}" style="width: 200px;height: auto;">
+                                                        @endif
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         {{--<input type="file" name="PhotoPosted" id="PhotoPosted" class="file-loading">--}}
@@ -55,7 +57,9 @@
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <label class="form-label">Upload Thumbnail Image *</label>
-                                                        <img src="{{ asset('storage/products/'.$thumbnailImage->path) }}" style="width: 50px;height: auto;">
+                                                        @if(!empty($thumbnailImage))
+                                                            <img src="{{ asset('storage/products/'.$thumbnailImage->path) }}" style="width: 50px;height: auto;">
+                                                        @endif
                                                     </div>
                                                     <div class="col-md-6 mb-3">
                                                         {{--<input type="file" name="PhotoPosted" id="PhotoPosted" class="file-loading">--}}

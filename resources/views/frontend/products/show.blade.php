@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-content bg-windrift-blue center" >
                     <section id="slider-product" class="carousel slider slider-shop slider-dots" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="true" data-dots="true" data-space="0" data-loop="true" data-speed="800">
-                        @php($productImages = $product->product_images)
+                        @php($productImages = $product->product_images->where('is_thumbnail', 0))
                         @php($productMainImages = $product->product_images->where('is_main_image', 1)->first())
                         @php($productThumbnailImage = $product->product_images->where('is_thumbnail', 1)->first())
                         @foreach($productImages as $images)

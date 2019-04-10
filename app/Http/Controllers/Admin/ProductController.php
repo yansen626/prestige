@@ -434,11 +434,11 @@ class ProductController extends Controller
             }
             if(!empty($thumbnailImages)){
 //                dd($thumbnailImages);
-                $mainImage = ProductImage::where('product_id', $product->id)->where('is_thumbnail', 1)->first();
-                if(!empty($mainImage)){
-                    $path = $mainImage->path;
+                $thumbnailImage = ProductImage::where('product_id', $product->id)->where('is_thumbnail', 1)->first();
+                if(!empty($thumbnailImage)){
+                    $path = $thumbnailImage->path;
 
-                    $img = Image::make($mainImages);
+                    $img = Image::make($thumbnailImages);
                     if(env('SERVER_HOST_URL') == 'http://localhost:8000/'){
                         $img->save(public_path('storage/products/'. $path), 75);
                     }

@@ -6273,7 +6273,7 @@ a.next-section:hover {
 
 .slider,
  .slider .slide--item {
-	height: 640px;
+	height: 550px !important;
 }
 
 .rs-arrows.tparrows.ares {

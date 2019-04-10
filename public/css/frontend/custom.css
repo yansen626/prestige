@@ -456,7 +456,7 @@ Product detail custom
     border: none;
 }
 .accordion .panel .panel--body {
-    padding: 0 0 15%;
+    padding: 0;
 }
 select {
     /* styling */
