@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderBankTransfer;
+use App\Models\StoreAddress;
+use App\Models\User;
 use App\Transformer\OrderBankTransferTransformer;
 use App\Transformer\OrderTransformer;
 use Illuminate\Http\Request;
@@ -119,6 +121,16 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         return view('admin.order.show', compact('order'));
+    }
+
+    public function packingLabel($id)
+    {
+        $order = Order::find($id);
+        $custDB = User::find($order->user_id);
+        $custAddress = $custDB->addresses->where('primary', 1)->first();
+        $namaAddress = StoreAddress::find(1);
+
+        return view('print.packing-label', compact('custDB', 'custAddress', 'namaAddress'));
     }
 
     /**

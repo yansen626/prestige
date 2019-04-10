@@ -189,6 +189,11 @@
                                     </table>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <div class="form-group form-float form-group-lg">
+                                        <a href="{{route('admin.orders.print_packing', ['id'=>$order->id])}}" target="_blank" class="btn btn-success">Print Packing Label</a>
+                                    </div>
+                                </div>
                                 @if($order->order_status_id == 3)
                                     {{ Form::open(['route'=>['admin.orders.tracking'],'method' => 'post','id' => 'general-form', 'enctype' => 'multipart/form-data']) }}
                                     <input type="hidden" name="order-id" value="{{$order->id}}">

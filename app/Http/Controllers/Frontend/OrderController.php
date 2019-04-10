@@ -82,7 +82,7 @@ class OrderController extends Controller
 
             //send email to admin
             $newTransferBank = new NewTransferBank($user, $orderDB);
-            Mail::to("sales@nama-official.com")
+            Mail::to(env('MAIL_ADMIN'))
                 ->send($newTransferBank);
             return Redirect::route('orders');
         }

@@ -166,6 +166,7 @@ Route::prefix('admin')->group(function(){
     Route::post('/orders/tracking-code/', 'Admin\OrderController@storeTracking')->name('admin.orders.tracking');
     Route::get('/orders/bank-transfer', 'Admin\OrderController@indexBankTransfer')->name('admin.orders.bank_transfer');
     Route::post('/orders/bank-transfer-accept/', 'Admin\OrderController@acceptBankTransfer')->name('admin.orders.bank_transfer_accept');
+    Route::get('/orders/print_packing/{id}', 'Admin\OrderController@packingLabel')->name('admin.orders.print_packing');
 });
 
 Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
