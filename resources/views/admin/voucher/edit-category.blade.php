@@ -40,13 +40,13 @@
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <input type="hidden" name="type" value="products"/>
+                                                <input type="hidden" name="type" value="categories"/>
                                                 @php($idx = 0)
                                                 <table class="table">
                                                     <thead>
                                                     <tr>
                                                         <th colspan="3">
-                                                            Products
+                                                            Categories
                                                         </th>
                                                     </tr>
                                                     </thead>
@@ -54,25 +54,37 @@
                                                         <tr>
                                                             @foreach($categories as $category)
                                                                 @php($idx++)
-                                                                @foreach($choosenCategories as $choosen)
-                                                                    @if($choosen->id == $category->id)
-                                                                        <td>
-                                                                            <label>
-                                                                                <input type="checkbox" class="group1 flat" id="chk{{$category->id}}" name="chk[]" onclick="changeInput('{{ $category->id }}')" checked/> {{ $category->name }}
-                                                                                <input type="hidden" class="group2" value="{{ $category->id }}" id="{{ $category->id }}" name="ids[]"/>
-                                                                            </label>
-                                                                        </td>
-                                                                        @break
-                                                                    @else
-                                                                        <td>
-                                                                            <label>
-                                                                                <input type="checkbox" class="group1 flat" id="chk{{$category->id}}" name="chk[]" onclick="changeInput('{{ $category->id }}')" /> {{ $category->name }}
-                                                                                <input type="hidden" class="group2" value="{{ $category->id }}" id="{{ $category->id }}" name="ids[]" disabled/>
-                                                                            </label>
-                                                                        </td>
-                                                                        @break
-                                                                    @endif
-                                                                @endforeach
+                                                                @php($checked="")
+                                                                @php($disabled="disabled")
+                                                                @if($choosenCategories->contains($category->id))
+                                                                    @php($checked="checked")
+                                                                    @php($disabled="")
+                                                                @endif
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" class="group1 flat" id="chk{{$category->id}}" name="chk[]" onclick="changeInput('{{ $category->id }}')" {{$checked}} /> {{ $category->name }}
+                                                                        <input type="hidden" class="group2" value="{{ $category->id }}" id="{{ $category->id }}" name="ids[]" {{$disabled}}/>
+                                                                    </label>
+                                                                </td>
+                                                                {{--@foreach($choosenCategories as $choosen)--}}
+                                                                    {{--@if($choosen->id == $category->id)--}}
+                                                                        {{--<td>--}}
+                                                                            {{--<label>--}}
+                                                                                {{--<input type="checkbox" class="group1 flat" id="chk{{$category->id}}" name="chk[]" onclick="changeInput('{{ $category->id }}')" checked/> {{ $category->name }}--}}
+                                                                                {{--<input type="hidden" class="group2" value="{{ $category->id }}" id="{{ $category->id }}" name="ids[]"/>--}}
+                                                                            {{--</label>--}}
+                                                                        {{--</td>--}}
+                                                                        {{--@break--}}
+                                                                    {{--@else--}}
+                                                                        {{--<td>--}}
+                                                                            {{--<label>--}}
+                                                                                {{--<input type="checkbox" class="group1 flat" id="chk{{$category->id}}" name="chk[]" onclick="changeInput('{{ $category->id }}')" /> {{ $category->name }}--}}
+                                                                                {{--<input type="hidden" class="group2" value="{{ $category->id }}" id="{{ $category->id }}" name="ids[]" disabled/>--}}
+                                                                            {{--</label>--}}
+                                                                        {{--</td>--}}
+                                                                        {{--@break--}}
+                                                                    {{--@endif--}}
+                                                                {{--@endforeach--}}
 
                                                                 @if($idx == 3)
                                                                     <tr/><tr>

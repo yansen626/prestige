@@ -54,23 +54,35 @@
                                                         <tr>
                                                             @foreach($products as $product)
                                                                 @php($idx++)
-                                                                @foreach($choosenProducts as $choosen)
-                                                                    @if($choosen->id == $product->id)
-                                                                        <td>
-                                                                            <label>
-                                                                                <input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" checked/> {{ $product->name }}
-                                                                                <input type="hidden" class="group2" value="{{ $product->id }}" id="{{ $product->id }}" name="ids[]"/>
-                                                                            </label>
-                                                                        </td>
-                                                                    @else
-                                                                        <td>
-                                                                            <label>
-                                                                                <input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" /> {{ $product->name }}
-                                                                                <input type="hidden" class="group2" value="{{ $product->id }}" id="{{ $product->id }}" name="ids[]" disabled/>
-                                                                            </label>
-                                                                        </td>
-                                                                    @endif
-                                                                @endforeach
+                                                                @php($checked="")
+                                                                @php($disabled="disabled")
+                                                                @if($choosenProducts->contains($product->id))
+                                                                    @php($checked="checked")
+                                                                    @php($disabled="")
+                                                                @endif
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" {{$checked}}/> {{ $product->name }}
+                                                                        <input type="hidden" class="group2" value="{{ $product->id }}" id="{{ $product->id }}" name="ids[]" {{$disabled}}/>
+                                                                    </label>
+                                                                </td>
+                                                                {{--@foreach($choosenProducts as $choosen)--}}
+                                                                    {{--@if($choosen->id == $product->id)--}}
+                                                                        {{--<td>--}}
+                                                                            {{--<label>--}}
+                                                                                {{--<input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" checked/> {{ $product->name }}--}}
+                                                                                {{--<input type="hidden" class="group2" value="{{ $product->id }}" id="{{ $product->id }}" name="ids[]"/>--}}
+                                                                            {{--</label>--}}
+                                                                        {{--</td>--}}
+                                                                    {{--@else--}}
+                                                                        {{--<td>--}}
+                                                                            {{--<label>--}}
+                                                                                {{--<input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" /> {{ $product->name }}--}}
+                                                                                {{--<input type="hidden" class="group2" value="{{ $product->id }}" id="{{ $product->id }}" name="ids[]" disabled/>--}}
+                                                                            {{--</label>--}}
+                                                                        {{--</td>--}}
+                                                                    {{--@endif--}}
+                                                                {{--@endforeach--}}
 
                                                                 @if($idx == 3)
                                                                     <tr/><tr>

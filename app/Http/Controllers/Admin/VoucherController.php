@@ -202,6 +202,7 @@ class VoucherController extends Controller
         if($voucher->category_id != null || $voucher->category_id != 0){
             $cats = explode('#', $voucher->category_id);
             $choosenCategories = Category::whereIn('id', $cats)->get();
+//            dd($choosenCategories);
             $categories = Category::all();
         }
         else{
@@ -265,6 +266,40 @@ class VoucherController extends Controller
 
         $user = Auth::guard('admin')->user();
         $voucher = Voucher::find($request->input('id'));
+//dd($request->input('ids'));
+        //check for categories or products
+        $cats = null;
+        $prods = null;
+        if($request->input('type') == 'categories'){
+            //Categories
+            $cats = '';
+            $idx = 1;
+            $categories = $request->input('ids');
+            foreach ($categories as $category){
+                if($idx == count($categories)){
+                    $cats .= $category;
+                }
+                else{
+                    $cats .= $category . '#';
+                }
+                $idx++;
+            }
+        }
+        else if($request->input('type') == 'products'){
+            //Categories
+            $prods = '';
+            $idx = 1;
+            $products = $request->input('ids');
+            foreach ($products as $product){
+                if($idx == count($products)){
+                    $prods .= $product;
+                }
+                else{
+                    $prods .= $product . '#';
+                }
+                $idx++;
+            }
+        }
 
         $voucher->code = $request->input('code');
         $voucher->voucher_amount   = $request->input('voucher_amount');
@@ -273,8 +308,8 @@ class VoucherController extends Controller
         $voucher->start_date = $startDate;
         $voucher->finish_date = $finishDate;
         $voucher->status_id = $request->input('status');
-        $voucher->category_id = $request->input('category');
-        $voucher->product_id = $request->input('product');
+        $voucher->category_id = $cats;
+        $voucher->product_id = $prods;
         $voucher->updated_at = Carbon::now('Asia/Jakarta');
         $voucher->updated_by = $user->id;
         $voucher->save();
