@@ -18,16 +18,32 @@ class ProductController extends Controller
      */
     public function index(){
         $category = request()->category;
+//        dd($category);
         if(!empty($category)){
-            $filter = $category;
-            $categoryDB = Category::find($category);
-            $filterName = $categoryDB->name;
+            if (strpos($category, '-') !== false) {
+                $filterArr = explode('-', $category);
 
-            $items = Product::where('is_primary', 1)
-                ->where('status', 1)
-                ->where('category_id', $filter)
-                ->orderBy('created_at', 'desc')
-                ->get();
+                $filter = 99;
+                $categoryDB = Category::whereIn('id', $filterArr)->get();
+                $filterName = "";
+
+                $items = Product::where('is_primary', 1)
+                    ->where('status', 1)
+                    ->whereIn('category_id', $filterArr)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            }
+            else{
+                $filter = $category;
+                $categoryDB = Category::find($category);
+                $filterName = $categoryDB->name;
+
+                $items = Product::where('is_primary', 1)
+                    ->where('status', 1)
+                    ->where('category_id', $filter)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            }
         }
         else{
             $categoryDB = Category::all();
@@ -45,6 +61,7 @@ class ProductController extends Controller
             'filterName'      => $filterName,
             'filter'      => $filter
         ];
+
         return view('frontend.products.index')->with($data);
     }
 

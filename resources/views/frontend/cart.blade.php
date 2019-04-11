@@ -31,7 +31,7 @@
                                         <tr class="cart-product">
                                             <td class="cart-product-item center pb-40 pt-40">
 {{--                                                @php($productImage = \App\libs\Utilities::GetProductMainImage($cart->product_id))--}}
-                                                @php($productImage = \App\Models\ProductImage::where('product_id', $product->id)->where('is_main_image', 1)->first())
+                                                @php($productImage = \App\Models\ProductImage::where('product_id', $cart->product_id)->where('is_main_image', 1)->first())
                                                 <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100px"/>
                                             </td>
                                             <td class="cart-product-item center pb-40 pt-40">
@@ -61,7 +61,7 @@
                                     @foreach($carts as $cart)
                                         <tr class="cart-product">
                                             <td class="cart-product-item center pb-40 pt-40">
-                                                @php($productImage = \App\Models\ProductImage::where('product_id', $cart['item']['product_id'])->first())
+                                                @php($productImage = \App\Models\ProductImage::where('product_id', $cart['item']['product_id'])->where('is_main_image', 1)->first())
                                                 <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100px"/>
                                             </td>
                                             <td class="cart-product-item center pb-40 pt-40">
@@ -167,7 +167,7 @@
                             @foreach($carts as $cart)
                             <div class="col-xs-12 col-sm-12 col-md-12 border-b" style="padding-bottom: 6%;">
                                     <div class="col-xs-6 col-sm-6">
-                                        @php($productImage = \App\Models\ProductImage::where('product_id', $cart->product_id)->first())
+                                        @php($productImage = \App\Models\ProductImage::where('product_id', $cart->product_id)->where('is_main_image', 1)->first())
                                         <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                         <br>
                                         <i class="fa fa-close delete font-16 pt-20" data-toggle="modal" data-id="{{ $cart->id }}" data-target="#myModal"></i>
@@ -196,7 +196,7 @@
                             @foreach($carts as $cart)
                             <div class="col-xs-12 col-sm-12 col-md-12 border-b" style="padding-bottom: 6%;">
                                     <div class="col-xs-6 col-sm-6" style="font-size: 20px; text-align: center;">
-                                        @php($productImage = \App\Models\ProductImage::where('product_id', $cart['item']['product_id'])->first())
+                                        @php($productImage = \App\Models\ProductImage::where('product_id', $cart['item']['product_id'])->where('is_main_image', 1)->first())
                                         <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                         <br>
                                         <i class="fa fa-close delete font-16" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>

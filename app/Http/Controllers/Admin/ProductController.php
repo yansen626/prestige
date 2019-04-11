@@ -128,10 +128,10 @@ class ProductController extends Controller
             // save product
             $colourNew = Utilities::CreateProductSlug($request->input('colour'));
             $is_primary = 1;
-            $is_exist = Product::where('name', $request->input('name'))->first();
-            if(!empty($is_exist)){
-                $is_primary = 0;
-            }
+//            $is_exist = Product::where('name', $request->input('name'))->first();
+//            if(!empty($is_exist)){
+//                $is_primary = 0;
+//            }
             if($request->input('is_customize') == 'on'){
                 $customize = 1;
             }

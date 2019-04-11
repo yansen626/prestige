@@ -28,8 +28,9 @@
                                 </div><!-- .slide-item end -->
                         @endforeach
                     </section>
-                    <div id="custom-section" style="display: none; margin-left:-50px !important;">
+                    <div id="custom-section" style="display: none; margin-left:-50px;">
                         <canvas id="myCanvas" width="600" height="600"></canvas>
+                        <canvas id="myCanvasMobile" width="300" height="300" style="display:none;"></canvas>
                     </div>
                 </div><!-- .col-md-8 end -->
                 <div class="col-xs-12 col-sm-12 col-md-6" style="padding: 8% 8% 0 8%;">
@@ -328,6 +329,9 @@
                                                     </div>
                                                 </div>
                                             @else
+                                                <p class="font-16" style="text-align: justify;color:red;">
+                                                    This product will ship on 30 April - 7 May
+                                                </p>
                                                 <button class="btn btn--secondary btn--bordered" type="submit">Add to Cart</button>
                                             @endif
                                         </div>
@@ -868,6 +872,22 @@
         }
 
         function ChangePosition(){
+            //checking mobile view
+            var isMobile = detectmob();
+            var canvasType = 1;
+            var canvasId = "myCanvas";
+            if(isMobile){
+                $('#myCanvas').hide();
+                $('#myCanvasMobile').show();
+
+                canvasType = 2;
+                canvasId = "myCanvasMobile";
+            }
+            else{
+                $('#myCanvas').show();
+                $('#myCanvasMobile').hide();
+            }
+
             $('#slider-product').hide();
             $('#custom-section').show();
 
@@ -876,22 +896,41 @@
             // var selectedFont = $('#custom-font').val();
             var color = $('#custom-color').val();
             var size = $('#custom-size').val();
-            var posX = $('#position_x').val();
-            var posY = $('#position_y').val();
+            var posX = ($('#position_x').val());
+            var posY = ($('#position_y').val());
 
             var colorArr = color.split("-");
             var sizeArr = size.split("-");
 
             var font = sizeArr[1] + "px Bodoni";
+            if(isMobile){
+                font = (sizeArr[1] - 8) + "px Bodoni";
+            }
             var fillStyle = "#"+colorArr[1];
 
-            var canvas = document.getElementById("myCanvas");
+            var canvas = document.getElementById(canvasId);
             var context = canvas.getContext("2d");
             var imageObj = new Image();
 
             imageObj.onload = function(){
                 context.restore();
-                context.drawImage(imageObj, 10, 10);
+                if(isMobile){
+                    var hRatio = canvas.width  / imageObj.width;
+                    posX = posX * (hRatio-0.025);
+                    var vRatio =  canvas.height / imageObj.height;
+                    posY = posY * (vRatio-0.025);
+
+                    var ratio  = Math.min ( hRatio, vRatio );
+                    var centerShift_x = ( canvas.width - imageObj.width*ratio )/2;
+                    var centerShift_y = ( canvas.height - imageObj.height*ratio )/2;
+                    // context.clearRect(0,0,canvas.width, canvas.height);
+                    context.drawImage(imageObj, 0,0, imageObj.width, imageObj.height,
+                        centerShift_x,centerShift_y,imageObj.width*ratio, imageObj.height*ratio);
+
+                }
+                else{
+                    context.drawImage(imageObj, 10, 10);
+                }
                 context.textAlign = 'center';
                 context.font = font;
 
@@ -948,6 +987,14 @@
                 }
             });
         });
+
+        function detectmob() {
+            if(window.innerWidth <= 400) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     </script>
 
 @endsection

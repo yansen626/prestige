@@ -372,15 +372,18 @@ p {
 /* Custom, iPhone Retina */
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 
-text-center-xs {
+.text-center-xs {
 	text-align: center !important;
 }
+	#custom-section{
+		margin-left :0 !important;
+	}
 }
 
 /* Small Devices, Tablets */
 @media only screen and (min-width: 768px) and (max-width: 991px) {
 
-text-center-sm {
+.text-center-sm {
 	text-align: center !important;
 }
 }
@@ -6253,7 +6256,7 @@ a.next-section {
 
 a.next-section:focus,
 a.next-section:hover {
-	color: acolor-white;
+	color: white;
 	font-weight: bold;
 }
 
@@ -6273,7 +6276,7 @@ a.next-section:hover {
 
 .slider,
  .slider .slide--item {
-	height: 550px !important;
+	height: auto !important;
 }
 
 .rs-arrows.tparrows.ares {
