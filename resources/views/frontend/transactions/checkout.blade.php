@@ -72,7 +72,7 @@
                                         @foreach($orderProduct as $product)
                                             <div class="col-md-12 mb-10">
                                                 <div class="col-md-2">
-                                                    @php($productImage = \App\Models\ProductImage::where('product_id', $product->id)->first())
+                                                    @php($productImage = \App\Models\ProductImage::where('product_id', $product->product->id)->where('is_main_image', 1)->first())
                                                     <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                                 </div>
                                                 <div class="col-md-4">
@@ -117,7 +117,7 @@
                                         </div>
                                         <div class="col-md-12 border-bottom-black mb-20">
                                             <div class="col-md-6 bold">VOUCHER</div>
-                                            <div class="col-md-6 right">{{env('KURS_IDR')}} <span id="voucher_amount_span">0</span></div>
+                                            <div class="col-md-6 right">({{env('KURS_IDR')}} <span id="voucher_amount_span">0</span>)</div>
                                             <input type="hidden" name="voucher_amount" id="voucher_amount" value="0">
                                         </div>
                                         <div class="col-md-12 mb-20">
@@ -218,7 +218,7 @@
             var grandTotal = $('#grand_total').val();
             var snapToken;
             // Request get token to your server & save result to snapToken variable
-            alert(paymentMethod);
+            // alert(paymentMethod);
             if(paymentMethod==="credit_card"){
                 snap.show();
                 $.ajax({

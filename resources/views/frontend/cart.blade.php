@@ -31,7 +31,7 @@
                                         <tr class="cart-product">
                                             <td class="cart-product-item center pb-40 pt-40">
 {{--                                                @php($productImage = \App\libs\Utilities::GetProductMainImage($cart->product_id))--}}
-                                                @php($productImage = \App\Models\ProductImage::where('product_id', $cart->product_id)->first())
+                                                @php($productImage = \App\Models\ProductImage::where('product_id', $product->id)->where('is_main_image', 1)->first())
                                                 <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100px"/>
                                             </td>
                                             <td class="cart-product-item center pb-40 pt-40">

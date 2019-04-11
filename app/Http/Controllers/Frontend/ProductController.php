@@ -58,8 +58,9 @@ class ProductController extends Controller
             $productArr = explode('--', $product);
             $slug = $productArr[0];
         }
+
         $productDB = Product::where('slug', $product)->first();
-        $otherProductColour = Product::where('slug','like', '%'.$slug.'%')
+        $otherProductColour = Product::where('slug','like', '%'.$slug.'--%')
             ->where('status', 1)->get();
 
         $data = [

@@ -47,7 +47,8 @@
                                         @foreach($orderProduct as $product)
                                             <div class="col-md-12 mb-10">
                                                 <div class="col-md-2">
-                                                    <img src="{{ asset('/images/shop/thumb/1.jpg') }}" alt="product"/>
+                                                    @php($productImage = \App\Models\ProductImage::where('product_id', $product->product->id)->where('is_main_image', 1)->first())
+                                                    <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                                 </div>
                                                 <div class="col-md-4">
                                                     {{$product->product->name}}
@@ -84,9 +85,14 @@
                                             <div class="col-md-6 bold">SHIPPING</div>
                                             <div class="col-md-6 right">{{env('KURS_IDR')}} {{$order->shipping_charge_string}}</div>
                                         </div>
-                                        <div class="col-md-12 border-bottom-black mb-20">
+                                        <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold">TAX</div>
                                             <div class="col-md-6 right">{{env('KURS_IDR')}} {{$order->tax_amount_string}}</div>
+                                        </div>
+                                        <div class="col-md-12 border-bottom-black mb-20">
+                                            <div class="col-md-6 bold">VOUCHER</div>
+                                            <div class="col-md-6 right">({{env('KURS_IDR')}} <span id="voucher_amount_span">{{$order->voucher_amount_string}}</span>)</div>
+                                            <input type="hidden" name="voucher_amount" id="voucher_amount" value="0">
                                         </div>
                                         <div class="col-md-12 mb-20">
                                             <div class="col-md-6 bold"><h5>TOTAL</h5></div>

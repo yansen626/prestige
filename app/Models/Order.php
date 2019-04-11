@@ -82,6 +82,7 @@ class Order extends Eloquent
 	    'payment_charge_string',
         'sub_total_string',
         'tax_amount_string',
+        'voucher_amount_string',
         'grand_total_string'
     ];
 
@@ -99,6 +100,10 @@ class Order extends Eloquent
 
     public function getTaxAmountStringAttribute(){
         return number_format($this->attributes['tax_amount'], 0, ",", ".");
+    }
+
+    public function getVoucherAmountStringAttribute(){
+        return number_format($this->attributes['voucher_amount'], 0, ",", ".");
     }
 
     public function getGrandTotalStringAttribute(){

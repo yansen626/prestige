@@ -74,8 +74,11 @@ class CheckoutController extends Controller
 
             if($request->input('voucher') != ''){
                 //Apply Voucher
+                $voucherAmount = (float)$request->input('voucher_amount');
                 $order->voucher_code = $request->input('voucher');
-                $order->voucher_amount = $request->input('voucher_amount');
+                $order->voucher_amount = $voucherAmount;
+                $total = $order->grand_total;
+                $order->grand_total = $total - $voucherAmount;
                 $order->save();
             }
 

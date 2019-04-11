@@ -233,7 +233,7 @@ class CartController extends Controller
             //Check if User already used the Voucher
             $order = Order::where('user_id', $user->id)->where('voucher_code', $voucher)->first();
             if($order != null){
-                return Response::json(array('errors' => 'Voucher Already Used!'. $order));
+                return Response::json(array('errors' => 'Voucher Already Used!'));
             }
 
             //Check Voucher
