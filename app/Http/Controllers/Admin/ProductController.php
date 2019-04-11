@@ -238,6 +238,7 @@ class ProductController extends Controller
 
             // Create ZOHO Product
             $tmp = Zoho::createProduct($newProduct, $newProduct->category->zoho_item_group_id);
+//            $tmp = Zoho::createProduct($newProduct, "1783013000000069095");
 //            dd($tmp);
 
             if($customize == 1){
@@ -327,7 +328,7 @@ class ProductController extends Controller
             return redirect()->route('admin.product.show',['item' => $item->product_id]);
 
         }catch(\Exception $ex){
-            dd($ex);
+//            dd($ex);
             error_log($ex);
             return back()->withErrors("Something Went Wrong")->withInput();
         }
@@ -518,7 +519,7 @@ class ProductController extends Controller
             }
 
             // Update ZOHO Product
-//            $tmp = Zoho::updateProduct($product, $product->category->zoho_item_group_id);
+            $tmp = Zoho::updateProduct($product, $product->category->zoho_item_group_id);
             //dd($tmp);
 
             return redirect()->route('admin.product.show',['item' => $product->id]);

@@ -247,6 +247,7 @@ class HomeController extends Controller
                     Mail::to($user->email)
                         ->bcc("yansen@student.umn.ac.id")
                         ->send($orderConfirmation);
+                    return 'success';
                     break;
 
                 //testing get city rajaongkir

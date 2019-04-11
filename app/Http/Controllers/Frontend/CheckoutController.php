@@ -108,6 +108,7 @@ class CheckoutController extends Controller
         }
         catch (\Exception $ex){
 //            dd($ex);
+            Log::error("CheckoutController.php > submitCheckout ".$ex);
             return Response::json(array('errors' => 'INVALID'));
         }
     }
@@ -139,20 +140,22 @@ class CheckoutController extends Controller
 //        return redirect($redirectUrl);
 //    }
 
-    public function checkoutSuccess(Order $order){
+    public function checkoutSuccess($order){
         try{
+//            dd("asdf");
             //change order status to pending payment
-            $orderDB = Order::find($order->id);
+            $order = str_replace('_', '/', $order);
+            $orderDB = Order::where('order_number', $order)->first();
             $orderDB->order_status_id = 3;
             $orderDB->save();
 
-            $orderProducts = OrderProduct::where('order_id', $order->id)->get();
+            $orderProducts = OrderProduct::where('order_id', $orderDB->id)->get();
 
             // Create ZOHO Invoice
             Zoho::createInvoice($orderDB->zoho_sales_order_id);
 
             //send email confirmation
-            $user = User::find($order->user_id);
+            $user = User::find($orderDB->user_id);
 
             $productIdArr = [];
             foreach ($orderProducts as $orderProduct){
