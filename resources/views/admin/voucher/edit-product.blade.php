@@ -62,7 +62,7 @@
                                                                 @endif
                                                                 <td>
                                                                     <label>
-                                                                        <input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" {{$checked}}/> {{ $product->name }}
+                                                                        <input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" {{$checked}}/> {{ $product->name }} ({{ $product->sku }})
                                                                         <input type="hidden" class="group2" value="{{ $product->id }}" id="{{ $product->id }}" name="ids[]" {{$disabled}}/>
                                                                     </label>
                                                                 </td>

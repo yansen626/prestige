@@ -39,7 +39,7 @@
                                 <div class="body">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <div class="col-md-12 col-sm-12 col-xs-12">
                                                 <input type="hidden" name="type" value="products"/>
                                                 @php($idx = 0)
                                                 <table class="table">
@@ -56,7 +56,7 @@
                                                             @php($idx++)
                                                             <td>
                                                                 <label>
-                                                                    <input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" /> {{ $product->name }}
+                                                                    <input type="checkbox" class="group1 flat" id="chk{{$product->id}}" name="chk[]" onclick="changeInput('{{ $product->id }}')" /> {{ $product->name }} ({{ $product->sku }})
                                                                     <input type="hidden" class="group2" value="{{ $product->id }}" id="{{ $product->id }}" name="ids[]" disabled/>
                                                                 </label>
                                                             </td>
