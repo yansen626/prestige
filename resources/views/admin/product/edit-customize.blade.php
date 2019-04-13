@@ -100,9 +100,9 @@
             imageObj.onload = function(){
                 context.drawImage(imageObj, 10, 10);
                 context.textAlign = 'center';
-                context.font = "20pt sans-serif";
+                context.font = "16px Bodoni";
                 context.fillStyle = "red";
-                context.fillText("TEST1234", posX, posY);
+                context.fillText("123", posX, posY);
             };
 
             imageObj.src = "{{ asset('storage/products/'.$mainImage->path) }}";
@@ -118,9 +118,9 @@
             imageObj.onload = function(){
                 context.drawImage(imageObj, 10, 10);
                 context.textAlign = 'center';
-                context.font = "20pt sans-serif";
+                context.font = "16px Bodoni";
                 context.fillStyle = "red";
-                context.fillText("TEST1234", posX, posY);
+                context.fillText("123", posX, posY);
             };
 
             imageObj.src = "{{ asset('storage/products/'.$mainImage->path) }}";

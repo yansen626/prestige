@@ -37,10 +37,10 @@
                         <h2>OUR STORY</h2>
                     </div>
                     <p class="font-16">
-                        nama is Indonesian for the word name; “a word or set of words by which a person, animal, place, or thing is known, addressed, or referred to.” We believe a name is not only a way to identify someone or something but it also what defines how others see us—our individuality.
+                        Nama is Indonesian for the word name; “a word or set of words by which a person, animal, place, or thing is known, addressed, or referred to.” We believe a name is not only a way to identify someone or something but it also what defines how others see us—our individuality.
                     </p>
                     <p class="font-16">
-                        Nama was established by two best friends who are passionate about all things personalized. They met in Los Angeles and spent their days sipping coffee and brunching on Melrose Ave surrounded by the most coveted fashion in the world. They were not looking forward to return and leave this fashion heaven until they realized they could bring a slice of that heaven home. They are firm believers that everyone is special and their essential accessories should reflect that. Consequently, nama was born. They want to make a line of staple everyday accessories made with exceptional quality leather, with a touch of personal customization.
+                        Nama was established by two best friends who are passionate about all things personalized. They met in Los Angeles and spent their days sipping coffee and brunching on Melrose Ave surrounded by the most coveted fashion in the world. They were not looking forward to return and leave this fashion heaven until they realized they could bring a slice of that heaven home. They are firm believers that everyone is special and their essential accessories should reflect that. Consequently, Nama was born. They want to make a line of staple everyday accessories made with exceptional quality leather, with a touch of personal customization.
                     </p>
                     <p class="font-16">
                         Nama’s designs are driven from minimalistic elements, with a twist of refined luxury. Our mission is to create timeless, elegant and functional pieces with exceptional quality that complements today’s demanding world.
@@ -74,16 +74,16 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 pr-0 pl-0">
                     <div class="bg-overlay">
                         <div class="bg-section">
-                            <img src="{{asset('/images/Links/home-3.png')}}" alt="Background"/>
+                            <img src="{{asset('/images/Links/mono.jpg')}}" alt="Background"/>
                         </div>
                     </div>
                 </div><!-- .col-md-6 end-->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-content-about-bottom bg-windrift-blue center">
                     <h3 class="">Customized Monogramming</h3>
                     <p class="font-16" style="text-transform: uppercase;">
-                        At nama. use the best equipment and techniques to personalize your leather goods.
-                        <BR>
-                        You can find out more about our processes, custom personalization,  monograming and colors below
+                        At nama, we believe in the beauty of adding a personal touch that's distinctively yours.
+                        <BR><BR>
+                        With our top of the line hot stamp machine and 100% imported genuine leather, we will beautifully embellish your products with one of a kind customization.
                     </p>
                 </div>
             </div>

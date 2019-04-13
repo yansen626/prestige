@@ -35,8 +35,8 @@ class ProductController extends Controller
             }
             else{
                 $filter = $category;
-                $categoryDB = Category::find($category);
-                $filterName = $categoryDB->name;
+                $categoryDB = Category::where('id', $category)->get();
+                $filterName = "";
 
                 $items = Product::where('is_primary', 1)
                     ->where('status', 1)
@@ -61,7 +61,7 @@ class ProductController extends Controller
             'filterName'      => $filterName,
             'filter'      => $filter
         ];
-
+//        dd($data);
         return view('frontend.products.index')->with($data);
     }
 

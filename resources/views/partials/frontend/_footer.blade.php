@@ -24,9 +24,9 @@
                                 <li><a href="{{route('about.us')}}">ABOUT</a></li>
                                 <li><a href="{{route('contact-form')}}">CONTACT</a></li>
                                 <li>
-                                    <img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-20">
-                                    <img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-20">
-                                    <img src="{{ asset('images/icons/nama-brand-facebook.svg') }}" class="width-20">
+                                    {{--<img src="{{ asset('images/icons/nama-brand-pinterest.svg') }}" class="width-20">--}}
+                                    <a href="http://instagram.com/namaofficial/" target="_blank"><img src="{{ asset('images/icons/nama-brand-instagram.svg') }}" class="width-20"></a>
+                                    <a href="https://www.facebook.com/worldofnama" target="_blank"><img src="{{ asset('images/icons/nama-brand-facebook.svg') }}" class="width-20"></a>
                                 </li>
                             </ul>
                         </div>

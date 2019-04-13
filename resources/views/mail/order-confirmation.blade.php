@@ -210,17 +210,17 @@
                                 <hr style="margin: 0;"/>
                             </td>
                         </tr>
-                        <tr>
-                            <td bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 14px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f; line-height: 1.6;">
+                        {{--<tr>--}}
+                            {{--<td bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 14px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f; line-height: 1.6;">--}}
 
-                                <h2>PAYMENT INFO</h2>
-                                <hr style="margin: 0;"/>
-                                <span>
-                                    <span>{{$order->payment_option}}</span>
-                                </span>
-                                <hr style="margin: 0;"/>
-                            </td>
-                        </tr>
+                                {{--<h2>PAYMENT INFO</h2>--}}
+                                {{--<hr style="margin: 0;"/>--}}
+                                {{--<span>--}}
+                                    {{--<span>{{$order->payment_option}}</span>--}}
+                                {{--</span>--}}
+                                {{--<hr style="margin: 0;"/>--}}
+                            {{--</td>--}}
+                        {{--</tr>--}}
                         </tbody>
                     </table>
                 </div>

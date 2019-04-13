@@ -3,8 +3,6 @@
 @section('pageTitle', 'Checkout | NAMA')
 @section('content')
     <section class="bg-white">
-        <form method="POST" action="{{ route('submit.checkout', ["order"=>$order->id]) }}">
-            @csrf
             <div class="container">
                 <div class="row" style="margin-bottom:5%;">
                     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -109,7 +107,6 @@
                     </table>
                 </div>
             </div>
-        </form>
     </section>
 @endsection
 

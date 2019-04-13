@@ -152,6 +152,7 @@
                                         {{--<select class="minimal" data-width="auto" id="custom-font" name="custom-font" onchange="ChangePosition()">--}}
                                         {{--<option value="Serif">SERIF</option>--}}
                                         {{--<option value="Sans-serif">SAN SERIF</option>--}}
+
                                         {{--</select>--}}
                                         {{--</div>--}}
                                         {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
@@ -210,18 +211,18 @@
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-default text-customization-xl btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                     <span class="fa fa-angle-down"></span>
-                                                    <span id="custom-size-text">24 pt</span>
+                                                    <span id="custom-size-text">36 pt</span>
                                                 </button>
-                                                <input type="hidden" name="custom-size" id="custom-size" value="24 pt-20">
+                                                <input type="hidden" name="custom-size" id="custom-size" value="36 pt-16">
 
                                                 <ul class="dropdown-menu text--center">
+                                                    {{--<li style="height: 30px;width: 40px;cursor:pointer;">--}}
+                                                        {{--<a onclick="ChangeCustom('24 pt-20', 3)">--}}
+                                                            {{--24 PT--}}
+                                                        {{--</a>--}}
+                                                    {{--</li>--}}
                                                     <li style="height: 30px;width: 40px;cursor:pointer;">
-                                                        <a onclick="ChangeCustom('24 pt-20', 3)">
-                                                            24 PT
-                                                        </a>
-                                                    </li>
-                                                    <li style="height: 30px;width: 40px;cursor:pointer;">
-                                                        <a onclick="ChangeCustom('36 pt-24', 3)">
+                                                        <a onclick="ChangeCustom('36 pt-16', 3)">
                                                             36 PT
                                                         </a>
                                                     </li>
@@ -329,7 +330,7 @@
                                                     </div>
                                                 </div>
                                             @else
-                                                <p class="font-16" style="text-align: justify;color:red;">
+                                                <p class="font-16" style="text-align: justify;">
                                                     This product will ship on 30 April - 7 May
                                                 </p>
                                                 <button class="btn btn--secondary btn--bordered" type="submit">Add to Cart</button>
@@ -989,7 +990,7 @@
         });
 
         function detectmob() {
-            if(window.innerWidth <= 400) {
+            if(window.innerWidth <= 450) {
                 return true;
             } else {
                 return false;

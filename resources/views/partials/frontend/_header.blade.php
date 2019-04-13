@@ -7,7 +7,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 top--contact center color-black">
                         <ul class="list-inline mb-0">
                             <li>
-                                <span>FREE SHIPPING ON All ORDERS OVER XXX</span>
+                                {{--<span>FREE SHIPPING ON All ORDERS OVER XXX</span>--}}
                             </li>
                         </ul>
                     </div><!-- .col-md-6 end -->

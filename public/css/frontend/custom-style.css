@@ -1033,14 +1033,14 @@ section {
 }
 
 .col-content {
-	padding: 120px 100px 110px 120px;
+	padding: 190px 100px 110px 120px;
 }
 
 /* Custom, iPhone Retina */
 @media only screen and (min-width: 320px) and (max-width: 767px) {
 
 .col-content {
-	padding: 40px !important;
+	padding: 60px 40px 40px 40px !important;
 }
 }
 

@@ -398,6 +398,7 @@
 
         // Ajax function to get rajaongkir delivery fee
         function rajaongkirAjaxGetCost(tmpCityId, tmpWeight, tmpCourier){
+            // alert(tmpCourier);
             $.ajax({
                 url: '{{ route('ajax.rajaongkir.cost') }}',
                 type: 'POST',
