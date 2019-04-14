@@ -407,7 +407,7 @@ class ProductController extends Controller
             $product->tag = $request->input('tags');
             $product->updated_at = $dateTimeNow->toDateTimeString();
 
-            $product->save();
+//            $product->save();
 
 //            // update product category
 //            $selectedCategory = CategoryProduct::where('product_id', $product->id)->first();
@@ -419,8 +419,8 @@ class ProductController extends Controller
             // update product main image, thumbnail and image detail
 
             if(!empty($mainImages)){
-//                dd($mainImages);
                 $mainImage = ProductImage::where('product_id', $product->id)->where('is_main_image', 1)->first();
+//                dd($mainImage);
                 if(!empty($mainImage)){
                     $path = $mainImage->path;
 
@@ -454,7 +454,7 @@ class ProductController extends Controller
                 }
             }
             if(!empty($thumbnailImages)){
-//                dd($thumbnailImages);
+                dd($thumbnailImages);
                 $thumbnailImage = ProductImage::where('product_id', $product->id)->where('is_thumbnail', 1)->first();
                 if(!empty($thumbnailImage)){
                     $path = $thumbnailImage->path;
@@ -489,6 +489,7 @@ class ProductController extends Controller
                 }
             }
             if(!empty($detailImages)){
+                dd($thumbnailImages);
                 $detailImage = ProductImage::where('product_id', $product->id)->where('is_main_image', 0)->get();
 
                 foreach($detailImage as $image){

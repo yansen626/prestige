@@ -6,7 +6,7 @@
     <!-- Slider #1
 ============================================= -->
     {{--<section id="slider" class="carousel slider slider-shop slider-dots slider-navs" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="false" data-dots="true" data-space="0" data-loop="true" data-speed="800">--}}
-    <section id="slider" class="carousel slider slider-shop slider-dots slider-navs" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="false" data-dots="true" data-space="0" data-loop="false" data-speed="800">
+    <section id="slider" class="carousel slider slider-shop slider-dots slider-navs" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="false" data-dots="false" data-space="0" data-loop="false" data-speed="800">
 
         <!-- Slide #1 -->
         <div class="slide--item">

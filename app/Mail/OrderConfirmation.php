@@ -37,7 +37,7 @@ class OrderConfirmation extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->user->first_name. " ".$this->user->last_name.", Order Confirmation")
+        return $this->subject("Order #".$this->order->order_number." Confirmed")
             ->view('mail.order-confirmation')->with([
                 'user' => $this->user,
                 'order' => $this->order,

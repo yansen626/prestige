@@ -101,16 +101,20 @@
                     <table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="9" class="vb-container halfpad" style="border-collapse: separate;border-spacing: 9px;padding-left: 9px;padding-right: 9px;width: 100%;max-width: 650px;background-color: #fff;" width="650">
                         <tbody>
                         <tr>
-                            <td bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 16px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f;line-height: 1.6;">
+                            <td bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 14px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f;line-height: 1.6;">
                                 <p>Thank you for your purchase!</p>
-                                <p>Helo {{$user->first_name}} {{$user->last_name}}, we're gettting your order ready to be shipped. We will notify you when it has been sent.</p>
+                                <p>
+                                    Hello {{$user->first_name}} {{$user->last_name}}.<br>
+                                    You can check the status of your order by loggin into your account. If you have
+                                    any question about your order, please contact us at hi@nama-official.com Monday-Friday, 9am-5pm WIB.
+                                </p>
                             </td>
                         </tr>
                         <tr>
                             <td bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 14px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f; line-height: 1.6;">
                                <span data-mce-style="color: #81b951;" style="color: rgb(129, 185, 81);">
                                     <strong>
-                                        <a data-mce-style="color: #81b951;" href="http://nama-official.com/orders" style="color: #81b951;text-decoration: underline;" title="Order History">
+                                        <a data-mce-style="color: #EAA2AE;" href="http://nama-official.com/orders" style="color: #81b951;text-decoration: underline;" title="Order History">
                                             View Order Status
                                         </a>
                                     </strong>
@@ -164,7 +168,7 @@
                                                 x {{$orderProduct->qty}}
                                             </td>
                                             <td bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 12px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f;line-height: 1.6;">
-                                                Rp {{$orderProduct->grand_total}}
+                                                {{env('KURS_IDR')}} {{$orderProduct->grand_total_string}}
                                             </td>
                                         </tr>
                                         @endforeach
@@ -185,7 +189,7 @@
                                                 Subtotal :
                                             </td>
                                             <td bgcolor="#FFFFFF" style="text-align: right;background-color: #ffffff; font-size: 12px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f;line-height: 1.6;">
-                                                {{$order->sub_total}}
+                                                {{env('KURS_IDR')}} {{$order->sub_total_string}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -193,7 +197,7 @@
                                                 Shipping :
                                             </td>
                                             <td bgcolor="#FFFFFF" style="text-align: right;background-color: #ffffff; font-size: 12px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f;line-height: 1.6;">
-                                                {{$order->shipping_charge}}
+                                                {{env('KURS_IDR')}} {{$order->shipping_charge_string}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -201,7 +205,7 @@
                                                 Total :
                                             </td>
                                             <td bgcolor="#FFFFFF" style="text-align: right;background-color: #ffffff; font-size: 12px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f;line-height: 1.6;">
-                                                {{$order->grand_total}}
+                                                {{env('KURS_IDR')}} {{$order->grand_total_string}}
                                             </td>
                                         </tr>
                                         </tbody>
@@ -221,6 +225,14 @@
                                 {{--<hr style="margin: 0;"/>--}}
                             {{--</td>--}}
                         {{--</tr>--}}
+                        <tr>
+                            <td bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 10px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f;line-height: 1.6;">
+                                <p>Terms & Conditions</p>
+                                <p>
+                                    All of our product are custom made to order, therefore please allow 2-3 bussiness days for production. All sales are final.
+                                </p>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

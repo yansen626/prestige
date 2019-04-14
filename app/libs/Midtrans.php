@@ -11,6 +11,7 @@ namespace App\libs;
 use App\Models\Cart;
 use App\Models\Currency;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class Midtrans
 {
@@ -173,7 +174,7 @@ class Midtrans
             ]);
 
 //            dd($request);
-            Utilities::ExceptionLog($request->getBody());
+//            Utilities::ExceptionLog($request->getBody());
 
             if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
                 $collect = json_decode($request->getBody());
@@ -197,7 +198,7 @@ class Midtrans
         catch (\Exception $ex){
 //            error_log($ex);
             dd($ex);
-            Utilities::ExceptionLog('midtransSendRequest EX = '. $ex);
+            Log::error("Midtrans.php > midtransSendRequest ".$ex);
         }
     }
 }

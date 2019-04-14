@@ -144,6 +144,7 @@ class HomeController extends Controller
     }
     public function TestingPurpose(){
         $type = 6;
+//        dd($type);
         try{
             switch ($type){
                 //testing midtrans

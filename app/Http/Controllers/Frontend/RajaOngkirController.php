@@ -23,6 +23,11 @@ class RajaOngkirController extends Controller
 //            $url = env('RAJAONGKIR_URL').'/cost';
             $key = env('RAJAONGKIR_KEY');
 
+            $courier = $courierArr[0];
+            if($cityId = 152){
+
+            }
+
             $response = $client->request('POST', $url, [
                 'headers' => [
                     'key' => $key
@@ -33,7 +38,7 @@ class RajaOngkirController extends Controller
                     'destination' => $cityId,
                     'destinationType' => 'city',
                     'weight' => $weight,
-                    'courier' => $courierArr[0]
+                    'courier' => $courier
                 ]
             ]);
 
@@ -46,8 +51,23 @@ class RajaOngkirController extends Controller
                 $shippingPrice = 0;
                 foreach($results as $result){
                     foreach ($result->costs as $cost){
-                        if($cost->service == $courierArr[1]){
-                            $shippingPrice = $cost->cost[0]->value;
+                        //if jne
+                        if($courierArr[0] == "jne"){
+                            if($courierArr[1] == "REG"){
+                                if($cost->service == "REG" || $cost->service == "CTC"){
+                                    $shippingPrice = $cost->cost[0]->value;
+                                }
+                            }
+                            else if($courierArr[1] == "YES"){
+                                if($cost->service == "YES" || $cost->service == "CTCYES"){
+                                    $shippingPrice = $cost->cost[0]->value;
+                                }
+                            }
+                        }
+                        else{
+                            if($cost->service == $courierArr[1]){
+                                $shippingPrice = $cost->cost[0]->value;
+                            }
                         }
                     }
                 }

@@ -15,7 +15,7 @@
                             <ul class="list-unstyled mb-0">
                                 <li><a href="{{route('others', ['type'=>'Term-Condition'])}}">T&C'S</a></li>
                                 <li><a href="{{route('others', ['type'=>'FAQ'])}}">FAQ'S</a></li>
-                                <li>SHIPPING</li>
+                                <li style="color:black;">SHIPPING</li>
                                 <li><a href="{{route('others', ['type'=>'Privacy-Policy'])}}">PRIVACY</a></li>
                             </ul>
                         </div>
