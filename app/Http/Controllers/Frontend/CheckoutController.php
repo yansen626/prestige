@@ -158,7 +158,7 @@ class CheckoutController extends Controller
             $orderProducts = OrderProduct::where('order_id', $orderDB->id)->get();
 
             // Create ZOHO Invoice
-            //Zoho::createInvoice($orderDB->zoho_sales_order_id);
+            Zoho::createInvoice($orderDB->zoho_sales_order_id);
 
             //send email confirmation
             $user = User::find($orderDB->user_id);
@@ -181,18 +181,19 @@ class CheckoutController extends Controller
             }
             $orderConfirmation = new OrderConfirmation($user, $orderDB, $orderProducts, $productImageArr);
             Mail::to($user->email)->bcc(env('MAIL_ADMIN'))->send($orderConfirmation);
-//            dd($test);
+//            dd($resultMail);
 
             $data=([
-                'order' => $order,
+                'order' => $orderDB,
                 'orderProduct' => $orderProducts,
             ]);
+//            dd($data);
             return view('frontend.transactions.checkout-success')->with($data);
         }
         catch(\Exception $ex){
 //            dd($ex);
             error_log($ex);
-            Log::error("CheckoutController Error: ". $ex->getMessage());
+            Log::error("CheckoutController > checkoutSuccess Error: ". $ex->getMessage());
         }
     }
     public function TransferInformation(Order $order){

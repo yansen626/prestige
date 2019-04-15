@@ -13,16 +13,16 @@
                         </div>
                         <div class="col-md-8">
                             <p>
-                                we are pleased to tell you your order has been confirmed and is underway.<br>
+                                We are pleased to tell you your order has been confirmed and is underway.<br>
                                 please allow for 10 business days before dispatch while we personalize your order.<br>
                                 we will send an email when your items are ready for dispatch.
                             </p>
                         </div>
-                        <div class="col-md-4">
-                            <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;margin-bottom:2%;">DOWNLOAD INVOICE</a>
-                            <br>
-                            <a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;margin-bottom:2%;">TRACK ORDER</a>
-                        </div>
+                        {{--<div class="col-md-4">--}}
+                            {{--<a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;margin-bottom:2%;">DOWNLOAD INVOICE</a>--}}
+                            {{--<br>--}}
+                            {{--<a class="btn btn--secondary btn--bordered" href="#" style="width: 220px;margin-bottom:2%;">TRACK ORDER</a>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
 

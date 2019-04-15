@@ -454,8 +454,8 @@ class ProductController extends Controller
                 }
             }
             if(!empty($thumbnailImages)){
-                dd($thumbnailImages);
                 $thumbnailImage = ProductImage::where('product_id', $product->id)->where('is_thumbnail', 1)->first();
+//                dd($thumbnailImage);
                 if(!empty($thumbnailImage)){
                     $path = $thumbnailImage->path;
 
@@ -489,8 +489,8 @@ class ProductController extends Controller
                 }
             }
             if(!empty($detailImages)){
-                dd($thumbnailImages);
-                $detailImage = ProductImage::where('product_id', $product->id)->where('is_main_image', 0)->get();
+//                dd($detailImages);
+                $detailImage = ProductImage::where('product_id', $product->id)->where('is_main_image', 0)->where('is_thumbnail', 0)->get();
 
                 foreach($detailImage as $image){
                     $image->delete();

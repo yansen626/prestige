@@ -105,16 +105,16 @@
                                 <p>Thank you for your purchase!</p>
                                 <p>
                                     Hello {{$user->first_name}} {{$user->last_name}}.<br>
-                                    You can check the status of your order by loggin into your account. If you have
+                                    You can check the status of your order by logging into your account. If you have
                                     any question about your order, please contact us at hi@nama-official.com Monday-Friday, 9am-5pm WIB.
                                 </p>
                             </td>
                         </tr>
                         <tr>
                             <td bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 14px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f; line-height: 1.6;">
-                               <span data-mce-style="color: #81b951;" style="color: rgb(129, 185, 81);">
+                               <span data-mce-style="color: #EAA2AE;" style="color:#EAA2AE;">
                                     <strong>
-                                        <a data-mce-style="color: #EAA2AE;" href="http://nama-official.com/orders" style="color: #81b951;text-decoration: underline;" title="Order History">
+                                        <a data-mce-style="color: #EAA2AE;" href="http://nama-official.com/orders" style="color: #EAA2AE;text-decoration: underline;" title="Order History">
                                             View Order Status
                                         </a>
                                     </strong>
