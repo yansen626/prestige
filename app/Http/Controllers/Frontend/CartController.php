@@ -171,6 +171,14 @@ class CartController extends Controller
                     $cart->save();
                 }
 
+                $cartQty = 0;
+                $cartsDb = Cart::where('user_id', Auth::user()->id)->get();
+                foreach ($cartsDb as $cart) {
+                    $cartQty += $cart->qty;
+                }
+
+                Session::put('cartQty', $cartQty);
+
                 return redirect()->route('billing');
             }
             else{
