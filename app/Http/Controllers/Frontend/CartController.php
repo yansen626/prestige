@@ -26,6 +26,8 @@ class CartController extends Controller
             $color = explode("-", $color);
             $size = $request->input('custom-size');
             $size = explode("-", $size);
+            $position = $request->input('custom-position-name');
+
             if($request->input('customize-toggle') == 'true'){
                 if($request->input('custom-text') == ""){
                     $description = "";
@@ -33,7 +35,7 @@ class CartController extends Controller
                 else{
                     $description = "Text: ".strtoupper($request->input('custom-text'))."<br>".
 //                        "Font: ".$request->input('custom-font')."<br>".
-
+                        "Position: ".$position."<br>".
                         "Color: ".$color[0]."<br>".
                         "Size: ".$size[0]."<br>";
                 }
