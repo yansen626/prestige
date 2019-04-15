@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -81,6 +82,17 @@ class LoginController extends Controller
 
         Session::forget('cart');
         Session::forget('cartQty');
+
+        if(Session::get('cartQty') == null) {
+            $cartQty = 0;
+            $cartsDb = Cart::where('user_id', Auth::user()->id)->get();
+            foreach ($cartsDb as $cart) {
+                $cartQty += $cart->qty;
+            }
+
+            Session::put('cartQty', $cartQty);
+        }
+
         if ($this->guard()->attempt($credentials, $request->has('remember'))) {
             return $this->sendLoginResponse($request);
         }
