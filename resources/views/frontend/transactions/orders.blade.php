@@ -53,11 +53,11 @@
 
                                                 @if($order->order_status_id == 2)
                                                     <a href="{{route('checkout', ['order'=>$order->id])}}">
-                                                        <button type="button" class="btn btn--primary btn--bordered custom-btn">Pay</button>
+                                                        <button type="button" class="btn btn--primary btn--bordered custom-btn">Confirm Order</button>
                                                     </a>
                                                 @elseif($order->order_status_id == 7)
                                                     <a href="{{route('order.bank_confirmation', ['order'=>$order->id])}}">
-                                                        <button type="button" class="btn btn--primary btn--bordered custom-btn">Pay</button>
+                                                        <button type="button" class="btn btn--primary btn--bordered custom-btn">Confirm Order</button>
                                                     </a>
                                                 @else
                                                     <a href="{{route('order.detail', ['order'=>$order->id])}}">

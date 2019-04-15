@@ -180,7 +180,9 @@ class CheckoutController extends Controller
                 $productImageArr[$productImage->product_id] = $productImage->path;
             }
             $orderConfirmation = new OrderConfirmation($user, $orderDB, $orderProducts, $productImageArr);
-            Mail::to($user->email)->bcc(env('MAIL_ADMIN'))->send($orderConfirmation);
+            Mail::to($user->email)
+                ->bcc(env('MAIL_SALES'))
+                ->send($orderConfirmation);
 //            dd($resultMail);
 
             $data=([

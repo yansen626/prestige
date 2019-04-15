@@ -407,7 +407,7 @@ class ProductController extends Controller
             $product->tag = $request->input('tags');
             $product->updated_at = $dateTimeNow->toDateTimeString();
 
-//            $product->save();
+            $product->save();
 
 //            // update product category
 //            $selectedCategory = CategoryProduct::where('product_id', $product->id)->first();

@@ -78,6 +78,24 @@
                         {{--</div>--}}
 
                         <div class="col-md-12">
+                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="FIRST NAME" required/>
+                            @if ($errors->has('first_name'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('first_name') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="LAST NAME" required/>
+                            @if ($errors->has('last_name'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('last_name') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+
+                        <div class="col-md-12">
                             <input type="email" class="form-control" name="email" id="email" placeholder="EMAIL ADDRESS" required/>
                             @if ($errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
@@ -109,24 +127,6 @@
                             @if ($errors->has('password_confirmation'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $errors->first('password_confirmation') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="FIRST NAME" required/>
-                            @if ($errors->has('first_name'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('first_name') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="LAST NAME" required/>
-                            @if ($errors->has('last_name'))
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('last_name') }}</strong>
                                 </span>
                             @endif
                         </div>

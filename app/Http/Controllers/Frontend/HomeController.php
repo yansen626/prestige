@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\libs\Midtrans;
 use App\libs\Utilities;
 use App\Mail\OrderConfirmation;
+use App\Models\Cart;
 use App\Models\City;
 use App\Models\ContactMessage;
 use App\Models\Order;
@@ -18,10 +19,12 @@ use App\Models\Voucher;
 use App\Models\WaitingList;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Cookie;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -44,6 +47,20 @@ class HomeController extends Controller
     {
         //return view('frontend.coming-soon');
         $products = Product::where('is_primary', 1)->where('status', 1)->get();
+
+        if (Auth::check())
+        {
+            if(Session::get('cartQty') == null) {
+                $cartQty = 0;
+                $cartsDb = Cart::where('user_id', Auth::user()->id)->get();
+                foreach ($cartsDb as $cart) {
+                    $cartQty += $cart->qty;
+                }
+
+                Session::put('cartQty', $cartQty);
+            }
+        }
+
         $data=([
            'products' => $products,
         ]);

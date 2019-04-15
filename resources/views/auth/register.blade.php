@@ -22,6 +22,15 @@
                             @endforeach
                         </div>
 
+
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="FIRST NAME" value="{{old('first_name')}}" required/>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="LAST NAME" value="{{old('last_name')}}" required/>
+                        </div>
+
                         <div class="col-md-12">
                             <input type="email" class="form-control" name="email" id="email" value="{{old('email')}}" placeholder="EMAIL ADDRESS" required/>
                         </div>
@@ -36,14 +45,6 @@
 
                         <div class="col-md-12">
                             <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" value="{{old('password_confirmation')}}" placeholder="PASSWORD CONFIRMATION" required/>
-                        </div>
-
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="FIRST NAME" value="{{old('first_name')}}" required/>
-                        </div>
-
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="LAST NAME" value="{{old('last_name')}}" required/>
                         </div>
 
                         <div class="col-md-12 center">

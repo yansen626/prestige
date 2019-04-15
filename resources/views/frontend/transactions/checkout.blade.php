@@ -76,8 +76,8 @@
                                                     <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    {{$product->product->name}}
-                                                    Customized :<br>
+                                                    {{$product->product->name}}<br>
+                                                    Customization :<br>
                                                     {!! $product->product_info !!}
                                                 </div>
                                                 <div class="col-md-2">

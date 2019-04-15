@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+@section('pageTitle', $product->name.' | NAMA')
 @section('content')
 
     <!-- Cover #5
@@ -7,7 +8,7 @@
     <section id="cover5" class="section mtop-100 pt-0 pb-0">
         <div class="container-fluid">
             <div class="row" style="background-color: white;">
-                <div class="col-xs-12 col-sm-12 col-md-6 col-content center" >
+                <div class="col-xs-12 col-sm-12 col-md-6 center" style="padding: 0 8% 0 8% !important;">
                     <section id="slider-product" class="carousel slider slider-shop slider-dots" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="true" data-dots="true" data-space="0" data-loop="true" data-speed="800">
                         @php($productImages = $product->product_images->where('is_thumbnail', 0))
                         @php($productMainImages = $product->product_images->where('is_main_image', 1)->first())
@@ -28,7 +29,7 @@
                                 </div><!-- .slide-item end -->
                         @endforeach
                     </section>
-                    <div id="custom-section" style="display: none; margin-left:-50px;">
+                    <div id="custom-section" style="display: none; margin-left:-50px;padding-top:20%;">
                         <canvas id="myCanvas" width="600" height="600"></canvas>
                         <canvas id="myCanvasMobile" width="300" height="300" style="display:none;"></canvas>
                     </div>
@@ -107,7 +108,7 @@
 
                             <div id="customize-section" class="row customize-section" style="display:{{$display}}">
                                 <div class="col-md-12 bg-white bg-white-mobile" style="padding-bottom: 25px;">
-                                    <p>Enter personalized text (max 3 characters)</p>
+                                    <p style="font-weight: bold">Enter text (max 3 characters)</p>
                                     <form>
                                         <input type="text" class="form-control auto-blur"
                                                name="custom-text" id="custom-text" placeholder="TEXT HERE" maxlength="3"
@@ -126,7 +127,7 @@
                                         {{--</div>--}}
                                         <div class="col-xs-12 col-sm-12 col-md-4 text-center">
                                             <div style="width: 100%">
-                                                <p style="margin-bottom: 0;">Choose Position</p>
+                                                <p style="margin-bottom: 0;font-weight: bold">Choose Position</p>
                                             </div>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-default text-customization-xl btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -134,6 +135,7 @@
                                                     <span id="custom-position-text">{{$product->product_positions[0]->name}}</span>
                                                 </button>
                                                 <input type="hidden" name="custom-position" id="custom-position" value="{{$product->product_positions[0]->pos_x}}-{{$product->product_positions[0]->pos_y}}">
+                                                <input type="hidden" name="custom-position-name" id="custom-position-name" value="{{$product->product_positions[0]->name}}">
 
                                                 <ul class="dropdown-menu">
                                                     @foreach($product->product_positions as $position)
@@ -165,7 +167,7 @@
 
                                         <div class="col-xs-12 col-sm-12 col-md-4 text-center">
                                             <div style="width: 100%">
-                                                <p style="margin-bottom: 0;">
+                                                <p style="margin-bottom: 0;font-weight: bold">
                                                     Choose Color <i class="fa fa-info-circle" data-toggle="modal" data-target="#colorInformation" style="cursor: pointer;"></i>
                                                 </p>
                                             </div>
@@ -206,7 +208,7 @@
 
                                         <div class="col-xs-12 col-sm-12 col-md-4 text-center">
                                             <div style="width: 100%">
-                                                <p style="margin-bottom: 0;">Choose Size</p>
+                                                <p style="margin-bottom: 0;font-weight: bold">Choose Size</p>
                                             </div>
                                             <div class="btn-group">
                                                 <button type="button" class="btn btn-default text-customization-xl btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -851,15 +853,18 @@
                 var valuePosition = valueArr[1] + "-" + valueArr[2];
                 $('#custom-position').val(valuePosition);
                 $('#custom-position-text').text(valueArr[0]);
+                $('#custom-position-name').text(valueArr[0]);
                 ChangeSelectedPosition();
             }
             else if(option === 2){
                 $('#custom-color').val(value);
                 $('#custom-color-text').text(valueArr[0]);
+                $('#custom-position-name').text(valueArr[0]);
             }
             else{
                 $('#custom-size').val(value);
                 $('#custom-size-text').text(valueArr[0]);
+                $('#custom-position-name').text(valueArr[0]);
             }
             ChangePosition();
         }

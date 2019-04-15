@@ -7,7 +7,7 @@
                 <div class="row" style="margin-bottom:5%;">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="col-md-12">
-                            <h1>Transfer Information!</h1>
+                            <h1>Transfer Information</h1>
                             <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                             <br/>
                         </div>
@@ -21,6 +21,10 @@
                                 006 612 1555  a.n Caroline
                             </h4>
                             <p>TOTAL PAYMENT = {{env('KURS_IDR')}} {{$order->grand_total_string}}</p>
+                            <br>
+                            <a href="{{route('order.bank_confirmation', ['order'=>$order->id])}}" style="color: red">
+                                Click here to confirm your payment
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -50,9 +54,9 @@
                                                     @php($productImage = \App\Models\ProductImage::where('product_id', $product->product->id)->where('is_main_image', 1)->first())
                                                     <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    {{$product->product->name}}
-                                                    Customized :<br>
+                                                <div class="col-md-4">>
+                                                    {{$product->product->name}}<br>
+                                                    Customization :<br>
                                                     {!! $product->product_info !!}
                                                 </div>
                                                 <div class="col-md-2">
