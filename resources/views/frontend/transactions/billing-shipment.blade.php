@@ -120,37 +120,37 @@
                             </div>
                         {{-- guset or user already have address --}}
                         @else
-                            <div>
-                                <div class="col-md-12 padding-bottom-10">
-                                    <span class="font-20 text-black">Country : {{$address->country->name}}</span>
-                                    <input type="hidden" name="country" value="{{$address->country_id}}">
-                                </div>
-
+                            <div class="col-md-12 bg-windrift-blue" style="padding-top:1%;padding-bottom:1%;">
                                 <div class="col-md-12 padding-bottom-10">
                                     <span class="font-20 text-black">{{$address->description}}, {{$address->street}}</span>
                                     <input type="hidden" name="address_detail" value="{{$address->description}}">
                                     <input type="hidden" name="street" value="{{$address->street}}">
                                 </div>
 
-                                <div class="col-md-6 padding-bottom-10">
+                                <div class="col-md-12 padding-bottom-10">
+                                    <span class="font-20 text-black">City : {{$address->city->name}}</span>
+                                    <input type="hidden" name="city" value="{{$address->city_id}}">
+                                </div>
+
+                                <div class="col-md-12 padding-bottom-10">
                                     <span class="font-20 text-black">Province : {{$address->province->name}}</span>
                                     <input type="hidden" name="province" value="{{$address->province_id}}">
                                 </div>
 
                                 <div class="col-md-6 padding-bottom-10">
-                                    <span class="font-20 text-black">City : {{$address->city->name}}</span>
-                                    <input type="hidden" name="city" value="{{$address->city_id}}">
+                                    <span class="font-20 text-black">Post Code : {{$address->postal_code}}</span>
+                                    <input type="hidden" name="post_code" value="{{$address->postal_code}}">
+                                </div>
+
+                                <div class="col-md-12 padding-bottom-10">
+                                    <span class="font-20 text-black">Country : {{$address->country->name}}</span>
+                                    <input type="hidden" name="country" value="{{$address->country_id}}">
                                 </div>
 
                                 {{--<div class="col-md-6 padding-bottom-10">--}}
                                     {{--<span class="font-20 text-black">Suburb : {{$address->suburb}}</span>--}}
                                     <input type="hidden" name="suburb" value="{{$address->suburb}}">
                                 {{--</div>--}}
-
-                                <div class="col-md-6 padding-bottom-10">
-                                    <span class="font-20 text-black">Post Code : {{$address->postal_code}}</span>
-                                    <input type="hidden" name="post_code" value="{{$address->postal_code}}">
-                                </div>
 
                                 {{--<div class="col-md-6 padding-bottom-10">--}}
                                     {{--<span class="font-20 text-black">State : {{$address->state}}</span>--}}

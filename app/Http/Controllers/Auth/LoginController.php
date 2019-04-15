@@ -59,7 +59,7 @@ class LoginController extends Controller
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            return View("auth.login")->withErrors(['msg' => ['Wrong Username or Password!']]);
+            return View("auth.login")->withErrors(['msg' => ['Wrong Username or Password']]);
         }
 
         if ($this->hasTooManyLoginAttempts($request)) {
@@ -69,7 +69,7 @@ class LoginController extends Controller
         }
 
         if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->back()->withErrors('Wrong Email or Password!!', 'default')->withInput($request->only('email'));
+            return redirect()->back()->withErrors('Wrong Email or Password', 'default')->withInput($request->only('email'));
         }
 
         $credentials = $this->credentials($request);

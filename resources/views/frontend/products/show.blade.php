@@ -8,8 +8,11 @@
     <section id="cover5" class="section mtop-100 pt-0 pb-0">
         <div class="container-fluid">
             <div class="row" style="background-color: white;">
-                <div class="col-xs-12 col-sm-12 col-md-6 center" style="padding: 0 8% 0 8% !important;">
-                    <section id="slider-product" class="carousel slider slider-shop slider-dots" data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="true" data-dots="true" data-space="0" data-loop="true" data-speed="800">
+                <div class="col-xs-12 col-sm-12 col-md-6 center slider-image-left" style="padding-left: 8%;">
+                    <section id="slider-product" class="carousel slider slider-shop slider-dots"
+                             data-slide="1" data-slide-rs="1" data-autoplay="false" data-nav="true" data-dots="true"
+                             data-space="0" data-loop="true" data-speed="800"
+                             style="height:500px;">
                         @php($productImages = $product->product_images->where('is_thumbnail', 0))
                         @php($productMainImages = $product->product_images->where('is_main_image', 1)->first())
                         @php($productThumbnailImage = $product->product_images->where('is_thumbnail', 1)->first())
@@ -20,7 +23,7 @@
                                     {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
                                     {{--</div>--}}
                                     <div class="pos-vertical-center">
-                                        <div class="col-xs-12 col-sm-12 col-md-12 slider-home" style="background-image: url('{{ asset('storage/products/'.$images->path) }}');background-size: contain !important;">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 slider-home" style="background-image: url('{{ asset('storage/products/'.$images->path) }}');background-size: contain !important;height:500px;">
                                             {{--<div class="bg-section">--}}
                                             {{--<img src="{{ asset('images/sliders/slide-bg/banner-1.jpg') }}" alt="Background"/>--}}
                                             {{--</div>--}}
@@ -29,12 +32,12 @@
                                 </div><!-- .slide-item end -->
                         @endforeach
                     </section>
-                    <div id="custom-section" style="display: none; margin-left:-50px;padding-top:20%;">
+                    <div id="custom-section" style="display: none; margin-left:-50px;padding-top:4%;">
                         <canvas id="myCanvas" width="600" height="600"></canvas>
                         <canvas id="myCanvasMobile" width="300" height="300" style="display:none;"></canvas>
                     </div>
                 </div><!-- .col-md-8 end -->
-                <div class="col-xs-12 col-sm-12 col-md-6" style="padding: 8% 8% 0 8%;">
+                <div class="col-xs-12 col-sm-12 col-md-6 slider-image-right" style="padding: 5% 8% 0 8%;">
                     <div class="row" style="margin-bottom: 28px;">
                         <div class="col-md-12">
                             <h2 style="margin: 0 0 18px;">{{$product->name}}</h2>
@@ -108,7 +111,7 @@
 
                             <div id="customize-section" class="row customize-section" style="display:{{$display}}">
                                 <div class="col-md-12 bg-white bg-white-mobile" style="padding-bottom: 25px;">
-                                    <p style="font-weight: bold">Enter text (max 3 characters)</p>
+                                    <p style="font-weight: bold">Enter Text (max 3 characters)</p>
                                     <form>
                                         <input type="text" class="form-control auto-blur"
                                                name="custom-text" id="custom-text" placeholder="TEXT HERE" maxlength="3"
@@ -126,27 +129,29 @@
                                         {{--</select>--}}
                                         {{--</div>--}}
                                         <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-                                            <div style="width: 100%">
-                                                <p style="margin-bottom: 0;font-weight: bold">Choose Position</p>
-                                            </div>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default text-customization-xl btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="fa fa-angle-down"></span>
-                                                    <span id="custom-position-text">{{$product->product_positions[0]->name}}</span>
-                                                </button>
-                                                <input type="hidden" name="custom-position" id="custom-position" value="{{$product->product_positions[0]->pos_x}}-{{$product->product_positions[0]->pos_y}}">
-                                                <input type="hidden" name="custom-position-name" id="custom-position-name" value="{{$product->product_positions[0]->name}}">
+                                            <div class="row">
+                                                <div style="width: 100%">
+                                                    <p style="margin-bottom: 0;font-weight: bold">Choose Position</p>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default text-customization-xl btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span class="fa fa-angle-down"></span>
+                                                        <span id="custom-position-text">{{$product->product_positions[0]->name}}</span>
+                                                    </button>
+                                                    <input type="hidden" name="custom-position" id="custom-position" value="{{$product->product_positions[0]->pos_x}}-{{$product->product_positions[0]->pos_y}}">
+                                                    <input type="hidden" name="custom-position-name" id="custom-position-name" value="{{$product->product_positions[0]->name}}">
 
-                                                <ul class="dropdown-menu">
-                                                    @foreach($product->product_positions as $position)
-                                                        @php($value=$position->pos_x."-".$position->pos_y)
-                                                        <li style="height: 30px;width: 40px;cursor:pointer;">
-                                                            <a onclick="ChangeCustom('{{$position->name}}-{{$value}}', 1)" style="text-transform: uppercase;">
-                                                                {{$position->name}}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
+                                                    <ul class="dropdown-menu">
+                                                        @foreach($product->product_positions as $position)
+                                                            @php($value=$position->pos_x."-".$position->pos_y)
+                                                            <li style="height: 30px;width: 40px;cursor:pointer;">
+                                                                <a onclick="ChangeCustom('{{$position->name}}-{{$value}}', 1)" style="text-transform: uppercase;">
+                                                                    {{$position->name}}
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                         {{--<div class="col-xs-12 col-sm-12 col-md-3 text-center">--}}
@@ -166,36 +171,38 @@
                                         {{--</div>--}}
 
                                         <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-                                            <div style="width: 100%">
-                                                <p style="margin-bottom: 0;font-weight: bold">
-                                                    Choose Color <i class="fa fa-info-circle" data-toggle="modal" data-target="#colorInformation" style="cursor: pointer;"></i>
-                                                </p>
-                                            </div>
+                                            <div class="row">
+                                                <div style="width: 100%">
+                                                    <p style="margin-bottom: 0;font-weight: bold">
+                                                        Choose Color <i class="fa fa-info-circle" data-toggle="modal" data-target="#colorInformation" style="cursor: pointer;"></i>
+                                                    </p>
+                                                </div>
 
-                                            <div class="btn-group">
-                                                <button type="button" class="btn text-customization-xl btn-default btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="fa fa-angle-down"></span>
-                                                    <span id="custom-color-text">Silver</span>
-                                                </button>
-                                                <input type="hidden" name="custom-color" id="custom-color" value="Silver-C0C0C0">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn text-customization-xl btn-default btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span class="fa fa-angle-down"></span>
+                                                        <span id="custom-color-text">Silver</span>
+                                                    </button>
+                                                    <input type="hidden" name="custom-color" id="custom-color" value="Silver-C0C0C0">
 
-                                                <ul class="dropdown-menu">
-                                                    <li style="height: 40px;width: 40px;cursor:pointer;">
-                                                        <a onclick="ChangeCustom('Silver-C0C0C0', 2)">
-                                                            <img src="{{asset('images/icons/Silver.PNG')}}" style="width: 35px; height: 35px;"> SILVER
-                                                        </a>
-                                                    </li>
-                                                    <li style="height: 40px;width: 40px;cursor:pointer;">
-                                                        <a onclick="ChangeCustom('Gold-FFD700', 2)">
-                                                            <img src="{{asset('images/icons/Gold.PNG')}}" style="width: 35px; height: 35px;"> GOLD
-                                                        </a>
-                                                    </li>
-                                                    <li style="height: 40px;width: 40px;cursor:pointer;">
-                                                        <a onclick="ChangeCustom('Blind-ffffff', 2)">
-                                                            <img src="{{asset('images/icons/Blind.PNG')}}" style="width: 35px; height: 35px;"> BLIND
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                                    <ul class="dropdown-menu">
+                                                        <li style="height: 40px;width: 40px;cursor:pointer;">
+                                                            <a onclick="ChangeCustom('Silver-C0C0C0', 2)">
+                                                                <img src="{{asset('images/icons/Silver.PNG')}}" style="width: 35px; height: 35px;"> SILVER
+                                                            </a>
+                                                        </li>
+                                                        <li style="height: 40px;width: 40px;cursor:pointer;">
+                                                            <a onclick="ChangeCustom('Gold-FFD700', 2)">
+                                                                <img src="{{asset('images/icons/Gold.PNG')}}" style="width: 35px; height: 35px;"> GOLD
+                                                            </a>
+                                                        </li>
+                                                        <li style="height: 40px;width: 40px;cursor:pointer;">
+                                                            <a onclick="ChangeCustom('Blind-ffffff', 2)">
+                                                                <img src="{{asset('images/icons/Blind.PNG')}}" style="width: 35px; height: 35px;"> BLIND
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                         {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
@@ -207,28 +214,30 @@
                                         {{--</div>--}}
 
                                         <div class="col-xs-12 col-sm-12 col-md-4 text-center">
-                                            <div style="width: 100%">
-                                                <p style="margin-bottom: 0;font-weight: bold">Choose Size</p>
-                                            </div>
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default text-customization-xl btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="fa fa-angle-down"></span>
-                                                    <span id="custom-size-text">36 pt</span>
-                                                </button>
-                                                <input type="hidden" name="custom-size" id="custom-size" value="36 pt-16">
+                                            <div class="row">
+                                                <div style="width: 100%">
+                                                    <p style="margin-bottom: 0;font-weight: bold">Choose Size</p>
+                                                </div>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default text-customization-xl btn-color-customize" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <span class="fa fa-angle-down"></span>
+                                                        <span id="custom-size-text">36 pt</span>
+                                                    </button>
+                                                    <input type="hidden" name="custom-size" id="custom-size" value="36 pt-16">
 
-                                                <ul class="dropdown-menu text--center">
-                                                    {{--<li style="height: 30px;width: 40px;cursor:pointer;">--}}
+                                                    <ul class="dropdown-menu text--center">
+                                                        {{--<li style="height: 30px;width: 40px;cursor:pointer;">--}}
                                                         {{--<a onclick="ChangeCustom('24 pt-20', 3)">--}}
-                                                            {{--24 PT--}}
+                                                        {{--24 PT--}}
                                                         {{--</a>--}}
-                                                    {{--</li>--}}
-                                                    <li style="height: 30px;width: 40px;cursor:pointer;">
-                                                        <a onclick="ChangeCustom('36 pt-16', 3)">
-                                                            36 PT
-                                                        </a>
-                                                    </li>
-                                                </ul>
+                                                        {{--</li>--}}
+                                                        <li style="height: 30px;width: 40px;cursor:pointer;">
+                                                            <a onclick="ChangeCustom('36 pt-16', 3)">
+                                                                36 PT
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </form>

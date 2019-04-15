@@ -130,7 +130,6 @@ class CartController extends Controller
                 foreach ($cartsDb as $cart) {
                     $cartQty += $cart->qty;
                 }
-
                 Session::put('cartQty', $cartQty);
             }
         }

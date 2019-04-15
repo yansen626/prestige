@@ -45,26 +45,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //return view('frontend.coming-soon');
-        $products = Product::where('is_primary', 1)->where('status', 1)->get();
-
-        if (Auth::check())
-        {
-            if(Session::get('cartQty') == null) {
-                $cartQty = 0;
-                $cartsDb = Cart::where('user_id', Auth::user()->id)->get();
-                foreach ($cartsDb as $cart) {
-                    $cartQty += $cart->qty;
-                }
-
-                Session::put('cartQty', $cartQty);
-            }
-        }
-
-        $data=([
-           'products' => $products,
-        ]);
-        return view('frontend.home')->with($data);
+        return view('frontend.coming-soon');
+//        $products = Product::where('is_primary', 1)->where('status', 1)->get();
+//
+//        if (Auth::check())
+//        {
+//            if(Session::get('cartQty') == null) {
+//                $cartQty = 0;
+//                $cartsDb = Cart::where('user_id', Auth::user()->id)->get();
+//                foreach ($cartsDb as $cart) {
+//                    $cartQty += $cart->qty;
+//                }
+//
+//                Session::put('cartQty', $cartQty);
+//            }
+//        }
+//
+//        $data=([
+//           'products' => $products,
+//        ]);
+//        return view('frontend.home')->with($data);
     }
 
     public function contactForm()

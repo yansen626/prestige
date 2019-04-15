@@ -26,6 +26,9 @@
     .text-customization-xl{
         margin-left: -14% !important;
     }
+    .slider-image-left{
+        padding-top:5%;
+    }
 }
 
 @media (min-width: 993px) and (max-width: 1024px){
@@ -40,6 +43,12 @@
     }
     .text-customization-xl{
         margin-left: -23% !important;
+    }
+    .slider-image-left{
+        padding-top:0;
+    }
+    .slider-image-right{
+        padding-top:2%;
     }
 }
 

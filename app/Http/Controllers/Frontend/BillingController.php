@@ -350,8 +350,22 @@ class BillingController extends Controller
             $shippingPrice = 0;
             foreach($results as $result){
                 foreach ($result->costs as $cost){
-                    if($cost->service == $selectedCourier[1]){
-                        $shippingPrice = $cost->cost[0]->value;
+                    if($selectedCourier[0] == "jne"){
+                        if($selectedCourier[1] == "REG"){
+                            if($cost->service == "REG" || $cost->service == "CTC"){
+                                $shippingPrice = $cost->cost[0]->value;
+                            }
+                        }
+                        else if($selectedCourier[1] == "YES"){
+                            if($cost->service == "YES" || $cost->service == "CTCYES"){
+                                $shippingPrice = $cost->cost[0]->value;
+                            }
+                        }
+                    }
+                    else{
+                        if($cost->service == $selectedCourier[1]){
+                            $shippingPrice = $cost->cost[0]->value;
+                        }
                     }
                 }
             }

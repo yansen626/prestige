@@ -4,7 +4,7 @@
     <section class="bg-white">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 center p-b-40">
+                <div class="col-md-12 p-b-40">
                     @foreach($errors->all() as $error)
                         <span class="form-message">
                             <strong> {{ $error }} </strong>
