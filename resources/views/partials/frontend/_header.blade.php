@@ -292,12 +292,12 @@
                 @if(auth()->guard('web')->check())
                     <a href="{{route('logout')}}" class="navbar-toggle collapsed icon-header-responsive" style="float: right;">
                         <span class="sr-only">Toggle navigation</span>
-                        <img src="{{asset('/images/icons/login.png')}}" style="width: 100%;">
+                        <img src="{{asset('/images/icons/logout-arrow.png')}}" style="width: 100%;">
                     </a>
                 @else
                     <a href="{{route('login')}}" class="navbar-toggle collapsed icon-header-responsive" style="float: right;">
                         <span class="sr-only">Toggle navigation</span>
-                        <img src="{{asset('/images/icons/login.png')}}" style="width: 100%;">
+                        <img src="{{asset('/images/icons/login-arrow.png')}}" style="width: 100%;">
                     </a>
                 @endif
                 <a href="{{route('cart')}}" class="navbar-toggle collapsed icon-header-responsive"

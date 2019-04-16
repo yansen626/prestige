@@ -1,5 +1,6 @@
 @extends('layouts.frontend')
 
+@section('pageTitle', 'Login | NAMA')
 @section('content')
     <section class="bg-white">
         <div class="container">

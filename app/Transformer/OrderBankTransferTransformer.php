@@ -22,7 +22,7 @@ class OrderBankTransferTransformer extends TransformerAbstract
         try{
             $createdDate = Carbon::parse($order->created_at)->format('d M Y');
 
-            $action = "<a class='btn btn-xs btn-info' href='orders/detail/".$order->id."' data-toggle='tooltip' data-placement='top'><i class='icon-info'></i></a>";
+            $action = "<a class='btn btn-xs btn-info' href='detail/".$order->order_id."' data-toggle='tooltip' data-placement='top'><i class='icon-info'></i></a>";
 
             if($order->order->order_status_id == 8){
                 $action .= " <a class='accept-modal btn btn-xs btn-success' data-id='". $order->id ."' ><i class='icon-save'></i></a>";

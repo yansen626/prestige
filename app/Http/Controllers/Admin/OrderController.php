@@ -3,13 +3,18 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\libs\Zoho;
+use App\Mail\OrderConfirmation;
 use App\Models\Order;
 use App\Models\OrderBankTransfer;
+use App\Models\OrderProduct;
+use App\Models\ProductImage;
 use App\Models\StoreAddress;
 use App\Models\User;
 use App\Transformer\OrderBankTransferTransformer;
 use App\Transformer\OrderTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Yajra\DataTables\DataTables;
 
 class OrderController extends Controller
@@ -105,6 +110,36 @@ class OrderController extends Controller
         $orderBankDB = OrderBankTransfer::where('order_id', $orderid)->first();
         $orderBankDB->status = 1;
         $orderBankDB->save();
+
+
+        $orderProducts = OrderProduct::where('order_id', $orderDB->id)->get();
+
+        // Create ZOHO Invoice
+        Zoho::createInvoice($orderDB->zoho_sales_order_id);
+
+        //send email confirmation
+        $user = User::find($orderDB->user_id);
+
+        $productIdArr = [];
+        foreach ($orderProducts as $orderProduct){
+            array_push($productIdArr, $orderProduct->product_id);
+
+            //minus item quantity
+            $product = $orderProduct->product;
+            $qty = $product->qty;
+            $product->qty = $qty-1;
+            $product->save();
+        }
+
+        $productImages = ProductImage::whereIn('product_id',$productIdArr)->where('is_main_image', 1)->get();
+        $productImageArr = [];
+        foreach ($productImages as $productImage){
+            $productImageArr[$productImage->product_id] = $productImage->path;
+        }
+        $orderConfirmation = new OrderConfirmation($user, $orderDB, $orderProducts, $productImageArr);
+        Mail::to($user->email)
+            ->bcc(env('MAIL_SALES'))
+            ->send($orderConfirmation);
 
         return redirect()->route('admin.orders.detail', ['id'=>$orderid]);
         //

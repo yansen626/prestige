@@ -170,7 +170,8 @@
                                         @php($productImage = \App\Models\ProductImage::where('product_id', $cart->product_id)->where('is_main_image', 1)->first())
                                         <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                         <br>
-                                        <i class="fa fa-close delete font-16 pt-20" data-toggle="modal" data-id="{{ $cart->id }}" data-target="#myModal"></i>
+                                        <i class="fa fa-close delete_mobile font-16" onclick="deleteItem('{{ $cart->id }}')"></i>
+                                        {{--<i class="fa fa-close delete font-16 pt-20" data-toggle="modal" data-id="{{ $cart->id }}" data-target="#myModal"></i>--}}
                                         <input type="hidden" value="{{ $cart->price }}" id="price_mobile{{ $cart->id }}">
                                     </div>
                                     <div class="col-xs-6 col-sm-6">
@@ -199,7 +200,8 @@
                                         @php($productImage = \App\Models\ProductImage::where('product_id', $cart['item']['product_id'])->where('is_main_image', 1)->first())
                                         <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                         <br>
-                                        <i class="fa fa-close delete font-16" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>
+                                        {{--<i class="fa fa-close delete font-16" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>--}}
+                                        <i class="fa fa-close delete_mobile font-16" onclick="deleteItem('{{ $cart['item']['product_id'] }}')"></i>
                                         <input type="hidden" value="{{ $cart['item']['price'] }}" id="price_mobile{{ $cart['item']['product_id'] }}">
                                     </div>
                                     <div class="col-xs-6 col-sm-6">
@@ -300,7 +302,7 @@
                     </div>
                     <div class="modal-body">
                         <p>Are you sure want to delete this?</p>
-                        <input type="hidden" id="cartId" name="cartId" />
+                        <input type="hidden" id="cartId" name="cartId"/>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-danger">Yes</button>
@@ -322,6 +324,11 @@
 
 @section('scripts')
     <script type="text/javascript">
+        function deleteItem(id){
+            $("#myModal").modal('show');
+            $("#cartId").val(id);
+        }
+
         function updateQty(identifier, state){
             //if it plus
             var tmpQty;
