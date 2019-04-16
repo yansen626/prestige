@@ -2,25 +2,26 @@
 
 @if($filter == 0)
     @section('pageTitle', 'Shop All | NAMA')
-@endif
-@if($filter == -1)
+@elseif($filter == -1)
     @section('pageTitle', 'Search | NAMA')
+@else
+    @section('pageTitle', 'Shop All | NAMA')
 @endif
-@if($filter == 1)
-    @section('pageTitle', 'Bags & Totes | NAMA')
-@endif
-@if($filter == 2)
-    @section('pageTitle', 'Wallets | NAMA')
-@endif
+{{--@if($filter == 1)--}}
+    {{--@section('pageTitle', 'Bags & Totes | NAMA')--}}
+{{--@endif--}}
+{{--@if($filter == 2)--}}
+    {{--@section('pageTitle', 'Wallets | NAMA')--}}
+{{--@endif--}}
 {{--@if($filter == 3)--}}
 {{--@section('pageTitle', 'Card Holders | NAMA')--}}
 {{--@endif--}}
-@if($filter == 4)
-    @section('pageTitle', 'Pouches | NAMA')
-@endif
-@if($filter == 5)
-    @section('pageTitle', 'Phone Cases | NAMA')
-@endif
+{{--@if($filter == 4)--}}
+    {{--@section('pageTitle', 'Pouches | NAMA')--}}
+{{--@endif--}}
+{{--@if($filter == 5)--}}
+    {{--@section('pageTitle', 'Phone Cases | NAMA')--}}
+{{--@endif--}}
 @section('content')
 
     @if($filter != -1)
@@ -59,8 +60,11 @@
             <!-- Search Result -->
             @if($filter == -1)
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 center">
+                    <div class="col-xs-12 col-sm-12 col-md-12 center hidden-sm hidden-xs">
                         <h3>Search Result of  "{{$searchText}}"</h3>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 center hidden-lg hidden-md">
+                        <h2>Search Result of  "{{$searchText}}"</h2>
                     </div>
                     <!-- Product #1 -->
                     @foreach($productResult as $product)
@@ -90,8 +94,11 @@
             @else
                 @foreach($categoryDB as $category)
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 center">
+                        <div class="col-xs-12 col-sm-12 col-md-12 center hidden-sm hidden-xs">
                             <h3>{{$category->name}}</h3>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 center hidden-lg hidden-md">
+                            <h2>{{$category->name}}</h2>
                         </div>
                         <!-- Product #1 -->
                         @php($products = $productResult->where('category_id', $category->id))
@@ -115,7 +122,7 @@
                                             <h3><a href="{{$link}}">{{$product->name}}</a></h3>
                                         </div><!-- .product-title end -->
                                         <div class="product--price">
-                                            <span>{{env('KURS_IDR')}} {{$product->price_string}}</span>
+                                            <span class="family-sans" style="font-weight: 400;">{{env('KURS_IDR')}} {{$product->price_string}}</span>
                                         </div><!-- .product-price end -->
                                     </div><!-- .product-bio end -->
                                 </div>

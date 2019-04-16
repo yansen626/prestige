@@ -422,17 +422,9 @@ class ProductController extends Controller
                 $mainImage = ProductImage::where('product_id', $product->id)->where('is_main_image', 1)->first();
 //                dd($mainImage);
                 if(!empty($mainImage)){
-                    $path = $mainImage->path;
 
-                    $img = Image::make($mainImages);
-                    if(env('SERVER_HOST_URL') == 'http://localhost:8000/'){
-                        $img->save(public_path('storage/products/'. $path), 75);
-                    }
-                    else{
-                        $img->save('../public_html/storage/products/'. $path, 75);
-                    }
-                }
-                else{
+                    $mainImage->delete();
+
                     $img = Image::make($mainImages);
                     $extStr = $img->mime();
                     $ext = explode('/', $extStr, 2);
@@ -457,17 +449,9 @@ class ProductController extends Controller
                 $thumbnailImage = ProductImage::where('product_id', $product->id)->where('is_thumbnail', 1)->first();
 //                dd($thumbnailImage);
                 if(!empty($thumbnailImage)){
-                    $path = $thumbnailImage->path;
 
-                    $img = Image::make($thumbnailImages);
-                    if(env('SERVER_HOST_URL') == 'http://localhost:8000/'){
-                        $img->save(public_path('storage/products/'. $path), 75);
-                    }
-                    else{
-                        $img->save('../public_html/storage/products/'. $path, 75);
-                    }
-                }
-                else{
+                    $thumbnailImage->delete();
+
                     $img = Image::make($thumbnailImages);
                     $extStr = $img->mime();
                     $ext = explode('/', $extStr, 2);

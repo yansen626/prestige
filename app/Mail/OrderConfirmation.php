@@ -38,6 +38,7 @@ class OrderConfirmation extends Mailable
     public function build()
     {
         return $this->subject("Order #".$this->order->order_number." Confirmed")
+//            ->from('sales@nama-official.com')
             ->view('mail.order-confirmation')->with([
                 'user' => $this->user,
                 'order' => $this->order,
