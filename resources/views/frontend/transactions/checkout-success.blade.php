@@ -13,9 +13,9 @@
                         </div>
                         <div class="col-md-8">
                             <p>
-                                We are pleased to tell you your order has been confirmed and is underway.<br>
-                                please allow for 10 business days before dispatch while we personalize your order.<br>
-                                we will send an email when your items are ready for dispatch.
+                                We are pleased to tell you that your order is confirmed and is underway. <br>
+                                Please allow 2-3 business days before dispatch, while we personalize your order. <br>
+                                We will send an email when your items are ready for dispatch.
                             </p>
                         </div>
                         {{--<div class="col-md-4">--}}
@@ -53,11 +53,13 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     {{$product->product->name}}<br>
-                                                    Customization :<br>
-                                                    {!! $product->product_info !!}
+                                                    @if(!empty($product->product_info))
+                                                        Customization :<br>
+                                                        {!! $product->product_info !!}
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-2">
-                                                    {{$product->qty}}
+                                                    Quantity : {{$product->qty}}
                                                 </div>
                                                 <div class="col-md-4 right">
                                                     {{env('KURS_IDR')}} {{$product->grand_total_string}}

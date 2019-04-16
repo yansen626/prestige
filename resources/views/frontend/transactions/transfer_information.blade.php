@@ -56,11 +56,13 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     {{$product->product->name}}<br>
-                                                    Customization :<br>
-                                                    {!! $product->product_info !!}
+                                                    @if(!empty($product->product_info))
+                                                        Customization :<br>
+                                                        {!! $product->product_info !!}
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-2">
-                                                    {{$product->qty}}
+                                                    Quantity : {{$product->qty}}
                                                 </div>
                                                 <div class="col-md-4 right">
                                                     {{env('KURS_IDR')}} {{$product->grand_total_string}}

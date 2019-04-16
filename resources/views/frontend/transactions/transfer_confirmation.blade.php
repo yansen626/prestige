@@ -6,8 +6,13 @@
             <div class="container">
                 <div class="row" style="margin-bottom:5%;">
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="col-md-12">
+                        <div class="col-md-12 hidden-xs hidden-sm">
                             <h1>{{$order->order_number}}</h1>
+                            <hr style="height:1px;border:none;color:#333;background-color:#333;" />
+                            <br/>
+                        </div>
+                        <div class="col-md-12 hidden-lg hidden-md text--center">
+                            <h3>{{$order->order_number}}</h3>
                             <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                             <br/>
                         </div>
@@ -98,11 +103,13 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     {{$product->product->name}}<br>
-                                                    Customization :<br>
-                                                    {!! $product->product_info !!}
+                                                    @if(!empty($product->product_info))
+                                                        Customization :<br>
+                                                        {!! $product->product_info !!}
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-2">
-                                                    {{$product->qty}}
+                                                    Quantity : {{$product->qty}}
                                                 </div>
                                                 <div class="col-md-4 right">
                                                     {{env('KURS_IDR')}} {{$product->grand_total_string}}

@@ -57,7 +57,7 @@
                         <tr>
                             <td>
                                 <div class="col-md-12">
-                                    <div class="col-md-7 border-bottom-black mb-20">
+                                    <div class="col-md-7 border-bottom-black mb-20 hidden-xs hidden-sm">
                                         <div class="col-md-2"></div>
                                         <div class="col-md-4">PRODUCT</div>
                                         <div class="col-md-2">QUANTITY</div>
@@ -77,11 +77,13 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     {{$product->product->name}}<br>
-                                                    Customization :<br>
-                                                    {!! $product->product_info !!}
+                                                    @if(!empty($product->product_info))
+                                                        Customization :<br>
+                                                        {!! $product->product_info !!}
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-2">
-                                                    {{$product->qty}}
+                                                    Quantity : {{$product->qty}}
                                                 </div>
                                                 <div class="col-md-4 right">
                                                     {{env('KURS_IDR')}} {{$product->grand_total_string}}

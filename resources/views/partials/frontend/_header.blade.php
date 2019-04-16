@@ -292,7 +292,7 @@
                 @if(auth()->guard('web')->check())
                     <a href="{{route('logout')}}" class="navbar-toggle collapsed icon-header-responsive" style="float: right;">
                         <span class="sr-only">Toggle navigation</span>
-                        <img src="{{asset('/images/icons/login.png')}}" style="width: 100%; height:100%;">
+                        <img src="{{asset('/images/icons/login.png')}}" style="width: 100%;">
                     </a>
                 @else
                     <a href="{{route('login')}}" class="navbar-toggle collapsed icon-header-responsive" style="float: right;">
