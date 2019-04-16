@@ -21,11 +21,12 @@ class OrderTransformer extends TransformerAbstract
         try{
             $createdDate = Carbon::parse($order->created_at)->format('d M Y');
 
-            $action = "<a class='btn btn-xs btn-info' href='orders/detail/".$order->id."' data-toggle='tooltip' data-placement='top'><i class='icon-info'></i></a>";
+            $url = route('admin.orders.detail', ['item'=>$order->id]);
+            $action = "<a class='btn btn-xs btn-info' href='".$url."' data-toggle='tooltip' data-placement='top'><i class='icon-info'></i></a>";
 
             $tax = 0;
             if($order->tax_amount != null){
-                $tax = $order->tax_amount;
+                $tax = $order->tax_amount_string;
             }
 
             return[
@@ -34,9 +35,9 @@ class OrderTransformer extends TransformerAbstract
                 'customer'          => $order->user->first_name . ' ' . $order->user->last_name,
                 'email'             => $order->user->email,
                 'shipping'          => $order->shipping_option,
-                'sub_total'         => 'Rp'.$order->sub_total,
+                'sub_total'         => 'Rp'.$order->sub_total_string,
                 'tax_amount'        => 'Rp'.$tax,
-                'grand_total'       => 'Rp'.$order->grand_total,
+                'grand_total'       => 'Rp'.$order->grand_total_string,
                 'status'            => $order->order_status->name,
                 'action'            => $action
             ];

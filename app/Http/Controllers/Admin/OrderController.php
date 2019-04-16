@@ -12,6 +12,7 @@ use App\Models\ProductImage;
 use App\Models\StoreAddress;
 use App\Models\User;
 use App\Transformer\OrderBankTransferTransformer;
+use App\Transformer\OrderProcessingTransformer;
 use App\Transformer\OrderTransformer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -45,6 +46,15 @@ class OrderController extends Controller
             ->make(true);
     }
 
+    public function getIndexProcessing(Request $request){
+        $users = Order::where('order_status_id', 3)
+            ->orderBy('created_at', 'asc')->get();
+        return DataTables::of($users)
+            ->setTransformer(new OrderTransformer())
+            ->addIndexColumn()
+            ->make(true);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -63,6 +73,16 @@ class OrderController extends Controller
     public function indexBankTransfer()
     {
         return view('admin.order.index-transfer');
+    }
+
+    /**
+     * Display a listing of the resource bank Transfer.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexProcessing()
+    {
+        return view('admin.order.index-processing');
     }
 
     /**

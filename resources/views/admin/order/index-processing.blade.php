@@ -6,7 +6,7 @@
         <div class="container-fluid text-white">
             <div class="row p-t-b-10 ">
                 <div class="col">
-                    <h4> <i class="icon-table"></i> Orders</h4>
+                    <h4> <i class="icon-table"></i> Order Processing</h4>
                 </div>
             </div>
         </div>
@@ -28,7 +28,6 @@
                                 <th>Shipping</th>
                                 <th>Sub total</th>
                                 <th>Grand Total</th>
-                                <th>Status</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -39,7 +38,7 @@
             </section>
         </div>
     </div>
-    @include('partials._delete')
+    @include('partials._accept-bank-transfer')
 @endsection
 
 @section('styles')
@@ -59,7 +58,7 @@
             processing: true,
             serverSide: true,
             pageLength: 25,
-            ajax: '{!! route('datatables.orders') !!}',
+            ajax: '{!! route('datatables.order-processing') !!}',
             columns: [
                 { data: 'created_at', name: 'created_at', class: 'text-center', orderable: false, searchable: false,
                     render: function ( data, type, row ){
@@ -75,19 +74,18 @@
                 { data: 'shipping', name: 'shipping', class: 'text-center text-uppercase'},
                 { data: 'sub_total', name: 'sub_total', class: 'text-right'},
                 { data: 'grand_total', name: 'grand_total', class: 'text-right'},
-                { data: 'status', name: 'status', class: 'text-center'},
                 { data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'}
             ],
         });
 
-        $(document).on('click', '.delete-modal', function(){
-            $('#deleteModal').modal({
+        $(document).on('click', '.accept-modal', function(){
+            $('#acceptModal').modal({
                 backdrop: 'static',
                 keyboard: false
             });
 
-            $('#deleted-id').val($(this).data('id'));
+            $('#accept-id').val($(this).data('id'));
         });
     </script>
-    @include('partials._deletejs', ['routeUrl' => 'admin.admin-users.destroy', 'redirectUrl' => 'admin.admin-users.index'])
+    @include('partials._accept-bank-transferjs', ['routeUrl' => 'admin.admin-users.destroy', 'redirectUrl' => 'admin.admin-users.index'])
 @endsection

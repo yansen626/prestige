@@ -109,7 +109,7 @@
                                         <div class="form-line">
                                             <label class="form-label" for="sub_total">Sub Total</label>
                                             <input id="sub_total" type="text" class="form-control"
-                                                   name="sub_total" value="Rp{{ $order->sub_total }}" readonly>
+                                                   name="sub_total" value="Rp{{ $order->sub_total_string }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                                         <div class="form-line">
                                             <label class="form-label" for="shipping_charge">Shipping Amount</label>
                                             <input id="shipping_charge" type="text" class="form-control"
-                                                   name="shipping_charge" value="Rp{{ $order->shipping_charge }}" readonly>
+                                                   name="shipping_charge" value="Rp{{ $order->shipping_charge_string }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -129,7 +129,7 @@
                                         <div class="form-line">
                                             <label class="form-label" for="tax_amount">Tax Amount</label>
                                             <input id="tax_amount" type="text" class="form-control"
-                                                   name="tax_amount" value="Rp{{ $order->tax_amount }}" readonly>
+                                                   name="tax_amount" value="Rp{{ $order->tax_amount_string }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -139,7 +139,7 @@
                                         <div class="form-line">
                                             <label class="form-label" for="payment_charge">Service Amount</label>
                                             <input id="payment_charge" type="text" class="form-control"
-                                                   name="payment_charge" value="Rp{{ $order->payment_charge }}" readonly>
+                                                   name="payment_charge" value="Rp{{ $order->payment_charge_string }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                                         <div class="form-line">
                                             <label class="form-label" for="grand_total">Grand Total</label>
                                             <input id="grand_total" type="text" class="form-control"
-                                                   name="grand_total" value="Rp{{ $order->grand_total }}" readonly>
+                                                   name="grand_total" value="Rp{{ $order->grand_total_string }}" readonly>
                                         </div>
                                     </div>
                                 </div>
@@ -181,8 +181,8 @@
                                                     <td>{{ $product->product->name }}</td>
                                                     <td>{!! $product->product_info !!}</td>
                                                     <td>{{ $product->qty }}</td>
-                                                    <td>{{ $product->price }}</td>
-                                                    <td>{{ $product->grand_total }}</td>
+                                                    <td>{{ $product->price_string }}</td>
+                                                    <td>{{ $product->grand_total_string }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

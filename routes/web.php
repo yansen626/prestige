@@ -164,6 +164,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/orders', 'Admin\OrderController@index')->name('admin.orders.index');
     Route::get('/orders/detail/{item}', 'Admin\OrderController@show')->name('admin.orders.detail');
     Route::post('/orders/tracking-code/', 'Admin\OrderController@storeTracking')->name('admin.orders.tracking');
+    Route::get('/orders/processing', 'Admin\OrderController@indexProcessing')->name('admin.orders.processing');
     Route::get('/orders/bank-transfer', 'Admin\OrderController@indexBankTransfer')->name('admin.orders.bank_transfer');
     Route::post('/orders/bank-transfer-accept/', 'Admin\OrderController@acceptBankTransfer')->name('admin.orders.bank_transfer_accept');
     Route::get('/orders/print_packing/{id}', 'Admin\OrderController@packingLabel')->name('admin.orders.print_packing');
@@ -189,6 +190,7 @@ Route::get('/datatables-vouchers', 'Admin\VoucherController@getIndex')->name('da
 Route::get('/datatables-faqs', 'Admin\FaqController@getIndex')->name('datatables.faqs');
 Route::get('/datatables-orders', 'Admin\OrderController@getIndex')->name('datatables.orders');
 Route::get('/datatables-order-bank-trfs', 'Admin\OrderController@getIndexBankTransfer')->name('datatables.order-bank-trfs');
+Route::get('/datatables-order-processing', 'Admin\OrderController@getIndexProcessing')->name('datatables.order-processing');
 
 // Select2
 Route::get('/select-roles', 'Admin\RoleController@getRoles')->name('select.roles');
