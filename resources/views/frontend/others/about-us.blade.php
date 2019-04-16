@@ -15,7 +15,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 pr-0 pl-0">
                     <div class="bg-overlay">
                         <div class="bg-section">
-                            <img src="{{asset('/images/Links/home-3.png')}}" alt="Background"/>
+                            <img src="{{asset('/images/Links/banner-1.jpg')}}" alt="Background"/>
                         </div>
                     </div>
                 </div><!-- .col-md-6 end-->
@@ -74,7 +74,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 pr-0 pl-0">
                     <div class="bg-overlay">
                         <div class="bg-section">
-                            <img src="{{asset('/images/Links/mono.jpg')}}" alt="Background"/>
+                            <img src="{{asset('/images/Links/home-3.jpg')}}" alt="Background"/>
                         </div>
                     </div>
                 </div><!-- .col-md-6 end-->

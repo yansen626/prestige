@@ -203,3 +203,4 @@ Route::get('/request-verification/{email}', 'Auth\RegisterController@RequestVeri
 
 // Rajaongkir AJAX
 Route::post('/ajax/rajaongkir/cost', 'Frontend\RajaOngkirController@getCost')->name('ajax.rajaongkir.cost');
+Route::post('/ajax/rajaongkir/waybill', 'Frontend\RajaOngkirController@getWaybill')->name('ajax.rajaongkir.waybill');

@@ -102,7 +102,7 @@
                         <tbody>
                         <tr>
                             <td bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 16px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f;line-height: 1.6;">
-                                <p>New Transfer Bank</p>
+                                <p>New Transaction using {{$paymentMethod}}</p>
                                 <p>From transaction {{$order->order_number}} please check on backend system.</p>
                             </td>
                         </tr>

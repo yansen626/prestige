@@ -11,23 +11,40 @@
                             <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                             <br/>
                         </div>
-                        <div class="col-md-12 mb-20">
-                            <div class="col-md-2"><h5>Date</h5></div>
-                            <div class="col-md-10"><h5>: {{$order->created_at}}</h5> </div>
-                        </div>
-                        <div class="col-md-12 mb-20">
-                            <div class="col-md-2"><h5>Shipping</h5></div>
-                            <div class="col-md-10"><h5>: {{$order->shipping_option}}</h5> </div>
-                        </div>
-                        <div class="col-md-12 mb-20">
-                            <div class="col-md-2"><h5>Status</h5></div>
-                            <div class="col-md-10"><h5>: {{$order->order_status->name}}</h5> </div>
-                        </div>
-                        @if($order->payment_option == 2)
+                        <div class="col-md-6">
                             <div class="col-md-12 mb-20">
-                                <a href="{{route('admin.orders.bank_confirmation')}}">Confirm Payment</a>
+                                <div class="col-md-3"><h5>Date</h5></div>
+                                <div class="col-md-9"><h5>: {{$order->created_at}}</h5> </div>
                             </div>
-                        @endif
+                            <div class="col-md-12 mb-20">
+                                <div class="col-md-3"><h5>Shipping</h5></div>
+                                <div class="col-md-9"><h5>: {{$order->shipping_option}}</h5> </div>
+                            </div>
+                            <div class="col-md-12 mb-20">
+                                <div class="col-md-3"><h5>Status</h5></div>
+                                <div class="col-md-9"><h5>: {{$order->order_status->name}}</h5> </div>
+                            </div>
+                            @if($order->payment_option == 2)
+                                <div class="col-md-12 mb-20">
+                                    <a href="{{route('admin.orders.bank_confirmation')}}">Confirm Payment</a>
+                                </div>
+                            @endif
+                        </div>
+                        <div class="col-md-6">
+                            @if($order->order_status_id == 4)
+                                <div class="col-md-12 mb-20">
+                                    <div class="col-md-3"><h5>Receipt</h5></div>
+                                    <div class="col-md-9"><h5>: {{$order->track_code}}</h5> </div>
+                                </div>
+                                <div class="col-md-12 mb-20">
+                                    <button class="btn btn--secondary btn--bordered"
+                                            onclick="rajaongkirAjaxGetWaybill('{{$order->track_code}}', '{{$order->shipping_option}}')"
+                                            style="width: 220px;margin-bottom:2%;">
+                                        TRACK ORDER
+                                    </button>
+                                </div>
+                            @endif
+                        </div>
                     </div>
                 </div>
 
@@ -53,7 +70,7 @@
                                                     @php($productImage = \App\Models\ProductImage::where('product_id', $product->product->id)->where('is_main_image', 1)->first())
                                                     <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                                 </div>
-                                                <div class="col-md-4">>
+                                                <div class="col-md-4">
                                                     {{$product->product->name}}<br>
                                                     Customization :<br>
                                                     {!! $product->product_info !!}
@@ -110,6 +127,7 @@
             </div>
     </section>
 @endsection
+@include('partials.frontend._waybill-detail')
 
 @section('styles')
     <style>
@@ -125,30 +143,46 @@
 
 @section('scripts')
     <script type="text/javascript">
-        //Set input Restriction
-        function setInputFilter(textbox, inputFilter) {
-            ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
-                textbox.addEventListener(event, function() {
-                    if (inputFilter(this.value)) {
-                        this.oldValue = this.value;
-                        this.oldSelectionStart = this.selectionStart;
-                        this.oldSelectionEnd = this.selectionEnd;
-                    } else if (this.hasOwnProperty("oldValue")) {
-                        this.value = this.oldValue;
-                        this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+
+        // Ajax function to get rajaongkir waybill details
+        function rajaongkirAjaxGetWaybill(tmpWaybill, tmpCourier){
+
+            var courierValueSplitted = tmpCourier.split('-');
+            // alert(courierValueSplitted[0]);
+            $.ajax({
+                url: '{{ route('ajax.rajaongkir.waybill') }}',
+                type: 'POST',
+                data: {
+                    'waybill': tmpWaybill,
+                    'courier': courierValueSplitted[0]
+                },
+                success: function(data) {
+                    //console.log(data);
+                    if(data.code === 200){
+                        for(var i=0;i<data.manifest.length;i++){
+                            $('#waybill').prepend(
+                                "<div class='col-md-12' style='padding-top:10px;'>" +
+                                "<span> Date = " + data.manifest[i].manifest_date + " " + data.manifest[i].manifest_time + "</span>" +
+                                "</div>" +
+                                "<div class='col-md-12 border-bottom-black '>" +
+                                "<span> " + data.manifest[i].manifest_description + "</span>" +
+                                "</div>"
+                            );
+
+                        }
+                        var height = data.manifest.length * 70;
+                        $(".modal-body").height(height);
+                        $("#waybill-detail").modal('show');
+                        console.log(data.manifest);
                     }
-                });
+                    else{
+                        console.log("error");
+                    }
+                },
+                error: function(response){
+                    console.log(response);
+                }
             });
         }
-
-        setInputFilter(document.getElementById("card_date"), function(value) {
-            return /^-?\d*[/,]?\d*$/.test(value); });
-
-        $('#card_date').on('input', function() {
-            var tmp = $(this).val();
-            if(tmp.length === 2){
-                $(this).val(tmp + '/');
-            }
-        });
     </script>
 @endsection

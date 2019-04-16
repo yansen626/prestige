@@ -252,9 +252,9 @@
                 <div class="oldwebkit" style="max-width: 650px;">
                     <table bgcolor="#FFFFFF" border="0" cellpadding="0" cellspacing="9" class="vb-container halfpad" style="border-collapse: separate;border-spacing: 9px;padding-left: 9px;padding-right: 9px;width: 100%;max-width: 650px;background-color: #fff;" width="650">
                         <tbody>
-                        <tr>
-                            <td align="center" bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 14px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f; text-align: center; line-height: 1.6;"><span>Contact us : contact@nama-official.com</span></td>
-                        </tr>
+                            <tr>
+                                <td align="center" bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 14px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f; text-align: center; line-height: 1.6;"><span>Contact us : hi@nama-official.com</span></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

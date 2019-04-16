@@ -138,12 +138,11 @@
                         <div class="col-md-12">
                             @if($isIndonesian)
                                 <input type="radio" name="payment_method" class="payment_method" value="credit_card" checked/>
-                                <span style="font-size: 16px;">Card Payment</span>
+                                <span style="font-size: 16px;">Card Payment </span>
                                 <img src="{{ asset('images/icons/checkout-visa.png') }}" class="width-50">
                                 <img src="{{ asset('images/icons/checkout-mastercard.png') }}" class="width-50">
                                 <img src="{{ asset('images/icons/checkout-jcb.png') }}" class="width-50">
                                 <img src="{{ asset('images/icons/checkout-american.png') }}" class="width-50">
-                                {{--Pay with Credit Card--}}
                                 &nbsp;<br>
                                 <input type="radio" name="payment_method" class="payment_method" value="bank_transfer"/>
                                 <span style="font-size: 16px;">Bank Transfer</span>

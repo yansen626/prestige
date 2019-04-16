@@ -45,26 +45,26 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('frontend.coming-soon');
-//        $products = Product::where('is_primary', 1)->where('status', 1)->get();
-//
-//        if (Auth::check())
-//        {
-//            if(Session::get('cartQty') == null) {
-//                $cartQty = 0;
-//                $cartsDb = Cart::where('user_id', Auth::user()->id)->get();
-//                foreach ($cartsDb as $cart) {
-//                    $cartQty += $cart->qty;
-//                }
-//
-//                Session::put('cartQty', $cartQty);
-//            }
-//        }
-//
-//        $data=([
-//           'products' => $products,
-//        ]);
-//        return view('frontend.home')->with($data);
+//        return view('frontend.coming-soon');
+        $products = Product::where('is_primary', 1)->where('status', 1)->get();
+
+        if (Auth::check())
+        {
+            if(Session::get('cartQty') == null) {
+                $cartQty = 0;
+                $cartsDb = Cart::where('user_id', Auth::user()->id)->get();
+                foreach ($cartsDb as $cart) {
+                    $cartQty += $cart->qty;
+                }
+
+                Session::put('cartQty', $cartQty);
+            }
+        }
+
+        $data=([
+           'products' => $products,
+        ]);
+        return view('frontend.home')->with($data);
     }
 
     public function contactForm()
@@ -247,7 +247,7 @@ class HomeController extends Controller
 
                 //testing SEND EMAIL ORDER CONFIRMATION
                 case 6:
-                    $order = Order::find(1);
+                    $order = Order::find(7);
                     $user = User::find($order->user_id);
                     $orderProducts = OrderProduct::where('order_id', $order->id)->get();
 
@@ -263,7 +263,7 @@ class HomeController extends Controller
                     }
                     $orderConfirmation = new OrderConfirmation($user, $order, $orderProducts, $productImageArr);
                     Mail::to($user->email)
-                        ->bcc("yansen@student.umn.ac.id")
+                        ->bcc("sales@nama-official.com")
                         ->send($orderConfirmation);
                     return 'success';
                     break;
@@ -298,6 +298,46 @@ class HomeController extends Controller
                     }
                     else{
                         return "not found";
+                    }
+                    break;
+
+                //testing get waybill rajaongkir
+                case 9:
+                    $client = new \GuzzleHttp\Client(['http_errors' => false]);
+
+//                    $url = "https://api.rajaongkir.com/starter/cost";
+                    $url = env('RAJAONGKIR_URL').'waybill';
+                    $key = env('RAJAONGKIR_KEY');
+
+                    $waybill = "020060078240919";
+                    $courierArr = "jne-REG";
+                    $courier = "jne";
+
+//                    dd($url, $key, $waybill, $courier);
+                    $response = $client->request('POST', $url, [
+                        'headers' => [
+                            'key' => $key
+                        ],
+                        'form_params' => [
+                            'waybill' => $waybill,
+                            'courier' => $courier
+                        ]
+                    ]);
+
+//                    dd($response);
+                    if($response->getStatusCode() === 200){
+                        $responseBody = $response->getBody()->getContents();
+                        $responseArr = json_decode($responseBody);
+                        $manifests = $responseArr->rajaongkir->result->manifest;
+                        return Response::json(
+                            array(
+                                'code'      => $response->getStatusCode(),
+                                'manifest'       => $manifests
+                            )
+                        );
+                    }
+                    else{
+                        dd("error");
                     }
                     break;
             }

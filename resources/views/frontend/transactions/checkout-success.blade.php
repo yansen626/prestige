@@ -7,7 +7,7 @@
                 <div class="row" style="margin-bottom:5%;">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="col-md-12">
-                            <h1>Success!</h1>
+                            <h1>Success</h1>
                             <hr style="height:1px;border:none;color:#333;background-color:#333;" />
                             <br/>
                         </div>
@@ -51,7 +51,7 @@
                                                     @php($productImage = \App\Models\ProductImage::where('product_id', $product->product->id)->where('is_main_image', 1)->first())
                                                     <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                                 </div>
-                                                <div class="col-md-4">>
+                                                <div class="col-md-4">
                                                     {{$product->product->name}}<br>
                                                     Customization :<br>
                                                     {!! $product->product_info !!}

@@ -124,13 +124,17 @@ class Midtrans
                 'email'         => $order->user->email,
                 'phone'         => $order->user->phone
             );
+
             $transaction = array(
                 'payment_type' => "vtweb",
-                'transaction_details' => $transaction_details,
-                'customer_details' => $customer_details,
-                'item_details' => $item_details,
-                'enabled_payments' => $paymentList,
                 'vtweb' => $vt_web,
+                'transaction_details' => $transaction_details,
+                'item_details' => $item_details,
+                'customer_details' => $customer_details,
+                'enabled_payments' => $paymentList,
+                'credit_card' => [
+                    "secure" => true
+                ],
             );
 
             return $transaction;

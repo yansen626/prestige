@@ -54,7 +54,7 @@
                                                     @php($productImage = \App\Models\ProductImage::where('product_id', $product->product->id)->where('is_main_image', 1)->first())
                                                     <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                                 </div>
-                                                <div class="col-md-4">>
+                                                <div class="col-md-4">
                                                     {{$product->product->name}}<br>
                                                     Customization :<br>
                                                     {!! $product->product_info !!}

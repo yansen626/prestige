@@ -7,25 +7,26 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewTransferBank extends Mailable
+class NewTransaction extends Mailable
 {
     use Queueable, SerializesModels;
 
     protected $user;
     protected $order;
     protected $orderProduct;
-    protected $productImages;
+    protected $paymentMethod;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($user, $order)
+    public function __construct($user, $order, $paymentMethod)
     {
         //
         $this->user = $user;
         $this->order = $order;
+        $this->paymentMethod = $paymentMethod;
     }
 
     /**
@@ -35,10 +36,11 @@ class NewTransferBank extends Mailable
      */
     public function build()
     {
-        return $this->subject("Confirmation Bank Transfer from ".$this->user->first_name. " ".$this->user->last_name)
-            ->view('mail.new-transfer-bank')->with([
+        return $this->subject("New Transaction from ".$this->user->first_name. " ".$this->user->last_name)
+            ->view('mail.new-transaction')->with([
                 'user' => $this->user,
-                'order' => $this->order
+                'order' => $this->order,
+                'paymentMethod' => $this->paymentMethod
             ]);
     }
 }

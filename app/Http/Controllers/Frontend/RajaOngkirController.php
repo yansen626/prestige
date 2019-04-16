@@ -20,13 +20,10 @@ class RajaOngkirController extends Controller
 
             $client = new \GuzzleHttp\Client(['http_errors' => false]);
             $url = "https://api.rajaongkir.com/starter/cost";
-//            $url = env('RAJAONGKIR_URL').'/cost';
+//            $url = env('RAJAONGKIR_URL').'cost';
             $key = env('RAJAONGKIR_KEY');
 
             $courier = $courierArr[0];
-            if($cityId = 152){
-
-            }
 
             $response = $client->request('POST', $url, [
                 'headers' => [
@@ -79,6 +76,56 @@ class RajaOngkirController extends Controller
                     'fee'       => $shippingPrice
                 )
             );
+        }
+        catch (\Exception $exception){
+            return Response::json(
+                array(
+                    'errors'    => 'EXCEPTION',
+                    'ex'        => $exception->getTraceAsString()
+                )
+            );
+        }
+    }
+
+    public function getWaybill(Request $request){
+        try{
+            $client = new \GuzzleHttp\Client(['http_errors' => false]);
+//            $url = "https://api.rajaongkir.com/starter/waybill";
+            $url = env('RAJAONGKIR_URL').'waybill';
+            $key = env('RAJAONGKIR_KEY');
+
+            $waybill = $request->input('waybill');
+            $courier = $request->input('courier');
+
+            $response = $client->request('POST', $url, [
+                'headers' => [
+                    'key' => $key
+                ],
+                'form_params' => [
+                    'waybill' => $waybill,
+                    'courier' => $courier
+                ]
+            ]);
+
+            if($response->getStatusCode() === 200){
+                $responseBody = $response->getBody()->getContents();
+                $responseArr = json_decode($responseBody);
+                $manifests = $responseArr->rajaongkir->result->manifest;
+
+                return Response::json(
+                    array(
+                        'code'      => $response->getStatusCode(),
+                        'manifest'       => $manifests
+                    )
+                );
+            }
+            else{
+                return Response::json(
+                    array(
+                        'code'      => 400
+                    )
+                );
+            }
         }
         catch (\Exception $exception){
             return Response::json(

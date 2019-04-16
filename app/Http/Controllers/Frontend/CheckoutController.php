@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\libs\Midtrans;
 use App\libs\Zoho;
+use App\Mail\NewTransaction;
 use App\Mail\OrderConfirmation;
 use App\Models\Order;
 use App\Models\OrderProduct;
@@ -93,7 +94,12 @@ class CheckoutController extends Controller
 
                 //sending to midtrans
                 $redirectUrl = Midtrans::sendRequest($transactionDataArr);
-                //dd($exception);
+
+                //send email for notification new transaction
+                $user = User::find($order->user_id);
+                $newTransaction = new NewTransaction($user, $order, "Credit Card");
+                Mail::to(env('MAIL_SALES'))
+                    ->send($newTransaction);
 
                 return Response::json(array('success' => $redirectUrl));
             }
@@ -108,6 +114,12 @@ class CheckoutController extends Controller
                 //change status
                 $order->order_status_id = 7;
                 $order->save();
+
+                //send email for notification new transaction
+                $user = User::find($order->user_id);
+                $newTransaction = new NewTransaction($user, $order, "Transfer Bank");
+                Mail::to(env('MAIL_SALES'))
+                    ->send($newTransaction);
 
                 return Response::json(array('success' => $redirectUrl));
             }
