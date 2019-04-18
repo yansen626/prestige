@@ -61,7 +61,10 @@
                                                         {!! $product->product_info !!}
                                                     @endif
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-2 hidden-sm hidden-xs">
+                                                    {{$product->qty}}
+                                                </div>
+                                                <div class="col-md-2 hidden-md hidden-lg">
                                                     Quantity : {{$product->qty}}
                                                 </div>
                                                 <div class="col-md-4 right">

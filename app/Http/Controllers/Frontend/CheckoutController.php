@@ -96,10 +96,10 @@ class CheckoutController extends Controller
                 $redirectUrl = Midtrans::sendRequest($transactionDataArr);
 
                 //send email for notification new transaction
-                $user = User::find($order->user_id);
-                $newTransaction = new NewTransaction($user, $order, "Credit Card");
-                Mail::to(env('MAIL_SALES'))
-                    ->send($newTransaction);
+//                $user = User::find($order->user_id);
+//                $newTransaction = new NewTransaction($user, $order, "Credit Card");
+//                Mail::to(env('MAIL_SALES'))
+//                    ->send($newTransaction);
 
                 return Response::json(array('success' => $redirectUrl));
             }
@@ -116,10 +116,10 @@ class CheckoutController extends Controller
                 $order->save();
 
                 //send email for notification new transaction
-                $user = User::find($order->user_id);
-                $newTransaction = new NewTransaction($user, $order, "Transfer Bank");
-                Mail::to(env('MAIL_SALES'))
-                    ->send($newTransaction);
+//                $user = User::find($order->user_id);
+//                $newTransaction = new NewTransaction($user, $order, "Transfer Bank");
+//                Mail::to(env('MAIL_SALES'))
+//                    ->send($newTransaction);
 
                 return Response::json(array('success' => $redirectUrl));
             }

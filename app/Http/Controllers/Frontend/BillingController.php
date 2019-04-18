@@ -198,6 +198,11 @@ class BillingController extends Controller
                             'created_at' => Carbon::now('Asia/Jakarta'),
                             'updated_at' => Carbon::now('Asia/Jakarta')
                         ]);
+
+                        if($totalWeight == 0){
+                            $weight = $cartData['item']['weight'] *  $cartData['item']['qty'];
+                            $totalWeight += $weight;
+                        }
                     }
                     Session::forget('cart');
                     // Session for Cart deleted
@@ -379,6 +384,7 @@ class BillingController extends Controller
             if($transactionSuccess > 0){
                 // Redirect to Checkout
                 Session::forget('cart');
+                Session::put('cartQty', 0);
                 Session::forget('shopping');
                 return redirect()->route('checkout', ['order'=>$transactionSuccess]);
             }
@@ -451,7 +457,7 @@ class BillingController extends Controller
                 'shipping_option' => $courier,
                 'shipping_address_id' => $userAddress->id,
                 'shipping_charge' => $shippingPrice,
-                'payment_option' => "",
+                'payment_option' => "default",
                 'sub_total' => $totalPrice,
                 'grand_total' => $grandTotal,
                 'currency_code' => "IDR",
@@ -463,7 +469,7 @@ class BillingController extends Controller
 
             // Update auto number of Order Number
             Utilities::UpdateOrderNumber($prepend);
-
+            $voucherCode = "";
             //create order product
             foreach ($carts as $cart){
                 $newOrderProduct = OrderProduct::create([
@@ -477,12 +483,13 @@ class BillingController extends Controller
                     'updated_at' => Carbon::now('Asia/Jakarta')
                 ]);
                 $newOrder->voucher_code = $cart->voucher_code;
+                $voucherCode = $cart->voucher_code;
                 $newOrder->save();
                 $cart->delete();
             }
 
             //edit voucher if using voucher
-            $voucherDB = Voucher::where('code', $cart->voucher_code)->first();
+            $voucherDB = Voucher::where('code', $voucherCode)->first();
 //            dd($voucherDB);
             if(!empty($voucherDB)){
                 $voucherAmount = $voucherDB->voucher_amount;
