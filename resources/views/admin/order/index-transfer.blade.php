@@ -87,5 +87,5 @@
             $('#accept-id').val($(this).data('id'));
         });
     </script>
-    @include('partials._accept-bank-transferjs', ['routeUrl' => 'admin.admin-users.destroy', 'redirectUrl' => 'admin.admin-users.index'])
+    @include('partials._accept-bank-transferjs', ['routeUrl' => 'admin.orders.bank_transfer_accept', 'redirectUrl' => 'admin.orders.bank_transfer'])
 @endsection

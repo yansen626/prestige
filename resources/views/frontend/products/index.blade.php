@@ -60,10 +60,7 @@
             <!-- Search Result -->
             @if($filter == -1)
                 <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 center hidden-sm hidden-xs">
-                        <h3>Search Result of  "{{$searchText}}"</h3>
-                    </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 center hidden-lg hidden-md">
+                    <div class="col-xs-12 col-sm-12 col-md-12 center">
                         <h2>Search Result of  "{{$searchText}}"</h2>
                     </div>
                     <!-- Product #1 -->
@@ -94,10 +91,7 @@
             @else
                 @foreach($categoryDB as $category)
                     <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 center hidden-sm hidden-xs">
-                            <h3>{{$category->name}}</h3>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 center hidden-lg hidden-md">
+                        <div class="col-xs-12 col-sm-12 col-md-12 center">
                             <h2>{{$category->name}}</h2>
                         </div>
                         <!-- Product #1 -->

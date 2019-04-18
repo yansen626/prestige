@@ -80,11 +80,11 @@
                 </div><!-- .col-md-6 end-->
                 <div class="col-xs-12 col-sm-12 col-md-6 col-content-about-bottom bg-windrift-blue center">
                     <h3 class="">Customized Monogramming</h3>
-                    <p class="font-16" style="text-transform: uppercase;">
-                        At nama, we believe in the beauty of adding a personal touch that's distinctively yours.
-                        <BR><BR>
-                        With our top of the line hot stamp machine and 100% imported genuine leather, we will beautifully embellish your products with one of a kind customization.
-                    </p>
+                    {{--<p class="font-16" style="text-transform: uppercase;">--}}
+                        {{--At nama, we believe in the beauty of adding a personal touch that's distinctively yours.--}}
+                        {{--<BR><BR>--}}
+                        {{--With our top of the line hot stamp machine and 100% imported genuine leather, we will beautifully embellish your products with one of a kind customization.--}}
+                    {{--</p>--}}
                 </div>
             </div>
             <!-- .row end -->

@@ -199,6 +199,7 @@
 
     <div id="menu-fullscreen" class="menu-fullscreen" style="display:none;">
         <div class="col-xs-12 col-sm-12 center" style="padding-top: 50%;">
+
             <!-- Module Shop -->
             <div id="shop-search2" class="module module-search pull-left">
                 <div class="module-icon search-icon color-black" style="margin-right: 5px !important;">
@@ -290,9 +291,15 @@
                 </button>
 
                 @if(auth()->guard('web')->check())
-                    <a href="{{route('logout')}}" class="navbar-toggle collapsed icon-header-responsive" style="float: right;">
+                    <a href="{{route('logout')}}" class="navbar-toggle collapsed icon-header-responsive" style="float: right;margin-right: 10px;">
                         <span class="sr-only">Toggle navigation</span>
                         <img src="{{asset('/images/icons/logout-arrow.png')}}" style="width: 100%;">
+                    </a>
+
+                    <!-- Module myorder -->
+                    <a href="{{route('orders')}}" class="navbar-toggle collapsed icon-header-responsive" style="float: right;margin-right: 15px;">
+                        <span class="sr-only">Toggle navigation</span>
+                        <img src="{{asset('/images/icons/order-list.png')}}" style="width: 100%;">
                     </a>
                 @else
                     <a href="{{route('login')}}" class="navbar-toggle collapsed icon-header-responsive" style="float: right;">
@@ -301,11 +308,17 @@
                     </a>
                 @endif
                 <a href="{{route('cart')}}" class="navbar-toggle collapsed icon-header-responsive"
-                        style="float: right;">
+                        style="float: right;margin-right: 17px;position: relative;">
                     <span class="sr-only">Toggle navigation</span>
                     <img src="{{asset('/images/icons/cart-image.png')}}" style="width: 100%;">
                 </a>
-                <a class="logo center navbar-toggle collapsed" href="{{route('home')}}" style="border: none;line-height: 0;height: 0;">
+
+                @if(auth()->guard('web')->check())
+                    <span class="badge badge-cart" style="font-size: 10px;">
+                        {{ \Illuminate\Support\Facades\Session::has('cart') ? \Illuminate\Support\Facades\Session::get('cart')->totalQty : '' }}{{ \Illuminate\Support\Facades\Session::has('cartQty') ? \Illuminate\Support\Facades\Session::get('cartQty') : '' }}
+                    </span>
+                @endif
+                <a class="logo center navbar-toggle collapsed" href="{{route('home')}}" style="border: none;line-height: 0;height: 0;width: 115px;">
                     <img  src="{{ asset('images/icons/logo.jpg') }}" alt="Nama Logo" style="height: 25px;">
                 </a>
             </div>

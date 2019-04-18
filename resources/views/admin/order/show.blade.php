@@ -171,6 +171,7 @@
                                                 <td>Product Name</td>
                                                 <td>Product Info</td>
                                                 <td>Qty</td>
+                                                <td>Color</td>
                                                 <td>Price</td>
                                                 <td>Total</td>
                                             </tr>
@@ -181,6 +182,7 @@
                                                     <td>{{ $product->product->name }}</td>
                                                     <td>{!! $product->product_info !!}</td>
                                                     <td>{{ $product->qty }}</td>
+                                                    <td>{{ $product->product->colour }}</td>
                                                     <td>{{ $product->price_string }}</td>
                                                     <td>{{ $product->grand_total_string }}</td>
                                                 </tr>
