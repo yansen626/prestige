@@ -280,7 +280,7 @@
 
             <!-- .navbar-collapse -->
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+            <div class="navbar-header" style="position: relative;">
                 <button id="module-menu" type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#navbar-collapse-3" aria-expanded="false"
                         style="float: left;">
@@ -308,7 +308,7 @@
                     </a>
                 @endif
                 <a href="{{route('cart')}}" class="navbar-toggle collapsed icon-header-responsive"
-                        style="float: right;margin-right: 17px;position: relative;">
+                        style="float: right;margin-right: 17px;">
                     <span class="sr-only">Toggle navigation</span>
                     <img src="{{asset('/images/icons/cart-image.png')}}" style="width: 100%;">
                 </a>

@@ -16,9 +16,9 @@
 .badge-cart{
     position: absolute;
     z-index:999;
-    top: 10px;
-    left:28px;
+    top: 57%;
     margin:0 auto;
+    right:30%;
 }
 
 @media (min-width: 1200px) {
