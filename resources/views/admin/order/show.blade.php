@@ -237,6 +237,7 @@
                                 @elseif ($order->order_status_id == 8)
                                     {{ Form::open(['route'=>['admin.orders.bank_transfer_accept'],'method' => 'post','id' => 'general-form', 'enctype' => 'multipart/form-data']) }}
                                     <input type="hidden" name="accept-id" value="{{$order->id}}">
+                                    <input type="hidden" name="type" value="form">
                                     <div class="col-md-6 text-center">
                                         <div class="form-group form-float form-group-lg">
                                             <button class="btn btn-danger">Confirm Transfer</button>

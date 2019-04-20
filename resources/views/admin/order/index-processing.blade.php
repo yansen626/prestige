@@ -38,7 +38,6 @@
             </section>
         </div>
     </div>
-    @include('partials._accept-bank-transfer')
 @endsection
 
 @section('styles')
@@ -87,5 +86,4 @@
             $('#accept-id').val($(this).data('id'));
         });
     </script>
-    @include('partials._accept-bank-transferjs', ['routeUrl' => 'admin.admin-users.destroy', 'redirectUrl' => 'admin.admin-users.index'])
 @endsection

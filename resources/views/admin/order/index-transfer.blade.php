@@ -27,6 +27,7 @@
                                 <th>Bank Account Number</th>
                                 <th>Bank Account Name</th>
                                 <th>Bank Name</th>
+                                <th>Status</th>
                                 <th>Amount</th>
                                 <th></th>
                             </tr>
@@ -73,6 +74,7 @@
                 { data: 'bank_acc_no', name: 'bank_acc_no', class: 'text-center'},
                 { data: 'bank_acc_name', name: 'bank_acc_name', class: 'text-center'},
                 { data: 'bank_name', name: 'bank_name', class: 'text-center'},
+                { data: 'status', name: 'status', class: 'text-center'},
                 { data: 'amount', name: 'amount', class: 'text-center'},
                 { data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'}
             ],

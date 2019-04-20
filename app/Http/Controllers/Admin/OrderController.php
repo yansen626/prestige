@@ -12,10 +12,12 @@ use App\Models\ProductImage;
 use App\Models\StoreAddress;
 use App\Models\User;
 use App\Transformer\OrderBankTransferTransformer;
-use App\Transformer\OrderProcessingTransformer;
 use App\Transformer\OrderTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\DataTables;
 
 class OrderController extends Controller
@@ -121,48 +123,62 @@ class OrderController extends Controller
      */
     public function acceptBankTransfer(Request $request)
     {
-
         $orderid = $request->input('accept-id');
-        $orderDB = Order::find($orderid);
-        $orderDB->order_status_id = 3;
-        $orderDB->save();
+        try {
+            $orderDB = Order::find($orderid);
+            $orderDB->order_status_id = 3;
+            $orderDB->save();
 
-        $orderBankDB = OrderBankTransfer::where('order_id', $orderid)->first();
-        $orderBankDB->status = 1;
-        $orderBankDB->save();
+            $orderBankDB = OrderBankTransfer::where('order_id', $orderid)->first();
+            $orderBankDB->status = 1;
+            $orderBankDB->save();
 
 
-        $orderProducts = OrderProduct::where('order_id', $orderDB->id)->get();
+            $orderProducts = OrderProduct::where('order_id', $orderDB->id)->get();
 
-        // Create ZOHO Invoice
-        Zoho::createInvoice($orderDB->zoho_sales_order_id);
+            // Create ZOHO Invoice
+            Zoho::createInvoice($orderDB->zoho_sales_order_id);
 
-        //send email confirmation
-        $user = User::find($orderDB->user_id);
+            //send email confirmation
+            $user = User::find($orderDB->user_id);
 
-        $productIdArr = [];
-        foreach ($orderProducts as $orderProduct){
-            array_push($productIdArr, $orderProduct->product_id);
+            $productIdArr = [];
+            foreach ($orderProducts as $orderProduct){
+                array_push($productIdArr, $orderProduct->product_id);
 
-            //minus item quantity
-            $product = $orderProduct->product;
-            $qty = $product->qty;
-            $product->qty = $qty-1;
-            $product->save();
+                //minus item quantity
+                $product = $orderProduct->product;
+                $qty = $product->qty;
+                $product->qty = $qty-1;
+                $product->save();
+            }
+
+            $productImages = ProductImage::whereIn('product_id',$productIdArr)->where('is_main_image', 1)->get();
+            $productImageArr = [];
+            foreach ($productImages as $productImage){
+                $productImageArr[$productImage->product_id] = $productImage->path;
+            }
+            $orderConfirmation = new OrderConfirmation($user, $orderDB, $orderProducts, $productImageArr);
+            Mail::to($user->email)
+                ->bcc(env('MAIL_SALES'))
+                ->send($orderConfirmation);
+
+            //request type, json or from form
+            $requestType = $request->input('type');
+            if($requestType == "json"){
+                Session::flash('success', 'Success Confirmed Bank Transfer from User ' . $user->email);
+                return Response::json(array('success' => 'VALID'));
+            }
+            else{
+                return redirect()->route('admin.orders.detail', ['id'=>$orderid]);
+            }
+            //
         }
-
-        $productImages = ProductImage::whereIn('product_id',$productIdArr)->where('is_main_image', 1)->get();
-        $productImageArr = [];
-        foreach ($productImages as $productImage){
-            $productImageArr[$productImage->product_id] = $productImage->path;
+        catch(\Exception $ex){
+            Log::error("OrderController > acceptBankTransfer ".$ex);
+            Session::flash('error', 'Something Went Wrong');
+            return redirect()->route('admin.orders.bank_transfer');
         }
-        $orderConfirmation = new OrderConfirmation($user, $orderDB, $orderProducts, $productImageArr);
-        Mail::to($user->email)
-            ->bcc(env('MAIL_SALES'))
-            ->send($orderConfirmation);
-
-        return redirect()->route('admin.orders.detail', ['id'=>$orderid]);
-        //
     }
 
     /**

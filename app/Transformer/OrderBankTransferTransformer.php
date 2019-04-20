@@ -25,7 +25,13 @@ class OrderBankTransferTransformer extends TransformerAbstract
             $action = "<a class='btn btn-xs btn-info' href='detail/".$order->order_id."' data-toggle='tooltip' data-placement='top'><i class='icon-info'></i></a>";
 
             if($order->order->order_status_id == 8){
-                $action .= " <a class='accept-modal btn btn-xs btn-success' data-id='". $order->id ."' ><i class='icon-save'></i></a>";
+                $action .= " <a class='accept-modal btn btn-xs btn-success' data-id='". $order->order_id ."' ><i class='icon-save'></i></a>";
+            }
+            if($order->status == 0){
+                $statusDesc = "Need Confimation";
+            }
+            else{
+                $statusDesc = "Confirmed";
             }
 
             return[
@@ -34,7 +40,8 @@ class OrderBankTransferTransformer extends TransformerAbstract
                 'bank_acc_no'       => $order->bank_acc_no,
                 'bank_acc_name'     => $order->bank_acc_name,
                 'bank_name'         => $order->bank_name,
-                'amount'            => $order->amount,
+                'amount'            => $order->amount_string,
+                'status'            => $statusDesc,
                 'created_at'        => $createdDate,
                 'action'            => $action
             ];

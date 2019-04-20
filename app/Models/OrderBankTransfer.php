@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Tue, 09 Apr 2019 04:35:51 +0000.
+ * Date: Sat, 20 Apr 2019 07:59:30 +0000.
  */
 
 namespace App\Models;
@@ -19,10 +19,10 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property string $bank_acc_name
  * @property string $bank_name
  * @property int $amount
- * @property \Carbon\Carbon $date
+ * @property int $status
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
- * 
+ *
  * @property \App\Models\Order $order
  * @property \App\Models\User $user
  *
@@ -33,11 +33,8 @@ class OrderBankTransfer extends Eloquent
 	protected $casts = [
 		'user_id' => 'int',
 		'order_id' => 'int',
-		'amount' => 'int'
-	];
-
-	protected $dates = [
-		'date'
+		'amount' => 'int',
+		'status' => 'int'
 	];
 
 	protected $fillable = [
@@ -47,16 +44,23 @@ class OrderBankTransfer extends Eloquent
 		'bank_acc_name',
 		'bank_name',
 		'amount',
-		'date'
+		'status'
 	];
 
-	public function order()
-	{
-		return $this->belongsTo(\App\Models\Order::class);
-	}
+    protected $appends = [
+        'amount_string',
+    ];
 
-	public function user()
-	{
-		return $this->belongsTo(\App\Models\User::class);
-	}
+    public function getAmountStringAttribute(){
+        return number_format($this->attributes['amount'], 0, ",", ".");
+    }
+    public function order()
+    {
+        return $this->belongsTo(\App\Models\Order::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class);
+    }
 }
