@@ -27,6 +27,7 @@
                                 <th>Customer Email</th>
                                 <th>Shipping</th>
                                 <th>Sub total</th>
+                                <th>Payment</th>
                                 <th>Grand Total</th>
                                 <th></th>
                             </tr>
@@ -72,6 +73,7 @@
                 { data: 'email', name: 'email', class: 'text-center'},
                 { data: 'shipping', name: 'shipping', class: 'text-center text-uppercase'},
                 { data: 'sub_total', name: 'sub_total', class: 'text-right'},
+                { data: 'payment_option', name: 'payment_option', class: 'text-center'},
                 { data: 'grand_total', name: 'grand_total', class: 'text-right'},
                 { data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'}
             ],

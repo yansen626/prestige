@@ -50,7 +50,7 @@ class OrderController extends Controller
 
     public function getIndexProcessing(Request $request){
         $users = Order::where('order_status_id', 3)
-            ->orderBy('created_at', 'asc')->get();
+            ->orderBy('order_number', 'desc')->get();
         return DataTables::of($users)
             ->setTransformer(new OrderTransformer())
             ->addIndexColumn()

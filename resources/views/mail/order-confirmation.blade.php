@@ -123,7 +123,7 @@
                                 </span>
                                 <h2>ORDER DETAILS</h2>
                                 <h4>Order {{$order->order_number}}</h4>
-                                @if($order->payment_option == "credit_card")
+                                @if($order->payment_option == "Credit Card")
                                     <h4>Payment with Credit Card</h4>
                                 @else
                                     <h4>Payment with Bank Transfer</h4>

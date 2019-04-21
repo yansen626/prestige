@@ -28,6 +28,10 @@ class OrderTransformer extends TransformerAbstract
             if($order->tax_amount != null){
                 $tax = $order->tax_amount_string;
             }
+            $payment = $order->payment_option;
+            if($order->payment_option == "default"){
+                $payment = "-";
+            }
 
             return[
                 'order_number'      => $order->order_number ?? '',
@@ -35,6 +39,7 @@ class OrderTransformer extends TransformerAbstract
                 'customer'          => $order->user->first_name . ' ' . $order->user->last_name,
                 'email'             => $order->user->email,
                 'shipping'          => $order->shipping_option,
+                'payment_option'    => $payment,
                 'sub_total'         => 'Rp'.$order->sub_total_string,
                 'tax_amount'        => 'Rp'.$tax,
                 'grand_total'       => 'Rp'.$order->grand_total_string,
