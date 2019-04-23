@@ -80,6 +80,7 @@ class CartController extends Controller
                 }
 
                 $request->session()->put('cartQty', $cartQty);
+                Session::put('cartQty', $cartQty);
             }
             //add cart to Session
             else
@@ -99,6 +100,7 @@ class CartController extends Controller
                 $cart->add($tmpCart, $productDB->id);
 
                 $request->session()->put('cart', $cart);
+                Session::put('cart', $cart);
             }
 
             return redirect()->route('cart');
@@ -191,6 +193,7 @@ class CartController extends Controller
                     $cart->update($item, $qtys[$item], $voucher);
                 }
                 $request->session()->put('cart', $cart);
+                Session::put('cart', $cart);
                 Session::put('shopping', 'yes');
 
                 return redirect()->route('login.register');
@@ -217,6 +220,7 @@ class CartController extends Controller
                 }
 
                 $request->session()->put('cartQty', $cartQty);
+                Session::put('cartQty', $cartQty);
             }
             else{
                 // delete from Session
@@ -225,6 +229,7 @@ class CartController extends Controller
                 $cart->remove($request->input('cartId'));
 //                dd($cart);
                 $request->session()->put('cart', $cart);
+                Session::put('cart', $cart);
             }
 
             return redirect()->route('cart');

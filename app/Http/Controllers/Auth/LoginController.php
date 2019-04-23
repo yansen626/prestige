@@ -80,7 +80,7 @@ class LoginController extends Controller
             return View('auth.send-email', compact('email'));
         }
 
-        Session::forget('cart');
+//        Session::forget('cart');
         Session::forget('cartQty');
 
         if(Session::get('cartQty') == null) {

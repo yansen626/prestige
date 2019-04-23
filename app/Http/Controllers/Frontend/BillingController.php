@@ -87,6 +87,8 @@ class BillingController extends Controller
         // Get Rajaongkir API Key
         $roApiKey = env('RAJAONGKIR_KEY');
 
+        Session::forget('cart');
+
         $data = [
             'flag'          => $flag,
             'address'       => $address,
