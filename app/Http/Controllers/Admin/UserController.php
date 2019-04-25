@@ -7,6 +7,7 @@ use App\libs\Zoho;
 use App\Models\User;
 use App\Transformer\UserTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -51,6 +52,7 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('admin.user.create');
     }
 
     /**
@@ -62,6 +64,46 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $rules = array(
+            'email'                 => 'required|email|max:100|unique:users',
+            'first_name'            => 'required|max:100',
+            'last_name'             => 'required|max:100',
+            'phone'                 => 'required|unique:users',
+            'password'              => 'required|min:6|max:20|same:password',
+            'password_confirmation' => 'required|same:password'
+        );
+
+        $messages = array(
+            'not_contains'  => 'Email cannot contain these characters +',
+            'phone.unique'  => 'Your phone number already registered!',
+        );
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput($request->all());
+        }
+
+        $user = User::create([
+            'first_name' => $request->input('first_name'),
+            'last_name' => $request->input('last_name'),
+            'email' => $request->input('email'),
+            'phone' => $request->input('phone'),
+            'zoho_id' => "",
+            'zoho_primary_contact_id' => $request->input('phone'),
+            'password' => Hash::make($request->input('password')),
+            'email_token' => base64_encode($request->input('email')),
+            'status_id' => 1
+        ]);
+
+//        Zoho::createUser($user);
+
+//        $emailVerify = new EmailVerification($user);
+//        Mail::to($user->email)->send($emailVerify);
+
+        //return View('auth.send-email', compact('user'));
+
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -122,7 +164,7 @@ class UserController extends Controller
         $user->save();
 
         Session::flash('success', 'Success Updating User!');
-        return redirect()->route('admin.users');
+        return redirect()->route('admin.users.index');
     }
 
     /**

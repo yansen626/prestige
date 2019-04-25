@@ -59,6 +59,7 @@
                             <button type="submit" class="btn btn--secondary btn--bordered">Login</button>
                         </div>
                         <div class="col-md-12 text--center">
+                            <a href="{{route('password.request')}}" style="font-size: 16px;"><span>Forgot Password?</span></a>
                             <h4>Or</h4>
                             <a href="{{route('register-page')}}" style="font-size: 16px;"><span>Create new account</span></a>
                         </div>

@@ -148,6 +148,26 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
+                        <i class="icon icon-settings light-green-text s-18 "></i> <span>Users</span>
+                        <i class="icon icon-angle-left s-18 pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('admin.users.index') }}">
+                                <i class="icon icon-user-circle text-green"></i>List Users
+                            </a>
+                        </li>
+                    </ul>
+                    {{--<ul class="treeview-menu">--}}
+                        {{--<li>--}}
+                            {{--<a href="{{ route('admin.users.create') }}">--}}
+                                {{--<i class="icon icon-user-circle text-green"></i>Add New User--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                    {{--</ul>--}}
+                </li>
+                <li class="treeview">
+                    <a href="#">
                         <i class="icon icon-settings light-green-text s-18 "></i> <span>Setup</span>
                         <i class="icon icon-angle-left s-18 pull-right"></i>
                     </a>
@@ -160,11 +180,6 @@
                         <li>
                             <a href="{{ route('admin.admin-users.index') }}">
                                 <i class="icon icon-user-circle text-green"></i>Admin Users
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('admin.users.index') }}">
-                                <i class="icon icon-users text-green"></i>Users
                             </a>
                         </li>
                     </ul>
