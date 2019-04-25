@@ -100,10 +100,17 @@
                                 @if($order->order_status_id == 3)
                                     <p>
                                         Hello {{$user->first_name}} {{$user->last_name}},<br>
-                                        Thank you for your payment. Your order is now confirmed and you can check the status of your order by logging into your account.
-                                        If you have any question regarding your order, please contact us at hi@nama-official.com Monday-Friday, 9am-5pm WIB.
+                                        Your payment has been received. We are pleased to inform you that your order has been confirmed and is underway.
+                                        Please allow 2-3 business days before dispatch, while we personalize your order.
+                                        You can check the status of your order by logging into your account.
+                                        If you have any questions regarding your order, please contact us at hi@nama-official.com Monday-Friday, 9am-5pm WIB.
                                     </p>
-                                @else
+                                @elseif($order->order_status_id == 8)
+                                    <p>
+                                        Hello {{$user->first_name}} {{$user->last_name}},<br>
+                                        Thank you for your order!
+                                    </p>
+                                @elseif($order->order_status_id == 7)
                                     <p>
                                         Hello {{$user->first_name}} {{$user->last_name}},<br>
                                         You can check the status of your order by logging into your account. If you have

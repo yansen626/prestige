@@ -36,6 +36,7 @@ class BillingController extends Controller
         $userCity = -1;
         if (Auth::check())
         {
+            error_log("Auth::check");
             //Read DB
             $user = Auth::user();
             $addressDB = Address::where('user_id', $user->id)->get();
@@ -44,8 +45,43 @@ class BillingController extends Controller
                 $userCity = $address->city_id;
                 $flag=1;
             }
+            $cartDB = Cart::where('user_id', $user->id)->first();
+            if(!empty($cartDB)){
+                error_log("if cartDB");
+                $cartDB = Cart::where('user_id', $user->id)->get();
+                foreach ($cartDB as $cart){
+                    $weight = $cart->product->weight * $cart->qty;
+                    $totalWeight += $weight;
+                }
+            }
+            if(Session::has('cart')){
+                error_log("if session cart");
+                    $oldCart = Session::has('cart') ? Session::get('cart') : null;
+                    $cart = new \App\Cart($oldCart);
+                    $carts = $cart->items;
+
+                    foreach ($carts as $cartData) {
+//                        dd($carts);
+                        $productDB = Product::find($cartData['item']['product_id']);
+                        Cart::create([
+                            'product_id' => $cartData['item']['product_id'],
+                            'user_id' => $user->id,
+                            'description' => $cartData['item']['description'],
+                            'qty' => $cartData['item']['qty'],
+                            'price' => $cartData['item']['price'],
+                            'total_price' => $cartData['price'],
+                            'created_at' => Carbon::now('Asia/Jakarta'),
+                            'updated_at' => Carbon::now('Asia/Jakarta')
+                        ]);
+
+
+                        $weight = $productDB->weight *  $cartData['item']['qty'];
+                        $totalWeight += $weight;
+                    }
+            }
         }
         else if(Session::has('cart')){
+            error_log("else if session cart");
             //guest has address
             if(Session::has('user')){
                 $user = Session::get('user');
@@ -69,20 +105,22 @@ class BillingController extends Controller
                 }
             }
         }
+        error_log("total weight = ".$totalWeight);
 
-        if(!empty($user)){
-            //get cart total weight for rajaongkir process
-            $cartDB = Cart::where('user_id', $user->id)->get();
-            foreach ($cartDB as $cart){
-                $weight = $cart->product->weight * $cart->qty;
-                $totalWeight += $weight;
-            }
-        }
+//        if(!empty($user)){
+//            //get cart total weight for rajaongkir process
+//            $cartDB = Cart::where('user_id', $user->id)->get();
+//            foreach ($cartDB as $cart){
+//                $weight = $cart->product->weight * $cart->qty;
+//                $totalWeight += $weight;
+//            }
+//        }
 
         $countries = Country::all();
         $provinces = Province::all();
         $cities = City::all();
         $isIndonesian = true;
+//        dd($totalWeight);
 
         // Get Rajaongkir API Key
         $roApiKey = env('RAJAONGKIR_KEY');

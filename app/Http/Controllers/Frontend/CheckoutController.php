@@ -213,6 +213,30 @@ class CheckoutController extends Controller
     public function TransferInformation(Order $order){
         $orderProducts = OrderProduct::where('order_id', $order->id)->get();
 
+        //send email confirmation
+        $user = User::find($order->user_id);
+
+        $productIdArr = [];
+        foreach ($orderProducts as $orderProduct){
+            array_push($productIdArr, $orderProduct->product_id);
+
+            //minus item quantity
+            $product = $orderProduct->product;
+            $qty = $product->qty;
+            $product->qty = $qty-1;
+            $product->save();
+        }
+
+        $productImages = ProductImage::whereIn('product_id',$productIdArr)->where('is_main_image', 1)->get();
+        $productImageArr = [];
+        foreach ($productImages as $productImage){
+            $productImageArr[$productImage->product_id] = $productImage->path;
+        }
+        $orderConfirmation = new OrderConfirmation($user, $order, $orderProducts, $productImageArr);
+        Mail::to($user->email)
+            ->bcc(env('MAIL_SALES'))
+            ->send($orderConfirmation);
+
         $data=([
             'order' => $order,
             'orderProduct' => $orderProducts,
