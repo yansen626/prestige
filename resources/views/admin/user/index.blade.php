@@ -36,6 +36,7 @@
             </section>
         </div>
     </div>
+    @include('partials._delete')
 @endsection
 
 @section('styles')

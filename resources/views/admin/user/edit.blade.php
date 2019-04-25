@@ -38,35 +38,37 @@
                                 <!-- Input -->
                                 <div class="body">
 
+                                    <input id="id" type="hidden" class="form-control"
+                                           name="id" value="{{ $user->id }}">
                                     <div class="col-md-12">
                                         <div class="form-group form-float form-group-lg">
                                             <div class="form-line">
                                                 <label class="form-label" for="email">Email *</label>
                                                 <input id="email" type="email" class="form-control"
-                                                       name="email" value="{{ $user->email }}">
+                                                       name="email" value="{{ $user->email }}" readonly>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label" for="password">Password *</label>
-                                                <input id="password" type="password" class="form-control"
-                                                       name="password" required>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {{--<div class="col-md-12">--}}
+                                        {{--<div class="form-group form-float form-group-lg">--}}
+                                            {{--<div class="form-line">--}}
+                                                {{--<label class="form-label" for="password">Password *</label>--}}
+                                                {{--<input id="password" type="password" class="form-control"--}}
+                                                       {{--name="password" required>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
 
-                                    <div class="col-md-12">
-                                        <div class="form-group form-float form-group-lg">
-                                            <div class="form-line">
-                                                <label class="form-label" for="password_confirmation">Password Confirmation *</label>
-                                                <input id="password_confirmation" type="password" class="form-control"
-                                                       name="password_confirmation" required>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {{--<div class="col-md-12">--}}
+                                        {{--<div class="form-group form-float form-group-lg">--}}
+                                            {{--<div class="form-line">--}}
+                                                {{--<label class="form-label" for="password_confirmation">Password Confirmation *</label>--}}
+                                                {{--<input id="password_confirmation" type="password" class="form-control"--}}
+                                                       {{--name="password_confirmation" required>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
 
                                     <div class="col-md-12">
                                         <div class="form-group form-float form-group-lg">

@@ -158,13 +158,13 @@
                             </a>
                         </li>
                     </ul>
-                    {{--<ul class="treeview-menu">--}}
-                        {{--<li>--}}
-                            {{--<a href="{{ route('admin.users.create') }}">--}}
-                                {{--<i class="icon icon-user-circle text-green"></i>Add New User--}}
-                            {{--</a>--}}
-                        {{--</li>--}}
-                    {{--</ul>--}}
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('admin.users.create') }}">
+                                <i class="icon icon-user-circle text-green"></i>Add New User
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
