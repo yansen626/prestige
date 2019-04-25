@@ -417,6 +417,46 @@ class Zoho
             return "Error!";
         }
     }
+
+    public static function stockAdjustment(Product $product, $prevQty)
+    {
+        try{
+            $client = new Client([
+                'base_uri' => env('ZOHO_BASE_URL')
+            ]);
+
+            $jsonData = [
+                'date'                  => Carbon::now('Asia/Jakarta')->format("Y-m-d"),
+                'reason'                => "Stock Written off",
+                'adjustment_type'       => "quantity",
+                'description'           => "Proses Manual Sell Atau Update Product",
+                'line_items'            => [[
+                    'item_id'           => $product->zoho_id,
+                    'quantity_adjusted' => $prevQty
+                ]]
+            ];
+            $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
+
+            $request = $client->request('POST', env('ZOHO_BASE_URL') . 'inventoryadjustments/'. $product->zoho_id .'?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
+                'form_params' => [
+                    'JSONString' => json_encode($jsonData)
+                ]
+            ]);
+
+            if($request->getStatusCode() == 200){
+                $collect = json_decode($request->getBody());
+
+                return $collect;
+            }
+            else{
+                return "Error!";
+            }
+        }
+        catch(\Exception $ex){
+            Log::error("Zoho.php > updateProduct ".$ex);
+            return "Error!";
+        }
+    }
     //Product Stuff Finish
 
     //Transaction Stuff Start

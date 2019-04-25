@@ -367,6 +367,21 @@ class ProductController extends Controller
                 'description'             => 'required',
             ]);
             $product = Product::find($request->input('id'));
+            if($product->qty > $request->input('qty')){
+                $prevQty = $product->qty - $request->input('qty');
+                $prevQty = '-' . $prevQty;
+            }
+            else if($product->qty < $request->input('qty')){
+                $prevQty = $request->input('qty') - $product->qty;
+                $prevQty = '+' . $prevQty;
+            }
+            else if($request->input('qty') == 0){
+                $prevQty = '-' . $product->qty;
+            }
+            else{
+                $prevQty = 0;
+            }
+
             if ($request->input('category') == "-1") {
                 return back()->withErrors("Category is required")->withInput($request->all());
             }
@@ -504,8 +519,10 @@ class ProductController extends Controller
             }
 
             // Update ZOHO Product
-            $tmp = Zoho::updateProduct($product, $product->category->zoho_item_group_id);
-            //dd($tmp);
+            if($prevQty != 0){
+                $tmp = Zoho::stockAdjustment($product, $prevQty);
+                dd($tmp);
+            }
 
             return redirect()->route('admin.product.show',['item' => $product->id]);
 
