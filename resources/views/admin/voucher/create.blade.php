@@ -94,7 +94,7 @@
                                             <div class="form-line">
                                                 <label class="form-label" for="code">Code *</label>
                                                 <input id="code" type="text" class="form-control"
-                                                       name="code" value="{{ old('code') }}">
+                                                       name="code" value="{{ old('code') }}" style="text-transform: uppercase;">
                                             </div>
                                         </div>
                                     </div>

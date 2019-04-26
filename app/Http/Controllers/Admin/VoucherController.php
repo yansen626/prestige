@@ -29,7 +29,7 @@ class VoucherController extends Controller
     }
 
     public function getIndex(Request $request){
-        $users = Voucher::query();
+        $users = Voucher::where('id', '!=', 3);
         return DataTables::of($users)
             ->setTransformer(new VoucherTransformer)
             ->addIndexColumn()
@@ -128,7 +128,7 @@ class VoucherController extends Controller
             }
 
             Voucher::create([
-                'code'  => $request->input('code'),
+                'code'  => strtoupper($request->input('code')),
                 'description'   => $request->input('description'),
                 'category_id'   => $cats,
                 'voucher_amount'   => $request->input('voucher_amount'),
@@ -158,7 +158,7 @@ class VoucherController extends Controller
             }
 
             Voucher::create([
-                'code'  => $request->input('code'),
+                'code'  => strtoupper($request->input('code')),
                 'description'   => $request->input('description'),
                 'product_id'   => $prods,
                 'voucher_amount'   => $request->input('voucher_amount'),
