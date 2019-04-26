@@ -54,13 +54,13 @@
                                 </label>
                                 <span>REMEMBER ME</span>
                             </div>
-                        </div>
+                        </div>l
                         <div class="col-md-12 text--center pb-30">
                             <button type="submit" class="btn btn--secondary btn--bordered">Login</button>
                         </div>
                         <div class="col-md-12 text--center">
                             <a href="{{route('password.request')}}" style="font-size: 16px;"><span>Forgot Password?</span></a>
-                            <h4>Or</h4>
+                            <h4 style="margin:10px;">Or</h4>
                             <a href="{{route('register-page')}}" style="font-size: 16px;"><span>Create new account</span></a>
                         </div>
                     </div><!-- .col-md-12 end -->

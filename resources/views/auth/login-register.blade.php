@@ -56,8 +56,11 @@
                                 <span>REMEMBER ME</span>
                             </div>
                         </div>
-                        <div class="col-md-12 text--center">
+                        <div class="col-md-12 text--center pb-30">
                             <button type="submit" class="btn btn--primary btn--bordered">Login</button>
+                        </div>
+                        <div class="col-md-12 text--center">
+                            <a href="{{route('password.request')}}" style="font-size: 16px;"><span>Forgot Password?</span></a>
                         </div>
                     </form>
                 </div>
