@@ -23,6 +23,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property \Carbon\Carbon $finish_date
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
+ * @property int $repeatable
+ * @property int $is_shipping
  * @property int $created_by
  * @property int $updated_by
  * @property int $status_id
@@ -40,7 +42,9 @@ class Voucher extends Eloquent
 		'product_id' => 'int',
 		'created_by' => 'int',
 		'updated_by' => 'int',
-		'status_id' => 'int'
+		'status_id' => 'int',
+        'is_shipping' => 'int',
+        'repeatable' => 'int'
 	];
 
 	protected $dates = [
@@ -53,6 +57,8 @@ class Voucher extends Eloquent
 		'description',
 		'voucher_percentage',
 		'voucher_amount',
+        'is_shipping',
+        'repeatable',
 		'category_id',
 		'product_id',
 		'start_date',

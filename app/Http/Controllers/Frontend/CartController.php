@@ -244,97 +244,105 @@ class CartController extends Controller
             $user = Auth::user();
             $voucher = $request->input('voucher-code');
 
-            //Check if User already used the Voucher
-            $order = Order::where('user_id', $user->id)->where('voucher_code', $voucher)->first();
-            if($order != null){
-                return Response::json(array('errors' => 'Voucher Already Used!'));
+            $voucherCheck = Voucher::where('code', $voucher)->first();
+            if($voucherCheck->is_shipping == 1){
+                $order = Order::find($request->input('order_id'));
+                $totalVoucher = $order->shipping_charge;
+
+                return Response::json(array('success' => $totalVoucher));
             }
-
-            //Check Voucher
-            $now = Carbon::now('Asia/Jakarta');
-            $voucherDB = Voucher::where('code', $voucher)
-                ->where('start_date', '<=', $now)
-                ->where('finish_date', '>=', $now)->first();
-            $trx = Order::find($request->input('order_id'));
-
-            if(!empty($voucherDB)){
-                //Check the Voucher Categories or Products
-                if($voucherDB->category_id != null){
-                    $cats = explode('#', $voucherDB->category_id);
-                    $flag = false;
-                    $totalVoucher = 0;
-                    $voucherAmount = $voucherDB->voucher_amount == null ? 0 : $voucherDB->voucher_amount;
-                    $voucherPercentage = $voucherDB->voucher_percentage == null ? 0 : $voucherDB->voucher_percentage;
-
-                    foreach ($trx->order_products as $details){
-                        foreach ($cats as $cat){
-                            if($flag == true){
-                                break;
-                            }
-                            if($cat == $details->product->category_id){
-                                $flag = true;
-
-                                //Count the Voucher Total Price
-                                if($voucherAmount != 0){
-                                    $totalVoucher += $voucherAmount;
-                                }
-                                else{
-                                    $totalVoucher += $details->product->price * $voucherPercentage / 100;
-                                }
-                                break;
-                            }
-                        }
-                    }
-
-                    if($flag){
-                        return Response::json(array('success' => $totalVoucher));
-                    }
-                    else{
-                        return Response::json(array('errors' => 'No Suitable Product Found!'));
-                    }
+            else{
+                //Check if User already used the Voucher
+                $order = Order::where('user_id', $user->id)->where('voucher_code', $voucher)->first();
+                if($order != null){
+                    return Response::json(array('errors' => 'Voucher Already Used!'));
                 }
-                else if($voucherDB->product_id != null){
-                    $prods = explode('#', $voucherDB->product_id);
-                    $flag = false;
-                    $totalVoucher = 0;
-                    $voucherAmount = $voucherDB->voucher_amount == null ? 0 : $voucherDB->voucher_amount;
-                    $voucherPercentage = $voucherDB->voucher_percentage == null ? 0 : $voucherDB->voucher_percentage;
 
-                    foreach ($trx->order_products as $details){
-                        foreach ($prods as $prod){
-                            if($prod == $details->product_id){
-                                $flag = true;
+                //Check Voucher
+                $now = Carbon::now('Asia/Jakarta');
+                $voucherDB = Voucher::where('code', $voucher)
+                    ->where('start_date', '<=', $now)
+                    ->where('finish_date', '>=', $now)->first();
+                $trx = Order::find($request->input('order_id'));
 
-                                //Count the Voucher Total Price
-                                if($voucherAmount != 0){
-                                    $totalVoucher += $voucherAmount;
+                if(!empty($voucherDB)){
+                    //Check the Voucher Categories or Products
+                    if($voucherDB->category_id != null){
+                        $cats = explode('#', $voucherDB->category_id);
+                        $flag = false;
+                        $totalVoucher = 0;
+                        $voucherAmount = $voucherDB->voucher_amount == null ? 0 : $voucherDB->voucher_amount;
+                        $voucherPercentage = $voucherDB->voucher_percentage == null ? 0 : $voucherDB->voucher_percentage;
+
+                        foreach ($trx->order_products as $details){
+                            foreach ($cats as $cat){
+                                if($flag == true){
+                                    break;
                                 }
-                                else{
-                                    $totalVoucher += $details->product->price * $voucherPercentage / 100;
+                                if($cat == $details->product->category_id){
+                                    $flag = true;
+
+                                    //Count the Voucher Total Price
+                                    if($voucherAmount != 0){
+                                        $totalVoucher += $voucherAmount;
+                                    }
+                                    else{
+                                        $totalVoucher += $details->product->price * $voucherPercentage / 100;
+                                    }
+                                    break;
                                 }
                             }
                         }
-                    }
 
-                    if($flag){
-                        return Response::json(array('success' => $totalVoucher));
+                        if($flag){
+                            return Response::json(array('success' => $totalVoucher));
+                        }
+                        else{
+                            return Response::json(array('errors' => 'No Suitable Product Found!'));
+                        }
+                    }
+                    else if($voucherDB->product_id != null){
+                        $prods = explode('#', $voucherDB->product_id);
+                        $flag = false;
+                        $totalVoucher = 0;
+                        $voucherAmount = $voucherDB->voucher_amount == null ? 0 : $voucherDB->voucher_amount;
+                        $voucherPercentage = $voucherDB->voucher_percentage == null ? 0 : $voucherDB->voucher_percentage;
+
+                        foreach ($trx->order_products as $details){
+                            foreach ($prods as $prod){
+                                if($prod == $details->product_id){
+                                    $flag = true;
+
+                                    //Count the Voucher Total Price
+                                    if($voucherAmount != 0){
+                                        $totalVoucher += $voucherAmount;
+                                    }
+                                    else{
+                                        $totalVoucher += $details->product->price * $voucherPercentage / 100;
+                                    }
+                                }
+                            }
+                        }
+
+                        if($flag){
+                            return Response::json(array('success' => $totalVoucher));
+                        }
+                        else{
+                            return Response::json(array('errors' => 'No Suitable Product Found!'));
+                        }
                     }
                     else{
-                        return Response::json(array('errors' => 'No Suitable Product Found!'));
+                        return Response::json(array('errors' => 'Voucher Not Found!'));
                     }
                 }
                 else{
                     return Response::json(array('errors' => 'Voucher Not Found!'));
                 }
             }
-            else{
-                return Response::json(array('errors' => 'Voucher Not Found!'));
-            }
-
         }
         catch (\Exception $exception){
             Log::error("CartController/voucherValidation error: ". $exception);
-            return Response::json(array('errors' => 'INVALID' . $request->input('id')));
+            return Response::json(array('errors' => 'INVALID' . $exception));
         }
     }
 }
