@@ -242,7 +242,7 @@ class CartController extends Controller
     public function voucherValidation(Request $request){
         try{
             $user = Auth::user();
-            $voucher = $request->input('voucher-code');
+            $voucher = strtoupper($request->input('voucher-code'));
 
             $voucherCheck = Voucher::where('code', $voucher)->first();
             if($voucherCheck->is_shipping == 1){
