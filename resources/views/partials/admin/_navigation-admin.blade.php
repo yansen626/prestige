@@ -127,7 +127,14 @@
                     <ul class="treeview-menu">
                         <li>
                             <a href="{{ route('admin.orders.index') }}">
-                                <i class="icon icon-user-circle text-green"></i>List Order
+                                <i class="icon icon-user-circle text-green"></i>List All Order
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{{ route('admin.orders.shipped') }}">
+                                <i class="icon icon-user-circle text-green"></i>List Shipped Order
                             </a>
                         </li>
                     </ul>

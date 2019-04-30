@@ -96,8 +96,8 @@
                         <tbody>
                         <tr>
                             <td bgcolor="#FFFFFF" style="background-color: #ffffff; font-size: 14px; font-family: Verdana, Geneva, sans-serif; color: #3f3f3f;line-height: 1.6;">
-                                <p>Thank you for your purchase!</p>
                                 @if($order->order_status_id == 3)
+                                    <p>Thank you for your purchase!</p>
                                     <p>
                                         Hello {{$user->first_name}} {{$user->last_name}},<br>
                                         Your payment has been received. We are pleased to inform you that your order has been confirmed and is underway.
@@ -106,6 +106,7 @@
                                         If you have any questions regarding your order, please contact us at hi@nama-official.com Monday-Friday, 9am-5pm WIB.
                                     </p>
                                 @elseif($order->order_status_id == 8)
+                                    <p>Thank you for your purchase!</p>
                                     <p>
                                         Hello {{$user->first_name}} {{$user->last_name}},<br>
                                         Thank you for your order!
@@ -113,8 +114,12 @@
                                 @elseif($order->order_status_id == 7)
                                     <p>
                                         Hello {{$user->first_name}} {{$user->last_name}},<br>
-                                        You can check the status of your order by logging into your account. If you have
-                                        any question regarding your order, please contact us at hi@nama-official.com Monday-Friday, 9am-5pm WIB.
+                                        Thank you for your order!<br>
+                                        You have selected to pay by bank transfer. Please make the payment to the account below:
+                                    </p>
+                                    <p style="font-size: 20px;text-align: center">
+                                        BANK CENTRAL ASIA (BCA)<br>
+                                        006 612 1555 A.N CAROLINE
                                     </p>
                                 @endif
                             </td>

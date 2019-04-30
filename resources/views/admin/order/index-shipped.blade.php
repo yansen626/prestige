@@ -6,7 +6,7 @@
         <div class="container-fluid text-white">
             <div class="row p-t-b-10 ">
                 <div class="col">
-                    <h4> <i class="icon-table"></i> Order Processing</h4>
+                    <h4> <i class="icon-table"></i> Order Shipped</h4>
                 </div>
             </div>
         </div>
@@ -29,7 +29,6 @@
                                 <th>Sub total</th>
                                 <th>Payment</th>
                                 <th>Grand Total</th>
-                                <th>Status</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -59,7 +58,7 @@
             processing: true,
             serverSide: true,
             pageLength: 25,
-            ajax: '{!! route('datatables.order-processing') !!}',
+            ajax: '{!! route('datatables.order-shipped') !!}',
             columns: [
                 { data: 'created_at', name: 'created_at', class: 'text-center', orderable: false, searchable: false,
                     render: function ( data, type, row ){
@@ -76,7 +75,6 @@
                 { data: 'sub_total', name: 'sub_total', class: 'text-right'},
                 { data: 'payment_option', name: 'payment_option', class: 'text-center'},
                 { data: 'grand_total', name: 'grand_total', class: 'text-right'},
-                { data: 'status', name: 'status', class: 'text-center'},
                 { data: 'action', name: 'action', orderable: false, searchable: false, class: 'text-center'}
             ],
         });
