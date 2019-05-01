@@ -866,17 +866,20 @@
                 $('#custom-position').val(valuePosition);
                 $('#custom-position-text').text(valueArr[0]);
                 $('#custom-position-name').text(valueArr[0]);
+                $('#custom-position-name').val(valueArr[0]);
                 ChangeSelectedPosition();
             }
             else if(option === 2){
                 $('#custom-color').val(value);
                 $('#custom-color-text').text(valueArr[0]);
                 $('#custom-position-name').text(valueArr[0]);
+                $('#custom-position-name').val(valueArr[0]);
             }
             else{
                 $('#custom-size').val(value);
                 $('#custom-size-text').text(valueArr[0]);
                 $('#custom-position-name').text(valueArr[0]);
+                $('#custom-position-name').val(valueArr[0]);
             }
             ChangePosition();
         }

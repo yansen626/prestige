@@ -73,7 +73,7 @@
                                     </a>
                                 </div>
                                 <div id="collapse01-5" class="panel--body panel-collapse collapse">
-                                    We currently offer international shipping to xxx.
+                                    We currently offer international shipping.
                                 </div>
                             </div>
 
@@ -117,7 +117,7 @@
                             <div class="panel">
                                 <div class="panel--heading">
                                     <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion01" href="#collapse01-9">
-                                        What products can be personalized/monogrammed?
+                                        What products can be personalized / monogrammed?
                                     </a>
                                 </div>
                                 <div id="collapse01-9" class="panel--body panel-collapse collapse">
@@ -168,6 +168,9 @@
     <style>
         .accordion .panel .panel--body {
             padding: 0 0 5%;
+        }
+        .accordion-toggle{
+            padding-right: 50px;
         }
     </style>
 @endsection
