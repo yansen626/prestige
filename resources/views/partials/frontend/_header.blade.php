@@ -198,7 +198,7 @@
     ============================================= -->
 
     <div id="menu-fullscreen" class="menu-fullscreen" style="display:none;">
-        <div class="col-xs-12 col-sm-12 center" style="padding-top: 50%;">
+        <div class="col-xs-12 col-sm-12 center" style="padding-top: 32%;">
 
             <!-- Module Shop -->
             <div id="shop-search2" class="module module-search pull-left">

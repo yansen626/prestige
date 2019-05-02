@@ -226,16 +226,18 @@
                                                     <input type="hidden" name="custom-size" id="custom-size" value="36 pt-16">
 
                                                     <ul class="dropdown-menu text--center">
-                                                        {{--<li style="height: 30px;width: 40px;cursor:pointer;">--}}
-                                                        {{--<a onclick="ChangeCustom('24 pt-20', 3)">--}}
-                                                        {{--24 PT--}}
-                                                        {{--</a>--}}
-                                                        {{--</li>--}}
                                                         <li style="height: 30px;width: 40px;cursor:pointer;">
                                                             <a onclick="ChangeCustom('36 pt-16', 3)">
                                                                 36 PT
                                                             </a>
                                                         </li>
+                                                        @if($product->category_id == 10)
+                                                            <li style="height: 30px;width: 40px;cursor:pointer;">
+                                                                <a onclick="ChangeCustom('24 pt-12', 3)">
+                                                                    24 PT
+                                                                </a>
+                                                            </li>
+                                                        @endif
                                                     </ul>
                                                 </div>
                                             </div>
@@ -926,7 +928,12 @@
 
             var font = sizeArr[1] + "px Bodoni";
             if(isMobile){
-                font = (sizeArr[1] - 8) + "px Bodoni";
+                if(sizeArr[1] === 16){
+                    font = (sizeArr[1] - 8) + "px Bodoni";
+                }
+                else{
+                    font = (sizeArr[1] - 2) + "px Bodoni";
+                }
             }
             var fillStyle = "#"+colorArr[1];
 
