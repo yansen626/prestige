@@ -373,7 +373,6 @@ class ProductController extends Controller
             }
             else if($product->qty < $request->input('qty')){
                 $prevQty = $request->input('qty') - $product->qty;
-                $prevQty = '+' . $prevQty;
             }
             else if($request->input('qty') == 0){
                 $prevQty = '-' . $product->qty;
@@ -521,7 +520,7 @@ class ProductController extends Controller
             // Update ZOHO Product
             if($prevQty != 0){
                 $tmp = Zoho::stockAdjustment($product, $prevQty);
-                dd($tmp);
+                //dd($tmp);
             }
 
             return redirect()->route('admin.product.show',['item' => $product->id]);

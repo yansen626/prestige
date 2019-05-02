@@ -437,19 +437,19 @@ class Zoho
             ];
             $configuration = Configuration::where('configuration_key', 'zoho_token')->first();
 
-            $request = $client->request('POST', env('ZOHO_BASE_URL') . 'inventoryadjustments/'. $product->zoho_id .'?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
+            $request = $client->request('POST', env('ZOHO_BASE_URL') . 'inventoryadjustments?authtoken=' . $configuration->configuration_value . '&organization_id=' . env('ZOHO_ORGANIZATION_ID'), [
                 'form_params' => [
                     'JSONString' => json_encode($jsonData)
                 ]
             ]);
 
-            if($request->getStatusCode() == 200){
+            if($request->getStatusCode() == 200 || $request->getStatusCode() == 201){
                 $collect = json_decode($request->getBody());
 
                 return $collect;
             }
             else{
-                return "Error!";
+                return $request;
             }
         }
         catch(\Exception $ex){
