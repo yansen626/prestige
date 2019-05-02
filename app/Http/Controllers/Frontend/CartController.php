@@ -245,6 +245,9 @@ class CartController extends Controller
             $voucher = strtoupper($request->input('voucher-code'));
 
             $voucherCheck = Voucher::where('code', $voucher)->first();
+            if(empty($voucherCheck)){
+                return Response::json(array('errors' => 'Voucher Not Found!'));
+            }
             if($voucherCheck->is_shipping == 1){
                 $order = Order::find($request->input('order_id'));
                 $totalVoucher = $order->shipping_charge;
@@ -342,7 +345,7 @@ class CartController extends Controller
         }
         catch (\Exception $exception){
             Log::error("CartController/voucherValidation error: ". $exception);
-            return Response::json(array('errors' => 'INVALID' . $exception));
+            return Response::json(array('errors' => 'INVALID'));
         }
     }
 }
