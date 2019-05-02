@@ -330,7 +330,10 @@
 
                                         <div class="mobile-center" style="padding: 5% 0 5% 0">
                                             @if($product->qty <= 0)
-                                                <p>This product is sold Out, drop your email for next information</p>
+                                                {{--<p style="color: red;">This product is sold Out, drop your email for next information</p>--}}
+                                                <div class="col-md-12" style="background-color: #D3D3D3; padding: 5% 5% 5% 5%">
+                                                    <p style="margin: 0;">This product is sold Out, drop your email below and we will notify you when the product is available</p>
+                                                </div>
                                                 <input type="text" class="form-control" id="waiting_list_name" placeholder="NAME"/>
                                                 <input type="email" class="form-control" id="waiting_list_email" placeholder="EMAIL"/>
                                                 <a class="btn btn--secondary btn--bordered" id="waiting_list_button">Submit</a>
@@ -863,17 +866,20 @@
                 $('#custom-position').val(valuePosition);
                 $('#custom-position-text').text(valueArr[0]);
                 $('#custom-position-name').text(valueArr[0]);
+                $('#custom-position-name').val(valueArr[0]);
                 ChangeSelectedPosition();
             }
             else if(option === 2){
                 $('#custom-color').val(value);
                 $('#custom-color-text').text(valueArr[0]);
                 $('#custom-position-name').text(valueArr[0]);
+                $('#custom-position-name').val(valueArr[0]);
             }
             else{
                 $('#custom-size').val(value);
                 $('#custom-size-text').text(valueArr[0]);
                 $('#custom-position-name').text(valueArr[0]);
+                $('#custom-position-name').val(valueArr[0]);
             }
             ChangePosition();
         }

@@ -247,7 +247,7 @@ class HomeController extends Controller
 
                 //testing SEND EMAIL ORDER CONFIRMATION
                 case 6:
-                    $order = Order::find(7);
+                    $order = Order::find(29);
                     $user = User::find($order->user_id);
                     $orderProducts = OrderProduct::where('order_id', $order->id)->get();
 
@@ -263,7 +263,7 @@ class HomeController extends Controller
                     }
                     $orderConfirmation = new OrderConfirmation($user, $order, $orderProducts, $productImageArr);
                     Mail::to($user->email)
-                        ->bcc("sales@nama-official.com")
+//                        ->bcc("sales@nama-official.com")
                         ->send($orderConfirmation);
                     return 'success';
                     break;

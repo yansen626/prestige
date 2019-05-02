@@ -57,6 +57,15 @@ class OrderController extends Controller
             ->make(true);
     }
 
+    public function getIndexShipped(Request $request){
+        $users = Order::where('order_status_id', 4)
+            ->orderBy('order_number', 'desc')->get();
+        return DataTables::of($users)
+            ->setTransformer(new OrderTransformer())
+            ->addIndexColumn()
+            ->make(true);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -78,13 +87,23 @@ class OrderController extends Controller
     }
 
     /**
-     * Display a listing of the resource bank Transfer.
+     * Display a listing of the resource processing.
      *
      * @return \Illuminate\Http\Response
      */
     public function indexProcessing()
     {
         return view('admin.order.index-processing');
+    }
+
+    /**
+     * Display a listing of the resource shipped.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexShipped()
+    {
+        return view('admin.order.index-shipped');
     }
 
     /**

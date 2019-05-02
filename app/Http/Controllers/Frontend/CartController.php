@@ -27,6 +27,7 @@ class CartController extends Controller
             $size = $request->input('custom-size');
             $size = explode("-", $size);
             $position = $request->input('custom-position-name');
+            dd($position);
 
             if($request->input('customize-toggle') == 'true'){
                 if($request->input('custom-text') == ""){
