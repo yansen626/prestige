@@ -861,6 +861,7 @@
 
         function ChangeCustom(value, option){
             var valueArr = value.split("-");
+            //change position
             if(option === 1){
                 var valuePosition = valueArr[1] + "-" + valueArr[2];
                 $('#custom-position').val(valuePosition);
@@ -869,17 +870,17 @@
                 $('#custom-position-name').val(valueArr[0]);
                 ChangeSelectedPosition();
             }
+            //change color
             else if(option === 2){
                 $('#custom-color').val(value);
                 $('#custom-color-text').text(valueArr[0]);
                 $('#custom-position-name').text(valueArr[0]);
-                $('#custom-position-name').val(valueArr[0]);
             }
+            //change Size
             else{
                 $('#custom-size').val(value);
                 $('#custom-size-text').text(valueArr[0]);
                 $('#custom-position-name').text(valueArr[0]);
-                $('#custom-position-name').val(valueArr[0]);
             }
             ChangePosition();
         }
