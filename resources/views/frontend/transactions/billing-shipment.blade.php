@@ -3,7 +3,7 @@
 @section('pageTitle', 'Billing and Shipment | NAMA')
 @section('content')
     <section class="bg-white">
-        <form method="POST" action="{{ route('submit.billing') }}">
+        <form method="POST" action="{{ route('submit.billing') }}" id="billingForm">
             @csrf
             <div class="container">
                 <div class="row">
@@ -325,7 +325,7 @@
                         <a href="{{ route('cart') }}"><button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 130px;line-height: 0px; border: 1px solid #282828;">BACK TO CART</button></a>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-3 text-center-xs" style="text-align: right;">
-                        <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">CONTINUE</button>
+                        <button type="submit" class="btn btn--secondary btn--bordered submitBtn" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">CONTINUE</button>
                     </div>
                 </div>
             </div>
@@ -485,5 +485,12 @@
             }
             return x1 + x2;
         }
+
+        $("#billingForm").submit(function () {
+            $(".submitBtn").click(function () {
+                $(".submitBtn").attr("disabled", true);
+                return true;
+            });
+        });
     </script>
 @endsection
