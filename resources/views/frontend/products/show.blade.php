@@ -196,11 +196,11 @@
                                                                 <img src="{{asset('images/icons/Gold.PNG')}}" style="width: 35px; height: 35px;"> GOLD
                                                             </a>
                                                         </li>
-                                                        <li style="height: 40px;width: 40px;cursor:pointer;">
-                                                            <a onclick="ChangeCustom('Blind-ffffff', 2)">
-                                                                <img src="{{asset('images/icons/Blind.PNG')}}" style="width: 35px; height: 35px;"> BLIND
-                                                            </a>
-                                                        </li>
+                                                        {{--<li style="height: 40px;width: 40px;cursor:pointer;">--}}
+                                                            {{--<a onclick="ChangeCustom('Blind-ffffff', 2)">--}}
+                                                                {{--<img src="{{asset('images/icons/Blind.PNG')}}" style="width: 35px; height: 35px;"> BLIND--}}
+                                                            {{--</a>--}}
+                                                        {{--</li>--}}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -334,7 +334,7 @@
                                             @if($product->qty <= 0)
                                                 {{--<p style="color: red;">This product is sold Out, drop your email for next information</p>--}}
                                                 <div class="col-md-12" style="background-color: #D3D3D3; padding: 5% 5% 5% 5%">
-                                                    <p style="margin: 0;">This product is sold Out, drop your email below and we will notify you when the product is available</p>
+                                                    <p style="margin: 0;">This product is sold out, drop your email below and we will notify you when the product is available</p>
                                                 </div>
                                                 <input type="text" class="form-control" id="waiting_list_name" placeholder="NAME"/>
                                                 <input type="email" class="form-control" id="waiting_list_email" placeholder="EMAIL"/>

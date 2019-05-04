@@ -73,7 +73,8 @@
                                     </a>
                                 </div>
                                 <div id="collapse01-5" class="panel--body panel-collapse collapse">
-                                    We currently offer international shipping.
+                                    {{--We currently offer international shipping.--}}
+                                    Please email us at sales@nama-official.com for all international orders.
                                 </div>
                             </div>
 
