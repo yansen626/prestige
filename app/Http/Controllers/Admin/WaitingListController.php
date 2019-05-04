@@ -27,7 +27,7 @@ class WaitingListController extends Controller
     }
 
     public function getIndex(Request $request){
-        $users = WaitingList::query();
+        $users = WaitingList::all();
         return DataTables::of($users)
             ->setTransformer(new WaitingListTransformer())
             ->addIndexColumn()

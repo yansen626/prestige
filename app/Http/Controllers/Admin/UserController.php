@@ -26,7 +26,7 @@ class UserController extends Controller
     }
 
     public function getIndex(Request $request){
-        $users = User::query();
+        $users = User::all();
         return DataTables::of($users)
             ->setTransformer(new UserTransformer)
             ->addIndexColumn()

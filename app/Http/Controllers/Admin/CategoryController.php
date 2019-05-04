@@ -27,7 +27,7 @@ class CategoryController extends Controller
     }
 
     public function getIndex(Request $request){
-        $users = Category::query();
+        $users = Category::all();
         return DataTables::of($users)
             ->setTransformer(new CategoryTransformer)
             ->addIndexColumn()

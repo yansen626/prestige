@@ -22,7 +22,7 @@ class SubscribeController extends Controller
     }
 
     public function getIndex(Request $request){
-        $users = Subscribe::query();
+        $users = Subscribe::all();
         return DataTables::of($users)
             ->setTransformer(new SubscribeTransformer)
             ->addIndexColumn()

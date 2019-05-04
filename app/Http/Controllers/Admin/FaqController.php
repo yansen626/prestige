@@ -27,7 +27,7 @@ class FaqController extends Controller
     }
 
     public function getIndex(Request $request){
-        $users = Faq::query();
+        $users = Faq::all();
         return DataTables::of($users)
             ->setTransformer(new FaqTransformer)
             ->addIndexColumn()

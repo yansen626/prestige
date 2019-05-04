@@ -21,7 +21,7 @@ class StoreAddressController extends Controller
     }
 
     public function getIndex(Request $request){
-        $storeAddress = StoreAddress::query();
+        $storeAddress = StoreAddress::all();
         return DataTables::of($storeAddress)
             ->setTransformer(new StoreAddressTransformer)
             ->addIndexColumn()

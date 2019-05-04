@@ -26,7 +26,7 @@ class AdminUserController extends Controller
     }
 
     public function getIndex(Request $request){
-        $users = AdminUser::query();
+        $users = AdminUser::all();
         return DataTables::of($users)
             ->setTransformer(new AdminUserTransformer)
             ->addIndexColumn()

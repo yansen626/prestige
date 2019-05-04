@@ -57,6 +57,16 @@
                                 <div class="col-md-6">
                                     <div class="form-group form-float form-group-lg">
                                         <div class="form-line">
+                                            <label class="form-label" for="customer_phone">Customer Phone</label>
+                                            <input id="customer_phone" type="text" class="form-control"
+                                                   name="customer_phone" value="{{ $order->user->phone }}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group form-float form-group-lg">
+                                        <div class="form-line">
                                             <label class="form-label" for="customer_address">Customer Address</label>
                                             <textarea id="customer_address" type="text" class="form-control"
                                                    name="customer_address" readonly>{{ $order->user->addresses[0]->description }}</textarea>

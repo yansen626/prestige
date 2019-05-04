@@ -88,11 +88,16 @@ class HomeController extends Controller
     {
         try{
             $dateTimeNow = Carbon::now('Asia/Jakarta');
-            $newSubscriber = Subscribe::create([
-                'name' => $request->input('name'),
-                'email' => $request->input('email'),
-                'created_at'        => $dateTimeNow->toDateTimeString(),
-            ]);
+            $subscribeDB = Subscribe::where('name', $request->input('name'))
+                ->where('email', $request->input('email'))
+                ->first();
+            if(empty($subscribeDB)){
+                $newSubscriber = Subscribe::create([
+                    'name' => $request->input('name'),
+                    'email' => $request->input('email'),
+                    'created_at'        => $dateTimeNow->toDateTimeString(),
+                ]);
+            }
             return Response::json(array('success' => 'VALID'));
         }
         catch(\Exception $ex){

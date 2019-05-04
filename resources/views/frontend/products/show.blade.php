@@ -345,6 +345,11 @@
                                                         <h5 class="text--left">Thank you for registering</h5>
                                                     </div>
                                                 </div>
+                                                <div id="waiting_list_error_message" class="row mb-3" style="display: none;padding-top:5%;">
+                                                    <div class="col-12">
+                                                        <h5 class="text--left">Please fill Name and Email</h5>
+                                                    </div>
+                                                </div>
                                             @else
                                                 <p class="font-16" style="text-align: justify;">
                                                     This product will ship on 30 April - 7 May
@@ -848,6 +853,54 @@
         $(document).ready(function(){
             $('a[data-toggle=tooltip]').tooltip();
         });
+
+        // Auto onfocusout when enter is pressed
+        $('.auto-blur').keypress(function (e) {
+            if (e.which == 13) {
+                $(this).blur();
+            }
+        });
+
+        // Toggle customize section
+        function onToggleCustomize(){
+            var toggleInput = $('#customize-toggle').val();
+            if(toggleInput === 'true'){
+                $('#customize-toggle').val('false');
+                $('#customize-section').hide();
+            }
+            else{
+                $('#customize-toggle').val('true');
+                $('#customize-section').show();
+            }
+        }
+
+        $('#waiting_list_button').click(function(e){
+            e.preventDefault();
+            var email = $('#waiting_list_email').val();
+            var name = $('#waiting_list_name').val();
+            var slug = $('#slug').val();
+
+            if(email === "" || name === ""){
+                $('#waiting_list_error_message').slideDown(500);
+            }
+            else{
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('waiting-list') }}',
+                    datatype : "application/json",
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'email': email,
+                        'name': name,
+                        'slug': slug,
+                    }, // no need to stringify
+                    success: function (result) {
+                        $('#waiting_list_error_message').hide();
+                        $('#waiting_list_success_message').slideDown(500);
+                    }
+                });
+            }
+        });
     </script>
     <script>
         function ChangeColour(){
@@ -974,48 +1027,6 @@
             imageObj.src = "{{ asset('storage/products/'.$productMainImages->path) }}";
 
         }
-
-        // Auto onfocusout when enter is pressed
-        $('.auto-blur').keypress(function (e) {
-            if (e.which == 13) {
-                $(this).blur();
-            }
-        });
-
-        // Toggle customize section
-        function onToggleCustomize(){
-            var toggleInput = $('#customize-toggle').val();
-            if(toggleInput === 'true'){
-                $('#customize-toggle').val('false');
-                $('#customize-section').hide();
-            }
-            else{
-                $('#customize-toggle').val('true');
-                $('#customize-section').show();
-            }
-        }
-
-        $('#waiting_list_button').click(function(e){
-            e.preventDefault();
-            var email = $('#waiting_list_email').val();
-            var name = $('#waiting_list_name').val();
-            var slug = $('#slug').val();
-
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('waiting-list') }}',
-                datatype : "application/json",
-                data: {
-                    '_token': '{{ csrf_token() }}',
-                    'email': email,
-                    'name': name,
-                    'slug': slug,
-                }, // no need to stringify
-                success: function (result) {
-                    $('#waiting_list_success_message').slideDown(500);
-                }
-            });
-        });
 
         function detectmob() {
             if(window.innerWidth <= 450) {

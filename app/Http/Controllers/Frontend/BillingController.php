@@ -81,7 +81,7 @@ class BillingController extends Controller
             }
         }
         else if(Session::has('cart')){
-            error_log("else if session cart");
+//            error_log("else if session cart");
             //guest has address
             if(Session::has('user')){
                 $user = Session::get('user');
@@ -469,6 +469,8 @@ class BillingController extends Controller
             return $result;
         }
         catch (\Exception $exception){
+            Log::error(
+                "BillingController - getRajaongkirData Data: totalWeight = ".$totalWeight." | selectedCourier = ".$selectedCourier);
             Log::error("BillingController - getRajaongkirData Error: ". $exception->getMessage());
             //dd($exception);
             return $result;

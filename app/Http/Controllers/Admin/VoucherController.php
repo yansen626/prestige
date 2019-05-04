@@ -29,7 +29,7 @@ class VoucherController extends Controller
     }
 
     public function getIndex(Request $request){
-        $users = Voucher::where('id', '!=', 3);
+        $users = Voucher::where('id', '!=', 3)->get();
         return DataTables::of($users)
             ->setTransformer(new VoucherTransformer)
             ->addIndexColumn()

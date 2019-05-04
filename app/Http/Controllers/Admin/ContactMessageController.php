@@ -21,7 +21,7 @@ class ContactMessageController extends Controller
     }
 
     public function getIndex(Request $request){
-        $users = ContactMessage::query();
+        $users = ContactMessage::all();
         return DataTables::of($users)
             ->setTransformer(new ContactMessageTransformer)
             ->addIndexColumn()
