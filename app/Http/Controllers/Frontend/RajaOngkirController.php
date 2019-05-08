@@ -19,8 +19,8 @@ class RajaOngkirController extends Controller
             $courierArr = $request->input('courier');
 
             $client = new \GuzzleHttp\Client(['http_errors' => false]);
-            $url = "https://api.rajaongkir.com/starter/cost";
-//            $url = env('RAJAONGKIR_URL').'cost';
+//            $url = "https://api.rajaongkir.com/starter/cost";
+            $url = env('RAJAONGKIR_URL').'cost';
             $key = env('RAJAONGKIR_KEY');
 
             $courier = $courierArr[0];

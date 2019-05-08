@@ -166,10 +166,10 @@ class OrderController extends Controller
                 array_push($productIdArr, $orderProduct->product_id);
 
                 //minus item quantity
-                $product = $orderProduct->product;
-                $qty = $product->qty;
-                $product->qty = $qty-1;
-                $product->save();
+//                $product = $orderProduct->product;
+//                $qty = $product->qty;
+//                $product->qty = $qty-1;
+//                $product->save();
             }
 
             $productImages = ProductImage::whereIn('product_id',$productIdArr)->where('is_main_image', 1)->get();

@@ -135,7 +135,7 @@
                     <!-- Home Menu -->
                     <li>
                         <a href="{{route('cart')}}"  class="menu-item">
-                            CART <span class="badge">{{ \Illuminate\Support\Facades\Session::has('cart') ? \Illuminate\Support\Facades\Session::get('cart')->totalQty : '' }}{{ \Illuminate\Support\Facades\Session::has('cartQty') ? \Illuminate\Support\Facades\Session::get('cartQty') : '' }}</span>
+                            CART <span class="badge">{{ \Illuminate\Support\Facades\Session::has('cart') ? \Illuminate\Support\Facades\Session::get('cart')->totalQty : '' }}{{ \Illuminate\Support\Facades\Session::has('cartQty') ? \Illuminate\Support\Facades\Session::get('cartQty') : '0' }}</span>
                         </a>
                         <!-- .mega-dropdown-menu end -->
                     </li>

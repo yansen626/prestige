@@ -27,14 +27,19 @@ class CartController extends Controller
             $size = $request->input('custom-size');
             $size = explode("-", $size);
             $position = $request->input('custom-position-name');
-//            dd($position);
+
 
             if($request->input('customize-toggle') == 'true'){
                 if($request->input('custom-text') == ""){
                     $description = "";
                 }
                 else{
-                    $description = "Text: ".strtoupper($request->input('custom-text'))."<br>".
+//                    $description = "Text: ".strtoupper($request->input('custom-text'))."<br>".
+////                        "Font: ".$request->input('custom-font')."<br>".
+//                        "Position: ".$position."<br>".
+//                        "Color: ".$color[0]."<br>".
+//                        "Size: ".$size[0]."<br>";
+                    $description = "Text: ".$request->input('custom-text')."<br>".
 //                        "Font: ".$request->input('custom-font')."<br>".
                         "Position: ".$position."<br>".
                         "Color: ".$color[0]."<br>".
@@ -44,6 +49,7 @@ class CartController extends Controller
             else{
                 $description = "";
             }
+//            dd($description);
 
             //add cart to database
             if (Auth::check())
@@ -116,6 +122,7 @@ class CartController extends Controller
     public function getCart(){
         if (Auth::check())
         {
+            Session::forget('cartQty');
             //Read DB
             $user = Auth::user();
             $carts = Cart::where('user_id', $user->id)->get();

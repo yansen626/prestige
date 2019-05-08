@@ -249,24 +249,30 @@
                     <div class="col-md-12">
                         @if($isIndonesian)
                             <div class="col-md-12 padding-bottom-3">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <img src="{{ asset('images/icons/jne.jpg') }}" class="width-100">
                                     <br>
                                     <input type="radio" name="courier" id="jne" value="jne-REG" checked/> REG <br>
                                     {{--<input type="radio" name="courier" id="jne" value="jne-OKE"/> OKE <br>--}}
                                     <input type="radio" name="courier" id="jne" value="jne-YES"/> YES <br>
                                 </div>
-                                <div class="col-md-4">
-                                    <img src="{{ asset('images/icons/tiki.png') }}" class="width-100">
-                                    <br>
-                                    <input type="radio" name="courier" id="jne" value="tiki-REG" /> REG (REGULER SERVICE) <br>
-                                    <input type="radio" name="courier" id="jne" value="tiki-ONS" /> ONS (OVER NIGHT SERVICE) <br>
-                                    <input type="radio" name="courier" id="jne" value="tiki-SDS" /> SDS (SAME DAY SERVICE) <br>
-                                </div>
-                                {{--<div class="col-md-4">--}}
-                                    {{--<img src="{{ asset('images/icons/pos.png') }}" class="width-100">--}}
+                                {{--<div class="col-md-3">--}}
+                                    {{--<img src="{{ asset('images/icons/tiki.png') }}" class="width-100">--}}
                                     {{--<br>--}}
-                                    {{--<input type="radio" name="courier" id="jne" value="pos-Paket Kilat Khusus" /> Paket Kilat Khusus <br>--}}
+                                    {{--<input type="radio" name="courier" id="jne" value="tiki-REG" /> REG (REGULER SERVICE) <br>--}}
+                                    {{--<input type="radio" name="courier" id="jne" value="tiki-ONS" /> ONS (OVER NIGHT SERVICE) <br>--}}
+                                    {{--<input type="radio" name="courier" id="jne" value="tiki-SDS" /> SDS (SAME DAY SERVICE) <br>--}}
+                                {{--</div>--}}
+                                <div class="col-md-3">
+                                    <img src="{{ asset('images/icons/gojek.png') }}" class="width-100">
+                                    <img src="{{ asset('images/icons/grab.png') }}" class="width-100">
+                                    <br>
+                                    <input type="radio" name="courier" id="jne" value="gojek-grab" /> GOJEK / GRAB <br>
+                                </div>
+                                {{--<div class="col-md-3">--}}
+                                    {{--<img src="{{ asset('images/icons/grab.png') }}" class="width-100">--}}
+                                    {{--<br>--}}
+                                    {{--<input type="radio" name="courier" id="jne" value="grab" /> GRAB <br>--}}
                                 {{--</div>--}}
                             </div>
                             {{--<div class="col-md-12">--}}
@@ -318,13 +324,13 @@
                 </div>
 
                 <div class="row padding-top-3">
-                    <div class="col-xs-12 col-sm-12 col-md-6">
-                        &nbsp;
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-3 text-center-xs">
-                        <a href="{{ route('cart') }}"><button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 130px;line-height: 0px; border: 1px solid #282828;">BACK TO CART</button></a>
-                    </div>
-                    <div class="col-xs-6 col-sm-6 col-md-3 text-center-xs" style="text-align: right;">
+
+                    <div class="col-xs-12 col-sm-12 col-md-12" style="text-align: right;">
+                        <a href="{{ route('cart') }}">
+                            <button type="button" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">
+                                BACK TO CART
+                            </button>
+                        </a>
                         <button type="submit" class="btn btn--secondary btn--bordered submitBtn" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;">CONTINUE</button>
                     </div>
                 </div>
@@ -343,10 +349,10 @@
        }
        .padding-bottom-10{
            padding-bottom: 10px !important;
-       }
         .bg-white{
             padding-bottom:0;
         }
+
     </style>
 @endsection
 @section('scripts')
@@ -399,28 +405,33 @@
         // Ajax function to get rajaongkir delivery fee
         function rajaongkirAjaxGetCost(tmpCityId, tmpWeight, tmpCourier){
             // alert(tmpCourier);
-            $.ajax({
-                url: '{{ route('ajax.rajaongkir.cost') }}',
-                type: 'POST',
-                data: {
-                    'destination_city_id': tmpCityId,
-                    'weight': tmpWeight,
-                    'courier': tmpCourier
-                },
-                success: function(data) {
-                    //console.log(data);
-                    if(data.code === 200){
-                        let feeStr = rupiahFormat(data.fee);
-                        $('#delivery-fee').html("Rp " + feeStr);
+            if(tmpCourier[0] === "gojek"){
+                $('#delivery-fee').html("Rp 0");
+            }
+            else{
+                $.ajax({
+                    url: '{{ route('ajax.rajaongkir.cost') }}',
+                    type: 'POST',
+                    data: {
+                        'destination_city_id': tmpCityId,
+                        'weight': tmpWeight,
+                        'courier': tmpCourier
+                    },
+                    success: function(data) {
+                        //console.log(data);
+                        if(data.code === 200){
+                            let feeStr = rupiahFormat(data.fee);
+                            $('#delivery-fee').html("Rp " + feeStr);
+                        }
+                        else{
+                            $('#delivery-fee').html("Shipping Service Not Available");
+                        }
+                    },
+                    error: function(response){
+                        console.log(response);
                     }
-                    else{
-                        $('#delivery-fee').html("Shipping Service Not Available");
-                    }
-                },
-                error: function(response){
-                    console.log(response);
-                }
-            });
+                });
+            }
         }
 
         $("#another_shipment").change(function() {
