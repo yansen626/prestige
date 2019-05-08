@@ -279,8 +279,8 @@
                             <button type="submit" class="btn btn--secondary btn--bordered" style="font-size: 11px; height: 31.5px; width: 120px;line-height: 0px; border: 1px solid #282828;" {{$disabled}}>PROCEED</button>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top: 10px; text-align: justify;">
-                            * Note: Shipping and taxes will be updated during checkout
-                            based on your billing and shipping information.
+{{--                            * Note: Shipping and taxes will be updated during checkout--}}
+{{--                            based on your billing and shipping information.--}}
                         </div>
                     </div>
                 </div>
