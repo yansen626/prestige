@@ -249,7 +249,7 @@
                     <div class="col-md-12">
                         @if($isIndonesian)
                             <div class="col-md-12 padding-bottom-3">
-                                <div class="col-md-3">
+                                <div class="col-md-3 col-sm-12">
                                     <img src="{{ asset('images/icons/jne.jpg') }}" class="width-100">
                                     <br>
                                     <input type="radio" name="courier" id="jne" value="jne-REG" checked/> REG <br>
@@ -263,11 +263,16 @@
                                     {{--<input type="radio" name="courier" id="jne" value="tiki-ONS" /> ONS (OVER NIGHT SERVICE) <br>--}}
                                     {{--<input type="radio" name="courier" id="jne" value="tiki-SDS" /> SDS (SAME DAY SERVICE) <br>--}}
                                 {{--</div>--}}
-                                <div class="col-md-3">
+                                <div class="col-md-5 col-sm-12">
                                     <img src="{{ asset('images/icons/gojek.png') }}" class="width-100">
                                     <img src="{{ asset('images/icons/grab.png') }}" class="width-100">
                                     <br>
                                     <input type="radio" name="courier" id="jne" value="gojek-grab" /> GOJEK / GRAB <br>
+                                    <br>
+                                    <div class="col-md-12" style="background-color: #D3D3D3; padding: 5% 5% 5% 5%">
+                                        <p style="margin: 0;">For this option, delivery cost will be borne by customer</p>
+                                    </div>
+
                                 </div>
                                 {{--<div class="col-md-3">--}}
                                     {{--<img src="{{ asset('images/icons/grab.png') }}" class="width-100">--}}
