@@ -22,6 +22,7 @@ class CartController extends Controller
         try{
             $productDB = Product::where('slug', $request->input('slug'))->first();
             $dateTimeNow = Carbon::now('Asia/Jakarta');
+            $text = "";
             $color = $request->input('custom-color');
             $color = explode("-", $color);
             $size = $request->input('custom-size');
@@ -34,11 +35,8 @@ class CartController extends Controller
                     $description = "";
                 }
                 else{
+                    $text = $request->input('custom-text');
 //                    $description = "Text: ".strtoupper($request->input('custom-text'))."<br>".
-////                        "Font: ".$request->input('custom-font')."<br>".
-//                        "Position: ".$position."<br>".
-//                        "Color: ".$color[0]."<br>".
-//                        "Size: ".$size[0]."<br>";
                     $description = "Text: ".$request->input('custom-text')."<br>".
 //                        "Font: ".$request->input('custom-font')."<br>".
                         "Position: ".$position."<br>".
@@ -104,7 +102,7 @@ class CartController extends Controller
                     'updated_at'        => $dateTimeNow->toDateTimeString()
                 ]);
 
-                $cart->add($tmpCart, $productDB->id);
+                $cart->add($tmpCart, $productDB->id.$text);
 
                 $request->session()->put('cart', $cart);
                 Session::put('cart', $cart);
@@ -120,9 +118,9 @@ class CartController extends Controller
     }
 
     public function getCart(){
+        Session::forget('cartQty');
         if (Auth::check())
         {
-            Session::forget('cartQty');
             //Read DB
             $user = Auth::user();
             $carts = Cart::where('user_id', $user->id)->get();
@@ -147,11 +145,15 @@ class CartController extends Controller
             $oldCart = Session::get('cart');
             $cart = new \App\Cart($oldCart);
             $carts = $cart->items;
-            $totalPrice = 0;
+            $totalPrice = $cart->totalPrice;
+            $cartQty = $cart->totalQty;
             //dd($carts);
-            foreach ($carts as $item){
-                $totalPrice += ($item['price'] * $item['qty']);
-            }
+//            foreach ($carts as $item){
+//                $totalPrice += ($item['price'] * $item['qty']);
+//                $cartQty += $item['qty'];
+//            }
+//            dd($cart);
+            Session::put('cartQty', $cartQty);
             $flag = 2;
             //dd($carts);
         }

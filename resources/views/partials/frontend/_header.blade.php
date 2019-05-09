@@ -135,7 +135,7 @@
                     <!-- Home Menu -->
                     <li>
                         <a href="{{route('cart')}}"  class="menu-item">
-                            CART <span class="badge">{{ \Illuminate\Support\Facades\Session::has('cart') ? \Illuminate\Support\Facades\Session::get('cart')->totalQty : '' }}{{ \Illuminate\Support\Facades\Session::has('cartQty') ? \Illuminate\Support\Facades\Session::get('cartQty') : '0' }}</span>
+                            CART <span class="badge">{{ \Illuminate\Support\Facades\Session::has('cartQty') ? \Illuminate\Support\Facades\Session::get('cartQty') : '0' }}</span>
                         </a>
                         <!-- .mega-dropdown-menu end -->
                     </li>
@@ -315,7 +315,7 @@
 
                 @if(auth()->guard('web')->check())
                     <span class="badge badge-cart" style="font-size: 10px;">
-                        {{ \Illuminate\Support\Facades\Session::has('cart') ? \Illuminate\Support\Facades\Session::get('cart')->totalQty : '' }}{{ \Illuminate\Support\Facades\Session::has('cartQty') ? \Illuminate\Support\Facades\Session::get('cartQty') : '' }}
+                        {{ \Illuminate\Support\Facades\Session::has('cartQty') ? \Illuminate\Support\Facades\Session::get('cartQty') : '' }}
                     </span>
                 @endif
                 <a class="logo center navbar-toggle collapsed" href="{{route('home')}}" style="border: none;line-height: 0;height: 0;width: 115px;">

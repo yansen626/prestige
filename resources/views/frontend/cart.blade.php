@@ -61,30 +61,30 @@
                                     @foreach($carts as $cart)
                                         <tr class="cart-product">
                                             <td class="cart-product-item center pb-40 pt-40">
-                                                @php($productImage = \App\Models\ProductImage::where('product_id', $cart['item']['product_id'])->where('is_main_image', 1)->first())
+                                                @php($productImage = \App\Models\ProductImage::where('product_id', $cart['product_id'])->where('is_main_image', 1)->first())
                                                 <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100px"/>
                                             </td>
                                             <td class="cart-product-item center pb-40 pt-40">
                                                 {{ $cart['item']['product']['name'] }}
-                                                <input type="hidden" name="id[]" value="{{ $cart['item']['product_id'] }}"/>
+                                                <input type="hidden" name="id[]" value="{{ $cart['product_id'] }}"/>
                                             </td>
                                             <td class="cart-product-item center pb-40 pt-40">{{ $cart['item']['product']['colour'] }}</td>
                                             <td class="cart-product-quantity pb-40 pt-40">
                                                 <div class="product-quantity">
-                                                    <a><i class="fa fa-minus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'min')"></i></a>
-                                                    <input type="text" value="{{ $cart['qty'] }}" id="qty{{ $cart['item']['product_id'] }}" name="qty[{{ $cart['item']['product_id'] }}]" readonly>
-                                                    <a><i class="fa fa-plus" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'plus')"></i></a>
+                                                    <a><i class="fa fa-minus" onclick="updateQty('{{ $cart['product_id'] }}', 'min')"></i></a>
+                                                    <input type="text" value="{{ $cart['qty'] }}" id="qty{{ $cart['product_id'] }}" name="qty[{{ $cart['product_id'] }}]" readonly>
+                                                    <a><i class="fa fa-plus" onclick="updateQty('{{ $cart['product_id'] }}', 'plus')"></i></a>
                                                 </div>
                                             </td>
                                             <td class="cart-product-item pb-40 pt-40">{!! $cart['item']['description'] !!}</td>
                                             <td class="cart-product-total pb-40 pt-40">
-                                                {{env('KURS_IDR')}} <span id="total_price{{ $cart['item']['product_id'] }}">{{ number_format($cart['item']['price'], 0, ",", ".") }}</span>
-                                                <input id="total_price_span{{$cart['item']['product_id']}}" type="hidden" class="priceForTotal" value="{{$cart['item']['price']}}">
+                                                {{env('KURS_IDR')}} <span id="total_price{{ $cart['product_id'] }}">{{ number_format($cart['item']['price'], 0, ",", ".") }}</span>
+                                                <input id="total_price_span{{$cart['product_id']}}" type="hidden" class="priceForTotal" value="{{$cart['item']['price']}}">
                                             </td>
-                                            {{--<td class="cart-product-total" id="total_price{{ $cart['item']['product_id'] }}">{{ $cart['item']['price'] }}</td>--}}
+                                            {{--<td class="cart-product-total" id="total_price{{ $cart['product_id'] }}">{{ $cart['item']['price'] }}</td>--}}
                                             <td class="pb-40 pt-40">
-                                                <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>
-                                                <input type="hidden" value="{{ $cart['item']['price'] }}" id="price{{ $cart['item']['product_id'] }}">
+                                                <i class="fa fa-close delete" data-toggle="modal" data-id="{{ $cart['product_id'] }}" data-target="#myModal"></i>
+                                                <input type="hidden" value="{{ $cart['item']['price'] }}" id="price{{ $cart['product_id'] }}">
                                             </td>
                                         </tr>
                                     @endforeach
@@ -197,28 +197,28 @@
                             @foreach($carts as $cart)
                             <div class="col-xs-12 col-sm-12 col-md-12 border-b" style="padding-bottom: 6%;">
                                     <div class="col-xs-6 col-sm-6" style="font-size: 20px; text-align: center;">
-                                        @php($productImage = \App\Models\ProductImage::where('product_id', $cart['item']['product_id'])->where('is_main_image', 1)->first())
+                                        @php($productImage = \App\Models\ProductImage::where('product_id', $cart['product_id'])->where('is_main_image', 1)->first())
                                         <img src="{{ asset('storage/products/'.$productImage->path) }}" alt="product" style="width: 100%"/>
                                         <br>
-                                        {{--<i class="fa fa-close delete font-16" data-toggle="modal" data-id="{{ $cart['item']['product_id'] }}" data-target="#myModal"></i>--}}
-                                        <i class="fa fa-close delete_mobile font-16" onclick="deleteItem('{{ $cart['item']['product_id'] }}')"></i>
-                                        <input type="hidden" value="{{ $cart['item']['price'] }}" id="price_mobile{{ $cart['item']['product_id'] }}">
+                                        {{--<i class="fa fa-close delete font-16" data-toggle="modal" data-id="{{ $cart['product_id'] }}" data-target="#myModal"></i>--}}
+                                        <i class="fa fa-close delete_mobile font-16" onclick="deleteItem('{{ $cart['product_id'] }}')"></i>
+                                        <input type="hidden" value="{{ $cart['item']['price'] }}" id="price_mobile{{ $cart['product_id'] }}">
                                     </div>
                                     <div class="col-xs-6 col-sm-6">
                                         {{ $cart['item']['product']['name'] }}, {{ $cart['item']['product']['colour'] }}
-                                        <input type="hidden" name="id[]" value="{{ $cart['item']['product_id'] }}"/>
+                                        <input type="hidden" name="id[]" value="{{ $cart['product_id'] }}"/>
                                         <br>
                                         {!! $cart['item']['description'] !!}
 
                                         <br>
                                         TOTAL<br>
-                                        {{env('KURS_IDR')}} <span id="total_price_mobile{{ $cart['item']['product_id'] }}">{{ number_format($cart['item']['price'], 0, ",", ".") }} </span>
-                                        <input id="total_price_mobile_span{{ $cart['item']['product_id'] }}" type="hidden" class="priceForTotalMobile" value="{{$cart['item']['price']}}">
+                                        {{env('KURS_IDR')}} <span id="total_price_mobile{{ $cart['product_id'] }}">{{ number_format($cart['item']['price'], 0, ",", ".") }} </span>
+                                        <input id="total_price_mobile_span{{ $cart['product_id'] }}" type="hidden" class="priceForTotalMobile" value="{{$cart['item']['price']}}">
 
                                         <div class="product-quantity">
-                                            <a><i class="fa fa-minus font-12" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'min')"></i></a>
-                                            <input type="text" value="{{ $cart['qty'] }}" id="qty_mobile{{ $cart['item']['product_id'] }}" name="qty[{{ $cart['item']['product_id'] }}]" readonly style="margin:6% 0 6% 0">
-                                            <a><i class="fa fa-plus font-12" onclick="updateQty('{{ $cart['item']['product_id'] }}', 'plus')"></i></a>
+                                            <a><i class="fa fa-minus font-12" onclick="updateQty('{{ $cart['product_id'] }}', 'min')"></i></a>
+                                            <input type="text" value="{{ $cart['qty'] }}" id="qty_mobile{{ $cart['product_id'] }}" name="qty[{{ $cart['product_id'] }}]" readonly style="margin:6% 0 6% 0">
+                                            <a><i class="fa fa-plus font-12" onclick="updateQty('{{ $cart['product_id'] }}', 'plus')"></i></a>
                                         </div>
                                     </div>
                                 </div>

@@ -10,7 +10,7 @@
     <!--IE Compatibility Meta-->
     <meta name="author" content="zytheme"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Multi-purpose Business html5 template">
+    <meta name="description" content="Customize for tailored & timeless accessories">
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
     <link rel="icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
 

@@ -182,8 +182,10 @@ class CheckoutController extends Controller
                 //minus item quantity
                 $product = $orderProduct->product;
                 $qty = $product->qty;
-                $product->qty = $qty-1;
-                $product->save();
+                if($qty > 0){
+                    $product->qty = $qty-1;
+                    $product->save();
+                }
             }
 
             $productImages = ProductImage::whereIn('product_id',$productIdArr)->where('is_main_image', 1)->get();
@@ -223,8 +225,10 @@ class CheckoutController extends Controller
             //minus item quantity
             $product = $orderProduct->product;
             $qty = $product->qty;
-            $product->qty = $qty-1;
-            $product->save();
+            if($qty > 0){
+                $product->qty = $qty-1;
+                $product->save();
+            }
         }
 
         $productImages = ProductImage::whereIn('product_id',$productIdArr)->where('is_main_image', 1)->get();

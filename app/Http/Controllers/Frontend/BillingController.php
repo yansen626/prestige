@@ -510,8 +510,8 @@ class BillingController extends Controller
                 'currency_code' => "IDR",
                 'order_status_id' => 1,
                 'order_number' => $orderNumber,
-                'created_at' => Carbon::now('Asia/Jakarta'),
-                'updated_at' => Carbon::now('Asia/Jakarta')
+                'created_at' => Carbon::now('Asia/Jakarta')->toDateTimeString(),
+                'updated_at' => Carbon::now('Asia/Jakarta')->toDateTimeString()
             ]);
 
             // Update auto number of Order Number
@@ -526,8 +526,8 @@ class BillingController extends Controller
                     'price' => $cart->price,
                     'grand_total' => $cart->total_price,
                     'product_info' => $cart->description,
-                    'created_at' => Carbon::now('Asia/Jakarta'),
-                    'updated_at' => Carbon::now('Asia/Jakarta')
+                    'created_at' => Carbon::now('Asia/Jakarta')->toDateTimeString(),
+                    'updated_at' => Carbon::now('Asia/Jakarta')->toDateTimeString()
                 ]);
                 $newOrder->voucher_code = $cart->voucher_code;
                 $voucherCode = $cart->voucher_code;
