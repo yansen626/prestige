@@ -13,6 +13,7 @@ use App\Models\AdminUser;
 use App\Models\Order;
 use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
+use Illuminate\Support\Facades\Log;
 
 class OrderTransformer extends TransformerAbstract
 {
@@ -49,6 +50,7 @@ class OrderTransformer extends TransformerAbstract
         }
         catch (\Exception $exception){
             error_log($exception);
+            Log::error("OrderTransformer.php > transform ".$exception);
         }
     }
 }

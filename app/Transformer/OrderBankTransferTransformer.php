@@ -14,6 +14,7 @@ use App\Models\Order;
 use App\Models\OrderBankTransfer;
 use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
+use Illuminate\Support\Facades\Log;
 
 class OrderBankTransferTransformer extends TransformerAbstract
 {
@@ -48,6 +49,7 @@ class OrderBankTransferTransformer extends TransformerAbstract
         }
         catch (\Exception $exception){
             error_log($exception);
+            Log::error("OrderBankTransferTransformer.php > transform ".$exception);
         }
     }
 }

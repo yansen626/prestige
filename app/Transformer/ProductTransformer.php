@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Status;
 use Carbon\Carbon;
 use League\Fractal\TransformerAbstract;
+use Illuminate\Support\Facades\Log;
 
 class ProductTransformer extends TransformerAbstract
 {
@@ -47,6 +48,7 @@ class ProductTransformer extends TransformerAbstract
         }
         catch (\Exception $exception){
             error_log($exception);
+            Log::error("ProductTransformer.php > transform ".$exception);
         }
     }
 }
