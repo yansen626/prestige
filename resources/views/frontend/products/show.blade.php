@@ -111,11 +111,33 @@
 
                             <div id="customize-section" class="row customize-section" style="display:{{$display}}">
                                 <div class="col-md-12 bg-white bg-white-mobile" style="padding-bottom: 25px;">
-                                    <p style="font-weight: bold">Enter Text (max 3 characters)</p>
+                                    <p style="font-weight: bold">Enter Text (max 3 characters) <button id="emoji-picker">☺</button></p>
+                                    <input type="hidden" id="emoji_show" value="false">
+
                                     <form>
                                         <input type="text" class="form-control auto-blur"
                                                name="custom-text" id="custom-text" placeholder="TEXT HERE" maxlength="3"
                                                onfocusout="ChangePosition()" style="text-transform:uppercase" />
+
+                                        <div id="emoji_list" class="field radio_field" style="display: none;">
+                                            <label style="padding-right: 3%;cursor: pointer;">
+                                                <input type="radio" name="emoji" onchange="SelectEmoji(this)" value="💍"/>
+                                                <span style="font-size: 40px">💍</span>
+                                            </label>
+                                            <label style="padding-right: 3%;cursor: pointer;">
+                                                <input type="radio" name="emoji" onchange="SelectEmoji(this)" value="♥" />
+                                                <span style="font-size: 40px">♥</span>
+                                            </label>
+                                            <label style="padding-right: 3%;cursor: pointer;">
+                                                <input type="radio" name="emoji" onchange="SelectEmoji(this)" value="🥐" />
+                                                <span style="font-size: 40px">🥐</span>
+                                            </label>
+                                            <label style="padding-right: 3%;cursor: pointer;">
+                                                <input type="radio" name="emoji" onchange="SelectEmoji(this)" value="✌" />
+                                                <span style="font-size: 40px">✌</span>
+                                            </label>
+                                        </div>
+
 
                                         {{--<div class="col-xs-12 col-sm-12 col-md-4 text-center">--}}
                                         {{--<p style="margin-bottom: 0;margin-left: 11%;">Choose Position</p>--}}
@@ -351,9 +373,9 @@
                                                     </div>
                                                 </div>
                                             @else
-                                                <p class="font-16" style="text-align: justify;">
-                                                    This product will ship on 30 April - 7 May
-                                                </p>
+                                                {{--<p class="font-16" style="text-align: justify;">--}}
+                                                    {{--This product will ship on 30 April - 7 May--}}
+                                                {{--</p>--}}
                                                 <button class="btn btn--secondary btn--bordered" type="submit">Add to Cart</button>
                                             @endif
                                         </div>
@@ -844,6 +866,14 @@
             outline: 2px solid #ffffff;
         }
 
+        /* EMOJI PICKER */
+        #emoji-picker{
+            background-color: transparent;
+            font-size: 30px;
+            font-weight: 400;
+            line-height: 20px;
+            border: none;
+        }
     </style>
 @endsection
 
@@ -873,6 +903,16 @@
                 $('#customize-section').show();
             }
         }
+        function ChangeColour(){
+            var url = "/product-detail/" + $('#select-colour').val();
+
+            window.location = url;
+        }
+        function ChangeColourThumbnail(myRadio){
+            var url = "/product-detail/" + myRadio.value;
+
+            window.location = url;
+        }
 
         $('#waiting_list_button').click(function(e){
             e.preventDefault();
@@ -901,19 +941,32 @@
                 });
             }
         });
+
+        $('#emoji-picker').click(function(e){
+            e.preventDefault();
+            var toggleEmoji = $('#emoji_show').val();
+
+            if(toggleEmoji === 'true'){
+                $('#emoji_show').val('false');
+                $('#emoji_list').hide();
+            }
+            else{
+                $('#emoji_show').val('true');
+                $('#emoji_list').show();
+            }
+        });
     </script>
     <script>
-        function ChangeColour(){
-            var url = "/product-detail/" + $('#select-colour').val();
 
-            window.location = url;
+        function SelectEmoji(myRadio){
+            var text = $('#custom-text').val();
+            if(text.length < 4){
+                var newText = text + myRadio.value;
+                alert(newText.length);
+                $('#custom-text').val(newText);
+                ChangePosition();
+            }
         }
-        function ChangeColourThumbnail(myRadio){
-            var url = "/product-detail/" + myRadio.value;
-
-            window.location = url;
-        }
-
         function ChangeCustom(value, option){
             var valueArr = value.split("-");
             //change position
@@ -969,6 +1022,7 @@
             $('#custom-section').show();
 
             var text = $('#custom-text').val().toUpperCase();
+            $('#custom-text').val(text);
             var selectedPosition = $('#custom-position').val();
             // var selectedFont = $('#custom-font').val();
             var color = $('#custom-color').val();
@@ -994,6 +1048,8 @@
             var context = canvas.getContext("2d");
             var imageObj = new Image();
 
+            var img2 = new Image();
+
             imageObj.onload = function(){
                 context.restore();
                 if(isMobile){
@@ -1008,13 +1064,14 @@
                     // context.clearRect(0,0,canvas.width, canvas.height);
                     context.drawImage(imageObj, 0,0, imageObj.width, imageObj.height,
                         centerShift_x,centerShift_y,imageObj.width*ratio, imageObj.height*ratio);
-
                 }
                 else{
                     context.drawImage(imageObj, 10, 10);
                 }
                 context.textAlign = 'center';
                 context.font = font;
+
+                context.drawImage(img2, posX, posY, 50, 50);
 
                 if(fillStyle === '#C0C0C0' || fillStyle === '#FFD700') {
                     context.fillStyle = fillStyle;
@@ -1025,6 +1082,7 @@
                 context.fillText(text, posX, posY);
             };
             imageObj.src = "{{ asset('storage/products/'.$productMainImages->path) }}";
+            img2.src = 'https://cdn.sstatic.net/stackexchange/img/logos/so/so-icon.png';
 
         }
 
